@@ -1,3 +1,3 @@
 export default {
-    mongoUrl: 'mongodb://localhost:27017/overment'
+    mongoUrl: 'mongodb://localhost:27017/badoo_bot'
 }
