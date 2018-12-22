@@ -5,10 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bot</title>
+    <style>
+        textarea{
+            width: 80%;
+        }
+    </style>
 </head>
 <body>
-    <textarea name="bot" id="bot" cols="30" rows="10"></textarea>
+    <textarea name="bot" id="botTextarea" cols="30" rows="10"></textarea>
+    <button id="sendButton">
+        prześlij
+    </button>
+    <div class="snapchats">
+
+    </div>
 
     <script src="./bot.js"></script>
+    <script src="./axios.js"></script>
 </body>
 </html>
