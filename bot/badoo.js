@@ -12,6 +12,7 @@ clear();
 
 
 //Bot for liking profiles
+const apiRoute = 'http://localhost:8080/api';
 
 const likeButton = document.querySelector('.profile-action--yes');
 const dislikeButton = document.querySelector('.profile-action--no');
@@ -71,6 +72,17 @@ function showStats(){
     return console.log(stats)
 }
 
+function sendData(){
+
+    axios.post(`${apiRoute}/snapchats`, {title: 'test badoo function', snapchats: ['kasia', 'asia', 'basia', 'hektor']})
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+		console.log(error)
+    });
+}
+
 function stopBot() {
     clearInterval(interval);
     botStatus = 'Off';
@@ -83,7 +95,7 @@ function showBotStatus(){
 }
 
 function showSnapchats(){
-    return console.log(snapchats);
+    return console.log(snapchats.toString());
 }
 
 
