@@ -8,7 +8,7 @@ const apiRoute = 'http://localhost:8080/api';
 let txt;
 
 function getSnapchats(){
-    txt = textarea.value.toString;
+    txt = textarea.value.split(',');
     console.log(txt)
 }
 
