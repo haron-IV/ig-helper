@@ -2,7 +2,7 @@ import Snap from '../models/snapchat';
 
 export default {
     async findOne(req, res, next){
-        const snap = await Snap.findOne({slug: req.params.lug});
+        const snap = await Snap.findOne({ slug: req.params.slug });
 
         if(!snap) return next();
         return res.status(200).send({data: snap});
@@ -22,7 +22,15 @@ export default {
         return res.status(201).send({data: snap, message: 'created.'})
     },
 
-    async update(req, res, next){},
+    async update(req, res, next){
+        const snap = await Snap.findOne({ slug: req.params.slug });
+
+        if(!snap) return next();
+        snap.snapchats = req.body.snapchats;
+        
+        await snap.save();
+        return res.status(200).send({data: snap, message: 'updated'});
+    },
 
     async remove(req, res, next){}
 }

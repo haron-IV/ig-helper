@@ -3,7 +3,7 @@ import URLSlugs from 'mongoose-url-slugs';
 
 const Snap = mongoose.Schema({
     title: String,
-    snapchats: Object
+    snapchats: Array
 },{
     timestamps: true
 });

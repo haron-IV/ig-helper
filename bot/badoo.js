@@ -53,6 +53,7 @@ function showStats(){
         profile_dislikes: dislikeCounter,
         snapchats_catch: snapchats.length,
         snapchats_profiles: snapchats,
+        snapchat_profiles_string: snapchats.toString()
     }
 
     return console.log(stats)
