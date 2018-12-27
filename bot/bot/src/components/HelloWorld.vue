@@ -40,7 +40,6 @@ export default {
     },
 
     showSnapchats(){
-      // this.getSnapchats();
       let scope = this;
 
       axios.get(`${this.apiRoute}/snapchats`)
@@ -56,12 +55,14 @@ export default {
           snapchatsArrays.push(el.snapchats)
         });
 
-        const allSnapchatNicknames = snapchatsArrays.flatMap(e => e); // connect all inside tabs
+        const connectedSnapchatArrays = snapchatsArrays.flatMap(e => e); // connect all inside tabs
+
+        
 
         console.log('allSnapchatNicknames: ')
-        console.log(allSnapchatNicknames)
+        console.log(connectedSnapchatArrays)
 
-        scope.allSnapchatNicknames = allSnapchatNicknames; //list of catched snapchat accounts (last array)
+        scope.allSnapchatNicknames = Array.from(new Set(connectedSnapchatArrays)); //list of catched snapchat accounts (last array)
         
       })
       .catch(function (error) {
@@ -75,8 +76,12 @@ export default {
         console.log(response)
       })
       .catch(function (error) {
-      console.log(error)
+        console.log(error)
       });
+    },
+
+    removeDoubledNicknames(){
+      return Array.from(new Set(this.allSnapchatNicknames));
     }
     
   }
