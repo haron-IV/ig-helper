@@ -32,7 +32,7 @@ export default {
     },
 
     async remove(req, res, next) {
-        const snaps = await Snap.find().sort({ createdAt: 'desc' });
+        const snaps = await Snap.findOne({ slug: req.params.slug });
         if (!snaps) return next();
         await snaps.remove();
 

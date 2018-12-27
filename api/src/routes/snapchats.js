@@ -13,7 +13,7 @@ export default () => {
 
     api.put('/:slug', catchAsync(snapchatsController.update));
 
-    api.delete('/', catchAsync(snapchatsController.remove));
+    api.delete('/:slug', catchAsync(snapchatsController.remove));
 
     return api;
 }
