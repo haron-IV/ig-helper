@@ -1,85 +1,23 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+    <textarea name="bot" id="botTextarea" cols="30" rows="10" v-model="textarea">
+    </textarea>
+
+    <button @click="sendData">
+      prześlij
+    </button>
+
+    <button @click="showSnapchats">
+      Pokaz listę snapów
+    </button>
+
+    <div>
+      <ol id="snapchatsList">
+          <li v-for="li in allSnapchatNicknames">
+            {{ li }}
+          </li>
+      </ol>
+    </div>
   </div>
 </template>
 
@@ -88,8 +26,59 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      apiRoute: 'http://localhost:8080/api',
+      textarea: '',
+      allSnapchatNicknames: []
     }
+  },
+  methods: {
+    getSnapchats(){
+      let txt;
+      txt = this.textarea.split(',');
+      console.log(txt)
+      return txt;
+    },
+
+    showSnapchats(){
+      // this.getSnapchats();
+      let scope = this;
+
+      axios.get(`${this.apiRoute}/snapchats`)
+      .then(function (response) {
+        scope.textarea = '';
+      
+        console.log('Response:')
+        console.log(response)
+    
+        let snapchatsArrays = [];
+
+        response.data.data.forEach(el => {
+          snapchatsArrays.push(el.snapchats)
+        });
+
+        const allSnapchatNicknames = snapchatsArrays.flatMap(e => e); // connect all inside tabs
+
+        console.log('allSnapchatNicknames: ')
+        console.log(allSnapchatNicknames)
+
+        scope.allSnapchatNicknames = allSnapchatNicknames; //list of catched snapchat accounts (last array)
+        
+      })
+      .catch(function (error) {
+		    console.log(error)
+      });
+    },
+
+    sendData() {
+      axios.post(`${this.apiRoute}/snapchats`, {title: 'snaps', snapchats: this.getSnapchats()}) // txt should be array
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+      console.log(error)
+      });
+    }
+    
   }
 }
 </script>
@@ -100,11 +89,11 @@ h1, h2 {
   font-weight: normal;
 }
 ul {
-  list-style-type: none;
+
   padding: 0;
 }
 li {
-  display: inline-block;
+  text-align: left;
   margin: 0 10px;
 }
 a {

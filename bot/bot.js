@@ -2,7 +2,7 @@ const textarea = document.querySelector('#botTextarea');
 const button = document.querySelector('#sendButton');
 const showButton = document.querySelector('#showButton');
 const showArea = document.querySelector('#snapchats');
-const snapchatsList = document.querySelector('#snapchatsList');
+const snapchatsList = document.querySelector('#snapchatsList')
 
 const apiRoute = 'http://localhost:8080/api';
 
@@ -33,7 +33,6 @@ function showSnapchats(){
       console.log(allSnapchatNicknames)
 
       showArea.innerHTML = allSnapchatNicknames; //list of catched snapchat accounts (last array)
-      
     })
     .catch(function (error) {
 		console.log(error)
