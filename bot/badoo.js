@@ -74,6 +74,14 @@ function showSnapchats(){
     return console.log(snapchats.toString());
 }
 
+function changeLocation(){
+    document.querySelector('.sidebar-info__name').click(); // go to profile 
+    document.querySelector('.js-profile-edit-block-toggle:nth-child(2)').click(); // click for select location
+    document.querySelector('#location_field').value = 'Chorzów'; // set location value
+
+    //this function reloaded page
+}
+
 
 function init(timeout, whatDo) {
     botStatus = 'On';
