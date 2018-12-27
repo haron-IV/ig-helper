@@ -3,9 +3,8 @@ import Snap from '../models/snapchat';
 export default {
     async findOne(req, res, next){
         const snap = await Snap.findOne({ slug: req.params.slug });
-
-        if(!snap) return next();
-        return res.status(200).send({data: snap});
+        if (!snap) return next();
+        return res.status(200).send({ data: snap });
     },
 
     async findAll(req, res){
@@ -32,5 +31,11 @@ export default {
         return res.status(200).send({data: snap, message: 'updated'});
     },
 
-    async remove(req, res, next){}
+    async remove(req, res, next) {
+        const snaps = await Snap.find().sort({ createdAt: 'desc' });
+        if (!snaps) return next();
+        await snaps.remove();
+
+        return res.status(200).send({ message: `Song was removed` });
+    }
 }

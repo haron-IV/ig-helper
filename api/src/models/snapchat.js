@@ -8,6 +8,6 @@ const Snap = mongoose.Schema({
     timestamps: true
 });
 
-Snap.plugin(URLSlugs('title', {field: 'slug', update: true}));
+Snap.plugin(URLSlugs('title', { field: 'slug', update: true }));
 
 export default mongoose.model('Snap', Snap);

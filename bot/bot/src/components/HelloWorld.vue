@@ -11,6 +11,7 @@
       Pokaz listę snapów
     </button>
 
+
     <div>
       <ol id="snapchatsList">
           <li v-for="li in allSnapchatNicknames">
@@ -58,7 +59,6 @@ export default {
         const connectedSnapchatArrays = snapchatsArrays.flatMap(e => e); // connect all inside tabs
 
         
-
         console.log('allSnapchatNicknames: ')
         console.log(connectedSnapchatArrays)
 

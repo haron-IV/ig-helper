@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import snapchatsController from '../controllers/snapchatsController';
 import { catchAsync } from '../middlewares/errors';
+import snapchatsController from '../controllers/snapchatsController';
 
 export default () => {
     const api = Router();
@@ -13,7 +13,7 @@ export default () => {
 
     api.put('/:slug', catchAsync(snapchatsController.update));
 
-    api.delete('/:slug', catchAsync(snapchatsController.remove));
+    api.delete('/', catchAsync(snapchatsController.remove));
 
     return api;
 }
