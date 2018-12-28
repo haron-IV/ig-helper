@@ -94,6 +94,11 @@ function stopBot() {
     botStatus = 'Off';
     showBotStatus();
     showStats();
+
+    if(messagingFunc == true){
+        startMessaging();
+    }
+   
 }
 
 function showBotStatus(){
@@ -125,7 +130,7 @@ function changeFromLikeToDislike(){
    
 }
 
-//////////// function for messaging
+//////////// function for messaging to new people
 
 let newConectedPeople = []; // peoples with no message from you
 function getNewConectedPeoples(){
@@ -149,7 +154,14 @@ function sendMessage(message){
     let count = 0;
 
     sendMessageInterval = setInterval(() => {
-        document.querySelector(`#${newConectedPeople[count]}`).children[2].click(); //open chat
+
+        if(document.querySelector(`#${newConectedPeople[0]}`)){
+            document.querySelector(`#${newConectedPeople[count]}`).children[2].click();
+        }else{
+            clearInterval(sendMessageInterval);
+            colorLog('stop messaging click', 'test')
+        }
+
         count++;
 
         setTimeout(() => {
@@ -174,13 +186,9 @@ function sendMessage(message){
 function startMessaging(){
     getNewConectedPeoples();
     setTimeout(() => {
-        sendMessage('Hejka. Jeśli masz insta odezwij się do mnie, poniewaz organizuję konkurs :D');
+        sendMessage(messageText);
     }, 5000);
 }
-
-startMessaging();
-
-
 
 
 ///////////
@@ -191,7 +199,10 @@ let changedToDislike = false;
 
 let timeoutForChangeLikeFunction = 0; // this variable let us use the same time after change from liking to disliking
 
-function init(timeout, whatDo) {
+let messagingFunc = false;
+let messageText = '';
+
+function init(timeout, whatDo, message, messageTxt) {
     botStatus = 'On';
     timeoutForChangeLikeFunction = timeout;
     timer();
@@ -208,6 +219,10 @@ function init(timeout, whatDo) {
         
     }, 5000);
 
+    if(message == true){
+        messagingFunc = true;
+        messageText = messageTxt; 
+    }
 
     generalInterval = setInterval(function() {
         searchSnapchat();
@@ -215,7 +230,7 @@ function init(timeout, whatDo) {
     }, timeout)
 }
 
-init(1500, dislike);
+init(1500, dislike, true, '');
 
 
 
@@ -225,11 +240,12 @@ init(1500, dislike);
 
 1.
 ***************************************************************************
-init (time, whatDo)
+init (time, whatDo, message)
 
 time - time space between bot actions in ms fe. 1500
-whatDo - action which bot do like or dislike 
-example: init(1500, like)
+whatDo - action which bot do like or dislike
+message - bot after stop automatic start sending message to new people (set false if u don't need this)
+example: init(1500, like, true)
 ***************************************************************************
 
 2.
