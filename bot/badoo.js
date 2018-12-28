@@ -208,9 +208,7 @@ function startMessaging(){
 /////////// end function for messaging to new people
 
 
-///////////
-
-// HERE IS PLACE FOR DELETING MESSAGE Function
+/////////// function for deleting all messages
 
 function deleteAllMessages(){
     let int = null;
@@ -323,6 +321,11 @@ If u only want to send message u can use this command
 if u dont pass message text in init function u can set this via -> messageText = 'your message' <- this must be declared before use commadn
 ***************************************************************************
 
+7.
+***************************************************************************
+deleteAllMessages()
 
+This command run function which will be deleting all messages
+***************************************************************************
 
 */
