@@ -82,16 +82,40 @@ function changeLocation(){
     //this function reloaded page
 }
 
+function changeFromLikeToDislike(){
+    //if likes are unvaliable stop bot and run init with dislike
+
+    if(document.querySelectorAll('.btn__text')[1].innerText == "Dodaj głosy"){
+        stopBot();
+        clearInterval(stopBotInterval);
+
+        setTimeout(() => {
+            document.querySelector('.js-ovl-close').click();
+            changedToDislike = true;
+            console.log('Bot auto change action from liking profiles to dislike')
+        }, 1000);
+
+        init(400, dislike);
+    }
+}
+
+
+let stopBotInterval = null;
+let changedToDislike = false;
 
 function init(timeout, whatDo) {
     botStatus = 'On';
-    let stopBotInterval = null;
 
     stopBotInterval = setInterval(function(){
         if(document.querySelector('.responsive-text') == null){
             stopBot();
             clearInterval(stopBotInterval);
         }
+
+        if(changedToDislike === false){
+            changeFromLikeToDislike();
+        }
+        
     }, 5000);
 
 
