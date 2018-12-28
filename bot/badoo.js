@@ -1,4 +1,3 @@
-//Bot for liking profiles
 
 const likeButton = document.querySelector('.profile-action--yes');
 const dislikeButton = document.querySelector('.profile-action--no');
@@ -11,7 +10,7 @@ let likeCounter = 0;
 
 let dislikeCounter = 0;
 
-let interval = null;
+let GeneralInterval = null;
 
 let text = '';
 
@@ -19,8 +18,16 @@ let botStatus = '';
 
 //not used
 
-let timer = 0;
+let startTimerValue = [];
 //
+
+function timer(){
+
+    let startDate = new Date();
+    let startTime = [startDate.getHours(), startDate.getMinutes(), startDate.getSeconds()]
+
+    startTimerValue = startTime;
+}
 
 
 function like() {
@@ -48,19 +55,24 @@ function searchSnapchat() {
 }
 
 function showStats(){
+    let endDate = new Date();
+    let endTime = [endDate.getHours(), endDate.getMinutes(), endDate.getSeconds()]
+
+    
     let stats = {
         profile_likes: likeCounter,
         profile_dislikes: dislikeCounter,
         snapchats_catch: snapchats.length,
         snapchats_profiles: snapchats,
-        snapchat_profiles_string: snapchats.toString()
+        snapchat_profiles_string: snapchats.toString(),
+        timer: `${endTime[0] - startTimerValue[0]}:${endTime[1] - startTimerValue[1]}:${endTime[2] - startTimerValue[2]}`
     }
 
     return console.log(stats)
 }
 
 function stopBot() {
-    clearInterval(interval);
+    clearInterval(generalInterval);
     botStatus = 'Off';
     showBotStatus();
     showStats();
@@ -85,18 +97,23 @@ function changeLocation(){
 function changeFromLikeToDislike(){
     //if likes are unvaliable stop bot and run init with dislike
 
-    if(document.querySelectorAll('.btn__text')[1].innerText == "Dodaj głosy"){
-        stopBot();
-        clearInterval(stopBotInterval);
+    let dodajGłosyButton = document.querySelectorAll('.btn__text')[1];
 
-        setTimeout(() => {
-            document.querySelector('.js-ovl-close').click();
-            changedToDislike = true;
-            console.log('Bot auto change action from liking profiles to dislike')
-        }, 1000);
-
-        init(400, dislike);
+    if(dodajGłosyButton != null){
+        if(dodajGłosyButton.innerText == "Dodaj głosy"){
+            stopBot();
+            clearInterval(stopBotInterval);
+    
+            setTimeout(() => {
+                document.querySelector('.js-ovl-close').click();
+                changedToDislike = true;
+                console.log('Bot auto change action from liking profiles to dislike')
+            }, 1000);
+    
+            init(400, dislike);
+        }
     }
+   
 }
 
 
@@ -105,6 +122,7 @@ let changedToDislike = false;
 
 function init(timeout, whatDo) {
     botStatus = 'On';
+    timer();
 
     stopBotInterval = setInterval(function(){
         if(document.querySelector('.responsive-text') == null){
@@ -119,7 +137,7 @@ function init(timeout, whatDo) {
     }, 5000);
 
 
-    interval = setInterval(function() {
+    generalInterval = setInterval(function() {
         searchSnapchat();
         setTimeout(whatDo, 500);
     }, timeout)
