@@ -16,10 +16,10 @@ let text = '';
 
 let botStatus = '';
 
-//not used
-
 let startTimerValue = [];
-//
+
+
+/////////////////////////////////////////////
 
 function colorLog(txt, way){
     if(way == 'warning'){
@@ -100,14 +100,6 @@ function showSnapchats(){
     return console.log(snapchats.toString());
 }
 
-function changeLocation(){
-    document.querySelector('.sidebar-info__name').click(); // go to profile 
-    document.querySelector('.js-profile-edit-block-toggle:nth-child(2)').click(); // click for select location
-    document.querySelector('#location_field').value = 'Chorzów'; // set location value
-
-    //this function reloaded page
-}
-
 function changeFromLikeToDislike(){
 
     let dodajGłosyButton = document.querySelectorAll('.btn__text')[1];
@@ -133,7 +125,7 @@ function changeFromLikeToDislike(){
 let stopBotInterval = null;
 let changedToDislike = false;
 
-let timeoutForChangeLikeFunction = 0;
+let timeoutForChangeLikeFunction = 0; // this variable let us use the same time after change from liking to disliking
 
 function init(timeout, whatDo) {
     botStatus = 'On';
