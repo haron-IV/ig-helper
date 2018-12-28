@@ -21,6 +21,20 @@ let botStatus = '';
 let startTimerValue = [];
 //
 
+function colorLog(txt, way){
+    if(way == 'warning'){
+        console.log(`%c ${txt}`, 'background: red; color: black')
+    }
+
+    if(way == 'tip'){
+        console.log(`%c ${txt}`, 'background: gold; color: black')
+    }
+
+    if(way == 'info'){
+        console.log(`%c ${txt}`, 'background: green; color: white')
+    }
+}
+
 function timer(){
 
     let startDate = new Date();
@@ -79,7 +93,7 @@ function stopBot() {
 }
 
 function showBotStatus(){
-    return console.log(`Bot is: ${botStatus}`)
+    return colorLog(`Bot is: ${botStatus}`, 'info')
 }
 
 function showSnapchats(){
@@ -95,7 +109,6 @@ function changeLocation(){
 }
 
 function changeFromLikeToDislike(){
-    //if likes are unvaliable stop bot and run init with dislike
 
     let dodajGłosyButton = document.querySelectorAll('.btn__text')[1];
 
@@ -107,7 +120,7 @@ function changeFromLikeToDislike(){
             setTimeout(() => {
                 document.querySelector('.js-ovl-close').click();
                 changedToDislike = true;
-                console.log('Bot auto change action from liking profiles to dislike')
+                colorLog('Bot auto change action from liking profiles to dislike', 'info');
             }, 1000);
     
             init(400, dislike);
