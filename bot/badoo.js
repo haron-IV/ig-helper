@@ -218,7 +218,10 @@ function deleteAllMessages(){
             document.querySelector('.js-im-contact-remove').click(); //click remove
 
             setTimeout(()=>{
-                document.querySelector('.js-im-confirm-delete').click(); // confirm remove
+                if(document.querySelector('.js-im-confirm-delete')){
+                    document.querySelector('.js-im-confirm-delete').click(); // confirm remove
+                }
+                
             }, 1000)
         }else{
             clearInterval(int);
