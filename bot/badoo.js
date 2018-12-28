@@ -33,6 +33,10 @@ function colorLog(txt, way){
     if(way == 'info'){
         console.log(`%c ${txt}`, 'background: green; color: white')
     }
+
+    if(way == 'test'){
+        console.log(`%c ${txt}`, 'background: yellow; color: green')
+    }
 }
 
 function timer(){
@@ -123,17 +127,16 @@ function changeFromLikeToDislike(){
 
 //////////// function for messaging
 
+let newConectedPeople = []; // peoples with no message from you
 function getNewConectedPeoples(){
-
     const openMessagerButton = document.querySelector('a[href="/messenger/open"]');
-    let newConectedPeople = []; // peoples with no message from you
 
     openMessagerButton.click();
 
     setTimeout(() => {
         document.querySelectorAll('.contacts__msg').forEach(el => {
             if(el.innerText.substring(0, 22) == "Zostaliście dopasowani"){
-                newConectedPeople.push(el);
+                newConectedPeople.push(el.parentElement.parentElement.id);
             }
         })
 
@@ -141,6 +144,41 @@ function getNewConectedPeoples(){
     }, 3000);
 }
 
+function sendMessage(message){
+    let sendMessageInterval = null;
+    let count = 0;
+
+    sendMessageInterval = setInterval(() => {
+        document.querySelector(`#${newConectedPeople[count]}`).children[2].click(); //open chat
+        count++;
+
+        setTimeout(() => {
+            document.querySelector('.messenger-tools__input').innerText = message;
+        }, 500);
+        
+
+        setTimeout(() => {
+            document.querySelector('.messenger-tools__btn').click();
+        }, 1500);
+        
+
+        console.log(document.querySelector(`#${newConectedPeople[count]}`));
+        if(count == newConectedPeople.length){
+            clearInterval(sendMessageInterval);
+            colorLog('stop messaging click', 'test')
+        }
+    }, 3500);
+    
+}
+
+function startMessaging(){
+    getNewConectedPeoples();
+    setTimeout(() => {
+        sendMessage('Hejka. Jeśli masz insta odezwij się do mnie, poniewaz organizuję konkurs :D');
+    }, 5000);
+}
+
+startMessaging();
 
 
 
