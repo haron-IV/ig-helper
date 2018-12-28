@@ -123,7 +123,7 @@ function changeFromLikeToDislike(){
                 colorLog('Bot auto change action from liking profiles to dislike', 'info');
             }, 1000);
     
-            init(400, dislike);
+            init(timeoutForChangeLikeFunction, dislike);
         }
     }
    
@@ -133,8 +133,11 @@ function changeFromLikeToDislike(){
 let stopBotInterval = null;
 let changedToDislike = false;
 
+let timeoutForChangeLikeFunction = 0;
+
 function init(timeout, whatDo) {
     botStatus = 'On';
+    timeoutForChangeLikeFunction = timeout;
     timer();
 
     stopBotInterval = setInterval(function(){
