@@ -10,6 +10,8 @@ let likeCounter = 0;
 
 let dislikeCounter = 0;
 
+let message_counter = 0;
+
 let GeneralInterval = null;
 
 let text = '';
@@ -83,6 +85,7 @@ function showStats(){
         snapchats_catch: snapchats.length,
         snapchats_profiles: snapchats,
         snapchat_profiles_string: snapchats.toString(),
+        sned_messages: message_counter,
         timer: `${endTime[0] - startTimerValue[0]}:${endTime[1] - startTimerValue[1]}:${endTime[2] - startTimerValue[2]}`
     }
 
@@ -181,6 +184,7 @@ function sendMessage(message){
 
         setTimeout(() => {
             document.querySelector('.messenger-tools__btn').click();
+            message_counter++;
         }, 1500);
         
 
@@ -202,6 +206,13 @@ function startMessaging(){
 
 
 /////////// end function for messaging to new people
+
+
+///////////
+
+// HERE IS PLACE FOR DELETING MESSAGE Function
+
+//////////
 
 
 let stopBotInterval = null;
