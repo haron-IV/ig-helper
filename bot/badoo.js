@@ -89,13 +89,19 @@ function showStats(){
     return console.log(stats)
 }
 
-function stopBot() {
+function stopBot(message) {
     clearInterval(generalInterval);
     botStatus = 'Off';
     showBotStatus();
     showStats();
 
-    if(messagingFunc == true){
+    if(message == true){
+        sendMessage = true;
+        colorLog('send message', 'test')
+        console.log(sendMessage)
+    }
+
+    if(messagingFunc == true && snedMessageNow == true){
         startMessaging();
     }
    
@@ -109,7 +115,10 @@ function showSnapchats(){
     return console.log(snapchats.toString());
 }
 
+let snedMessageNow = true; // this variable let us off messaging when bot change likes to dislikes
+
 function changeFromLikeToDislike(){
+    snedMessageNow = false;
 
     let dodajGłosyButton = document.querySelectorAll('.btn__text')[1];
 
@@ -125,6 +134,7 @@ function changeFromLikeToDislike(){
             }, 1000);
     
             init(timeoutForChangeLikeFunction, dislike);
+            snedMessageNow = true;
         }
     }
    
@@ -230,7 +240,7 @@ function init(timeout, whatDo, message, messageTxt) {
     }, timeout)
 }
 
-init(1500, dislike, true, '');
+init(1500, dislike, false, '');
 
 
 
