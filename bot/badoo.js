@@ -212,6 +212,24 @@ function startMessaging(){
 
 // HERE IS PLACE FOR DELETING MESSAGE Function
 
+function deleteAllMessages(){
+    let int = null;
+
+    int = setInterval(()=>{
+        if(document.querySelector('.js-im-contact-remove')){
+            document.querySelector('.js-im-contact-remove').click(); //click remove
+
+            setTimeout(()=>{
+                document.querySelector('.js-im-confirm-delete').click(); // confirm remove
+            }, 1000)
+        }else{
+            clearInterval(int);
+            colorLog('All messages deleted', 'info')
+        }
+    }, 1000)
+    
+}
+
 //////////
 
 
