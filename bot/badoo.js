@@ -121,6 +121,32 @@ function changeFromLikeToDislike(){
    
 }
 
+//////////// function for messaging
+
+function getNewConectedPeoples(){
+
+    const openMessagerButton = document.querySelector('a[href="/messenger/open"]');
+    let newConectedPeople = []; // peoples with no message from you
+
+    openMessagerButton.click();
+
+    setTimeout(() => {
+        document.querySelectorAll('.contacts__msg').forEach(el => {
+            if(el.innerText.substring(0, 22) == "Zostaliście dopasowani"){
+                newConectedPeople.push(el);
+            }
+        })
+
+        console.log(newConectedPeople)
+    }, 3000);
+}
+
+
+
+
+
+///////////
+
 
 let stopBotInterval = null;
 let changedToDislike = false;
