@@ -262,14 +262,14 @@ example: init(1500, like, true)
 ***************************************************************************
 stopBot()
 
-this commant stops the bot and show us: bot status, and bot stats
+this command stops the bot and show us: bot status, and bot stats
 ***************************************************************************
 
 3.
 ***************************************************************************
 showSnapchats()
 
-this commant show us array with catched snapchats nicknames
+this commantd show us array with catched snapchats nicknames
 ***************************************************************************
 
 4.
@@ -286,7 +286,13 @@ showStats()
 Show us all bot statistics
 ***************************************************************************
 
+6.
+***************************************************************************
+startMessaging()
 
+If u only want to send message u can use this command
+if u dont pass message text in init function u can set this via -> messageText = 'your message' <- this must be declared before use commadn
+***************************************************************************
 
 
 
