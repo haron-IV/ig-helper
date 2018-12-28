@@ -191,7 +191,7 @@ function startMessaging(){
 }
 
 
-///////////
+/////////// end function for messaging to new people
 
 
 let stopBotInterval = null;
@@ -200,7 +200,7 @@ let changedToDislike = false;
 let timeoutForChangeLikeFunction = 0; // this variable let us use the same time after change from liking to disliking
 
 let messagingFunc = false;
-let messageText = '';
+let messageText = ''; // this message will be sending after stop bot
 
 function init(timeout, whatDo, message, messageTxt) {
     botStatus = 'On';
@@ -271,8 +271,9 @@ this command show us bot status :)
 
 5.
 ***************************************************************************
+showStats()
 
-
+Show us all bot statistics
 ***************************************************************************
 
 
