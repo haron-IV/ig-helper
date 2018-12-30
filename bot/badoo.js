@@ -20,6 +20,8 @@ let botStatus = '';
 
 let startTimerValue = [];
 
+let deletedMessages = 0;
+
 
 /////////////////////////////////////////////
 
@@ -86,7 +88,8 @@ function showStats(){
         snapchats_profiles: snapchats,
         snapchat_profiles_string: snapchats.toString(),
         sned_messages: message_counter,
-        timer: `${endTime[0] - startTimerValue[0]}:${endTime[1] - startTimerValue[1]}:${endTime[2] - startTimerValue[2]}`
+        timer: `${endTime[0] - startTimerValue[0]}:${endTime[1] - startTimerValue[1]}:${endTime[2] - startTimerValue[2]}`,
+        deleted_messages: deletedMessages
     }
 
     return console.log(stats)
@@ -212,6 +215,7 @@ function startMessaging(){
 
 function deleteAllMessages(){
     let int = null;
+    
 
     int = setInterval(()=>{
         if(document.querySelector('.js-im-contact-remove')){
@@ -220,12 +224,14 @@ function deleteAllMessages(){
             setTimeout(()=>{
                 if(document.querySelector('.js-im-confirm-delete')){
                     document.querySelector('.js-im-confirm-delete').click(); // confirm remove
+                    deletedMessages++;
                 }
                 
             }, 1000)
         }else{
             clearInterval(int);
             colorLog('All messages deleted', 'info')
+            colorLog(`Deleted messages: ${deletedMessages}`, 'info')
         }
     }, 1000)
     
