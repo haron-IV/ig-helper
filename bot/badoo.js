@@ -216,7 +216,6 @@ function startMessaging(){
 function deleteAllMessages(){
     let int = null;
     
-
     int = setInterval(()=>{
         if(document.querySelector('.js-im-contact-remove')){
             document.querySelector('.js-im-contact-remove').click(); //click remove
@@ -238,6 +237,89 @@ function deleteAllMessages(){
 }
 
 //////////
+
+
+
+////////////////////////////// function for messaging to visitors
+
+function getIntoVisitors(){
+    const openVisitorsButton = document.querySelector('a[href="/visitors"]');
+    openVisitorsButton.click();
+}
+
+function pasteMessageToChat(message){
+    document.querySelector('.messenger-tools__input').innerText = message;
+}
+
+function sendMessageToVisitor(){
+    document.querySelector('.messenger-tools__btn').click();
+}
+
+
+let visitors = []; // peoples which visited u
+function getNewVisitors(){
+    getIntoVisitors();
+
+    setTimeout(() => {
+        document.querySelectorAll('.users-list__cell').forEach(el => {
+            if(document.querySelectorAll('.users-list__cell')[0].children[0].children[0].children[1].className == 'user-card__marks'){
+                visitors.push(el);
+            }
+        })
+
+        console.log(visitors)
+    }, 3000);
+}
+
+function startMessagingToVisitors(){
+    let sendMessageInterval = null;
+    let count = 0;
+
+    sendMessageInterval = setInterval(() => {
+
+        if(visitors[0]){
+            //if this element is undefined - not have children go to next element
+            if(visitors[count].children[0].children[2].children[0].children[0].children[0].children[0]){
+                visitors[count].children[0].children[2].children[0].children[0].children[0].children[0].click(); 
+            }else{
+                visitors[count+1].children[0].children[2].children[0].children[0].children[0].children[0].click(); 
+            }
+            //get into messager
+        }else{
+            clearInterval(sendMessageInterval);
+            colorLog('stop messaging click', 'test')
+        }
+
+        count++;
+
+        setTimeout(() => {
+            pasteMessageToChat('');
+        }, 500);
+        
+
+        setTimeout(() => {
+            sendMessageToVisitor();
+            message_counter++;
+        }, 1500);
+        
+
+        // console.log(document.querySelector(`#${newConectedPeople[count]}`));
+        if(count == visitors.length){
+            clearInterval(sendMessageInterval);
+            colorLog('stop messaging click', 'test')
+        }
+    }, 3500);
+}
+
+function messagingToVisitorsInit(){
+    getNewVisitors();
+    setTimeout(() => {
+        startMessagingToVisitors();    
+    }, 5000);
+    
+}
+
+////////////////////////////////
 
 
 let stopBotInterval = null;
