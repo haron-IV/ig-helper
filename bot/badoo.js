@@ -255,20 +255,16 @@ function sendMessageToVisitor(){
     document.querySelector('.messenger-tools__btn').click();
 }
 
-
-let visitors = []; // peoples which visited u
+let visitors = [];
 function getNewVisitors(){
-    getIntoVisitors();
-
-    setTimeout(() => {
-        document.querySelectorAll('.users-list__cell').forEach(el => {
-            if(document.querySelectorAll('.users-list__cell')[0].children[0].children[0].children[1].className == 'user-card__marks'){
-                visitors.push(el);
-            }
-        })
-
-        console.log(visitors)
-    }, 3000);
+	let visitorsList = document.querySelectorAll('.users-list__cell');	
+	
+	visitorsList.forEach(el => {
+		if(el.children[0].children[2].children[1].innerText.trim() != "Użytkownik niewidoczny"){
+            visitors.push(el);
+        }
+	})
+   
 }
 
 function startMessagingToVisitors(){
@@ -277,23 +273,12 @@ function startMessagingToVisitors(){
 
     sendMessageInterval = setInterval(() => {
 
-        if(visitors[0]){
-            //if this element is undefined - not have children go to next element
-            if(visitors[count].children[0].children[2].children[0].children[0].children[0].children[0]){
-                visitors[count].children[0].children[2].children[0].children[0].children[0].children[0].click(); 
-            }else{
-                visitors[count+1].children[0].children[2].children[0].children[0].children[0].children[0].click(); 
-            }
-            //get into messager
-        }else{
-            clearInterval(sendMessageInterval);
-            colorLog('stop messaging click', 'test')
-        }
+        visitors[count].children[0].children[2].children[0].children[0].children[0].children[0].click();
 
         count++;
 
         setTimeout(() => {
-            pasteMessageToChat('');
+            pasteMessageToChat(messageText);
         }, 500);
         
 
@@ -303,10 +288,15 @@ function startMessagingToVisitors(){
         }, 1500);
         
 
-        // console.log(document.querySelector(`#${newConectedPeople[count]}`));
         if(count == visitors.length){
             clearInterval(sendMessageInterval);
-            colorLog('stop messaging click', 'test')
+            document.querySelectorAll('.pagination__nav')[1].children[0].click(); //go to next visitor page
+
+            // setTimeout(() => { //start sending to users from next page
+            //     messagingToVisitorsInit();
+            // }, 2500);
+
+            colorLog('Messaging to visitors is stopped', 'test')
         }
     }, 3500);
 }
