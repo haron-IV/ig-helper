@@ -301,7 +301,7 @@ function startMessagingToVisitors(){
     }, 3500);
 }
 
-function messagingToVisitorsInit(){
+function messagingToVisitors(){
     getNewVisitors();
     setTimeout(() => {
         startMessagingToVisitors();    
@@ -407,6 +407,16 @@ if u dont pass message text in init function u can set this via -> messageText =
 deleteAllMessages()
 
 This command run function which will be deleting all messages
+***************************************************************************
+
+8.
+***************************************************************************
+messagingToVisitors()
+
+This command run function which will be messaging to visitors.
+Message which will be sending is message used in global init function.
+Function after sending messages automatic change visitor's page to next page.
+After messaging you must refresh page and run bot.
 ***************************************************************************
 
 */
