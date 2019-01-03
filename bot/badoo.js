@@ -95,6 +95,48 @@ function showStats(){
     return console.log(stats)
 }
 
+function checkGlobalStats(){
+    if ( localStorage.getItem('GlobalDataBot') == null ){
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function initGlobalStats(){
+    if( checkGlobalStats() == false ){
+        let stats = {
+            profile_likes: 0,
+            profile_dislikes: 0,
+            snapchats_catch: 0,
+            snapchats_profiles: 0,
+            snapchat_profiles_string: '',
+            sned_messages: 0,
+            deleted_messages: 0
+        }
+
+        localStorage.setItem('GlobalDataBot', JSON.stringify(stats) );
+    }
+}
+
+function updateGlobalStats(){
+    let storage = JSON.parse( localStorage.getItem('GlobalDataBot') );
+
+    let stats = {
+        profile_likes: storage.profile_likes + likeCounter,
+        profile_dislikes: storage.profile_dislikes + dislikeCounter,
+        snapchats_catch: storage.snapchats + snapchats.length,
+        sendMessage: storage.message_counter + message_counter,
+        deleted_messages: storage.deletedMessages + deletedMessages
+    }
+
+    localStorage.setItem('GlobalDataBot', JSON.stringify(stats) );
+}
+
+function showGlobalStats(){
+    console.log(JSON.parse( localStorage.getItem('GlobalDataBot') ) );
+}
+
 function stopBot(message) {
     clearInterval(generalInterval);
     botStatus = 'Off';
