@@ -258,7 +258,7 @@ function sendMessage(message){
 
         setTimeout(() => {
             document.querySelector('.messenger-tools__input').innerText = message;
-        }, 500);
+        }, 1000);
         
 
         setTimeout(() => {
@@ -320,29 +320,26 @@ function deleteAllMessages(){
 
 
 ///////// function for deleting old messages
-
-
-let a = []; // after test change name of this array
-let counter = 1; // this should be in function but now is here for testing
 function getOldMessages() {
+    let messagesToRemove = [];
 
     document.querySelectorAll('.contacts__msg').forEach(el => {
         if(el.innerText.substring(0, 22) != "Zostaliście dopasowani"){
-            console.log(el)
-            a.push(el.parentElement.parentElement.id);
+            messagesToRemove.push(el.parentElement.parentElement.id);
         }
-        return a
     })
+
+    return messagesToRemove;
 }
 
 function removeOldMessages() {
     let removeOldMessagesInterval = null;
-    
+    let counter = 1;
 
     removeOldMessagesInterval = setInterval(()=>{
 
-        if(counter < a.length){ // there is problem
-            document.querySelector('#'+a[counter]).children[2].click();
+        if(counter < getOldMessages().length){
+            document.querySelector('#'+getOldMessages()[counter]).children[2].click();
         }
 
         if(document.querySelector('.js-im-contact-remove')){
@@ -357,20 +354,24 @@ function removeOldMessages() {
                 
             }, 1000)
         }
-        if(a.length == counter){
+        if(getOldMessages().length <= counter){
             clearInterval(removeOldMessagesInterval);
             colorLog('All old messages deleted', 'info')
             secureUpdateGlobalData();
         }
         
     }, 1500)
-    
 }
 
+function deleteAllOldMessages(){
+    getOldMessages();
 
+    setTimeout(() => {
+        removeOldMessages();
+    }, 1000);
+}
 
 /////////
-
 
 
 ////////////////////////////// function for messaging to visitors
