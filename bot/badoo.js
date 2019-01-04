@@ -151,6 +151,9 @@ function secureUpdateGlobalData() {
     }, 5000);
 }
 
+function clearGlobalData(){
+    localStorage.removeItem('GlobalDataBot')
+}
 ///////////////////////////////////////////
 
 function stopBot(message) {
