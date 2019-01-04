@@ -95,6 +95,7 @@ function showStats(){
     return console.log(stats)
 }
 
+/////////////////////////////////////////// GLOBAL STATS FUNCTIONS
 function checkGlobalStats(){
     if ( localStorage.getItem('GlobalDataBot') == null ){
         return false;
@@ -134,14 +135,30 @@ function updateGlobalStats(){
 }
 
 function showGlobalStats(){
+    colorLog('Global Stats: ', 'info')
     console.log(JSON.parse( localStorage.getItem('GlobalDataBot') ) );
 }
+
+let secureUpdateCounter = 0;
+function secureUpdateGlobalData() {
+    if (secureUpdateCounter == 0 ){
+        updateGlobalStats();
+    }
+    secureUpdateCounter++;
+
+    setTimeout(() => {
+        secureUpdateCounter = 0;
+    }, 5000);
+}
+
+///////////////////////////////////////////
 
 function stopBot(message) {
     clearInterval(generalInterval);
     botStatus = 'Off';
     showBotStatus();
     showStats();
+    secureUpdateGlobalData();
 
     if(message == true){
         sendMessage = true;
@@ -366,6 +383,8 @@ function init(timeout, whatDo, message, messageTxt) {
     botStatus = 'On';
     timeoutForChangeLikeFunction = timeout;
     timer();
+
+    initGlobalStats();
 
     stopBotInterval = setInterval(function(){
         if(document.querySelector('.responsive-text') == null){
