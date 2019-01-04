@@ -491,4 +491,12 @@ Function after sending messages automatic change visitor's page to next page.
 After messaging you must refresh page and run bot.
 ***************************************************************************
 
+9.
+***************************************************************************
+showGlobalStats() 
+
+Command which show us global stats.
+Global stats are auto updated after end all actions.
+If u wanna update statsmanually u can type secureUpdateGlobalData()
+***************************************************************************
 */
