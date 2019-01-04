@@ -224,6 +224,47 @@ function changeFromLikeToDislike(){
 
 //////////// function for messaging to new people
 
+let a = [];
+function getOldMessages() {
+    
+
+    document.querySelectorAll('.contacts__msg').forEach(el => {
+        if(el.innerText.substring(0, 22) != "Zostaliście dopasowani"){
+            console.log(el)
+            a.push(el.parentElement.parentElement.id);
+        }
+        return a
+    })
+}
+
+function removeOldMessages() {
+    let removeOldMessagesInterval = null;
+    let counter = 1;
+
+    removeOldMessagesInterval = setInterval(()=>{
+        document.querySelector('#'+a[counter]).children[2].click();
+
+        if(document.querySelector('.js-im-contact-remove')){
+            document.querySelector('.js-im-contact-remove').click(); //click remove
+
+            setTimeout(()=>{
+                if(document.querySelector('.js-im-confirm-delete')){
+                    document.querySelector('.js-im-confirm-delete').click(); // confirm remove
+                    counter++;
+                    deletedMessages++;
+                }
+                
+            }, 1000)
+        }else if(a.length > counter){
+            clearInterval(removeOldMessagesInterval);
+            colorLog('All old messages deleted', 'info')
+            secureUpdateGlobalData();
+        }
+        
+    }, 1500)
+    
+}
+
 let newConectedPeople = []; // peoples with no message from you
 function getNewConectedPeoples(){
     const openMessagerButton = document.querySelector('a[href="/messenger/open"]');
