@@ -76,6 +76,12 @@ function searchSnapchat() {
     } );
 }
 
+function removeDuplicatedSnapchats(){
+    let cleared = [...new Set(snapchats)]
+
+    return cleared;
+}
+
 function showStats(){
     let endDate = new Date();
     let endTime = [endDate.getHours(), endDate.getMinutes(), endDate.getSeconds()]
@@ -85,8 +91,8 @@ function showStats(){
         profile_likes: likeCounter,
         profile_dislikes: dislikeCounter,
         snapchats_catch: snapchats.length,
-        snapchats_profiles: snapchats,
-        snapchat_profiles_string: snapchats.toString(),
+        snapchats_profiles: removeDuplicatedSnapchats(),
+        snapchat_profiles_string: removeDuplicatedSnapchats().toString(),
         sned_messages: message_counter,
         timer: `${endTime[0] - startTimerValue[0]}:${endTime[1] - startTimerValue[1]}:${endTime[2] - startTimerValue[2]}`,
         deleted_messages: deletedMessages
@@ -372,7 +378,12 @@ function startMessagingToVisitors(){
 }
 
 function messagingToVisitors(){
-    getNewVisitors();
+    getIntoVisitors();
+
+    setTimeout(() => {
+        getNewVisitors();
+    }, 2000);
+    
     setTimeout(() => {
         startMessagingToVisitors();    
     }, 5000);
@@ -498,5 +509,8 @@ showGlobalStats()
 Command which show us global stats.
 Global stats are auto updated after end all actions.
 If u wanna update statsmanually u can type secureUpdateGlobalData()
+
+Global stats are in localStorage, if u open bot in incognito they will be deleting 
+after close the browser
 ***************************************************************************
 */
