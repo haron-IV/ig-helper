@@ -150,6 +150,7 @@ let secureUpdateCounter = 0;
 function secureUpdateGlobalData() {
     if (secureUpdateCounter == 0 ){
         updateGlobalStats();
+        colorLog('Global data is updated.', 'info')
     }
     secureUpdateCounter++;
 
@@ -259,11 +260,10 @@ function sendMessage(message){
             message_counter++;
         }, 1500);
         
-
-        console.log(document.querySelector(`#${newConectedPeople[count]}`));
         if(count == newConectedPeople.length){
             clearInterval(sendMessageInterval);
-            colorLog('stop messaging click', 'test')
+            colorLog('Messaging is stopped', 'info')
+            secureUpdateGlobalData();
         }
     }, 3500);
     
@@ -300,6 +300,7 @@ function deleteAllMessages(){
             clearInterval(int);
             colorLog('All messages deleted', 'info')
             colorLog(`Deleted messages: ${deletedMessages}`, 'info')
+            secureUpdateGlobalData();
         }
     }, 1000)
     
