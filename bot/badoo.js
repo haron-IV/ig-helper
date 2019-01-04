@@ -270,6 +270,10 @@ function sendMessage(message){
             clearInterval(sendMessageInterval);
             colorLog('Messaging is stopped', 'info')
             secureUpdateGlobalData();
+
+            setTimeout(()=>{ // close messenger
+                document.querySelector('.im-close').click()
+            }, 1000)
         }
     }, 3500);
     
