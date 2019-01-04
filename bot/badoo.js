@@ -123,12 +123,19 @@ function initGlobalStats(){
 function updateGlobalStats(){
     let storage = JSON.parse( localStorage.getItem('GlobalDataBot') );
 
+    let snapchatsCheck = snapchats.length;
+    if( snapchatsCheck > 0 ){
+        snapchatsCheck = snapchats.length;
+    }else{
+        snapchatsCheck = 0;
+    }
+
     let stats = {
         profile_likes: storage.profile_likes + likeCounter,
         profile_dislikes: storage.profile_dislikes + dislikeCounter,
-        snapchats_catch: storage.snapchats + snapchats.length,
-        sendMessage: storage.message_counter + message_counter,
-        deleted_messages: storage.deletedMessages + deletedMessages
+        snapchats_catch: storage.snapchats_catch + snapchatsCheck,
+        sendMessage: storage.sendMessage + message_counter,
+        deleted_messages: storage.deleted_messages + deletedMessages
     }
 
     localStorage.setItem('GlobalDataBot', JSON.stringify(stats) );
