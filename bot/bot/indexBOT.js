@@ -29,7 +29,9 @@ function getData() {
 
 function getSnapchats(){
     let textareaValue = textarea.value;
-    return textareaValue.split(",");
+    textareaValue = textareaValue.split(",");
+
+    return removeDoubledSnapchats(textareaValue);
 }
 
 function pushData() {
@@ -43,9 +45,8 @@ function pushData() {
     return Data
 }
 
-function removeDoubledSnapchats() {
-    let Data = getData();
-    clearData = [... new Set(Data.snapchats)]
+function removeDoubledSnapchats(data) {
+    clearData = [... new Set(data)];
     return clearData;
 }
 
