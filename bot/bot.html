@@ -9,14 +9,54 @@
         textarea{
             width: 80%;
         }
+        .list{
+            list-style-type: none;
+            widows: calc(50% - 4rem);
+            display: inline-block;
+        }
+        .list__item{
+            margin: .2rem 0;
+            border-bottom: 1px solid gray;
+        }
+        .not-marked{
+            color: black;
+        }
+
+        .not-marked{
+            margin-left: 1rem;
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .marked{
+            border: 3px solid green;
+            outline: none;
+            color: red;
+            background-color: green;
+        }
     </style>
 </head>
 <body>
 
     <h1>Local base bot</h1>
 
-    <textarea id="textarea"></textarea>
-    <button id="button-add">add</button>
+    <div style="width: 100vw">
+        <textarea id="textarea"></textarea>
+        <button id="button-add">add</button>
+    </div>
+    
+    <button id="button-show-snapchats">Show Snapchat List</button>
+    <button id="button-show-marked-snapchats">Show Marked Snapchat List</button>
+    <div class="snapchat-list-area">
+       
+        <ul class="list" id="list">
+
+        </ul>
+
+        <ul class="list list--marked" id="list-marked">
+
+        </ul>
+    </div>
 
     <!-- <script src="./bot.js"></script> -->
     <script src="./bot/indexBOT.js"></script>
