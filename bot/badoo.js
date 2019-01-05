@@ -82,12 +82,13 @@ function removeDuplicatedSnapchats(){
     return cleared;
 }
 
+let stats;
 function showStats(){
     let endDate = new Date();
     let endTime = [endDate.getHours(), endDate.getMinutes(), endDate.getSeconds()]
 
     
-    let stats = {
+    stats = {
         profile_likes: likeCounter,
         profile_dislikes: dislikeCounter,
         snapchats_catch: snapchats.length,
@@ -461,16 +462,25 @@ function messagingToVisitors(){
 //////////////////////////////// function to create show and hide bot dock
 
 function createDock(){
-    const dock = document.createElement('div');
-    dock.classList.add('dock');
-    dock.style.width = "100vw";
-    dock.style.height = "100vh";
-    dock.style.backgroundColor = "red";
-    dock.style.zIndex = '99999';
-    dock.style.position = "absolute";
-    dock.style.top = "0";
+    const BOTdock = document.createElement('div');
+    BOTdock.classList.add('dock');
+    BOTdock.style.width = "100vw";
+    BOTdock.style.height = "100vh";
+    BOTdock.style.backgroundColor = "white";
+    BOTdock.style.zIndex = '99999';
+    BOTdock.style.position = "absolute";
+    BOTdock.style.top = "0";
 
-    document.querySelector('body').appendChild(dock)
+    document.querySelector('body').appendChild(BOTdock);
+
+    stats.snapchats_profiles.forEach( (el, i) =>{
+        const BOTstats = document.createElement('div');
+        BOTstats.classList.add('stats');
+
+        bott.innerText = el;
+        BOTdock.appendChild(bott);
+    })
+    
 }
 
 function hideDock(){
@@ -480,10 +490,6 @@ function hideDock(){
 function showDock(){
     document.querySelector('.dock').style.display = 'block'
 }
-
-
-
-
 
 ////////////////////////////////
 
