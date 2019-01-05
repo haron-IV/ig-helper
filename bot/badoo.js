@@ -237,7 +237,7 @@ function getNewConectedPeoples(){
             }
         })
 
-        console.log(newConectedPeople)
+        colorLog("Don't close messenger window. Bot autoclose this after send messages.", 'warning')
     }, 3000);
 }
 
@@ -273,7 +273,7 @@ function sendMessage(message){
 
             setTimeout(()=>{ // close messenger
                 document.querySelector('.im-close').click()
-            }, 1000)
+            }, 2000)
         }
     }, 3500);
     
@@ -294,7 +294,8 @@ function startMessaging(){
 
 function deleteAllMessages(){
     let int = null;
-    
+    colorLog("Don't close messenger window when bot deleting.", 'warning');
+
     int = setInterval(()=>{
         if(document.querySelector('.js-im-contact-remove')){
             document.querySelector('.js-im-contact-remove').click(); //click remove
@@ -320,26 +321,32 @@ function deleteAllMessages(){
 
 
 ///////// function for deleting old messages
+let oldMessagesToRemove = [];
+
 function getOldMessages() {
-    let messagesToRemove = [];
+    const openMessagerButton = document.querySelector('a[href="/messenger/open"]');
 
-    document.querySelectorAll('.contacts__msg').forEach(el => {
-        if(el.innerText.substring(0, 22) != "Zostaliście dopasowani"){
-            messagesToRemove.push(el.parentElement.parentElement.id);
-        }
-    })
+    openMessagerButton.click();
 
-    return messagesToRemove;
+    setTimeout(() => {
+        document.querySelectorAll('.contacts__msg').forEach(el => {
+            if(el.innerText.substring(0, 22) != "Zostaliście dopasowani"){
+                oldMessagesToRemove.push(el.parentElement.parentElement.id);
+            }
+        });
+    }, 1500);
 }
 
 function removeOldMessages() {
     let removeOldMessagesInterval = null;
     let counter = 1;
 
+    colorLog("Don't close messenger window. Bot autoclose this after send messages.", 'warning')
+
     removeOldMessagesInterval = setInterval(()=>{
 
-        if(counter < getOldMessages().length){
-            document.querySelector('#'+getOldMessages()[counter]).children[2].click();
+        if(counter < oldMessagesToRemove.length){
+            document.querySelector('#'+oldMessagesToRemove[counter]).children[2].click();
         }
 
         if(document.querySelector('.js-im-contact-remove')){
@@ -354,7 +361,7 @@ function removeOldMessages() {
                 
             }, 1000)
         }
-        if(getOldMessages().length <= counter){
+        if(oldMessagesToRemove.length <= counter){
             clearInterval(removeOldMessagesInterval);
             colorLog('All old messages deleted', 'info')
             secureUpdateGlobalData();
@@ -368,7 +375,7 @@ function deleteAllOldMessages(){
 
     setTimeout(() => {
         removeOldMessages();
-    }, 1000);
+    }, 2500);
 }
 
 /////////
