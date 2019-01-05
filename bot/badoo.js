@@ -458,6 +458,36 @@ function messagingToVisitors(){
 ////////////////////////////////
 
 
+//////////////////////////////// function to create show and hide bot dock
+
+function createDock(){
+    const dock = document.createElement('div');
+    dock.classList.add('dock');
+    dock.style.width = "100vw";
+    dock.style.height = "100vh";
+    dock.style.backgroundColor = "red";
+    dock.style.zIndex = '99999';
+    dock.style.position = "absolute";
+    dock.style.top = "0";
+
+    document.querySelector('body').appendChild(dock)
+}
+
+function hideDock(){
+    document.querySelector('.dock').style.display = 'none'
+}
+
+function showDock(){
+    document.querySelector('.dock').style.display = 'block'
+}
+
+
+
+
+
+////////////////////////////////
+
+
 let stopBotInterval = null;
 let changedToDislike = false;
 
