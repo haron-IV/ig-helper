@@ -477,7 +477,7 @@ function createDock(){
         const BOTstats = document.createElement('div');
         BOTstats.classList.add('stats');
 
-        bott.innerText = el;
+        BOTstats.innerText = el;
         BOTdock.appendChild(bott);
     })
     

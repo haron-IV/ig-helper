@@ -183,18 +183,59 @@ showMarkedSnapchatList.addEventListener('click', ()=>{
         showMarked();
         button2counter = true;
     }
-})
+});
+
+function getMarkedData() {
+    const markedData = JSON.parse( localStorage.getItem('markedData') );
+    return markedData;
+}
 
 
 function compareArrays(){
-    const Data = JSON.parse( localStorage.getItem('Data') );
-    const markedData = JSON.parse( localStorage.getItem('markedData') );
+    const Data = getData();
     const test = document.querySelector('.list');
 
 
-    markedData.snapchats.forEach( (el, i) =>{
+    getMarkedData().snapchats.forEach( (el, i) =>{
         if (Data.snapchats.indexOf(el) != null){
-            test.children[Data.snapchats.indexOf(el)].style.color = "red"
+            test.children[Data.snapchats.indexOf(el)].style.color = "red";
+            test.children[Data.snapchats.indexOf(el)].style.display = "none";
         }
     })
+}
+
+document.querySelector('#show-hidden').addEventListener('click', ()=>{
+   if(toggle == false){
+        toggleMarkedData(false);
+        toggle = true;
+   }else{
+       toggleMarkedData(true);
+       toggle = false;
+   }
+})
+
+let toggle = false;
+function toggleMarkedData(toggled){
+    const Data = getData();
+    const test = document.querySelector('.list');
+
+    let displayType = '';
+    let buttonText = '';
+
+    if(toggled == false){
+        displayType = 'list-item';
+        buttonText = 'Hide Marked';
+    }else{
+        displayType = 'none';
+        buttonText = 'Show Marked';
+        
+    }
+
+    getMarkedData().snapchats.forEach( (el) =>{
+        if (Data.snapchats.indexOf(el) != null){
+            test.children[Data.snapchats.indexOf(el)].style.display = displayType;
+        }
+    });
+
+    document.querySelector('#show-hidden').innerText = buttonText;
 }
