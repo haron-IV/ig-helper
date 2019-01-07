@@ -493,6 +493,55 @@ function showDock(){
 
 ////////////////////////////////
 
+///////////////////////////////Function for set timer after this bot will be stoped
+
+function stopBotTimer(timeout){//'1h22m'
+    // let example = '1h22m';
+    let timer = 0;
+
+    if(timeout.indexOf('h') >= 1 ){
+        console.log(timeout.split('h')[0] )
+
+        if(JSON.parse( timeout.split('h')[0] ) > 1){
+            let hours = JSON.parse( timeout.split('h')[0] );
+        }else{
+            let hours = 0;
+        }
+
+        if(JSON.parse( timeout.split('h')[1].split('m')[0] ) > 1){
+            let minutes = JSON.parse( timeout.split('h')[1].split('m')[0] );
+        }else{
+            minutes = 0;
+        }
+        
+        console.log(`hours: ${hours}`)
+        setTimeout(() => {
+            let minutesMS = minutes*60*1000;
+            let hoursMS = hours*60*60*1000;
+            timer = hours+minutesMS;
+        }, 200);
+        
+    }
+    setTimeout(() => {
+        console.log('end');
+    }, timer);
+}
+//maybe next time hahahah
+//////////////////////////////// 
+
+
+function stopClock(howMuch){
+    if(dislikeCounter + likeCounter == howMuch){
+        console.log('kurwiszcze')
+        stopBot();
+    }
+}
+
+
+
+
+///////////////////////////////
+
 
 let stopBotInterval = null;
 let changedToDislike = false;
@@ -502,7 +551,7 @@ let timeoutForChangeLikeFunction = 0; // this variable let us use the same time 
 let messagingFunc = false;
 let messageText = ''; // this message will be sending after stop bot
 
-function init(timeout, whatDo, message, messageTxt) {
+function init(timeout, whatDo, message, messageTxt, stopCounter) {
     botStatus = 'On';
     timeoutForChangeLikeFunction = timeout;
     timer();
@@ -527,12 +576,13 @@ function init(timeout, whatDo, message, messageTxt) {
     }
 
     generalInterval = setInterval(function() {
+        stopClock(stopCounter);
         searchSnapchat();
         setTimeout(whatDo, 500);
     }, timeout)
 }
 
-init(1500, dislike, false, '');
+init(500, like, false, '', 1500);
 
 
 
