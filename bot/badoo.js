@@ -532,7 +532,7 @@ function stopBotTimer(timeout){//'1h22m'
 
 function stopClock(howMuch){
     if(dislikeCounter + likeCounter == howMuch){
-        console.log('kurwiszcze')
+        colorLog('Bot stopped after get over set value', 'info')
         stopBot();
     }
 }
