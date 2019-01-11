@@ -432,7 +432,7 @@ function startMessagingToVisitors(){
 
         if(count == visitors.length){
             clearInterval(sendMessageInterval);
-            document.querySelectorAll('.pagination__nav')[1].children[0].click(); //go to next visitor page
+            document.querySelectorAll('.pagination__nav')[2].children[0].click(); //go to next visitor page
 
             // setTimeout(() => { //start sending to users from next page
             //     messagingToVisitorsInit();

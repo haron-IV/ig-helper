@@ -28,6 +28,10 @@ function initLocalStorage() {
 
 function getData() {
     let Data = JSON.parse( localStorage.getItem('Data') );
+
+    Data.snapchats = Data.snapchats[0].split(' ');
+
+
     return Data;
 }
 
@@ -86,7 +90,11 @@ buttonShowSnapchats.addEventListener('click', ()=>{
 
 function showSnapchatsList(){
     const Data = getData();
-    filteredData = [... new Set(Data.snapchats) ]
+
+    let newData = Data.snapchats[0].split(' ');
+    
+
+    filteredData = [... new Set(Data.snapchats) ] // here filtered data is string ! should be array
 
     filteredData.forEach(el=>{
         const li = document.createElement('li');
@@ -95,6 +103,9 @@ function showSnapchatsList(){
 
         li.classList.add('list__item');
         li.innerText = el;
+
+        console.log('el: ')
+        console.log(el)
 
         list.appendChild(li);
         li.appendChild(marked);
@@ -182,15 +193,16 @@ function getMarkedData() {
 
 function compareArrays(){
     const Data = getData();
-    const test = document.querySelector('.list');
+    const list = document.querySelector('.list');
 
-
-    getMarkedData().snapchats.forEach( (el, i) =>{
-        if (Data.snapchats.indexOf(el) != null){
-            test.children[Data.snapchats.indexOf(el)].style.color = "red";
-            test.children[Data.snapchats.indexOf(el)].style.display = "none";
-        }
-    })
+    setTimeout(() => {
+        getMarkedData().snapchats.forEach( el =>{
+            if (Data.snapchats.indexOf(el) != null){
+                list.children[Data.snapchats.indexOf(el)].style.color = "red";
+                list.children[Data.snapchats.indexOf(el)].style.display = "none";
+            }
+        });
+    }, 250);  
 }
 
 document.querySelector('#show-hidden').addEventListener('click', ()=>{
@@ -217,7 +229,6 @@ function toggleMarkedData(toggled){
     }else{
         displayType = 'none';
         buttonText = 'Show Marked';
-        
     }
 
     getMarkedData().snapchats.forEach( (el) =>{
