@@ -52,9 +52,7 @@ function nicknamesFiltr( snapchatsArray ){
 
         ways.forEach( (elWays, i) => {
             if ( elTab.indexOf(elWays) >= 0 ){
-                console.log(elWays);
                 filteredNicknames.push( elTab.split(elWays)[1].trim() );
-                return;
             }
         });
 
@@ -63,6 +61,10 @@ function nicknamesFiltr( snapchatsArray ){
   cleared = [... new Set(filteredNicknames)]
 
   return cleared;
+}
+
+function nicknamesFiltrDoubled(){
+    
 }
 
 
