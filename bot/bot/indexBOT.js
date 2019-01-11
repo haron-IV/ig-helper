@@ -28,31 +28,47 @@ function initLocalStorage() {
 
 function getData() {
     let Data = JSON.parse( localStorage.getItem('Data') );
-
-    Data.snapchats = Data.snapchats[0].split(' ');
-
-
     return Data;
 }
 
 function getSnapchats(){
     let textareaValue = textarea.value;
     textareaValue = textareaValue.split(",");
+    
+    //remove " from first and last element
+    textareaValue[0] = textareaValue[0].replace('"', '');
+    textareaValue[textareaValue.length-1] = textareaValue[textareaValue.length-1].replace('"', '');
 
-    return removeDoubledSnapchats(textareaValue);
+    nicknamesFiltr(textareaValue);
+    return textareaValue;
 }
 
-function removeDoubledSnapchats(data) {
-    clearData = [... new Set(data)];
-    return clearData;
+const ways = [':', '-', 'snap', 'Snap', 'SNAP', 'sc', 'Sc', 'SC', '👻'];
+
+function nicknamesFiltr( snapchatsArray ){
+    let filteredNicknames = [];
+
+    snapchatsArray.forEach( (elTab, i) => {
+
+        ways.forEach( (elWays, i) => {
+            if ( elTab.indexOf(elWays) >= 0 ){
+                console.log(elWays);
+                filteredNicknames.push( elTab.split(elWays)[1].trim() );
+                return;
+            }
+        });
+
+    });
+
+  cleared = [... new Set(filteredNicknames)]
+
+  return cleared;
 }
+
 
 function checkDoubledBeforeSend(){
     let Data = getData();
-    let dataToPush = getSnapchats();
-
-    console.log("DATA: ")
-    console.log(Data)
+    let dataToPush = nicknamesFiltr(getSnapchats());
 
     if (dataToPush.length > 0){
         dataToPush.forEach(el=>{
@@ -91,11 +107,11 @@ buttonShowSnapchats.addEventListener('click', ()=>{
 function showSnapchatsList(){
     const Data = getData();
 
-    let newData = Data.snapchats[0].split(' ');
+    // let newData = Data.snapchats[0].split(' ');
     
 
     filteredData = [... new Set(Data.snapchats) ] // here filtered data is string ! should be array
-
+    console.log(filteredData)
     filteredData.forEach(el=>{
         const li = document.createElement('li');
         const marked = document.createElement('button');
@@ -103,9 +119,6 @@ function showSnapchatsList(){
 
         li.classList.add('list__item');
         li.innerText = el;
-
-        console.log('el: ')
-        console.log(el)
 
         list.appendChild(li);
         li.appendChild(marked);
@@ -239,3 +252,12 @@ function toggleMarkedData(toggled){
 
     document.querySelector('#show-hidden').innerText = buttonText;
 }
+
+
+
+/// PLACE FOR CREATING NEW FEATURE AND TESTING
+
+
+
+
+////
