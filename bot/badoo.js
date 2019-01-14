@@ -102,9 +102,56 @@ function showStats(){
     return console.log(stats)
 }
 
+////////////////////////////////
+function goToProfile(){
+    document.querySelector('.sidebar-info__name').click(); //go to prfole section
+    return document.querySelector('.sidebar-info__name').innerHTML;
+}
+
+function getRestProfileInfoData(){
+    let restProfileInfo = {
+        localization: document.querySelector('.js-location-label').innerText,
+        age_range: document.querySelectorAll('.profile-section__content')[3].innerText.split('wieku')[1],
+        profile_description: document.querySelectorAll('.profile-section__content')[5].children[0].children[0].innerText.trim()
+    }
+    return restProfileInfo;
+}
+
+function setProfileInfoData(){
+    let profileInfo = {
+        profile_name: goToProfile(),
+        localization: getRestProfileInfoData().localization,
+        age_range: getRestProfileInfoData().age_range,
+        profile_description: getRestProfileInfoData().profile_description
+    }
+
+    return JSON.stringify( profileInfo );
+}
+
+function updateProfileInfoData(){
+    goToProfile();
+
+    let localStorageCheck = checkGlobalStats('ProfileInfo');
+
+    if(localStorageCheck == true){
+        colorLog('Profile info was created.', 'info');
+    }else{
+        setTimeout(() => {
+            localStorage.setItem('ProfileInfo', setProfileInfoData());
+            colorLog('Profile info updated!', 'info'); 
+        }, 1500);
+    }
+}
+
+
+
+updateProfileInfoData();
+
+////////////////////////////////
+
 /////////////////////////////////////////// GLOBAL STATS FUNCTIONS
-function checkGlobalStats(){
-    if ( localStorage.getItem('GlobalDataBot') == null ){
+function checkGlobalStats(dataName){
+    if ( localStorage.getItem(dataName) == null ){
         return false;
     } else {
         return true;
@@ -112,7 +159,7 @@ function checkGlobalStats(){
 }
 
 function initGlobalStats(){
-    if( checkGlobalStats() == false ){
+    if( checkGlobalStats('GlobalDataBot') == false ){
         let stats = {
             profile_likes: 0,
             profile_dislikes: 0,
@@ -124,6 +171,7 @@ function initGlobalStats(){
         }
 
         localStorage.setItem('GlobalDataBot', JSON.stringify(stats) );
+        colorLog('Bot init global data instance in browser local sotrage.', 'info');
     }
 }
 
@@ -444,7 +492,7 @@ function startMessagingToVisitors(){
 }
 
 function messagingToVisitors(){
-    getIntoVisitors();
+    // getIntoVisitors();  //add this in better way
 
     setTimeout(() => {
         getNewVisitors();
@@ -527,6 +575,8 @@ function stopBotTimer(timeout){//'1h22m'
     }, timer);
 }
 //maybe next time hahahah
+
+
 //////////////////////////////// 
 
 
@@ -536,8 +586,6 @@ function stopClock(howMuch){
         stopBot();
     }
 }
-
-
 
 
 ///////////////////////////////
@@ -582,7 +630,7 @@ function init(timeout, whatDo, message, messageTxt, stopCounter) {
     }, timeout)
 }
 
-init(500, like, false, '', 1500);
+// init(500, like, false, '', 1500);
 
 
 
