@@ -128,24 +128,38 @@ function setProfileInfoData(){
     return JSON.stringify( profileInfo );
 }
 
-function updateProfileInfoData(){
+function updateProfileInfoData(timeout){ //timeout 3000 ms down in code
     goToProfile();
 
     let localStorageCheck = checkGlobalStats('ProfileInfo');
 
     if(localStorageCheck == true){
-        colorLog('Profile info was created.', 'info');
+        colorLog('Profile info was corretly created.', 'info');
+
+        setTimeout(() => {
+            localStorage.setItem('ProfileInfo', setProfileInfoData());
+            colorLog('Profile info updated!', 'info');
+            showProfileInfo();
+            goToEncounters();
+        }, timeout);
     }else{
         setTimeout(() => {
             localStorage.setItem('ProfileInfo', setProfileInfoData());
-            colorLog('Profile info updated!', 'info'); 
-        }, 1500);
+            colorLog('Profile info updated!', 'info');
+            showProfileInfo();
+            goToEncounters();
+        }, timeout);
     }
 }
 
+function showProfileInfo(){
+    colorLog('Profile Info:', 'info');
+    console.log( JSON.parse( localStorage.getItem('ProfileInfo') ) );
+}
 
-
-updateProfileInfoData();
+function goToEncounters(){
+    document.querySelector('.sidebar-menu__item[href="/encounters"]').click();
+}
 
 ////////////////////////////////
 
@@ -581,10 +595,20 @@ function stopBotTimer(timeout){//'1h22m'
 
 
 function stopClock(howMuch){
-    if(dislikeCounter + likeCounter == howMuch){
-        colorLog('Bot stopped after get over set value', 'info')
-        stopBot();
-    }
+    let stopClockInterval = null;
+
+    stopClockInterval = setInterval(() => {
+        let stop = dislikeCounter + likeCounter;
+        console.log(stop); // after clear interval console log alive, try to fix this
+
+        if( stop >= howMuch){
+            colorLog('Bot stopped after get over set value', 'info');
+            stopBot();
+            updateProfileInfoData(3000);
+            clearInterval(stopClockInterval);
+        }
+    }, 1000);
+    
 }
 
 
@@ -603,6 +627,7 @@ function init(timeout, whatDo, message, messageTxt, stopCounter) {
     botStatus = 'On';
     timeoutForChangeLikeFunction = timeout;
     timer();
+    stopClock(stopCounter);
 
     initGlobalStats();
 
@@ -624,7 +649,6 @@ function init(timeout, whatDo, message, messageTxt, stopCounter) {
     }
 
     generalInterval = setInterval(function() {
-        stopClock(stopCounter);
         searchSnapchat();
         setTimeout(whatDo, 500);
     }, timeout)
@@ -711,5 +735,12 @@ If u wanna update statsmanually u can type secureUpdateGlobalData()
 
 Global stats are in localStorage, if u open bot in incognito they will be deleting 
 after close the browser
+***************************************************************************
+
+10.
+***************************************************************************
+showProfileInfo() 
+
+Show our profile information in console.
 ***************************************************************************
 */
