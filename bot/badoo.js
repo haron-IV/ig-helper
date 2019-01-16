@@ -599,7 +599,7 @@ function stopClock(howMuch){
 
     stopClockInterval = setInterval(() => {
         let stop = dislikeCounter + likeCounter;
-        console.log(stop); // after clear interval console log alive, try to fix this
+        //console.log(stop); // after clear interval console log alive, try to fix this
 
         if( stop >= howMuch){
             colorLog('Bot stopped after get over set value', 'info');
