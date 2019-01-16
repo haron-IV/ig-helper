@@ -259,6 +259,19 @@ function toggleMarkedData(toggled){
 
 /// PLACE FOR CREATING NEW FEATURE AND TESTING
 
+// Function for removing element from data
+
+function removeSingleElementFromData(index){
+    let Data = getData();
+
+    Data.snapchats.splice(index, 1)
+
+    return Data
+}
+
+function pusNewData() {// in this function is create test data for snpachat list but working on true data from localstorage
+    localStorage.setItem('testData', JSON.stringify( removeSingleElementFromData() ) );
+}
 
 
 
