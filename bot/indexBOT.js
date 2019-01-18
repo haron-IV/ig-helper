@@ -309,19 +309,9 @@ function toggleMarkedData(toggled){
     document.querySelector('#show-hidden').innerText = buttonText;
 }
 
-
-
 /// PLACE FOR CREATING NEW FEATURE AND TESTING
 
 // Function for removing element from data
-
-function removeSingleElementFromData(index){
-    let Data = getData();
-}
-
-function pushNewData() {// in this function is create test data for snpachat list but working on true data from localstorage
-    localStorage.setItem('testData', JSON.stringify( removeSingleElementFromData() ) );
-}
 
 function removeSingleElementByIndex(index){
     let Data = getData();
@@ -331,7 +321,6 @@ function removeSingleElementByIndex(index){
     return Data;
 }
 
-
 function removeSnapchatByNick(nickname){
     let Data = getData();
 
@@ -339,7 +328,5 @@ function removeSnapchatByNick(nickname){
 
     localStorage.setItem('Data', JSON.stringify( removeSingleElementByIndex( nicknamePosition) ) );
 }
-
-
 
 //// 

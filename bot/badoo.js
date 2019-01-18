@@ -99,7 +99,7 @@ function showStats(){
         deleted_messages: deletedMessages
     }
 
-    return console.log(stats)
+    return console.table(stats)
 }
 
 ////////////////////////////////
@@ -154,7 +154,7 @@ function updateProfileInfoData(timeout){ //timeout 3000 ms down in code
 
 function showProfileInfo(){
     colorLog('Profile Info:', 'info');
-    console.log( JSON.parse( localStorage.getItem('ProfileInfo') ) );
+    console.table( JSON.parse( localStorage.getItem('ProfileInfo') ) );
 }
 
 function goToEncounters(){
@@ -212,7 +212,7 @@ function updateGlobalStats(){
 
 function showGlobalStats(){
     colorLog('Global Stats: ', 'info')
-    console.log(JSON.parse( localStorage.getItem('GlobalDataBot') ) );
+    console.table(JSON.parse( localStorage.getItem('GlobalDataBot') ) );
 }
 
 let secureUpdateCounter = 0;
@@ -408,8 +408,12 @@ function removeOldMessages() {
 
     removeOldMessagesInterval = setInterval(()=>{
 
-        if(counter < oldMessagesToRemove.length){
-            document.querySelector('#'+oldMessagesToRemove[counter]).children[2].click();
+        if(counter < oldMessagesToRemove.length ){
+
+            if ( oldMessagesToRemove[counter] != 'js-notification-empty' ){
+                document.querySelector('#'+oldMessagesToRemove[counter]).children[2].click();
+            }
+
         }
 
         if(document.querySelector('.js-im-contact-remove')){
@@ -611,6 +615,11 @@ function stopClock(howMuch){
     
 }
 
+
+function playSound(){
+    var audio = new Audio('/Users/mabbyn/Desktop/workspace/self/tinder badoo bots/bot/plucky.mp3');
+    audio.play()
+}
 
 ///////////////////////////////
 
