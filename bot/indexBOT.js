@@ -1,4 +1,6 @@
-import test from './test.js';
+// import test from './test.js';
+
+var _test = require('file:///Users/mabbyn/Desktop/workspace/self/tinder_badoo_bots/bot/test.js');
 
 const textarea = document.querySelector('#textarea');
 const buttonAdd = document.querySelector('#button-add');

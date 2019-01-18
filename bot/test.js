@@ -4,4 +4,8 @@ function test(message) {
     console.groupEnd('test')
 }
 
-export default test;
+// export default test;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = test;
