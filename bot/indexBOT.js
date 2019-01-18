@@ -39,8 +39,19 @@ function getSnapchats(){
     textareaValue[0] = textareaValue[0].replace('"', '');
     textareaValue[textareaValue.length-1] = textareaValue[textareaValue.length-1].replace('"', '');
 
+    let trimmed = [];
+
+    textareaValue.forEach(el => {
+        trimmed.push( el.trim() )
+    })
+
     nicknamesFiltr(textareaValue);
-    return textareaValue;
+
+    console.groupCollapsed('GetSnapchats')
+    console.log(trimmed)
+    console.groupEnd('GetSnapchats')
+
+    return trimmed;
 }
 
 const ways = [':', '-', 'snap', 'Snap', 'SNAP', 'sc', 'Sc', 'SC', '👻'];
@@ -50,21 +61,64 @@ function nicknamesFiltr( snapchatsArray ){
 
     snapchatsArray.forEach( (elTab, i) => { // Here is problem with getting snapchats with no prefix like sc: snap- etc. All clear nicknames are romoving from array
 
-        ways.forEach( (elWays, i) => {
-            if ( elTab.indexOf(elWays) >= 0 ){
-                filteredNicknames.push( elTab.split(elWays)[1].trim() );
-            }
-        });
+        // ways.forEach( (elWays, i) => {
+        //     if ( elTab.indexOf(elWays) >= 0 ){
+        //         filteredNicknames.push( elTab.split(elWays)[1].trim() );   
+        //     }
+        // });
+
+        // way above working bad, bottom is better but longer, i think I can do this better in future
+
+        if ( elTab.indexOf( ways[0] ) >= 0 ) {
+            filteredNicknames.push( elTab.split( ways[0] )[1].trim() );
+            return;
+        }
+
+        if ( elTab.indexOf( ways[1] ) >= 0 ) {
+            filteredNicknames.push( elTab.split( ways[1] )[1].trim() );
+            return;
+        }
+
+        if ( elTab.indexOf( ways[2] ) >= 0 ) {
+            filteredNicknames.push( elTab.split( ways[2] )[1].trim() );
+            return;
+        }
+
+        if ( elTab.indexOf( ways[3] ) >= 0 ) {
+            filteredNicknames.push( elTab.split( ways[3] )[1].trim() );
+            return;
+        }
+
+        if ( elTab.indexOf( ways[4] ) >= 0 ) {
+            filteredNicknames.push( elTab.split( ways[4] )[1].trim() );
+            return;
+        }
+
+        if ( elTab.indexOf( ways[5] ) >= 0 ) {
+            filteredNicknames.push( elTab.split( ways[5] )[1].trim() );
+            return;
+        }
+
+        if ( elTab.indexOf( ways[6] ) >= 0 ) {
+            filteredNicknames.push( elTab.split( ways[6] )[1].trim() );
+            return;
+        }
+
+        if ( elTab.indexOf( ways[7] ) >= 0 ) {
+            filteredNicknames.push( elTab.split( ways[7] )[1].trim() );
+            return;
+        }
+
+        if ( elTab.indexOf( ways[8] ) >= 0 ) {
+            filteredNicknames.push( elTab.split( ways[8] )[1].trim() );
+            return;
+        }
 
     });
 
   cleared = [... new Set(filteredNicknames)]
 
   return cleared;
-}
-
-function nicknamesFiltrDoubled(){
-
 }
 
 
@@ -86,7 +140,7 @@ function checkDoubledBeforeSend(){
 }
 
 function sendData() {
-    if( getSnapchats() == ''){
+    if( getSnapchats() == '' ){
         console.log("Can't add empty array");
     }else{
         localStorage.setItem('Data', JSON.stringify( checkDoubledBeforeSend() ) );
@@ -113,7 +167,7 @@ function showSnapchatsList(){
 
 
     filteredData = [... new Set(Data.snapchats) ] // here filtered data is string ! should be array
-    console.log(filteredData)
+    console.table(filteredData)
     filteredData.forEach(el=>{
         const li = document.createElement('li');
         const marked = document.createElement('button');
@@ -263,14 +317,27 @@ function toggleMarkedData(toggled){
 
 function removeSingleElementFromData(index){
     let Data = getData();
-
-    Data.snapchats.splice(index, 1)
-
-    return Data
 }
 
-function pusNewData() {// in this function is create test data for snpachat list but working on true data from localstorage
+function pushNewData() {// in this function is create test data for snpachat list but working on true data from localstorage
     localStorage.setItem('testData', JSON.stringify( removeSingleElementFromData() ) );
+}
+
+function removeSingleElementByIndex(index){
+    let Data = getData();
+
+    Data.snapchats.splice(index, 1);
+
+    return Data;
+}
+
+
+function removeSnapchatByNick(nickname){
+    let Data = getData();
+
+    let nicknamePosition = Data.snapchats.indexOf(nickname);
+
+    localStorage.setItem('Data', JSON.stringify( removeSingleElementByIndex( nicknamePosition) ) );
 }
 
 
