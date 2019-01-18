@@ -1,3 +1,5 @@
+import {test1} from "/Users/mabbyn/Desktop/workspace/self/tinder_badoo_bots/bot/test.js";
+
 
 const likeButton = document.querySelector('.profile-action--yes');
 const dislikeButton = document.querySelector('.profile-action--no');

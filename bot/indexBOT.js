@@ -1,3 +1,5 @@
+import test from './test.js';
+
 const textarea = document.querySelector('#textarea');
 const buttonAdd = document.querySelector('#button-add');
 const buttonShowSnapchats = document.querySelector('#button-show-snapchats');
