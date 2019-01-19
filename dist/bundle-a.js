@@ -1,3 +1,5 @@
+'use strict';
+
 // import test from './test.js';
 var _test = require('./test.js');
 
@@ -12,7 +14,7 @@ function checkLocalStorage() {
     if(localStorage.getItem('Data') == null){
         initLocalStorage();
     }else{
-        console.log("Data is ready")
+        console.log("Data is ready");
     }
 }
 
@@ -21,11 +23,11 @@ checkLocalStorage();
 function initLocalStorage() {
     const Data = {
         snapchats: []
-    }
+    };
 
     setTimeout(() => {
         localStorage.setItem('Data', JSON.stringify( Data ) );
-        console.log("LocalStorage Data created")
+        console.log("LocalStorage Data created");
     }, 1000);
 }
 
@@ -45,14 +47,14 @@ function getSnapchats(){
     let trimmed = [];
 
     textareaValue.forEach(el => {
-        trimmed.push( el.trim() )
-    })
+        trimmed.push( el.trim() );
+    });
 
     nicknamesFiltr(textareaValue);
 
-    console.groupCollapsed('GetSnapchats')
-    console.log(trimmed)
-    console.groupEnd('GetSnapchats')
+    console.groupCollapsed('GetSnapchats');
+    console.log(trimmed);
+    console.groupEnd('GetSnapchats');
 
     return trimmed;
 }
@@ -119,7 +121,7 @@ function nicknamesFiltr( snapchatsArray ){
 
     });
 
-  cleared = [... new Set(filteredNicknames)]
+  cleared = [... new Set(filteredNicknames)];
 
   return cleared;
 }
@@ -131,11 +133,11 @@ function checkDoubledBeforeSend(){
 
     if (dataToPush.length > 0){
         dataToPush.forEach(el=>{
-            Data.snapchats.push(el)
+            Data.snapchats.push(el);
         });
     }
 
-    clearedData = [... new Set(Data.snapchats)]
+    clearedData = [... new Set(Data.snapchats)];
 
     Data.snapchats = clearedData;
 
@@ -153,7 +155,7 @@ function sendData() {
 
 buttonAdd.addEventListener('click', ()=>{
     sendData();
-})
+});
 
 let buttonCounter = false;
 buttonShowSnapchats.addEventListener('click', ()=>{
@@ -161,7 +163,7 @@ buttonShowSnapchats.addEventListener('click', ()=>{
         showSnapchatsList();
         buttonCounter = true;
     }
-})
+});
 
 function showSnapchatsList(){
     const Data = getData();
@@ -169,8 +171,8 @@ function showSnapchatsList(){
     // let newData = Data.snapchats[0].split(' ');
 
 
-    filteredData = [... new Set(Data.snapchats) ] // here filtered data is string ! should be array
-    console.table(filteredData)
+    filteredData = [... new Set(Data.snapchats) ]; // here filtered data is string ! should be array
+    console.table(filteredData);
     filteredData.forEach(el=>{
         const li = document.createElement('li');
         const marked = document.createElement('button');
@@ -181,7 +183,7 @@ function showSnapchatsList(){
 
         list.appendChild(li);
         li.appendChild(marked);
-    })
+    });
 
     setTimeout(() => {
         markSnapListPosition();
@@ -198,23 +200,23 @@ function markSnapListPosition(){
     snapList.forEach(el =>{
         el.addEventListener('click', ()=>{
             let selected_name = el.parentElement.innerText;
-            console.log(selected_name)
+            console.log(selected_name);
             el.classList.add('marked');
             markedSnapchats.push(selected_name);
             addMarkedSnapchatsToData();
-        })
-    })
+        });
+    });
 }
 
 function checkLocalStorageMarkedSnapchats(){
     let Data = {
         snapchats: []
-    }
+    };
 
     if(localStorage.getItem('markedData') == null){
         localStorage.setItem('markedData', JSON.stringify( Data ) );
     }else{
-        console.log('Marked data was created :)')
+        console.log('Marked data was created :)');
     }
 }
 
@@ -224,20 +226,20 @@ checkLocalStorageMarkedSnapchats();
 function addMarkedSnapchatsToData(){
     let Data = JSON.parse( localStorage.getItem('markedData') );
     markedSnapchats.forEach(el=>{
-        Data.snapchats.push(el)
-    })
+        Data.snapchats.push(el);
+    });
 
-    cleared = [... new Set(Data.snapchats)]
+    cleared = [... new Set(Data.snapchats)];
 
     Data.snapchats = cleared;
 
-    localStorage.setItem('markedData', JSON.stringify(Data))
+    localStorage.setItem('markedData', JSON.stringify(Data));
 }
 
 
 function showMarked(){
     const Data = JSON.parse( localStorage.getItem('markedData') );
-    filteredData = [... new Set(Data.snapchats) ]
+    filteredData = [... new Set(Data.snapchats) ];
 
     filteredData.forEach(el=>{
         const li = document.createElement('li');
@@ -285,7 +287,7 @@ document.querySelector('#show-hidden').addEventListener('click', ()=>{
        toggleMarkedData(true);
        toggle = false;
    }
-})
+});
 
 let toggle = false;
 function toggleMarkedData(toggled){
@@ -312,24 +314,4 @@ function toggleMarkedData(toggled){
     document.querySelector('#show-hidden').innerText = buttonText;
 }
 
-/// PLACE FOR CREATING NEW FEATURE AND TESTING
-
-// Function for removing element from data
-
-function removeSingleElementByIndex(index){
-    let Data = getData();
-
-    Data.snapchats.splice(index, 1);
-
-    return Data;
-}
-
-function removeSnapchatByNick(nickname){
-    let Data = getData();
-
-    let nicknamePosition = Data.snapchats.indexOf(nickname);
-
-    localStorage.setItem('Data', JSON.stringify( removeSingleElementByIndex( nicknamePosition) ) );
-}
-
-//// 
+////

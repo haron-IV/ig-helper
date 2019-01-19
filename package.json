@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.18.0",
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "rollup": "^1.1.0"
   },
   "devDependencies": {},
   "scripts": {

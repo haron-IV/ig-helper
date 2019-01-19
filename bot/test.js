@@ -5,7 +5,7 @@ function test(message) {
 }
 
 // export default test;
-Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.default = test;
+// Object.defineProperty(exports, "__esModule", {
+//     value: true
+//   });
+//   exports.default = test;
