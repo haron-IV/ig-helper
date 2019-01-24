@@ -732,18 +732,6 @@ function setCalendar () {
     return data;
 }
 
-function err() {
-    let data = getCalendarData();
-    console.log(data)
-    if ( data[data.length-1].snapchats_get > 0 ) {
-        data[data.length-1].snapchats_get = data[data.length-1].snapchats_get + snapchats.length;
-        console.log('kurwa')
-    } else {
-        data[data.length-1].snapchats_get = snapchats.length
-    }
-
-}
-
 function updateCalendar () {
     let data = getCalendarData();
 
@@ -776,13 +764,18 @@ function updateCalendar () {
         let filteredSnapchats = [... new Set( data[data.length-1].snapchats_list.concat(snapchats) )];
 
         data[data.length-1].snapchats_list = filteredSnapchats
+        console.log('kurwa')
     } else {
-        data[data.length-1].profile_likes = likeCounter
+        data[data.length-1].snapchats_list = snapchats
     }
 
     localStorage.setItem('CalendarData', JSON.stringify( data ) )
 
     colorLog('Calendar Updated.', 'info');
+    colorLog('Bot Auto refresh the page for get rid of mess. Please do not anything for 10 seconds :)', 'warning');
+    setTimeout(() => {
+        location.reload();
+    }, 10000);
 }
 
 function checkToday () {
