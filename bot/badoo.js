@@ -23,6 +23,8 @@ let deletedMessages = 0;
 
 let initCounter = 0;
 
+let updateCalendarCounter = 0;
+
 
 /////////////////////////////////////////////
 
@@ -779,10 +781,18 @@ function updateCalendar () {
     localStorage.setItem('CalendarData', JSON.stringify( data ) )
 
     colorLog('Calendar Updated.', 'info');
-    colorLog('Bot Auto refresh the page for get rid of mess. Please do not anything for 10 seconds :)', 'warning');
-    setTimeout(() => {
-        location.href = 'https://badoo.com/encounters';
-    }, 10000);
+    updateCalendarCounter++;
+    reloadPage();
+}
+
+
+function reloadPage(){
+    if ( updateCalendarCounter >= 2 ) {
+        colorLog('Bot Auto refresh the page for get rid of mess. Please do not anything for 10 seconds :)', 'warning');
+        setTimeout(() => {
+            location.href = 'https://badoo.com/encounters';
+        }, 10000);   
+    }
 }
 
 function checkToday () {
