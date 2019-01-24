@@ -768,25 +768,31 @@ Show our profile information in console.
 
 let statisticsCalendar = [
     {
-        date: null,
-        snapchats_get: null, // number of snapchats
-        profile_likes: null,
-        profile_dislikes: null,
-        sned_messages: null,
-        deleted_messages: null,
+        date: getDateNow(),
+        snapchats_get: 0, 
+        profile_likes: 0,
+        profile_dislikes: 0,
+        sned_messages: 0,
+        deleted_messages: 0,
         snapchats_list: [],
     }
 ]
 
 
 function checkCalendarData () {
-    const data = localStorage.getItem('CalendarDate');
+    const data = localStorage.getItem('CalendarData');
     if ( data === null ) {
-        localStorage.setItem('CalendarDate', JSON.stringify( statisticsCalendar ) );
+        localStorage.setItem('CalendarData', JSON.stringify( statisticsCalendar ) );
+        // setCalendar();
         colorLog('Calendar Data is created now.', 'info');
     } else {
         colorLog('Calendar Data was created correctly', 'info');
     }
+}
+
+function getCalendarData () {
+    const data = localStorage.getItem('CalendarData');
+    return JSON.parse( data );
 }
 
 function getDateNow () {
@@ -836,12 +842,79 @@ function setCalendar () {
         snapchats_list: checkSnapchatsForCalendar(),
     }
 
+    let lsData = getCalendarData();
+
+    lsData.push(data);
+
+    localStorage.setItem('CalendarData', JSON.stringify( lsData ) );
+
     return data;
+}
+
+function err() {
+    let data = getCalendarData();
+    console.log(data)
+    if ( data[data.length-1].snapchats_get > 0 ) {
+        data[data.length-1].snapchats_get = data[data.length-1].snapchats_get + snapchats.length;
+        console.log('kurwa')
+    } else {
+        data[data.length-1].snapchats_get = snapchats.length
+    }
+
+}
+
+function updateCalendar () {
+    let data = getCalendarData();
+
+    if ( data[data.length-1].snapchats_get > 0 ) {
+        data[data.length-1].snapchats_get = data[data.length-1].snapchats_get + snapchats.length;
+        console.log('kurwa')
+    } else {
+        data[data.length-1].snapchats_get = snapchats.length
+    }
+
+    if ( data[data.length-1].profile_likes > 0 ) {
+        data[data.length-1].profile_likes = data[data.length-1].profile_likes + likeCounter
+    } else {
+        data[data.length-1].profile_likes = likeCounter
+    }
+
+    if ( data[data.length-1].profile_dislikes > 0 ) {
+        data[data.length-1].profile_dislikes = data[data.length-1].profile_dislikes + dislikeCounter
+    } else {
+        data[data.length-1].profile_dislikes = dislikeCounter
+    }
+
+    if ( data[data.length-1].sned_messages > 0 ) {
+        data[data.length-1].sned_messages = data[data.length-1].sned_messages + message_counter
+    } else {
+        data[data.length-1].sned_messages = message_counter
+    }
+
+    if ( data[data.length-1].snapchats_list.length > 0 ) {
+        let filteredSnapchats = [... new Set( data[data.length-1].snapchats_list.concat(snapchats) )];
+
+        data[data.length-1].snapchats_list = filteredSnapchats
+    } else {
+        data[data.length-1].profile_likes = likeCounter
+    }
+
+    localStorage.setItem('CalendarData', JSON.stringify( data ) )
+
+    colorLog('Calendar Updated.', 'info');
+}
+
+function checkToday () {
+    if ( getCalendarData()[getCalendarData().length-1].date == getDateNow() ){
+        updateCalendar();
+    } else {
+        setCalendar()
+    }
 }
 
 function CalendarData () {
     checkCalendarData();
-
-
+    checkToday();
 }
 
+// CalendarData();
