@@ -753,3 +753,95 @@ showProfileInfo()
 Show our profile information in console.
 ***************************************************************************
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+let statisticsCalendar = [
+    {
+        date: null,
+        snapchats_get: null, // number of snapchats
+        profile_likes: null,
+        profile_dislikes: null,
+        sned_messages: null,
+        deleted_messages: null,
+        snapchats_list: [],
+    }
+]
+
+
+function checkCalendarData () {
+    const data = localStorage.getItem('CalendarDate');
+    if ( data === null ) {
+        localStorage.setItem('CalendarDate', JSON.stringify( statisticsCalendar ) );
+        colorLog('Calendar Data is created now.', 'info');
+    } else {
+        colorLog('Calendar Data was created correctly', 'info');
+    }
+}
+
+function getDateNow () {
+    let date = new Date;
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDay();
+    
+    if ( month < 10 ) {
+        if ( month == 0 ){
+            month = '01';
+        } else {
+            month = '0' + JSON.stringify( month );
+        } 
+        
+    }
+
+    if ( day < 10 ) {
+        if ( month == 0 ){
+            day = '01';
+        } else {
+            day = '0' + JSON.stringify( day );
+        }
+    }
+
+    date = `${day}:${month}:${year}`;
+    return date;
+}
+
+function checkSnapchatsForCalendar () {
+    if ( snapchats.length > 0 ) {
+        return snapchats;
+    } else {
+        return ['null']
+    }
+}
+
+function setCalendar () {
+
+    const data = {
+        date: getDateNow(),
+        snapchats_get: snapchats.length,
+        profile_likes: likeCounter,
+        profile_dislikes: dislikeCounter,
+        sned_messages: message_counter,
+        deleted_messages: deletedMessages,
+        snapchats_list: checkSnapchatsForCalendar(),
+    }
+
+    return data;
+}
+
+function CalendarData () {
+    checkCalendarData();
+
+
+}
+
