@@ -34,6 +34,24 @@
             color: red;
             background-color: green;
         }
+        .hidden {
+            display: none;
+        }
+        .visible {
+            display: block;
+        }
+        .info-about-add{
+            text-align: center;
+            border: 1px solid #000;
+            border-radius: 4px;
+            padding: 5px;
+            margin: 10px 0;
+            background-color: bisque;
+        }
+        h1 {
+            padding: 0;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -48,15 +66,11 @@
     <button id="button-show-snapchats">Show Snapchat List</button>
     <button id="button-show-marked-snapchats">Show Marked Snapchat List</button>
     <button id="show-hidden">Show Hidden</button>
+    <div id="infoaboutadd" class="hidden info-about-add"><h1>Dodano!</h1></div>
     <div class="snapchat-list-area">
-        <ul class="list" id="list">
-            
+        <ul class="list" id="list"></ul>
 
-        </ul>
-
-        <ul class="list list--marked" id="list-marked">
-
-        </ul>
+        <ul class="list list--marked" id="list-marked"></ul>
     </div>
 
     <!-- <script src="./bot.js"></script> -->

@@ -1,4 +1,4 @@
-import {test1} from "/Users/mabbyn/Desktop/workspace/self/tinder_badoo_bots/bot/test.js";
+// import {test1} from "/Users/mabbyn/Desktop/workspace/self/tinder_badoo_bots/bot/test.js";
 
 
 const likeButton = document.querySelector('.profile-action--yes');

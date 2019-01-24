@@ -1,5 +1,5 @@
 // import test from './test.js';
-var _test = require('./test.js');
+// var _test = require('./test.js');
 
 const textarea = document.querySelector('#textarea');
 const buttonAdd = document.querySelector('#button-add');
@@ -147,8 +147,18 @@ function sendData() {
         console.log("Can't add empty array");
     }else{
         localStorage.setItem('Data', JSON.stringify( checkDoubledBeforeSend() ) );
+        showInfoAboutAddSnapchats();
     }
 
+}
+
+function showInfoAboutAddSnapchats () {
+    const infoSection = document.querySelector('#infoaboutadd');
+
+    infoSection.classList.remove('hidden');
+    setTimeout(() => {
+        infoSection.classList.add('hidden');
+    }, 5000);
 }
 
 buttonAdd.addEventListener('click', ()=>{
