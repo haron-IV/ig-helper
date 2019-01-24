@@ -1,3 +1,21 @@
+
+function colorLog(txt, way){
+    if(way == 'red'){
+        console.log(`%c ${txt}`, 'background: red; color: black')
+    }
+
+    if(way == 'green'){
+        console.log(`%c ${txt}`, 'background: green; color: white')
+    }
+
+    if(way == 'yellow'){
+        console.log(`%c ${txt}`, 'background: yellow; color: green')
+    }
+}
+
+
+
+
 let testsResults = {
     localStorageTests: {
         test_BotDataStats: null,
@@ -76,7 +94,23 @@ function initLocalStorageTests () {
 // -------------------------------------------------------------------------------------------------------------- \\
 
 function showTestLog () {
+    //add logic here !!!!
     const tr = testsResults;
+
+    colorLog('                                      ', 'red');
+        colorLog(`passed: ${tr.passed}`, 'green');
+        colorLog(`failed: ${tr.failed}`, 'red');
+
+    colorLog('                                      ', 'yellow');
+        colorLog(`failed tests names:`, 'green');
+        console.log(tr.failedTests)
+
+
+
+
+
+
+    colorLog('                                      ', 'red');
 }
 
 function initTests () {
