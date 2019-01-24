@@ -781,7 +781,7 @@ function updateCalendar () {
     colorLog('Calendar Updated.', 'info');
     colorLog('Bot Auto refresh the page for get rid of mess. Please do not anything for 10 seconds :)', 'warning');
     setTimeout(() => {
-        location.reload();
+        location.href = 'https://badoo.com/encounters';
     }, 10000);
 }
 
