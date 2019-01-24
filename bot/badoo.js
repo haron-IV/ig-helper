@@ -434,6 +434,7 @@ function removeOldMessages() {
             clearInterval(removeOldMessagesInterval);
             colorLog('All old messages deleted', 'info')
             secureUpdateGlobalData();
+            oldMessagesToRemove = [];
         }
         
     }, 1500)
