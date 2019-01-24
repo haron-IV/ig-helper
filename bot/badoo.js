@@ -697,7 +697,6 @@ function getDateNow () {
         } else {
             month = '0' + JSON.stringify( month );
         } 
-        
     }
 
     if ( day < 10 ) {
