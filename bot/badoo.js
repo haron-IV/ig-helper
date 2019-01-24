@@ -120,7 +120,15 @@ function autoShowLastStats () {
 }
 
 if ( autoShowLastStats() != false ) {
+    colorLog('                                                                        ', 'info');
+    colorLog('                                                                        ', 'info');
+    colorLog('                                                                        ', 'warning');
+    colorLog('                            LAST BOT STATS                              ', 'warning');
     console.log( autoShowLastStats() );
+    colorLog('                                                                        ', 'warning');
+    colorLog('                                                                        ', 'warning');
+    colorLog('                                                                        ', 'info');
+    colorLog('                                                                        ', 'info');
 }
 
 
@@ -764,7 +772,6 @@ function updateCalendar () {
         let filteredSnapchats = [... new Set( data[data.length-1].snapchats_list.concat(snapchats) )];
 
         data[data.length-1].snapchats_list = filteredSnapchats
-        console.log('kurwa')
     } else {
         data[data.length-1].snapchats_list = snapchats
     }
