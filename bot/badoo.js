@@ -261,6 +261,7 @@ function stopBot(message) {
     showBotStatus();
     showStats();
     secureUpdateGlobalData();
+    CalendarData();
 
     if(message == true){
         sendMessage = true;
@@ -644,153 +645,7 @@ function playSound(){
     audio.play()
 }
 
-///////////////////////////////
-
-
-let stopBotInterval = null;
-let changedToDislike = false;
-
-let timeoutForChangeLikeFunction = 0; // this variable let us use the same time after change from liking to disliking
-
-let messagingFunc = false;
-let messageText = ''; // this message will be sending after stop bot
-
-function init(timeout, whatDo, message, messageTxt, stopCounter) {
-    botStatus = 'On';
-    timeoutForChangeLikeFunction = timeout;
-    initCounter++;
-    timer();
-    stopClock(stopCounter);
-
-    initGlobalStats();
-    removeLastStatsData();
-
-
-    stopBotInterval = setInterval(function(){
-        if(document.querySelector('.responsive-text') == null){
-            stopBot();
-            clearInterval(stopBotInterval);
-        }
-
-        if(changedToDislike === false){
-            changeFromLikeToDislike();
-        }
-        
-    }, 5000);
-
-    if(message == true){
-        messagingFunc = true;
-        messageText = messageTxt; 
-    }
-
-    generalInterval = setInterval(function() {
-        searchSnapchat();
-        setTimeout(whatDo, 500);
-    }, timeout)
-}
-
-// init(500, like, false, '', 1500);
-
-
-
-
-// documentation \\
-/*
-
-1.
-***************************************************************************
-init (time, whatDo, message)
-
-time - time space between bot actions in ms fe. 1500
-whatDo - action which bot do like or dislike
-message - bot after stop automatic start sending message to new people (set false if u don't need this)
-example: init(1500, like, true)
-***************************************************************************
-
-2.
-***************************************************************************
-stopBot()
-
-this command stops the bot and show us: bot status, and bot stats
-***************************************************************************
-
-3.
-***************************************************************************
-showSnapchats()
-
-this commantd show us array with catched snapchats nicknames
-***************************************************************************
-
-4.
-***************************************************************************
-showBotStatus()
-
-this command show us bot status :)
-***************************************************************************
-
-5.
-***************************************************************************
-showStats()
-
-Show us all bot statistics
-***************************************************************************
-
-6.
-***************************************************************************
-startMessaging()
-
-If u only want to send message u can use this command
-if u dont pass message text in init function u can set this via -> messageText = 'your message' <- this must be declared before use commadn
-***************************************************************************
-
-7.
-***************************************************************************
-deleteAllMessages()
-
-This command run function which will be deleting all messages
-***************************************************************************
-
-8.
-***************************************************************************
-messagingToVisitors()
-
-This command run function which will be messaging to visitors.
-Message which will be sending is message used in global init function.
-Function after sending messages automatic change visitor's page to next page.
-After messaging you must refresh page and run bot.
-***************************************************************************
-
-9.
-***************************************************************************
-showGlobalStats() 
-
-Command which show us global stats.
-Global stats are auto updated after end all actions.
-If u wanna update statsmanually u can type secureUpdateGlobalData()
-
-Global stats are in localStorage, if u open bot in incognito they will be deleting 
-after close the browser
-***************************************************************************
-
-10.
-***************************************************************************
-showProfileInfo() 
-
-Show our profile information in console.
-***************************************************************************
-*/
-
-
-
-
-
-
-
-
-
-
-
-
+//*********************************  CALENDAR  ******************************************
 
 let statisticsCalendar = [
     {
@@ -942,5 +797,139 @@ function CalendarData () {
     checkCalendarData();
     checkToday();
 }
+//********************************* END CALENDAR  ******************************************
 
-// CalendarData();
+///////////////////////////////
+
+let stopBotInterval = null;
+let changedToDislike = false;
+
+let timeoutForChangeLikeFunction = 0; // this variable let us use the same time after change from liking to disliking
+
+let messagingFunc = false;
+let messageText = ''; // this message will be sending after stop bot
+
+function init(timeout, whatDo, message, messageTxt, stopCounter) {
+    botStatus = 'On';
+    timeoutForChangeLikeFunction = timeout;
+    initCounter++;
+    timer();
+    stopClock(stopCounter);
+
+    initGlobalStats();
+    removeLastStatsData();
+
+
+    stopBotInterval = setInterval(function(){
+        if(document.querySelector('.responsive-text') == null){
+            stopBot();
+            clearInterval(stopBotInterval);
+        }
+
+        if(changedToDislike === false){
+            changeFromLikeToDislike();
+        }
+        
+    }, 5000);
+
+    if(message == true){
+        messagingFunc = true;
+        messageText = messageTxt; 
+    }
+
+    generalInterval = setInterval(function() {
+        searchSnapchat();
+        setTimeout(whatDo, 500);
+    }, timeout)
+}
+
+// init(500, like, false, '', 1500);
+
+
+
+
+// documentation \\
+/*
+
+1.
+***************************************************************************
+init (time, whatDo, message)
+
+time - time space between bot actions in ms fe. 1500
+whatDo - action which bot do like or dislike
+message - bot after stop automatic start sending message to new people (set false if u don't need this)
+example: init(1500, like, true)
+***************************************************************************
+
+2.
+***************************************************************************
+stopBot()
+
+this command stops the bot and show us: bot status, and bot stats
+***************************************************************************
+
+3.
+***************************************************************************
+showSnapchats()
+
+this commantd show us array with catched snapchats nicknames
+***************************************************************************
+
+4.
+***************************************************************************
+showBotStatus()
+
+this command show us bot status :)
+***************************************************************************
+
+5.
+***************************************************************************
+showStats()
+
+Show us all bot statistics
+***************************************************************************
+
+6.
+***************************************************************************
+startMessaging()
+
+If u only want to send message u can use this command
+if u dont pass message text in init function u can set this via -> messageText = 'your message' <- this must be declared before use commadn
+***************************************************************************
+
+7.
+***************************************************************************
+deleteAllMessages()
+
+This command run function which will be deleting all messages
+***************************************************************************
+
+8.
+***************************************************************************
+messagingToVisitors()
+
+This command run function which will be messaging to visitors.
+Message which will be sending is message used in global init function.
+Function after sending messages automatic change visitor's page to next page.
+After messaging you must refresh page and run bot.
+***************************************************************************
+
+9.
+***************************************************************************
+showGlobalStats() 
+
+Command which show us global stats.
+Global stats are auto updated after end all actions.
+If u wanna update statsmanually u can type secureUpdateGlobalData()
+
+Global stats are in localStorage, if u open bot in incognito they will be deleting 
+after close the browser
+***************************************************************************
+
+10.
+***************************************************************************
+showProfileInfo() 
+
+Show our profile information in console.
+***************************************************************************
+*/
