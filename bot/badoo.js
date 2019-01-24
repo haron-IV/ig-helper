@@ -797,6 +797,10 @@ function CalendarData () {
     checkCalendarData();
     checkToday();
 }
+
+function showCalendar() {
+    console.table(getCalendarData());
+}
 //********************************* END CALENDAR  ******************************************
 
 ///////////////////////////////
@@ -931,5 +935,13 @@ after close the browser
 showProfileInfo() 
 
 Show our profile information in console.
+***************************************************************************
+
+11.
+***************************************************************************
+showCalendar() 
+
+Show all collect data with dates in table.
+Bot get auto collect data.
 ***************************************************************************
 */
