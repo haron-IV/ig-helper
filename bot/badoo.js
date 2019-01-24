@@ -21,6 +21,8 @@ let startTimerValue = [];
 
 let deletedMessages = 0;
 
+let initCounter = 0;
+
 
 /////////////////////////////////////////////
 
@@ -98,8 +100,29 @@ function showStats(){
         deleted_messages: deletedMessages
     }
 
+    localStorage.setItem('BotDataStats', JSON.stringify( stats ));
+
     return console.table(stats)
 }
+
+function removeLastStatsData(){
+    if ( localStorage.getItem('BotDataStats') ) {
+        localStorage.removeItem('BotDataStats');
+    }
+}
+
+function autoShowLastStats () {
+    if ( localStorage.getItem('BotDataStats') ){
+        return JSON.parse( localStorage.getItem('BotDataStats') );
+    } else {
+        return false;
+    }
+}
+
+if ( autoShowLastStats() != false ) {
+    console.log( autoShowLastStats() );
+}
+
 
 ////////////////////////////////
 function goToProfile(){
@@ -635,10 +658,13 @@ let messageText = ''; // this message will be sending after stop bot
 function init(timeout, whatDo, message, messageTxt, stopCounter) {
     botStatus = 'On';
     timeoutForChangeLikeFunction = timeout;
+    initCounter++;
     timer();
     stopClock(stopCounter);
 
     initGlobalStats();
+    removeLastStatsData();
+
 
     stopBotInterval = setInterval(function(){
         if(document.querySelector('.responsive-text') == null){
@@ -868,7 +894,7 @@ function updateCalendar () {
 
     if ( data[data.length-1].snapchats_get > 0 ) {
         data[data.length-1].snapchats_get = data[data.length-1].snapchats_get + snapchats.length;
-        console.log('kurwa')
+
     } else {
         data[data.length-1].snapchats_get = snapchats.length
     }
