@@ -674,10 +674,9 @@ function checkCalendarData () {
     const data = localStorage.getItem('CalendarData');
     if ( data === null ) {
         localStorage.setItem('CalendarData', JSON.stringify( statisticsCalendar ) );
-        // setCalendar();
         colorLog('Calendar Data is created now.', 'info');
     } else {
-        colorLog('Calendar Data was created correctly', 'info');
+        // colorLog('Calendar Data was created correctly', 'info');
     }
 }
 
