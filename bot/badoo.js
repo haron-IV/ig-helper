@@ -689,7 +689,7 @@ function getDateNow () {
     let date = new Date;
     let year = date.getFullYear();
     let month = date.getMonth();
-    let day = date.getDay();
+    let day = date.getDate();
     
     if ( month < 10 ) {
         if ( month == 0 ){
@@ -700,7 +700,7 @@ function getDateNow () {
     }
 
     if ( day < 10 ) {
-        if ( month == 0 ){
+        if ( day == 0 ){
             day = '01';
         } else {
             day = '0' + JSON.stringify( day );
