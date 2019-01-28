@@ -873,7 +873,8 @@ let settingsStorage = {
                 stopCounter: 250,
                 settingName: 'Default init settings'
             }
-        ]
+        ],
+        messageText: []
     },
     last: {
         init: {
@@ -899,7 +900,7 @@ checkSettingStorage();
 
 function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, settingName) {
     let data = JSON.parse( localStorage.getItem('SettingsStorage') );
-    
+        //this function let us add new settings to storage
     let dataToSend = {
         timeout: timeout,
         whatDo: whatDo,
@@ -914,13 +915,12 @@ function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, se
     localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
 }
 
-let detectDefaultSettingByNameIndex = 0;
+let detectDefaultSettingByNameIndex = 0; // here must be better way for return te index 
 function detectDefaultSettingByName (name) {
     let data = JSON.parse( localStorage.getItem('SettingsStorage') );
     
     data.hardCoded.init.forEach( (el, i) => {
         if (el.settingName == name) {
-            console.log(i)
             detectDefaultSettingByNameIndex = i;
             return i;
         }
@@ -937,6 +937,20 @@ function init_DefaultSettings (name) {
     } else if ( data.hardCoded.init[detectDefaultSettingByNameIndex].whatDo === 'dislike') {
         init(data.timeout, dislike, data.message, data.messageTxt, data.stopCounter);
     }
+}
+
+function setHardCodedMessageText (message) {
+    let data = JSON.parse( localStorage.getItem('SettingsStorage') );
+
+    data.hardCoded.messageText.push(message);
+
+    localStorage.setItem('SettingsStorage', JSON.stringify( data ) )
+}
+
+function loadHardcodecMessageText (number) {
+    let data = JSON.parse( localStorage.getItem('SettingsStorage') );
+
+    messageText = data.hardCoded.messageText[number];
 }
 
 // function 
