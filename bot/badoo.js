@@ -859,6 +859,59 @@ function init(timeout, whatDo, message, messageTxt, stopCounter) {
 
 
 
+////////////////////////////////////SETTINGS STORAGE ////////////////////////////////////
+
+let settingsStorage = {
+    hardCoded: {
+        init: {
+            timeout: null,
+            whatDo: null,
+            message: null,
+            messageTxt: null,
+            stopCounter: null
+        }
+    },
+    last: {
+        init: {
+            timeout: null,
+            whatDo: null,
+            message: null,
+            messageTxt: null,
+            stopCounter: null
+        }
+    }
+}
+
+
+function checkSettingStorage () {
+    if ( localStorage.getItem('SettingsStorage') ) {
+        colorLog('settings storage is available.', 'info');
+    } else {
+        localStorage.setItem('SettingsStorage', JSON.stringify( settingsStorage ) );
+    }
+}
+
+function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter) {
+    let data = JSON.parse( localStorage.getItem('SettingsStorage') );
+
+    data.hardCoded.init.timeout = timeout;
+    data.hardCoded.init.whatDo = whatDo; //this must be string, and after use as function
+    data.hardCoded.init.message = message;
+    data.hardCoded.init.messageTxt = messageTxt;
+    data.hardCoded.init.stopCounter = stopCounter;
+
+    localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
+}
+
+// function 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 // documentation \\
 /*
