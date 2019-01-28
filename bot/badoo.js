@@ -912,6 +912,12 @@ function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, se
     localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
 }
 
+function initDefaultSettings () {
+    const data = JSON.parse( localStorage.getItem('SettingsStorage') );
+
+    init(data.hardCoded.init[0].timeout, like, data.hardCoded.init[0].message, data.hardCoded.init[0].messageTxt, data.hardCoded.init[0].stopCounter);
+}
+
 // function 
 
 
