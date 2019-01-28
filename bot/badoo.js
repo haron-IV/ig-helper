@@ -863,13 +863,16 @@ function init(timeout, whatDo, message, messageTxt, stopCounter) {
 
 let settingsStorage = {
     hardCoded: {
-        init: {
-            timeout: null,
-            whatDo: null,
-            message: null,
-            messageTxt: null,
-            stopCounter: null
-        }
+        init: [
+            {
+                timeout: 700,
+                whatDo: 'like',
+                message: false,
+                messageTxt: '',
+                stopCounter: 250,
+                settingName: 'Default init settings'
+            }
+        ]
     },
     last: {
         init: {
@@ -891,14 +894,20 @@ function checkSettingStorage () {
     }
 }
 
-function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter) {
+function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, settingName) {
     let data = JSON.parse( localStorage.getItem('SettingsStorage') );
+    
+    let dataToSend = {
+        timeout: timeout,
+        whatDo: whatDo,
+        message: message,
+        messageTxt: messageTxt,
+        stopCounter: stopCounter,
+        settingName: settingName
+    }
 
-    data.hardCoded.init.timeout = timeout;
-    data.hardCoded.init.whatDo = whatDo; //this must be string, and after use as function
-    data.hardCoded.init.message = message;
-    data.hardCoded.init.messageTxt = messageTxt;
-    data.hardCoded.init.stopCounter = stopCounter;
+    data.hardCoded.init.push(dataToSend);
+  
 
     localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
 }
