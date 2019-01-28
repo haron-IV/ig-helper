@@ -861,6 +861,7 @@ function init(timeout, whatDo, message, messageTxt, stopCounter) {
 
 ////////////////////////////////////SETTINGS STORAGE ////////////////////////////////////
 
+//default settings should be in code cuz this let us save localSotrage
 let settingsStorage = {
     hardCoded: {
         init: [
@@ -914,8 +915,13 @@ function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, se
 
 function initDefaultSettings () {
     const data = JSON.parse( localStorage.getItem('SettingsStorage') );
+    if ( data.hardCoded.init[0].whatDo === 'like' ){
+        init(data.hardCoded.init[0].timeout, like, data.hardCoded.init[0].message, data.hardCoded.init[0].messageTxt, data.hardCoded.init[0].stopCounter);    
+    } else if (data.hardCoded.init[0].whatDo === 'dislike') {
+        init(data.hardCoded.init[0].timeout, dislike, data.hardCoded.init[0].message, data.hardCoded.init[0].messageTxt, data.hardCoded.init[0].stopCounter);
+    }
 
-    init(data.hardCoded.init[0].timeout, like, data.hardCoded.init[0].message, data.hardCoded.init[0].messageTxt, data.hardCoded.init[0].stopCounter);
+    
 }
 
 // function 
