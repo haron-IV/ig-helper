@@ -914,22 +914,28 @@ function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, se
     localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
 }
 
+let detectDefaultSettingByNameIndex = 0;
 function detectDefaultSettingByName (name) {
     let data = JSON.parse( localStorage.getItem('SettingsStorage') );
     
-    data.hardCoded.init.forEach(el => {
+    data.hardCoded.init.forEach( (el, i) => {
         if (el.settingName == name) {
-            console.log(el)
+            console.log(i)
+            detectDefaultSettingByNameIndex = i;
+            return i;
         }
     });
 }
 
 function init_DefaultSettings (name) {
+    detectDefaultSettingByName(name);
+
     const data = JSON.parse( localStorage.getItem('SettingsStorage') );
-    if ( data.hardCoded.init[0].whatDo === 'like' ){
-        init(data.hardCoded.init[0].timeout, like, data.hardCoded.init[0].message, data.hardCoded.init[0].messageTxt, data.hardCoded.init[0].stopCounter);    
-    } else if (data.hardCoded.init[0].whatDo === 'dislike') {
-        init(data.hardCoded.init[0].timeout, dislike, data.hardCoded.init[0].message, data.hardCoded.init[0].messageTxt, data.hardCoded.init[0].stopCounter);
+    
+    if ( data.hardCoded.init[detectDefaultSettingByNameIndex].whatDo === 'like' ){
+        init(data.timeout, like, data.message, data.messageTxt, data.stopCounter);    
+    } else if ( data.hardCoded.init[detectDefaultSettingByNameIndex].whatDo === 'dislike') {
+        init(data.timeout, dislike, data.message, data.messageTxt, data.stopCounter);
     }
 }
 
