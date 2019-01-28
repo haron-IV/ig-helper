@@ -913,6 +913,7 @@ function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, se
     data.hardCoded.init.push(dataToSend);
 
     localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
+    checkMaxSavedSettings();
 }
 
 let detectDefaultSettingByNameIndex = 0; // here must be better way for return te index 
@@ -953,13 +954,32 @@ function setHardCodedMessageText (message) {
 
     data.hardCoded.messageText.push(message);
 
-    localStorage.setItem('SettingsStorage', JSON.stringify( data ) )
+    localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
+    checkMaxSavedSettings();
 }
 
 function loadHardcodecMessageText (number) {
     let data = JSON.parse( localStorage.getItem('SettingsStorage') );
 
     messageText = data.hardCoded.messageText[number];
+}
+
+function checkMaxSavedSettings () {
+    let data = JSON.parse( localStorage.getItem('SettingsStorage') );
+
+    if ( data.hardCoded.init.length > 5 ) {
+        colorLog('place for storage your init settings is full. Removed settings under:', 'warning')
+        console.log(data.hardCoded.init.shift())
+        data.hardCoded.init.shift(); // remove first element from array (but it's last added)
+    }
+    
+    if ( data.hardCoded.messageText.length > 5 ) {
+        colorLog('place for storage your message text settings is full. Removed saved message under:', 'warning');
+        console.log(data.hardCoded.messageText.shift())
+        data.hardCoded.messageText.shift(); // remove first element from array (but it's last added)
+    }
+
+    localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
 }
 
 // function 
