@@ -895,6 +895,8 @@ function checkSettingStorage () {
     }
 }
 
+checkSettingStorage();
+
 function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, settingName) {
     let data = JSON.parse( localStorage.getItem('SettingsStorage') );
     
@@ -908,20 +910,27 @@ function setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, se
     }
 
     data.hardCoded.init.push(dataToSend);
-  
 
     localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
 }
 
-function initDefaultSettings () {
+function detectDefaultSettingByName (name) {
+    let data = JSON.parse( localStorage.getItem('SettingsStorage') );
+    
+    data.hardCoded.init.forEach(el => {
+        if (el.settingName == name) {
+            console.log(el)
+        }
+    });
+}
+
+function init_DefaultSettings (name) {
     const data = JSON.parse( localStorage.getItem('SettingsStorage') );
     if ( data.hardCoded.init[0].whatDo === 'like' ){
         init(data.hardCoded.init[0].timeout, like, data.hardCoded.init[0].message, data.hardCoded.init[0].messageTxt, data.hardCoded.init[0].stopCounter);    
     } else if (data.hardCoded.init[0].whatDo === 'dislike') {
         init(data.hardCoded.init[0].timeout, dislike, data.hardCoded.init[0].message, data.hardCoded.init[0].messageTxt, data.hardCoded.init[0].stopCounter);
     }
-
-    
 }
 
 // function 
