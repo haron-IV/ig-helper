@@ -927,6 +927,15 @@ function detectDefaultSettingByName (name) {
     });
 }
 
+function showSavedSettings(){
+    const data = JSON.parse( localStorage.getItem('SettingsStorage') );
+
+    colorLog('                                                 ', 'info');
+    colorLog('Hardcoded settings: ', 'tip');
+    console.log(data.hardCoded);
+    colorLog('                                                 ', 'info');
+}
+
 function init_DefaultSettings (name) {
     detectDefaultSettingByName(name);
 
