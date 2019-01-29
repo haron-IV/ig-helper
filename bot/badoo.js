@@ -974,10 +974,10 @@ function loadHardcodecMessageText (number) {
     if (messageText == undefined){
         colorLog(`In your settings isn't message with index number: ${number}`, 'warning');
         colorLog('Look under for get message which you want.');
-        console.log(data.hardCoded.messageText);
+        console.table(data.hardCoded.messageText);
     } else {
         colorLog(`You loaded message:`, 'info');
-        console.table(messageText);
+        console.log(messageText);
     }
 
     
