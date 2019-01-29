@@ -990,6 +990,24 @@ function checkMaxSavedSettings () {
     localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
 }
 
+let removeAllSavedSettingsSecure = false;
+function removeAllSavedSettings(){
+
+    if ( removeAllSavedSettingsSecure === false ){
+        colorLog('If you really want to delete all your settings and set default, type one more this function', 'tip');
+        removeAllSavedSettingsSecure = true;
+    } else if (removeAllSavedSettingsSecure == true) {
+        colorLog('Settings data removed succesfully.', 'info');
+        
+        let data = JSON.parse( localStorage.getItem('SettingsStorage') );
+
+        data = settingsStorage;
+
+        localStorage.setItem('SettingsStorage', JSON.stringify ( data ) );
+        
+    }
+}
+
 
 //////////////////////////////////// END SETTINGS STORAGE ////////////////////////////////////
 
