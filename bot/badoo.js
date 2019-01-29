@@ -924,8 +924,16 @@ function detectDefaultSettingByName (name) {
         if (el.settingName == name) {
             detectDefaultSettingByNameIndex = i;
             return i;
+        } else {
+            detectDefaultSettingByNameIndex = null;
         }
     });
+
+    if (detectDefaultSettingByNameIndex === null) {
+        colorLog(`There isn't settings with name: ${name}`, 'warning');
+        colorLog('Find your settings under.', 'tip');
+        showSavedSettings();
+    }
 }
 
 function showSavedSettings(){
@@ -944,7 +952,6 @@ function init_DefaultSettings (name) {
     
     if ( data.hardCoded.init[detectDefaultSettingByNameIndex].whatDo === 'like' ){
         init(data.timeout, like, data.message, data.messageTxt, data.stopCounter);
-        console.log('kurwa')
     } else if ( data.hardCoded.init[detectDefaultSettingByNameIndex].whatDo === 'dislike') {
         init(JSON.parse(data.timeout), dislike, data.message, data.messageTxt, data.stopCounter);
     }
@@ -983,11 +990,8 @@ function checkMaxSavedSettings () {
     localStorage.setItem('SettingsStorage', JSON.stringify( data ) );
 }
 
-// function 
 
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////// END SETTINGS STORAGE ////////////////////////////////////
 
 
 
@@ -1085,4 +1089,42 @@ showCalendar()
 Show all collect data with dates in table.
 Bot get auto collect data.
 ***************************************************************************
+
+12.
+***************************************************************************
+showSavedSettings() 
+
+Showing your saved settings.
+***************************************************************************
+
+13.
+***************************************************************************
+setHardCodedInit (timeout, whatDo, message, messageTxt, stopCounter, settingName)
+
+Save your init settings, u can have max 5 hardcoded settings for init function.
+***************************************************************************
+
+14.
+***************************************************************************
+setHardCodedMessageText (message)
+
+Save your message template. U can have max 5 message templates.
+***************************************************************************
+
+15.
+***************************************************************************
+init_DefaultSettings (name)
+
+This command run init function with saved settings in your storage. U must type
+the setting name for run function.
+***************************************************************************
+
+16.
+***************************************************************************
+loadHardcodecMessageText (number)
+
+This function load your saved message template. You must type the number of 
+message tempate which u want use.
+***************************************************************************
+
 */
