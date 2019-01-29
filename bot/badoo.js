@@ -943,9 +943,10 @@ function init_DefaultSettings (name) {
     const data = JSON.parse( localStorage.getItem('SettingsStorage') );
     
     if ( data.hardCoded.init[detectDefaultSettingByNameIndex].whatDo === 'like' ){
-        init(data.timeout, like, data.message, data.messageTxt, data.stopCounter);    
+        init(data.timeout, like, data.message, data.messageTxt, data.stopCounter);
+        console.log('kurwa')
     } else if ( data.hardCoded.init[detectDefaultSettingByNameIndex].whatDo === 'dislike') {
-        init(data.timeout, dislike, data.message, data.messageTxt, data.stopCounter);
+        init(JSON.parse(data.timeout), dislike, data.message, data.messageTxt, data.stopCounter);
     }
 }
 
