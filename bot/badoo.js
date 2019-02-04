@@ -425,17 +425,21 @@ let oldMessagesToRemove = [];
 function getOldMessages() {
     const openMessagerButton = document.querySelector('a[href="/messenger/open"]');
     
-
     openMessagerButton.click();
 
     setTimeout(() => {
-        document.querySelectorAll('.contact-card__message').forEach(el => {
-            if(el.innerText.substring(0, 22) != "Zostaliście dopasowani"){ // add other message type
-                oldMessagesToRemove.push(el.parentElement.parentElement);
-            }
-        });
-        
+        refreshOldMessagesToRemove();
     }, 1500);
+}
+
+function refreshOldMessagesToRemove(){
+    oldMessagesToRemove = [];
+
+    document.querySelectorAll('.contact-card__message').forEach(el => {
+        if(el.innerText.substring(0, 22) != "Zostaliście dopasowani"){ // add other message type
+            oldMessagesToRemove.push(el.parentElement.parentElement);
+        }
+    });
 }
 
 function removeOldMessages() {
@@ -460,12 +464,14 @@ function removeOldMessages() {
             setTimeout(()=>{
                 if(document.querySelector('.js-im-confirm-delete')){
                     document.querySelector('.js-im-confirm-delete').click(); // confirm remove
+                    refreshOldMessagesToRemove();
                     counter++;
                     deletedMessages++;
                 }
                 
             }, 1000)
         }
+
         if(oldMessagesToRemove.length <= counter){
             clearInterval(removeOldMessagesInterval);
             colorLog('All old messages deleted', 'info')
