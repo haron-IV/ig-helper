@@ -330,9 +330,9 @@ function getNewConectedPeoples(){
     openMessagerButton.click();
 
     setTimeout(() => {
-        document.querySelectorAll('.contacts__msg').forEach(el => {
+        document.querySelectorAll('.contact-card__message').forEach(el => {
             if(el.innerText.substring(0, 22) == "Zostaliście dopasowani"){
-                newConectedPeople.push(el.parentElement.parentElement.id);
+                newConectedPeople.push(el.parentElement.parentElement);
             }
         })
 
@@ -346,11 +346,10 @@ function sendMessage(message){
 
     sendMessageInterval = setInterval(() => {
 
-        if(document.querySelector(`#${newConectedPeople[0]}`)){
-            document.querySelector(`#${newConectedPeople[count]}`).children[2].click();
+        if(newConectedPeople.length >= count ){
+            newConectedPeople[count].click();
         }else{
             clearInterval(sendMessageInterval);
-            colorLog('stop messaging click', 'test')
         }
 
         count++;
