@@ -1,6 +1,3 @@
-const likeButton = document.querySelector('.profile-action--yes');
-const dislikeButton = document.querySelector('.profile-action--no');
-
 const options = ['👻', 'snap', 'Snap', 'snapchat', 'Snapchat', 'sc:', 'Sc:', 'SNAP', 'SNAPCHAT'];
 
 let snapchats = []; //here is catched snapchat nicks
@@ -56,27 +53,33 @@ function timer(){
 
 
 function like() {
+    const likeButton = document.querySelector('.profile-action--yes');
+
     likeButton.click();
     likeCounter++;
 }
 
 function dislike() {
+    const dislikeButton = document.querySelector('.profile-action--no');
+    
     dislikeButton.click();
     dislikeCounter++;
 }
 
 function searchSnapchat() {
-    text = document.querySelector('.profile-section__txt-line').innerText;
+    if (document.querySelector('.profile-section__txt-line')){
+        text = document.querySelector('.profile-section__txt-line').innerText;
 
-    options.forEach( function (el) {
+        options.forEach( function (el) {
 
-        if (text.indexOf(el) > 0) {
-            let snapPosition = text.indexOf(el);
-
-            snapchats.push(text.slice( snapPosition, snapPosition + 30 ));
-        }
-
-    } );
+            if (text.indexOf(el) > 0) {
+                let snapPosition = text.indexOf(el);
+    
+                snapchats.push(text.slice( snapPosition, snapPosition + 30 ));
+            }
+    
+        } );
+    }
 }
 
 function removeDuplicatedSnapchats(){
@@ -104,7 +107,7 @@ function showStats(){
 
     localStorage.setItem('BotDataStats', JSON.stringify( stats ));
 
-    return console.table(stats)
+    console.table(stats)
 }
 
 function removeLastStatsData(){
@@ -833,7 +836,7 @@ function init(timeout, whatDo, message, messageTxt, stopCounter) {
 
 
     stopBotInterval = setInterval(function(){
-        if(document.querySelector('.responsive-text') == null){
+        if(document.querySelector('.photo-gallery__photo').children[0] == null){
             stopBot();
             clearInterval(stopBotInterval);
         }
