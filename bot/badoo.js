@@ -66,7 +66,7 @@ function dislike() {
 }
 
 function searchSnapchat() {
-    text = document.querySelector('.responsive-text').innerText;
+    text = document.querySelector('.profile-section__txt-line').innerText;
 
     options.forEach( function (el) {
 
