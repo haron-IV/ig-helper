@@ -443,18 +443,15 @@ function refreshOldMessagesToRemove(){
 
 function removeOldMessages() {
     let removeOldMessagesInterval = null;
-    let counter = 1;
+    let counter = 0;
 
     colorLog("Don't close messenger window. Bot autoclose this after send messages.", 'warning')
 
     removeOldMessagesInterval = setInterval(()=>{
+        refreshOldMessagesToRemove();
 
-        if(counter < oldMessagesToRemove.length ){
-
-            // if ( oldMessagesToRemove[counter] != 'js-notification-empty' ){
-            oldMessagesToRemove[counter].click();
-            // }
-
+        if ( oldMessagesToRemove[0] !== undefined ) {
+            oldMessagesToRemove[0].click();
         }
 
         if(document.querySelector('.js-im-contact-remove')){
@@ -463,15 +460,14 @@ function removeOldMessages() {
             setTimeout(()=>{
                 if(document.querySelector('.js-im-confirm-delete')){
                     document.querySelector('.js-im-confirm-delete').click(); // confirm remove
-                    refreshOldMessagesToRemove();
                     counter++;
                     deletedMessages++;
                 }
                 
             }, 1000)
-        }
+        }    
 
-        if(oldMessagesToRemove.length <= counter){
+        if(oldMessagesToRemove.length <= 0){
             clearInterval(removeOldMessagesInterval);
             colorLog('All old messages deleted', 'info')
             secureUpdateGlobalData();
