@@ -355,6 +355,8 @@ function sendMessage(message){
         count++;
 
         setTimeout(() => {
+            addProfileInfoFromChat();
+            addLastProfileInfoFromChat();
             document.querySelector('.messenger-tools__input').innerText = message;
         }, 1000);
         
@@ -562,78 +564,6 @@ function messagingToVisitors(){
     
 }
 
-////////////////////////////////
-
-
-//////////////////////////////// function to create show and hide bot dock
-
-function createDock(){
-    const BOTdock = document.createElement('div');
-    BOTdock.classList.add('dock');
-    BOTdock.style.width = "100vw";
-    BOTdock.style.height = "100vh";
-    BOTdock.style.backgroundColor = "white";
-    BOTdock.style.zIndex = '99999';
-    BOTdock.style.position = "absolute";
-    BOTdock.style.top = "0";
-
-    document.querySelector('body').appendChild(BOTdock);
-
-    stats.snapchats_profiles.forEach( (el, i) =>{
-        const BOTstats = document.createElement('div');
-        BOTstats.classList.add('stats');
-
-        BOTstats.innerText = el;
-        BOTdock.appendChild(bott);
-    })
-    
-}
-
-function hideDock(){
-    document.querySelector('.dock').style.display = 'none'
-}
-
-function showDock(){
-    document.querySelector('.dock').style.display = 'block'
-}
-
-////////////////////////////////
-
-///////////////////////////////Function for set timer after this bot will be stoped
-
-function stopBotTimer(timeout){//'1h22m'
-    // let example = '1h22m';
-    let timer = 0;
-
-    if(timeout.indexOf('h') >= 1 ){
-        console.log(timeout.split('h')[0] )
-
-        if(JSON.parse( timeout.split('h')[0] ) > 1){
-            let hours = JSON.parse( timeout.split('h')[0] );
-        }else{
-            let hours = 0;
-        }
-
-        if(JSON.parse( timeout.split('h')[1].split('m')[0] ) > 1){
-            let minutes = JSON.parse( timeout.split('h')[1].split('m')[0] );
-        }else{
-            minutes = 0;
-        }
-        
-        console.log(`hours: ${hours}`)
-        setTimeout(() => {
-            let minutesMS = minutes*60*1000;
-            let hoursMS = hours*60*60*1000;
-            timer = hours+minutesMS;
-        }, 200);
-        
-    }
-    setTimeout(() => {
-        console.log('end');
-    }, timer);
-}
-//maybe next time hahahah
-
 
 //////////////////////////////// 
 
@@ -653,12 +583,6 @@ function stopClock(howMuch){
         }
     }, 1000);
     
-}
-
-
-function playSound(){
-    var audio = new Audio('/Users/mabbyn/Desktop/workspace/self/tinder badoo bots/bot/plucky.mp3');
-    audio.play()
 }
 
 //*********************************  CALENDAR  ******************************************
@@ -985,8 +909,6 @@ function loadHardcodecMessageText (number) {
         colorLog(`You loaded message:`, 'info');
         console.log(messageText);
     }
-
-    
 }
 
 function checkMaxSavedSettings () {
@@ -1025,8 +947,70 @@ function removeAllSavedSettings(){
     }
 }
 
-
 //////////////////////////////////// END SETTINGS STORAGE ////////////////////////////////////
+
+let chattersInfo = []
+
+
+function getProfileImageFromChat () {
+    return document.querySelector('.connection-header__userpic').children[0].src; // link from profile img
+}
+
+function getProfileNameFromChat () {
+    return document.querySelector('.connection-header__name').innerText
+}
+
+function getProfileAgeFromChat () {
+    return document.querySelector('.connection-header__age').innerText.replace(',', '').trim();
+}
+
+function addProfileInfoFromChat () {
+    chattersInfo.push({
+        name: getProfileNameFromChat(),
+        age: getProfileAgeFromChat(),
+        profile_img: getProfileImageFromChat()
+    });
+}
+
+function addLastProfileInfoFromChat () {
+    let data = chattersInfo;
+
+    localStorage.setItem('chatters_last', JSON.stringify( data ) );
+}
+
+function checkLocalStorageChatters () {
+    if ( localStorage.getItem('chatters') && localStorage.getItem('chatters_last') ) {
+        colorLog('chatters store available', 'info')
+    } else {
+        colorLog('chatters not found in local storage', 'warning');
+        localStorage.setItem('chatters', JSON.stringify( [] ) );
+        localStorage.setItem('chatters_last', JSON.stringify( [] ) );
+        colorLog('chatters created!', 'info');
+    } 
+}
+
+function storeChattersInfo () {
+    let data = JSON.parse( localStorage.getItem('chatters') );
+
+    data = data.concat(JSON.parse(localStorage.getItem('chatters_last') ));
+    
+    localStorage.setItem('chatters', JSON.stringify( data ) );
+
+    setTimeout(() => {
+        localStorage.removeItem('chatters_last');
+    }, 1000);
+}
+checkLocalStorageChatters();
+storeChattersInfo();
+
+function showChattersInfo() {
+    console.log(JSON.parse( localStorage.getItem('chatters') ) );
+}
+
+
+
+
+
 
 
 
