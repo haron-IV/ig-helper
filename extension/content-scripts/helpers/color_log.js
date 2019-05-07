@@ -1,18 +1,25 @@
-const color_log = (txt, way) => {
-    if(way == 'warning'){
-        console.log(`%c ${txt}`, 'background: red; color: black')
-    }
+const color_log = (txt, way = 'default') => {
 
-    if(way == 'tip'){
-        console.log(`%c ${txt}`, 'background: gold; color: black')
-    }
+    switch(way){
+        case 'default':
+            console.log(txt);
+        break;
 
-    if(way == 'info'){
-        console.log(`%c ${txt}`, 'background: green; color: white')
-    }
+        case 'warning':
+            console.log(`%c ${txt}`, 'background: red; color: black');
+        break;
 
-    if(way == 'test'){
-        console.log(`%c ${txt}`, 'background: yellow; color: green')
+        case 'tip':
+            console.log(`%c ${txt}`, 'background: gold; color: black');
+        break;
+
+        case 'info':
+            console.log(`%c ${txt}`, 'background: green; color: white');
+        break;
+
+        case 'test':
+            console.log(`%c ${txt}`, 'background: yellow; color: green');
+        break;
     }
 };
 
