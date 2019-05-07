@@ -4,102 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../css/index.css">
+    <!-- <link rel="stylesheet" href="../css/index.css"> -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
-    <title>Margonem Bot</title>
+    
+    <title>Badoo spam bot</title>
 </head>
-<body class="body-popup">
+<body>
+    <div id="app">
+        <header></header>
 
-    <header class="header">
-        <div class="header__heading">
-            <img src="../icons/icon48.png" class="img"> Margonem Multi Bot. <img src="../icons/icon48.png" class="img">
-        </div>
-        
-
-        <nav class="navbar">
-            <ul class="list list--menu">
-                <li class="list__item"> <a href="./popup.html" class="link">Start</a> </li>
-                <li class="list__item"> <a href="./settings.html" class="link">Ustawienia</a> </li>
-                <li class="list__item"> <a href="./notes.html" class="link">Notatnik</a> </li>
-                <li class="list__item"> <a href="./links.html" class="link">Zbiór linków</a> </li>
-            </ul>
-        </nav>
-    </header>
-
-    <article class="article">
-        <section class="section section--toolbar">
-        
-            <div class="toolbar-item" >
-                <label for="search-player-inp">szukaj gracza:</label>
-
-                <input type="text" id="search-player-inp" name="search-player-inp" class="input">
-                <button id='search-player-btn' class="button">szukaj</button>
-            </div>
-        
-            <div class="toolbar-item">
-                <label for="npc-search-inp">szukaj npc:</label>
-                
-                <input type="text" name="npc-search" id="npc-search-inp" class="input">
-                <button id="npc-search-btn" class="button">szukaj</button>
-            </div>
-        
-            <div class="toolbar-item">
-                <label for="quest-search-inp">szukaj questa:</label>
-                
-                <input type="text" name="quest-search" id="quest-search-inp" class="input">
-                <button id="quest-search-btn" class="button">szukaj</button>
-            </div>
-        
-            <div class="toolbar-item">
-                <label for="mob-search-inp">szukaj potwora:</label>
-                
-                <input type="text" name="mob-search" id="mob-search-inp" class="input">
-                <button id="mob-search-btn" class="button">szukaj</button>
-            </div>
-
-            <div class="toolbar-item" >
-                <label for="searcher_input" title="(mozesz wpisać nazwę questa, npc lub potwora )" style="cursor: help">szukaj w margonem:</label>
-
-                <input type="text" id="searcher_input" name="search-inp" class="input">
-                <button id='searcher-btn' class="button">szukaj</button>
-            </div>
-
-        </section>
-
-
-        <section class="section section--stats">
-
-            <p class="paragraph">
-                Do następnego lvl: <span id="need-exp"></span> exp
-            </p>
-
-            <p class="paragraph">
-                Aktualna lokalizacja: <span id="actual-localization"></span>, (<span id="actual-localization-coord"></span>)
-            </p>
-
-            <p class="paragraph">
-                Złoto: <span id="gold"></span>
-            </p>
-            
-        </section>
-    </article>
-
-    <footer class="footer">
-        <div class="footer__link-section">
-            <a href="https://www.margonem.pl/?task=config" target="_blank" title="Zmiana wyglądu postaci, kupno waluty, profil." class="link">Margonem - konfiguracja</a>
-            <a href="" title="" class="link" id="clan-rank">Ranking Klanów</a>
-            <!-- <a href="https://www.margonem.pl/?task=forum" target="_blank" title="" class="link">Margonem - Forum</a> -->
-            <a href="https://margonembot.wordpress.com/" target="_blank" title="" class="link">Główna strona bota</a>
-            <a href="https://margonembot.wordpress.com/2019/04/11/the-journey-begins/" target="_blank" title="" class="link">Ostatnia Aktualizacja</a>
-        </div>
-        
-        <div class="footer__bot-version">
-            version: <span id="bot-version"></span>
-        </div>
-    </footer>
-
-    <script src="../external/jQuery.js"></script>
+        <article>
+    
+            <section>
+    
+            </section>
+    
+        </article>
+    
+        <button @click="test1">start</button>
+    </div>
+    
+    <script type="text/javascript" src="./vue.js"></script>
     <script src="./popup.js"></script>
-    <script src="./index.js"></script>
 </body>
 </html>

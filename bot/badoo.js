@@ -1,19 +1,13 @@
 
-function timer(){
+// function timer(){
 
-    let startDate = new Date();
-    let startTime = [startDate.getHours(), startDate.getMinutes(), startDate.getSeconds()]
+//     let startDate = new Date();
+//     let startTime = [startDate.getHours(), startDate.getMinutes(), startDate.getSeconds()]
 
-    startTimerValue = startTime;
-}
+//     startTimerValue = startTime;
+// }
 
 
-function like() {
-    const likeButton = document.querySelector('.profile-action--yes');
-
-    likeButton.click();
-    likeCounter++;
-}
 
 function dislike() {
     const dislikeButton = document.querySelector('.profile-action--no');
