@@ -1,0 +1,28 @@
+{
+  "name": "margonem-multi-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "audit": "source-map-explorer public/dist/main.bundle.js",
+    "clear": "rm -rf public/dist/",
+    "clear:all": "rm -rf node_modules/ && npm run clear",
+    "count": "find src -name '*.js' | xargs wc -l | sort -r",
+    "build": "webpack",
+    "watch": "webpack -w",
+    "start": "node public/dist/main.bundle.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-loader": "^8.0.5",
+    "source-map-explorer": "^1.7.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "author": "venglas",
+  "license": "ISC",
+  "dependencies": {
+    "lodash.debounce": "^4.0.8"
+  }
+}
