@@ -13,15 +13,16 @@
     <div id="app">
         <header></header>
 
-        <article>
+        <article class="control-section">
     
-            <section>
-    
+            <section class="button-section">
+                <button @click="sendMessageToContentScript('start_liking')">start</button>
+                <button @click="sendMessageToContentScript('stop_liking')">stop</button>
             </section>
     
         </article>
     
-        <button @click="sendMessageToContentScript('start_liking')">start</button>
+        
     </div>
     
     <script type="text/javascript" src="./vue.js"></script>
