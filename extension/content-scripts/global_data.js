@@ -14,7 +14,8 @@ const global_data = () => {
         updateCalendarCounter: 0,
 
         like_button: document.querySelector('.profile-action--yes'), // this not working correctly
-        peoples_to_message: []
+        people_to_message: [],
+        message_bot_interval: null
     }
 };
 
