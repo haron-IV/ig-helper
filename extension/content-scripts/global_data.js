@@ -13,7 +13,8 @@ const global_data = () => {
         initCounter: 0,
         updateCalendarCounter: 0,
 
-        like_button: document.querySelector('.profile-action--yes') // this not working correctly
+        like_button: document.querySelector('.profile-action--yes'), // this not working correctly
+        peoples_to_message: []
     }
 };
 

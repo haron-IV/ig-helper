@@ -305,8 +305,8 @@ function sendMessage(message){
         count++;
 
         setTimeout(() => {
-            addProfileInfoFromChat();
-            addLastProfileInfoFromChat();
+            // addProfileInfoFromChat();
+            // addLastProfileInfoFromChat();
             document.querySelector('.messenger-tools__input').innerText = message;
         }, 1000);
         
