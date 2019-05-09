@@ -1,1 +1,5 @@
-// chrome.storage.sync.set({'test01': 'config.miniMapSettings'}); // This works but should be refactorize
+const save_data_to_chrome = (object) => {
+    chrome.storage.sync.set(object);
+};
+
+export default save_data_to_chrome;

@@ -22,8 +22,6 @@ const vm = new Vue ({
         },
 
         toggle_messaging(){
-            alert(1);
-            
             if (this.message_bot.isStart === false){
                 this.sendMessageToContentScript('start_messaging');
                 this.message_bot.isStart = true;
