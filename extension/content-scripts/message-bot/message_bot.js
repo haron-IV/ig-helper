@@ -19,7 +19,7 @@ const message_bot = () => {
 
             setTimeout(() => {
                 people_to_message = get_people_to_message();
-                message_sender(people_to_message)
+                message_sender(people_to_message);
             }, 2000);
         }
     });

@@ -1,19 +1,19 @@
-import global_data from '../global_data';
+// import global_data from '../global_data';
 import get_data_from_chrome from '../helpers/get_data_from_chrome';
 
-const open_message = (message_list) => {
-    let i = 0;
+const open_message = (message_list, index) => {
+
     
     get_data_from_chrome('last_message');
 
-    global_data.message_bot_interval = setInterval(() => {
-        message_list[i].click();
-        i++;
+    // global_data.message_bot_interval = setInterval(() => {
+        message_list[index].click();
+        // i++;
 
-        if ( message_list.length <= i ) {
-            clearInterval( global_data.message_bot_interval );
+        if ( message_list.length <= index ) {
+            // clearInterval( global_data.message_bot_interval );
         }
-    }, 1000);
+    // }, timeout);
 };
 
 export default open_message;
