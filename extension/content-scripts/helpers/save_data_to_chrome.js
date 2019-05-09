@@ -1,0 +1,1 @@
+// chrome.storage.sync.set({'test01': 'config.miniMapSettings'}); // This works but should be refactorize

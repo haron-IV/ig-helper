@@ -13,12 +13,12 @@
     <div id="app">
         <header></header>
 
-        <article class="control-section bottom-line">
+        <article class="control-section">
     
             <section class="button-section">
                 <header class="header"><h3>Like bot</h3></header>
                 
-                <div class="button-group">
+                <div class="button-group bottom-line">
                     <button 
                     class="button"
                     :class="{ button_active: like_bot.isStart }"
@@ -26,9 +26,20 @@
                     >
                         {{like_bot.isStart === true ? 'Stop' : 'Start'}}
                     </button>
+                </div>
 
+                <header class="header"><h3>Message Bot</h3></header>
 
-                    <!-- <button class="button" @click="sendMessageToContentScript('stop_liking')">stop</button> -->
+                <div class="button-group">
+                    <textarea type="text" class="textarea" v-model="message_bot.message"></textarea>
+
+                    <button 
+                    class="button"
+                    :class="{ button_active: message_bot.isStart }"
+                    @click="toggle_messaging"
+                    >
+                        {{message_bot.isStart === true ? 'Stop' : 'Start'}}
+                    </button>
                 </div>
             </section>
     

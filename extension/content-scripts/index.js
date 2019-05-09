@@ -22,3 +22,5 @@
 // // }, 6500);
 
 import like_bot from './like-bot/like_bot';
+import message_bot from './message-bot/message_bot';
+import save_data_to_chrome from './helpers/save_data_to_chrome';
