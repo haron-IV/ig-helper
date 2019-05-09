@@ -1,8 +1,9 @@
 import get_message_from_popup from '../helpers/get_message_from_popup';
 import check_message_window from './check_message_window';
 import get_people_to_message from './get_people_to_message';
-import open_message from './open_message';
+import message_sender from './message_sender';
 import stop_message_bot from './stop_message_bot';
+
 
 
 let people_to_message; // node list with single message
@@ -18,7 +19,7 @@ const message_bot = () => {
 
             setTimeout(() => {
                 people_to_message = get_people_to_message();
-                open_message(people_to_message);
+                message_sender(people_to_message)
             }, 2000);
         }
     });

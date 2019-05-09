@@ -6,7 +6,6 @@ const get_people_to_message = () => {
         }
     });
 
-
     return data.filter((value) => {
         return value !== undefined
     });

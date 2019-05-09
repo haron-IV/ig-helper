@@ -23,9 +23,9 @@ const vm = new Vue ({
 
         toggle_messaging(){
             if (this.message_bot.isStart === false){
-                chrome.storage.sync.set({"last_message": this.message_bot.message});
-                
                 this.sendMessageToContentScript('start_messaging');
+                chrome.storage.sync.set({'last_message': this.message_bot.message});
+                
                 this.message_bot.isStart = true;
             } else {
                 this.sendMessageToContentScript('stop_messaging');
