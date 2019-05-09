@@ -9,6 +9,10 @@ const open_message = (message_list) => {
     global_data.message_bot_interval = setInterval(() => {
         message_list[i].click();
         i++;
+
+        if ( message_list.length <= i ) {
+            clearInterval( global_data.message_bot_interval );
+        }
     }, 1000);
 };
 
