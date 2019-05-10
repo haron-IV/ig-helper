@@ -16,6 +16,7 @@ const global_data = () => {
         like_button: document.querySelector('.profile-action--yes'), // this not working correctly
         people_to_message: [],
         message_bot_interval: null,
+        deleting_message_bot_interval: null,
         last_message: ''
     }
 };

@@ -41,6 +41,14 @@
                         {{message_bot.isStart === true ? 'Stop' : 'Start'}}
                     </button>
                 </div>
+
+                <button 
+                class="button"
+                :class="{ button_active: message_bot.dletingIsStart }"
+                @click="toggle_deleting_messages"
+                >
+                   {{message_bot.dletingIsStart === true ? 'Stop' : 'Delete all old messages'}}
+                </button>
             </section>
     
         </article>

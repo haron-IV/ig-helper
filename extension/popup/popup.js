@@ -6,7 +6,8 @@ const vm = new Vue ({
         },
         message_bot: {
             isStart: false,
-            message: localStorage.getItem('last_message')
+            message: localStorage.getItem('last_message'),
+            dletingIsStart: false
         }
     },
 
@@ -35,14 +36,20 @@ const vm = new Vue ({
             }
         },
 
+        toggle_deleting_messages(){
+            if (this.message_bot.dletingIsStart === false){
+                this.sendMessageToContentScript('start_delete_all_old_messages');
+                this.message_bot.dletingIsStart = true;
+            } else {
+                this.sendMessageToContentScript('stop_delete_all_old_messages');
+                this.message_bot.dletingIsStart = false;
+            }
+        },
+
         sendMessageToContentScript(message_name){
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 chrome.tabs.sendMessage(tabs[0].id, {greeting: message_name});
             });
         }
-    },
-
-    mounted(){
-        // this.message_bot.message = localStorage.getItem('last_message');
     }
 });

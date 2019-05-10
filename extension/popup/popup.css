@@ -12,7 +12,7 @@ body {
     font-size: 1.5rem;
     padding: 3rem;
     font-family: Montserrat;
-    min-width: 250px;
+    min-width: 350px;
 }
 
 .header {
@@ -50,6 +50,21 @@ body {
     border-radius: 3px;
     outline: none;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, .6);
+}
+
+.textarea {
+    height: 200px;
+    width: 80%;
+    margin-right: .5rem;
+    padding: .5rem;
+    outline: none;
+    border: 1px solid #7100e3;
+    resize: none;
+    transition: border ease-in-out 400ms;
+}
+
+.textarea:focus {
+    border: 1px solid #ff681b;
 }
 
 .button-section {}
