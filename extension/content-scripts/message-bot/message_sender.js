@@ -11,7 +11,6 @@ const message_sender = (message_list) => {
             past_message_txt();    
         }, 200);
         
-
         if (document.querySelector('.message__content') !== null){ // check if message was send.
             i++;
         }

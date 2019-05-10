@@ -6,7 +6,7 @@ const vm = new Vue ({
         },
         message_bot: {
             isStart: false,
-            message: ''
+            message: localStorage.getItem('last_message')
         }
     },
 
@@ -24,8 +24,10 @@ const vm = new Vue ({
         toggle_messaging(){
             if (this.message_bot.isStart === false){
                 this.sendMessageToContentScript('start_messaging');
+
                 chrome.storage.sync.set({'last_message': this.message_bot.message});
-                
+                localStorage.setItem('last_message', this.message_bot.message);
+
                 this.message_bot.isStart = true;
             } else {
                 this.sendMessageToContentScript('stop_messaging');
@@ -38,5 +40,9 @@ const vm = new Vue ({
                 chrome.tabs.sendMessage(tabs[0].id, {greeting: message_name});
             });
         }
+    },
+
+    mounted(){
+        // this.message_bot.message = localStorage.getItem('last_message');
     }
 });
