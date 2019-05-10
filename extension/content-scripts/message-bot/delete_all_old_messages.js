@@ -12,16 +12,14 @@ const get_people_to_delete = () => {
 };
 
 const delete_message = () => {
-    const int = setInterval(() => {
-        if (get_people_to_delete()[0]) {
+    const interval = setInterval(() => {
+        if ( get_people_to_delete()[0] && document.querySelector('.js-im-contact-remove') ) {
             get_people_to_delete()[0].click(); // open message for delete
-        }
-        
-        setTimeout(() => {
-            if (document.querySelector('.js-im-contact-remove')) {
+
+            setTimeout(() => {
                 document.querySelector('.js-im-contact-remove').click(); // open deleting menu
-            }
-        }, 300);
+            }, 300);
+        }
 
         setTimeout(() => {
             if (document.querySelector('.js-im-confirm-delete')) {
@@ -29,12 +27,8 @@ const delete_message = () => {
             }
         }, 700);
 
-
-        console.log(get_people_to_delete().length);
-
         if ( get_people_to_delete().length < 1 ){
-            console.log('end working.')
-            clearInterval(int);
+            clearInterval(interval);
         } 
     }, 1200);
 };
