@@ -7,22 +7,28 @@ const message_sender = (message_list) => {
     let i = 0;
 
     global_data.message_bot_interval = setInterval(() => {
-        past_message_txt();
+        setTimeout(() => {
+            past_message_txt();    
+        }, 200);
+        
+
+        if (document.querySelector('.message__content') !== null){ // check if message was send.
+            i++;
+        }
         
         setTimeout(() => {
             send_message();
-        }, 200);
+        }, 500);
         
         setTimeout(() => {
             open_message(message_list, i);
-            i++;
-        }, 700);
+        }, 800);
 
         if ( message_list.length <= i ) {
             clearInterval( global_data.message_bot_interval );
         }
         
-    }, 800);
+    }, 1000);
 };
 
 export default message_sender;
