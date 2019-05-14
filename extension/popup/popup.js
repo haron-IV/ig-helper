@@ -3,7 +3,7 @@ const vm = new Vue ({
     data: {
         like_bot: {
             isStart: false,
-            speed: parseInt( localStorage.getItem('bot_like_speed') ) ? parseInt( localStorage.getItem('bot_like_speed') ) : 50
+            speed: localStorage.getItem('bot_like_speed') !== null ? parseInt( localStorage.getItem('bot_like_speed') ) : 50 
         },
         message_bot: {
             isStart: false,
@@ -55,6 +55,7 @@ const vm = new Vue ({
 
         set_like_speed(speed){
             this.like_bot.speed = speed;
+            localStorage.setItem('bot_like_speed', speed);
             this.sendMessageToContentScript('set_like_speed', speed);
         }
     }
