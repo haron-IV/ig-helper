@@ -4,6 +4,7 @@ import get_people_to_message from './get_people_to_message';
 import message_sender from './message_sender';
 import stop_message_bot from './stop_message_bot';
 import delete_all_old_messages from './delete_all_old_messages';
+import save_user_name from './save_user_name';
 import global_data from '../global_data';
 
 
@@ -15,6 +16,9 @@ const open_message_window = () => {
 
 const message_bot = () => {
     get_message_from_popup('start_messaging', () => {
+        
+        save_user_name();
+        
         if ( check_message_window() === false ) {
             open_message_window();
 

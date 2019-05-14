@@ -2,8 +2,10 @@ import global_data from '../global_data';
 
 const get_people_to_delete = () => {
 
+    const user_name = localStorage.getItem('user_name');
+
     const data = [...document.querySelectorAll('.contact-card__message')].map(function callback(currentValue){ 
-        if(currentValue.innerText.substring(0, 11) !== "You matched" && !currentValue.parentElement.parentElement.children[2].classList.contains('is-active')){ // here should be other examples
+        if(currentValue.innerText.substring(0, 11) !== "You matched" && !currentValue.parentElement.parentElement.children[2].classList.contains('is-active') && currentValue.innerText.substring(0, 11) !== `Hey ${user_name} ! `){ // here should be other examples
             return currentValue.parentElement.parentElement;
         }
     });
@@ -15,7 +17,7 @@ const get_people_to_delete = () => {
 
 const delete_all_old_messages = () => {
     
-        global_data.deleting_message_bot_interval = setInterval(() => {
+    global_data.deleting_message_bot_interval = setInterval(() => {
         if ( get_people_to_delete()[0] && document.querySelector('.js-im-contact-remove') ) {
             get_people_to_delete()[0].click(); // open message for delete
 
