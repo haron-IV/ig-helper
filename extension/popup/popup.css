@@ -74,8 +74,18 @@ body {
     justify-content: center;
 }
 
+.like-bot-speed {
+    display: flex;
+    justify-content: space-between;
+}
 
+.like-bot-speed > span {
+    cursor: pointer;
+}
 
+.progress-bar {
+    width: 100%;
+}
 
 /* HELPERS */
 .bottom-line {

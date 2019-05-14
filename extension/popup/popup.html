@@ -18,6 +18,15 @@
             <section class="button-section">
                 <header class="header"><h3>Like bot</h3></header>
                 
+                <div>
+                    <div class="like-bot-speed">
+                        <span @click="set_like_speed(25)">Slow</span>
+                        <span @click="set_like_speed(50)">Medium</span>
+                        <span @click="set_like_speed(100)">Fast</span>
+                    </div>
+                    <progress class="progress-bar" v-bind:value="like_bot.speed" max="100"></progress>
+                </div>
+
                 <div class="button-group bottom-line">
                     <button 
                     class="button"
@@ -27,6 +36,7 @@
                         {{like_bot.isStart === true ? 'Stop' : 'Start'}}
                     </button>
                 </div>
+
 
                 <header class="header"><h3>Message Bot</h3></header>
 

@@ -2,7 +2,8 @@ const vm = new Vue ({
     el: '#app',
     data: {
         like_bot: {
-            isStart: false
+            isStart: false,
+            speed: parseInt( localStorage.getItem('bot_like_speed') ) ? parseInt( localStorage.getItem('bot_like_speed') ) : 50
         },
         message_bot: {
             isStart: false,
@@ -46,10 +47,15 @@ const vm = new Vue ({
             }
         },
 
-        sendMessageToContentScript(message_name){
+        sendMessageToContentScript(message_name, message_value = null){
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, {greeting: message_name});
+                chrome.tabs.sendMessage(tabs[0].id, {greeting: message_name, value: message_value});
             });
+        },
+
+        set_like_speed(speed){
+            this.like_bot.speed = speed;
+            this.sendMessageToContentScript('set_like_speed', speed);
         }
     }
 });

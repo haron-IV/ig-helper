@@ -23,3 +23,7 @@ get_message_from_popup('start_liking', () => {
 get_message_from_popup('stop_liking', () => {
     clearInterval( like_bot_data.interval );
 });
+
+get_message_from_popup('set_like_speed', (request) => {
+    localStorage.setItem('bot_like_speed', request.value);
+});
