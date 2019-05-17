@@ -21,7 +21,7 @@
     ],
     "content_scripts": [
         {
-            "matches": ["https://badoo.com/*"],
+            "matches": ["https://*.badoo.com/*"],
             "js": [
                 "./content-scripts/dist/main.bundle.js"
             ],

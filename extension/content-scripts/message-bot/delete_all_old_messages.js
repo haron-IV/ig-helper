@@ -4,8 +4,12 @@ const get_people_to_delete = () => {
 
     const user_name = localStorage.getItem('user_name');
 
-    const data = [...document.querySelectorAll('.contact-card__message')].map(function callback(currentValue){ 
-        if(currentValue.innerText.substring(0, 11) !== "You matched" && !currentValue.parentElement.parentElement.children[2].classList.contains('is-active') && currentValue.innerText.substring(0, 11) !== `Hey ${user_name} ! `){ // here should be other examples
+    const data = [...document.querySelectorAll('.contact-card__message')].map(function callback(currentValue){
+        if(
+        currentValue.innerText.substring(0, 11) !== "You matched" &&
+        !currentValue.parentElement.parentElement.children[2].classList.contains('is-active') && // if someone delete his acc his chat element haven't this element end console drop red alert about undefined
+        currentValue.innerText.substring(0, 11) !== `Hey ${user_name} ! `
+        ){ // here should be other examples
             return currentValue.parentElement.parentElement;
         }
     });
