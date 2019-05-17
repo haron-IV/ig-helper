@@ -1,3 +1,8 @@
+.bottom-line {
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ff681b; }
+
 * {
   padding: 0;
   margin: 0;
@@ -11,9 +16,6 @@ body {
   padding: 3rem;
   font-family: Montserrat;
   min-width: 350px; }
-
-.header {
-  margin-bottom: 2rem; }
 
 .button {
   font-size: 1.35rem;
@@ -50,26 +52,27 @@ body {
   border: 1px solid #7100e3;
   resize: none;
   transition: border ease-in-out 400ms; }
+  .textarea:focus {
+    border: 1px solid #ff681b; }
 
-.textarea:focus {
-  border: 1px solid #ff681b; }
+.main-header {
+  margin-bottom: 2rem;
+  color: #7100e3;
+  text-shadow: 2px 2px 5px #ff681b, 2px 2px 7px rgba(0, 0, 0, 0.5); }
 
-.button-group {
+.main--popup .header {
+  margin: 3rem 0;
+  text-decoration: underline; }
+
+.main--popup .box {
   display: flex;
   justify-content: center; }
 
-.like-bot-speed {
+.main--popup .like-bot__speed {
   display: flex;
   justify-content: space-between; }
+  .main--popup .like-bot__speed span {
+    cursor: pointer; }
 
-.like-bot-speed > span {
-  cursor: pointer; }
-
-.progress-bar {
+.main--popup .like-bot__progress-bar {
   width: 100%; }
-
-/* HELPERS */
-.bottom-line {
-  padding-bottom: 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid #ff681b; }

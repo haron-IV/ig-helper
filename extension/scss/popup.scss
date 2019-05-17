@@ -1,95 +1,35 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+.main-header {
+    @include medium-space-bottom;
+    color: $violet;
+    text-shadow: 2px 2px 5px $orange, 2px 2px 7px rgba(#000, .5);
 }
 
-html {
-    font-size: 10px;
-}
+.main {
+    &--popup {
+        .header {
+            @include big-space-vertical;
+            text-decoration: underline;
+        }
 
-body {
-    font-size: 1.5rem;
-    padding: 3rem;
-    font-family: Montserrat;
-    min-width: 350px;
-}
+        .box {
+            display: flex;
+            justify-content: center;
+        }
 
-.header {
-    margin-bottom: 2rem;
-}
+        .like-bot {
+            &__speed{
+                display: flex;
+                justify-content: space-between;
 
-.button {
-    font-size: 1.35rem;
-    font-weight: 300;
+                span {
+                    cursor: pointer;
+                }
+            }
 
-    background: #7100e3;
-    color: #ff681b;
-    border-radius: 3px;
-    padding: .5rem 2rem;
-    outline: none;
 
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, .6);
-
-    transition: all ease-in-out 250ms;
-}
-
-.button_active{
-    background-color: #ff681b;
-    border: 1px solid #7100e3;
-    color: #7100e3;
-
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
-}
-
-.input-text {
-    font-size: 1.35rem;
-    font-weight: 300;
-    height: 25px;
-    color: #ff681b;
-    border-radius: 3px;
-    outline: none;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, .6);
-}
-
-.textarea {
-    height: 200px;
-    width: 80%;
-    margin-right: .5rem;
-    padding: .5rem;
-    outline: none;
-    border: 1px solid #7100e3;
-    resize: none;
-    transition: border ease-in-out 400ms;
-}
-
-.textarea:focus {
-    border: 1px solid #ff681b;
-}
-
-.button-section {}
-
-.button-group {
-    display: flex;
-    justify-content: center;
-}
-
-.like-bot-speed {
-    display: flex;
-    justify-content: space-between;
-}
-
-.like-bot-speed > span {
-    cursor: pointer;
-}
-
-.progress-bar {
-    width: 100%;
-}
-
-/* HELPERS */
-.bottom-line {
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #ff681b;
+            &__progress-bar {
+                width: 100%;
+            }
+        }
+    }
 }

@@ -11,23 +11,23 @@
 </head>
 <body>
     <div id="app">
-        <header></header>
+        <Main_header></Main_header>
 
-        <article class="control-section">
-    
-            <section class="button-section">
+        <main class="main main--popup">
+
+            <article class="like-bot">
                 <header class="header"><h3>Like bot</h3></header>
-                
+            
                 <div>
-                    <div class="like-bot-speed">
+                    <div class="like-bot__speed">
                         <span @click="set_like_speed(25)">Slow</span>
                         <span @click="set_like_speed(50)">Medium</span>
                         <span @click="set_like_speed(100)">Fast</span>
                     </div>
-                    <progress class="progress-bar" :value="like_bot.speed" max="100"></progress>
+                    <progress class="like-bot__progress-bar" :value="like_bot.speed" max="100"></progress>
                 </div>
 
-                <div class="button-group bottom-line">
+                <div class="box bottom-line">
                     <button 
                     class="button"
                     :class="{ button_active: like_bot.isStart }"
@@ -36,11 +36,12 @@
                         {{like_bot.isStart === true ? 'Stop' : 'Start'}}
                     </button>
                 </div>
+            </article>
 
-
+            <article class="message-bot">
                 <header class="header"><h3>Message Bot</h3></header>
 
-                <div class="button-group">
+                <div class="box">
                     <textarea type="text" class="textarea" v-model="message_bot.message"></textarea>
 
                     <button 
@@ -52,18 +53,16 @@
                     </button>
                 </div>
 
-                <button 
+                <button
                 class="button"
                 :class="{ button_active: message_bot.dletingIsStart }"
                 @click="toggle_deleting_messages"
                 >
-                   {{message_bot.dletingIsStart === true ? 'Stop' : 'Delete all old messages'}}
+                    {{message_bot.dletingIsStart === true ? 'Stop' : 'Delete all old messages'}}
                 </button>
-            </section>
-    
-        </article>
-    
-        
+            </article>
+
+        </main>
     </div>
     
     <script type="text/javascript" src="./vue.js"></script>

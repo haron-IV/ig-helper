@@ -1,3 +1,18 @@
+Vue.component('Main_header', {
+    template: `
+    <header class="main-header">
+        <h1>Badoo Spam Bot</h1>
+        <nav class="navigation">
+            <ul>
+                <li>
+                    <a href="./statistics.html">Statistics</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    `
+});
+
 const vm = new Vue ({
     el: '#app',
     data: {
@@ -60,4 +75,3 @@ const vm = new Vue ({
         }
     }
 });
-
