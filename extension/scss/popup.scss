@@ -2,6 +2,26 @@
     @include medium-space-bottom;
     color: $violet;
     text-shadow: 2px 2px 5px $orange, 2px 2px 7px rgba(#000, .5);
+
+    .navigation {
+        @include small-space-vertical;
+
+        &__list {
+            list-style-type: none;
+            display: flex;
+
+            .item {
+                margin: 0 .5rem;
+                transition: transform ease-in-out 200ms;
+                &:hover {
+                    transform: rotateZ(-3deg) scale(1.1);
+                }
+                .link{
+                
+                }
+            }
+        }
+    }
 }
 
 .main {

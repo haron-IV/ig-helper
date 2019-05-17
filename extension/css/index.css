@@ -44,7 +44,7 @@ body {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); }
 
 .textarea {
-  height: 200px;
+  height: 150px;
   width: 80%;
   margin-right: .5rem;
   padding: .5rem;
@@ -59,6 +59,16 @@ body {
   margin-bottom: 2rem;
   color: #7100e3;
   text-shadow: 2px 2px 5px #ff681b, 2px 2px 7px rgba(0, 0, 0, 0.5); }
+  .main-header .navigation {
+    margin: 1rem 0; }
+    .main-header .navigation__list {
+      list-style-type: none;
+      display: flex; }
+      .main-header .navigation__list .item {
+        margin: 0 .5rem;
+        transition: transform ease-in-out 200ms; }
+        .main-header .navigation__list .item:hover {
+          transform: rotateZ(-3deg) scale(1.1); }
 
 .main--popup .header {
   margin: 3rem 0;

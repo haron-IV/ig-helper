@@ -2,10 +2,15 @@ Vue.component('Main_header', {
     template: `
     <header class="main-header">
         <h1>Badoo Spam Bot</h1>
+
         <nav class="navigation">
-            <ul>
-                <li>
-                    <a href="./statistics.html">Statistics</a>
+            <ul class="navigation__list">
+                <li class="item">
+                    <a class="link" href="./popup.html">Home</a>
+                </li>
+                
+                <li class="item">
+                    <a class="link" href="./statistics.html">Statistics 2</a>
                 </li>
             </ul>
         </nav>
@@ -73,5 +78,9 @@ const vm = new Vue ({
             localStorage.setItem('bot_like_speed', speed);
             this.sendMessageToContentScript('set_like_speed', speed);
         }
+    },
+
+    mounted(){
+        this.sendMessageToContentScript('update_statistics', {}); // should send obiect with stas
     }
 });
