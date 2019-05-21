@@ -51,5 +51,18 @@
                 width: 100%;
             }
         }
+
+        .message-bot {
+            .saved-message {
+                display: flex;
+                justify-content: space-between;
+                width: 70%;
+                @include small-space-bottom;
+
+                &__item {
+
+                }
+            }
+        }
     }
 }

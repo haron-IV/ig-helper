@@ -10,13 +10,16 @@
     <title>Badoo spam bot</title>
 </head>
 <body>
-    <div id="app">
-        <Main_header></Main_header>
+    <div>
+        <template id="app">
+            <Main_header></Main_header>
+        </template>
+        
 
-        <main class="main main--statistics">
+        <main class="main main--statistics" id="statistics">
             <article class="statistics-box">
-                <header class="statistics-box__header">
-                    Like
+                <header class="statistics-box__header" @click="test">
+                    {{testtxt}}
                 </header>
 
                 <div class="statistics-box__content">
@@ -32,5 +35,6 @@
     
     <script type="text/javascript" src="./vue.js"></script>
     <script src="./popup.js"></script>
+    <script src="./statistics.js"></script>
 </body>
 </html>

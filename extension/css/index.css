@@ -25,8 +25,12 @@ body {
   border-radius: 3px;
   padding: .5rem 2rem;
   outline: none;
+  cursor: pointer;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
   transition: all ease-in-out 250ms; }
+  .button:hover {
+    background-color: #8a17ff;
+    transform: translateY(-2px); }
 
 .button_active {
   background-color: #ff681b;
@@ -86,3 +90,9 @@ body {
 
 .main--popup .like-bot__progress-bar {
   width: 100%; }
+
+.main--popup .message-bot .saved-message {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin-bottom: 1rem; }

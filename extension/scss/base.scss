@@ -25,10 +25,16 @@ body {
     border-radius: 3px;
     padding: .5rem 2rem;
     outline: none;
+    cursor: pointer;
 
     box-shadow: 2px 2px 5px rgba(0, 0, 0, .6);
 
     transition: all ease-in-out 250ms;
+
+    &:hover {
+        background-color: lighten(#7100e3, 10%);
+        transform: translateY(-2px);
+    }
 }
 
 .button_active{
