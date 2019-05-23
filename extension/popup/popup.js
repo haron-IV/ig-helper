@@ -30,7 +30,7 @@ const vm = new Vue({
 		like_bot: {
 			isStart: false,
 			speed:
-				localStorage.getItem('bot_like_speed') !== null ? parseInt(localStorage.getItem('bot_like_speed')) : 50
+				localStorage.getItem('bot_like_speed') !== null ? parseInt(localStorage.getItem('bot_like_speed')) : 500
 		},
 		message_bot: {
 			isStart: false,
