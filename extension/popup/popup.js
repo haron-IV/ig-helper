@@ -122,7 +122,7 @@ const vm = new Vue({
 
 	created() {
 		const check_localStorage = () => {
-			const data = [ 'test 11', 'test 22', 'test 33' ];
+			const data = [ '', '', '' ];
 
 			if (localStorage.getItem('saved_messages') === null) {
 				localStorage.setItem('saved_messages', JSON.stringify(data));
