@@ -1,68 +1,69 @@
 .main-header {
-    @include medium-space-bottom;
-    color: $violet;
-    text-shadow: 2px 2px 5px $orange, 2px 2px 7px rgba(#000, .5);
+	@include medium-space-bottom;
+	color: $violet;
+	text-shadow: 2px 2px 5px $orange, 2px 2px 7px rgba(#000, .5);
 
-    .navigation {
-        @include small-space-vertical;
+	&__title {
+		cursor: pointer;
+	}
 
-        &__list {
-            list-style-type: none;
-            display: flex;
+	.navigation {
+		@include small-space-vertical;
 
-            .item {
-                margin: 0 .5rem;
-                transition: transform ease-in-out 200ms;
-                &:hover {
-                    transform: rotateZ(-3deg) scale(1.1);
-                }
-                .link{
-                
-                }
-            }
-        }
-    }
+		&__list {
+			list-style-type: none;
+			display: flex;
+
+			.item {
+				margin: 0 .5rem;
+				transition: transform ease-in-out 200ms;
+				&:hover {
+					transform: rotateZ(-3deg) scale(1.1);
+				}
+				.link {
+				}
+			}
+		}
+	}
 }
 
 .main {
-    &--popup {
-        .header {
-            @include big-space-vertical;
-            text-decoration: underline;
-        }
+	&--popup {
+		.header {
+			@include big-space-vertical;
+			text-decoration: underline;
+		}
 
-        .box {
-            display: flex;
-            justify-content: center;
-        }
+		.box {
+			display: flex;
+			justify-content: center;
+		}
 
-        .like-bot {
-            &__speed{
-                display: flex;
-                justify-content: space-between;
+		.like-bot {
+			&__speed {
+				display: flex;
+				justify-content: space-between;
 
-                span {
-                    cursor: pointer;
-                }
-            }
+				span {
+					cursor: pointer;
+				}
+			}
 
+			&__progress-bar {
+				width: 100%;
+			}
+		}
 
-            &__progress-bar {
-                width: 100%;
-            }
-        }
+		.message-bot {
+			.saved-message {
+				display: flex;
+				justify-content: space-between;
+				width: 70%;
+				@include small-space-bottom;
 
-        .message-bot {
-            .saved-message {
-                display: flex;
-                justify-content: space-between;
-                width: 70%;
-                @include small-space-bottom;
-
-                &__item {
-
-                }
-            }
-        }
-    }
+				&__item {
+				}
+			}
+		}
+	}
 }

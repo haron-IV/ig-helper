@@ -1,7 +1,7 @@
 Vue.component('Main_header', {
 	template: `
     <header class="main-header">
-        <h1 @click="open_badoo">Badoo Spam Bot</h1>
+        <h1 @click="open_badoo" class="main-header__title" title="Clicke here to go to badoo.com">Badoo Spam Bot</h1>
         
         <nav class="navigation">
             <ul class="navigation__list">
