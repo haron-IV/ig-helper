@@ -96,5 +96,5 @@ body {
 .main--popup .message-bot .saved-message {
   display: flex;
   justify-content: space-between;
-  width: 70%;
+  width: 100%;
   margin-bottom: 1rem; }

@@ -35,15 +35,14 @@ const vm = new Vue({
 		message_bot: {
 			isStart: false,
 			message: localStorage.getItem('last_message'),
-			dletingIsStart: false
+			dletingIsStart: false,
+			saved_messages: [],
+			active_message:
+				localStorage.getItem('last_message') !== null ? parseInt(localStorage.getItem('last_message')) : 1
 		}
 	},
 
 	methods: {
-		open_badoo() {
-			alert();
-		},
-
 		toggle_liking() {
 			if (this.like_bot.isStart === false) {
 				this.sendMessageToContentScript('start_liking');
@@ -59,7 +58,7 @@ const vm = new Vue({
 				this.sendMessageToContentScript('start_messaging');
 
 				chrome.storage.sync.set({ last_message: this.message_bot.message });
-				localStorage.setItem('last_message', this.message_bot.message);
+				localStorage.setItem('last_message', this.message_bot.active_message);
 
 				this.message_bot.isStart = true;
 			} else {
@@ -88,7 +87,64 @@ const vm = new Vue({
 			this.like_bot.speed = speed;
 			localStorage.setItem('bot_like_speed', speed);
 			this.sendMessageToContentScript('set_like_speed', speed);
+		},
+
+		save_message(which_message) {
+			const saved_messages = JSON.parse(localStorage.getItem('saved_messages'));
+			let last_message = JSON.parse(localStorage.getItem('last_message'));
+
+			last_message = which_message;
+			saved_messages[which_message] = this.message_bot.message;
+
+			localStorage.setItem('last_message', JSON.stringify(last_message));
+			localStorage.setItem('saved_messages', JSON.stringify(saved_messages));
+		},
+
+		set_message(which) {
+			switch (which) {
+				case 1:
+					this.message_bot.active_message = which;
+					this.message_bot.message = this.message_bot.saved_messages[which - 1];
+					break;
+
+				case 2:
+					this.message_bot.active_message = which;
+					this.message_bot.message = this.message_bot.saved_messages[which - 1];
+					break;
+
+				case 3:
+					this.message_bot.active_message = which;
+					this.message_bot.message = this.message_bot.saved_messages[which - 1];
+					break;
+			}
 		}
+	},
+
+	created() {
+		const check_localStorage = () => {
+			const data = [ 'test 11', 'test 22', 'test 33' ];
+
+			if (localStorage.getItem('saved_messages') === null) {
+				localStorage.setItem('saved_messages', JSON.stringify(data));
+			} else {
+				this.message_bot.saved_messages = JSON.parse(localStorage.getItem('saved_messages'));
+			}
+		};
+		check_localStorage();
+
+		const set_last_message = () => {
+			const data = {
+				messages: JSON.parse(localStorage.getItem('saved_messages')),
+				last_message: JSON.parse(localStorage.getItem('last_message')) - 1
+			};
+
+			this.message_bot.message = data.messages[data.last_message];
+			this.message_bot.active_message = data.last_message + 1;
+
+			// alert(this.message_bot.message);
+		};
+
+		set_last_message();
 	},
 
 	mounted() {
