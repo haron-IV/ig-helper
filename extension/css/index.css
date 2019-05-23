@@ -17,6 +17,9 @@ body {
   font-family: Montserrat;
   min-width: 350px; }
 
+[v-cloak] {
+  display: none; }
+
 .button {
   font-size: 1.35rem;
   font-weight: 300;

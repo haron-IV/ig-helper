@@ -130,7 +130,6 @@ const vm = new Vue({
 				this.message_bot.saved_messages = JSON.parse(localStorage.getItem('saved_messages'));
 			}
 		};
-		check_localStorage();
 
 		const set_last_message = () => {
 			const data = {
@@ -140,11 +139,14 @@ const vm = new Vue({
 
 			this.message_bot.message = data.messages[data.last_message];
 			this.message_bot.active_message = data.last_message + 1;
-
-			// alert(this.message_bot.message);
 		};
 
-		set_last_message();
+		const init = () => {
+			check_localStorage();
+			set_last_message();
+		};
+
+		init();
 	},
 
 	mounted() {
