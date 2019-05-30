@@ -3,6 +3,9 @@
   margin-bottom: 2rem;
   border-bottom: 1px solid #ff681b; }
 
+.medium-space {
+  margin: .7rem 0; }
+
 * {
   padding: 0;
   margin: 0;

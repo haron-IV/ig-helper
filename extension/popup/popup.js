@@ -27,6 +27,7 @@ Vue.component('Main_header', {
 const vm = new Vue({
 	el: '#app',
 	data: {
+		first_settings: false,
 		like_bot: {
 			isStart: false,
 			speed:
@@ -117,6 +118,10 @@ const vm = new Vue({
 					this.message_bot.message = this.message_bot.saved_messages[which - 1];
 					break;
 			}
+		},
+
+		set_correct_settings() {
+			this.sendMessageToContentScript('set_correct_settings');
 		}
 	},
 
@@ -148,7 +153,13 @@ const vm = new Vue({
 
 		init();
 
-		// this.sendMessageToContentScript('check_first_login', )
+		const set_interface = () => {
+			chrome.storage.sync.get([ 'first_login_status' ], (status) => {
+				this.first_settings = status.first_login_status;
+			});
+		};
+
+		set_interface();
 	},
 
 	mounted() {

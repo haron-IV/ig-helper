@@ -11,76 +11,98 @@
 </head>
 <body>
     <div id="app" v-cloak>
-        <Main_header></Main_header>
+        <template v-if="first_settings">
+            <Main_header></Main_header>
 
-        <main class="main main--popup">
-
-            <article class="like-bot">
-                <header class="header"><h3>Like bot</h3></header>
-            
-                <div>
-                    <div class="like-bot__speed">
-                        <span @click="set_like_speed(25)">Slow</span>
-                        <span @click="set_like_speed(50)">Medium</span>
-                        <span @click="set_like_speed(100)">Fast</span>
+            <main class="main main--popup">
+    
+                <article class="like-bot">
+                    <header class="header"><h3>Like bot</h3></header>
+                
+                    <div>
+                        <div class="like-bot__speed">
+                            <span @click="set_like_speed(25)">Slow</span>
+                            <span @click="set_like_speed(50)">Medium</span>
+                            <span @click="set_like_speed(100)">Fast</span>
+                        </div>
+                        <progress class="like-bot__progress-bar" :value="like_bot.speed" max="100"></progress>
                     </div>
-                    <progress class="like-bot__progress-bar" :value="like_bot.speed" max="100"></progress>
-                </div>
-
-                <div class="box bottom-line">
-                    <button 
+    
+                    <div class="box bottom-line">
+                        <button 
+                        class="button"
+                        :class="{ button_active: like_bot.isStart }"
+                        @click="toggle_liking"
+                        >
+                            {{like_bot.isStart === true ? 'Stop' : 'Start'}}
+                        </button>
+                    </div>
+                </article>
+    
+                <article class="message-bot">
+                    <header class="header"><h3>Message Bot</h3></header>
+    
+                    <div class="saved-message">
+                        <button class="saved-message__item button" @click="set_message(1)" :class="{button_active: message_bot.active_message === 1}">
+                            1
+                        </button>
+    
+                        <button class="saved-message__item button" @click="set_message(2)" :class="{button_active: message_bot.active_message === 2}">
+                            2
+                        </button>
+    
+                        <button class="saved-message__item button" @click="set_message(3)" :class="{button_active: message_bot.active_message === 3}">
+                            3
+                        </button>
+    
+                        <button class="saved-message__item button" @click="save_message(message_bot.active_message - 1)" >
+                            save
+                        </button>
+                    </div>
+    
+                    <div class="box">
+                        <textarea type="text" class="textarea" v-model="message_bot.message"></textarea>
+    
+                        <button 
+                        class="button"
+                        :class="{ button_active: message_bot.isStart }"
+                        @click="toggle_messaging"
+                        >
+                            {{message_bot.isStart === true ? 'Stop' : 'Start'}}
+                        </button>
+                    </div>
+    
+                    <button
                     class="button"
-                    :class="{ button_active: like_bot.isStart }"
-                    @click="toggle_liking"
+                    :class="{ button_active: message_bot.dletingIsStart }"
+                    @click="toggle_deleting_messages"
                     >
-                        {{like_bot.isStart === true ? 'Stop' : 'Start'}}
+                        {{message_bot.dletingIsStart === true ? 'Stop' : 'Delete all old messages'}}
                     </button>
-                </div>
-            </article>
+                </article>
+    
+            </main>
+        </template>
 
-            <article class="message-bot">
-                <header class="header"><h3>Message Bot</h3></header>
+        <template v-else>
+            <h3 class="medium-space">
+                Before use bot you must configurate your badoo profile.
+            </h3>
 
-                <div class="saved-message">
-                    <button class="saved-message__item button" @click="set_message(1)" :class="{button_active: message_bot.active_message === 1}">
-                        1
-                    </button>
+            <hr>
 
-                    <button class="saved-message__item button" @click="set_message(2)" :class="{button_active: message_bot.active_message === 2}">
-                        2
-                    </button>
+            <p class="medium-space">
+                Go to your profile and click this button.
+                <button @click="set_correct_settings" class="button">Set correct setting</button>
+            </p>
+            
+            <hr>
 
-                    <button class="saved-message__item button" @click="set_message(3)" :class="{button_active: message_bot.active_message === 3}">
-                        3
-                    </button>
-
-                    <button class="saved-message__item button" @click="save_message(message_bot.active_message - 1)" >
-                        save
-                    </button>
-                </div>
-
-                <div class="box">
-                    <textarea type="text" class="textarea" v-model="message_bot.message"></textarea>
-
-                    <button 
-                    class="button"
-                    :class="{ button_active: message_bot.isStart }"
-                    @click="toggle_messaging"
-                    >
-                        {{message_bot.isStart === true ? 'Stop' : 'Start'}}
-                    </button>
-                </div>
-
-                <button
-                class="button"
-                :class="{ button_active: message_bot.dletingIsStart }"
-                @click="toggle_deleting_messages"
-                >
-                    {{message_bot.dletingIsStart === true ? 'Stop' : 'Delete all old messages'}}
-                </button>
-            </article>
-
-        </main>
+            <p class="medium-space">
+                And set your language to English (United States) and save.
+            </p>
+            
+        </template>
     </div>
     
     <script type="text/javascript" src="./vue.js"></script>
