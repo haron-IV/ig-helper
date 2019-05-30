@@ -147,6 +147,8 @@ const vm = new Vue({
 		};
 
 		init();
+
+		// this.sendMessageToContentScript('check_first_login', )
 	},
 
 	mounted() {
