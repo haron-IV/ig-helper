@@ -1,17 +1,15 @@
-const past_message_txt = (chatter_name = '') => {
+const past_message_txt = (chatter_name) => {
 	if (document.querySelector('.messenger-tools__input') && document.querySelector('.message__content') === null) {
 		if (
 			document.querySelector('.messenger-tools__input') &&
 			document.querySelector('.message__content') === null &&
-			chatter_name !== ''
+			chatter_name !== null
 		) {
 			const msg = JSON.parse(localStorage.getItem('last_message')).last_message;
 
-			const splited = msg.split('{name}');
+			const msg_with_names = msg.replace(/{name}/g, chatter_name);
 
-			const msg_with_name = `${splited[0]} ${chatter_name} ${splited[1]}`;
-			console.log(msg_with_name);
-			document.querySelector('.messenger-tools__input').innerText = msg_with_name;
+			document.querySelector('.messenger-tools__input').innerText = msg_with_names;
 		} else {
 			document.querySelector('.messenger-tools__input').innerText = JSON.parse(
 				localStorage.getItem('last_message')

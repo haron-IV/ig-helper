@@ -19,6 +19,7 @@ const message_sender = (message_list) => {
 			// check if message was send.
 			// if (document.querySelector('.message__content').children[0].innertText !== `Hey ${user_name} ! How's your day?` || document.querySelector('.message__content').children[0].innertText !== `Hey ${user_name} ! What are you up to?`) {
 			i++;
+			console.log('i: ', i);
 		}
 
 		setTimeout(() => {
