@@ -1,45 +1,45 @@
 import global_data from '../global_data';
 
 const get_people_to_delete = () => {
+	const user_name = localStorage.getItem('user_name');
 
-    const user_name = localStorage.getItem('user_name');
+	const data = [ ...document.querySelectorAll('.contact-card__message') ].map(function callback(currentValue) {
+		if (
+			currentValue.parentElement.parentElement.children.length === 3 &&
+			currentValue.innerText.substring(0, 11) !== 'You matched' &&
+			!currentValue.parentElement.parentElement.children[2].classList.contains('is-active') &&
+			currentValue.innerText.substring(0, 11) !== `Hey ${user_name} ! `
+		) {
+			// here should be other examples
+			return currentValue.parentElement.parentElement;
+		}
+	});
 
-    const data = [...document.querySelectorAll('.contact-card__message')].map(function callback(currentValue){
-        if(
-        currentValue.innerText.substring(0, 11) !== "You matched" &&
-        !currentValue.parentElement.parentElement.children[2].classList.contains('is-active') && // if someone delete his acc his chat element haven't this element end console drop red alert about undefined
-        currentValue.innerText.substring(0, 11) !== `Hey ${user_name} ! `
-        ){ // here should be other examples
-            return currentValue.parentElement.parentElement;
-        }
-    });
-
-    return data.filter((value) => {
-        return value !== undefined;
-    });
+	return data.filter((value) => {
+		return value !== undefined;
+	});
 };
 
 const delete_all_old_messages = () => {
-    
-    global_data.deleting_message_bot_interval = setInterval(() => {
-        if ( get_people_to_delete()[0] && document.querySelector('.js-im-contact-remove') ) {
-            get_people_to_delete()[0].click(); // open message for delete
+	global_data.deleting_message_bot_interval = setInterval(() => {
+		if (get_people_to_delete()[0] && document.querySelector('.js-im-contact-remove')) {
+			get_people_to_delete()[0].click(); // open message for delete
 
-            setTimeout(() => {
-                document.querySelector('.js-im-contact-remove').click(); // open deleting menu
-            }, 300);
-        }
+			setTimeout(() => {
+				document.querySelector('.js-im-contact-remove').click(); // open deleting menu
+			}, 300);
+		}
 
-        setTimeout(() => {
-            if (document.querySelector('.js-im-confirm-delete')) {
-                document.querySelector('.js-im-confirm-delete').click(); // confirm deleting
-            }
-        }, 700);
+		setTimeout(() => {
+			if (document.querySelector('.js-im-confirm-delete')) {
+				document.querySelector('.js-im-confirm-delete').click(); // confirm deleting
+			}
+		}, 700);
 
-        if ( get_people_to_delete().length < 1 ){
-            clearInterval(global_data.deleting_message_bot_interval);
-        } 
-    }, 1200);
+		if (get_people_to_delete().length < 1) {
+			clearInterval(global_data.deleting_message_bot_interval);
+		}
+	}, 1200);
 };
 
 export default delete_all_old_messages;
