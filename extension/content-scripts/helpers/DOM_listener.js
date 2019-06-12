@@ -5,8 +5,8 @@ const DOM_listener = (
 		attributes: true,
 		subtree: true //Omit or set to false to observe only changes to the parent node.
 	},
-	childListCallback = undefined,
-	attributesCallback = undefined
+	childListCallback = function() {},
+	attributesCallback = function() {}
 ) => {
 	const targetNode = document.querySelector(element);
 

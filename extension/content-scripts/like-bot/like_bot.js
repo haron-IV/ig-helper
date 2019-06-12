@@ -1,5 +1,6 @@
 import global_data from '../global_data';
 import get_message_from_popup from '../helpers/get_message_from_popup';
+import DOM_listener from '../helpers/DOM_listener';
 import like from './like';
 
 let data = null;
@@ -33,6 +34,13 @@ get_message_from_popup('start_liking', () => {
 
 	like_bot_data.interval = setInterval(() => {
 		like(document.querySelector('.profile-action--yes'), data);
+
+		DOM_listener('body', undefined, (mutation) => {
+			if (mutation.target.classList[0] === 'body' && mutation.addedNodes[0].classList[0] === 'ovl') {
+				console.log(mutation);
+				console.log('chuja!');
+			}
+		});
 	}, timeout);
 });
 
