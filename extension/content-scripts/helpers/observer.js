@@ -5,7 +5,8 @@ const DOM_listener = (
 		attributes: true,
 		subtree: true //Omit or set to false to observe only changes to the parent node.
 	},
-	childListCallback
+	childListCallback = undefined,
+	attributesCallback = undefined
 ) => {
 	const targetNode = document.querySelector(element);
 
@@ -18,21 +19,28 @@ const DOM_listener = (
 				case 'childList':
 					childListCallback(mutation);
 					break;
+
+				case 'attributes':
+					attributesCallback(mutation);
+					break;
 			}
 		});
 	}
 };
 
-DOM_listener(
-	'body',
-	{
-		childList: true,
-		attributes: true,
-		subtree: true //Omit or set to false to observe only changes to the parent node.
-	},
-	(mutation) => {
-		if (mutation.target.classList[0] === 'body' && mutation.addedNodes[0].classList[0] === 'ovl') {
-			console.log(mutation);
-		}
-	}
-);
+export default DOM_listener;
+
+// EXAMPLE WAY TO USE
+// DOM_listener(
+// 	'body',
+// 	{
+// 		childList: true,
+// 		attributes: true,
+// 		subtree: true //Omit or set to false to observe only changes to the parent node.
+// 	},
+// 	(mutation) => {
+// 		if (mutation.target.classList[0] === 'body' && mutation.addedNodes[0].classList[0] === 'ovl') {
+// 			console.log(mutation);
+// 		}
+// 	}
+// );
