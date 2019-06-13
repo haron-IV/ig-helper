@@ -1,4 +1,6 @@
 import global_data from '../global_data';
+import check_message_window from './check_message_window';
+import open_message_window from './open_message_window';
 
 const get_people_to_delete = () => {
 	const user_name = localStorage.getItem('user_name');
@@ -20,7 +22,7 @@ const get_people_to_delete = () => {
 	});
 };
 
-const delete_all_old_messages = () => {
+const deleting_all_messages = () => {
 	global_data.deleting_message_bot_interval = setInterval(() => {
 		if (get_people_to_delete()[0] && document.querySelector('.js-im-contact-remove')) {
 			get_people_to_delete()[0].click(); // open message for delete
@@ -40,6 +42,15 @@ const delete_all_old_messages = () => {
 			clearInterval(global_data.deleting_message_bot_interval);
 		}
 	}, 1200);
+};
+
+const delete_all_old_messages = () => {
+	if (check_message_window() === true) {
+		deleting_all_messages();
+	} else {
+		open_message_window();
+		deleting_all_messages();
+	}
 };
 
 export default delete_all_old_messages;

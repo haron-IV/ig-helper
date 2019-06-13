@@ -1,3 +1,4 @@
+import open_message_window from './open_message_window';
 import get_message_from_popup from '../helpers/get_message_from_popup';
 import check_message_window from './check_message_window';
 import get_people_to_message from './get_people_to_message';
@@ -8,10 +9,6 @@ import save_user_name from './save_user_name';
 import global_data from '../global_data';
 
 let people_to_message; // node list with single message
-
-const open_message_window = () => {
-	document.querySelector('.sidebar-menu__item[href="/messenger/open"]').click();
-};
 
 const message_bot = () => {
 	get_message_from_popup('start_messaging', () => {
