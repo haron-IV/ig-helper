@@ -1,3 +1,4 @@
+// TODO: Debaunce this observer
 const DOM_listener = (
 	element,
 	options = {

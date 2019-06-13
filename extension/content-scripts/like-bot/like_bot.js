@@ -2,6 +2,7 @@ import global_data from '../global_data';
 import get_message_from_popup from '../helpers/get_message_from_popup';
 import DOM_listener from '../helpers/DOM_listener';
 import like from './like';
+import close_new_match from './close_new_match';
 
 let data = null;
 const like_bot_data = {
@@ -35,10 +36,22 @@ get_message_from_popup('start_liking', () => {
 	like_bot_data.interval = setInterval(() => {
 		like(document.querySelector('.profile-action--yes'), data);
 
+		close_new_match();
+
 		DOM_listener('body', undefined, (mutation) => {
-			if (mutation.target.classList[0] === 'body' && mutation.addedNodes[0].classList[0] === 'ovl') {
-				console.log(mutation);
-				console.log('chuja!');
+			// should be in other funciton and file, and not working correctly
+			if (
+				//TODO: check this if states, i think here shouldn't be soo much states
+				mutation.target.classList &&
+				mutation.target.classList[0] === 'body' &&
+				mutation.addedNodes[0] &&
+				mutation.addedNodes[0].classList &&
+				mutation.addedNodes[0].classList[0] === 'ovl' &&
+				mutation.addedNodes[0].innerText.substr(0, 20) === "You're out of votes!"
+			) {
+				console.log('mt: ', mutation);
+				// TODO: Here should be function for changing state of like bot in popup
+				clearInterval(like_bot_data.interval);
 			}
 		});
 	}, timeout);

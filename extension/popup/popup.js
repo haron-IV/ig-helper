@@ -44,6 +44,12 @@ const vm = new Vue({
 	},
 
 	methods: {
+		sendMessageToContentScript(message_name, message_value = null) {
+			chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+				chrome.tabs.sendMessage(tabs[0].id, { greeting: message_name, value: message_value });
+			});
+		},
+
 		toggle_liking() {
 			if (this.like_bot.isStart === false) {
 				this.sendMessageToContentScript('start_liking');
@@ -76,12 +82,6 @@ const vm = new Vue({
 				this.sendMessageToContentScript('stop_delete_all_old_messages');
 				this.message_bot.dletingIsStart = false;
 			}
-		},
-
-		sendMessageToContentScript(message_name, message_value = null) {
-			chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-				chrome.tabs.sendMessage(tabs[0].id, { greeting: message_name, value: message_value });
-			});
 		},
 
 		set_like_speed(speed) {
@@ -163,6 +163,6 @@ const vm = new Vue({
 	},
 
 	mounted() {
-		this.sendMessageToContentScript('update_statistics', {}); // should send obiect with stas
+		// this.sendMessageToContentScript('update_statistics', {}); // should send obiect with stas
 	}
 });
