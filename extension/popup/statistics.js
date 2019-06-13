@@ -1,15 +1,14 @@
-const vm_statistics = new Vue ({
-    el: '#statistics',
-    data: {
-        testtxt: 'elo'
-    },
+const vm_statistics = new Vue({
+	el: '#statistics',
+	data: {
+		test: ''
+	},
 
-    methods: {
-       test(){
-           alert(1)
-       }
-    },
+	methods: {},
 
-    mounted(){
-    }
+	created() {
+		alert(JSON.parse(localStorage.getItem('bot_stats')));
+	},
+
+	mounted() {}
 });

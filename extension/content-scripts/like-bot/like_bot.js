@@ -49,7 +49,6 @@ get_message_from_popup('start_liking', () => {
 				mutation.addedNodes[0].classList[0] === 'ovl' &&
 				mutation.addedNodes[0].innerText.substr(0, 20) === "You're out of votes!"
 			) {
-				console.log('mt: ', mutation);
 				// TODO: Here should be function for changing state of like bot in popup
 				clearInterval(like_bot_data.interval);
 			}
