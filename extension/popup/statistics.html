@@ -19,12 +19,12 @@
         <main class="main main--statistics" id="statistics">
             <article class="statistics-box">
                 <header class="statistics-box__header" @click="test">
-                    {{test}}
+                    Bot Stats:
                 </header>
 
                 <div class="statistics-box__content">
-                    <ul>
-                        <li class="main "></li>
+                    <ul class="list">
+                        <li class="list__item" v-for="(item_name, stats_item) in stats.bot_stats" :key="stats_item.index">{{removeUnderscore(item_name)}}: {{stats_item}}</li>
                     </ul>
                 </div>
             </article>

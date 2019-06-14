@@ -1,13 +1,21 @@
 const vm_statistics = new Vue({
 	el: '#statistics',
 	data: {
-		test: ''
+		stats: null
 	},
 
-	methods: {},
+	methods: {
+		removeUnderscore(item_name) {
+			return item_name.replace(/_/g, ' ');
+		}
+	},
 
 	created() {
-		alert(JSON.parse(localStorage.getItem('bot_stats')));
+		const vm = this;
+		chrome.storage.sync.get([ 'bot_stats' ], (stats) => {
+			// stats = {bot_stats: {here are all stats}}
+			vm.stats = stats;
+		});
 	},
 
 	mounted() {}

@@ -11,9 +11,9 @@ const close_new_match = () => {
 			mutation.addedNodes[0].innerText &&
 			mutation.addedNodes[0].innerText.substr(0, 23) === 'Oh, yeah! It’s a match!'
 		) {
-			console.log(mutation);
+			// console.log(mutation);
 			document.querySelector('.ovl__close').children[0].click();
-			console.log('Closed new match');
+			// console.log('Closed new match');
 		}
 	});
 };
