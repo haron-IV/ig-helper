@@ -2,6 +2,14 @@
   100% {
     transform: translateY(3px); } }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s; }
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0; }
+
 .bottom-line {
   padding-bottom: 2rem;
   margin-bottom: 2rem;

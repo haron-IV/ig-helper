@@ -16,12 +16,15 @@
 
             <main class="main main--popup">
                 <article class="set-name">
-                    <template v-if="show_name_setter">
+
+                    <template v-if="show_name_setter" class="test">
                         <h4>Set your name*.</h4>
                         <p class="small-info">* Name should be same as your profile name for proper bot operation</p>
                         <input type="text" class="input-text" v-model="user_name">
                         <button class="button" @click="show_name_setter_status(false)">save</button>
                     </template>
+
+                    
 
                     <template v-else>
                         <button class="button button--show-name-setter" @click="show_name_setter_status(true)">
