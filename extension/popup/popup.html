@@ -15,6 +15,22 @@
             <Main_header></Main_header>
 
             <main class="main main--popup">
+                <article class="set-name">
+                    <template v-if="show_name_setter">
+                        <h4>Set your name*.</h4>
+                        <p class="small-info">* Name should be same as your profile name for proper bot operation</p>
+                        <input type="text" class="input-text" v-model="user_name">
+                        <button class="button" @click="show_name_setter_status(false)">save</button>
+                    </template>
+
+                    <template v-else>
+                        <button class="button button--show-name-setter" @click="show_name_setter_status(true)">
+                            change Name
+                            <img src="../icons/down-arrow.png" class="img">
+                        </button>
+                    </template>
+                    
+                </article>
     
                 <article class="like-bot">
                     <header class="header"><h3>Like bot</h3></header>

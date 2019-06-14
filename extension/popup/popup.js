@@ -28,6 +28,11 @@ const vm = new Vue({
 	el: '#app',
 	data: {
 		first_settings: false,
+		show_name_setter:
+			localStorage.getItem('show_name_setter') !== null
+				? JSON.parse(localStorage.getItem('show_name_setter'))
+				: true,
+		user_name: '',
 		like_bot: {
 			isStart: false,
 			speed:
@@ -44,6 +49,22 @@ const vm = new Vue({
 	},
 
 	methods: {
+		save_user_name() {
+			const vm = this;
+			chrome.storage.sync.set({ user_name: vm.user_name });
+		},
+
+		show_name_setter_status(status) {
+			if (status) {
+				this.show_name_setter = true;
+				localStorage.setItem('show_name_setter', true);
+			} else {
+				this.save_user_name();
+				this.show_name_setter = false;
+				localStorage.setItem('show_name_setter', false);
+			}
+		},
+
 		sendMessageToContentScript(message_name, message_value = null) {
 			chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
 				chrome.tabs.sendMessage(tabs[0].id, { greeting: message_name, value: message_value });
@@ -160,9 +181,16 @@ const vm = new Vue({
 		};
 
 		set_interface();
+
+		// if (!localStorage.getItem('show_name_setter')) {
+		// 	localStorage.setItem('show_name_setter', true);
+		// }
+
+		// this.show_name_setter = JSON.parse(localStorage.getItem('show_name_setter'));
 	},
 
 	mounted() {
 		// this.sendMessageToContentScript('update_statistics', {}); // should send obiect with stas
-	}
+	},
+	destroyed() {}
 });

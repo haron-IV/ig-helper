@@ -51,11 +51,13 @@ body {
 .input-text {
 	font-size: 1.35rem;
 	font-weight: 300;
-	height: 25px;
-	color: #ff681b;
-	border-radius: 3px;
+	height: 27px;
+	color: $dark_gray;
+	padding: 0 10px;
+	border-radius: 2px;
+	border: 1px solid $dark_gray;
 	outline: none;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, .6);
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
 }
 
 .textarea {

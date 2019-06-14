@@ -34,6 +34,40 @@
 			text-decoration: underline;
 		}
 
+		.set-name {
+			display: flex;
+			flex-direction: column;
+
+			.small-info {
+				font-size: 10px;
+			}
+
+			.button {
+				&--show-name-setter {
+					background: transparent;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					padding: 0;
+					border: 0;
+					box-shadow: none;
+					color: $violet;
+					font-size: 12px;
+
+					&:hover .img {
+						animation-name: jumpingArrow;
+						animation-duration: 800ms;
+						animation-iteration-count: infinite;
+					}
+
+					.img {
+						max-width: 25px;
+					}
+				}
+			}
+		}
+
 		.box {
 			display: flex;
 			justify-content: center;

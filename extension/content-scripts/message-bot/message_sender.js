@@ -4,11 +4,12 @@ import open_message from './open_message';
 import past_message_txt from './past_message_txt';
 import send_message from './send_message';
 import get_conected_username from './get_conected_username';
+import update_send_messages from '../statistics/update_send_messages';
+import get_data_from_chrome from '../helpers/get_data_from_chrome';
 
 const message_sender = (message_list) => {
 	let i = 0;
 	let chatter_name = null;
-	// const user_name = localStorage.getItem('user_name');
 
 	global_data.message_bot_interval = setInterval(() => {
 		setTimeout(() => {
@@ -19,6 +20,12 @@ const message_sender = (message_list) => {
 			// check if message was send.
 			// if (document.querySelector('.message__content').children[0].innertText !== `Hey ${user_name} ! How's your day?` || document.querySelector('.message__content').children[0].innertText !== `Hey ${user_name} ! What are you up to?`) {
 			i++;
+			chrome.storage.sync.get([ 'user_name' ], (name) => {
+				if (document.querySelector('.message__content').innerText !== `Hey ${name} ! How's it going?`) {
+					// other examples of messages
+					update_send_messages();
+				}
+			});
 		}
 
 		setTimeout(() => {
