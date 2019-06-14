@@ -147,6 +147,8 @@ const vm = new Vue({
 	},
 
 	created() {
+		const vm = this;
+
 		const check_localStorage = () => {
 			const data = [ '', '', '' ];
 
@@ -182,11 +184,13 @@ const vm = new Vue({
 
 		set_interface();
 
-		// if (!localStorage.getItem('show_name_setter')) {
-		// 	localStorage.setItem('show_name_setter', true);
-		// }
+		if (!localStorage.getItem('show_name_setter')) {
+			localStorage.setItem('show_name_setter', true);
+		}
 
-		// this.show_name_setter = JSON.parse(localStorage.getItem('show_name_setter'));
+		chrome.storage.sync.get([ 'user_name' ], (user) => {
+			vm.user_name = user.user_name;
+		});
 	},
 
 	mounted() {
