@@ -1,6 +1,6 @@
 const init_statistics = () => {
 	chrome.storage.sync.get([ 'bot_stats' ], (stats) => {
-		if (stats === {}) {
+		if (typeof stats === 'object' && stats.likes === undefined) {
 			chrome.storage.sync.set({
 				bot_stats: {
 					likes: 0,
