@@ -5,7 +5,6 @@ import past_message_txt from './past_message_txt';
 import send_message from './send_message';
 import get_conected_username from './get_conected_username';
 import update_send_messages from '../statistics/update_send_messages';
-import get_data_from_chrome from '../helpers/get_data_from_chrome';
 
 const message_sender = (message_list) => {
 	let i = 0;

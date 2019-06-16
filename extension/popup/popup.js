@@ -10,7 +10,7 @@ Vue.component('Main_header', {
                 </li>
                 
                 <li class="item">
-                    <a class="link" href="./statistics.html">Statistics 2</a>
+                    <a class="link" href="./statistics.html">Statistics</a>
                 </li>
             </ul>
         </nav>

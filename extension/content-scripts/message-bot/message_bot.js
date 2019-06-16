@@ -7,6 +7,7 @@ import stop_message_bot from './stop_message_bot';
 import delete_all_old_messages from './delete_all_old_messages';
 import save_user_name from './save_user_name';
 import global_data from '../global_data';
+import usables from '../message-bot/usables/usables';
 
 let people_to_message; // node list with single message
 
@@ -40,6 +41,8 @@ const message_bot = () => {
 	get_message_from_popup('stop_delete_all_old_messages', () => {
 		clearInterval(global_data.deleting_message_bot_interval);
 	});
+
+	usables();
 };
 
 export default message_bot;
