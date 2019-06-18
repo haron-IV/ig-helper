@@ -23,6 +23,7 @@ const message_sender = (message_list) => {
 				if (document.querySelector('.message__content').innerText !== `Hey ${name} ! How's it going?`) {
 					// other examples of messages
 					update_send_messages();
+					console.log('updated msg');
 				}
 			});
 		}

@@ -109,6 +109,11 @@ const vm = new Vue({
 			this.like_bot.speed = speed;
 			localStorage.setItem('bot_like_speed', speed);
 			this.sendMessageToContentScript('set_like_speed', speed);
+
+			if (this.like_bot.isStart) {
+				this.sendMessageToContentScript('stop_liking');
+				this.sendMessageToContentScript('start_liking');
+			}
 		},
 
 		save_message(which_message) {

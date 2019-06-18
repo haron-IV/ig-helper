@@ -10,7 +10,7 @@ const vm_statistics = new Vue({
 		},
 
 		numberWithComma(number) {
-			return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+			return number.toLocaleString();
 		}
 	},
 
