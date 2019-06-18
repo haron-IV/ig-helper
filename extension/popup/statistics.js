@@ -7,6 +7,10 @@ const vm_statistics = new Vue({
 	methods: {
 		removeUnderscore(item_name) {
 			return item_name.replace(/_/g, ' ');
+		},
+
+		numberWithComma(number) {
+			return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 		}
 	},
 

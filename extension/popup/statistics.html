@@ -24,7 +24,7 @@
 
                 <div class="statistics-box__content">
                     <ul class="list">
-                        <li class="list__item" v-for="(item_name, stats_item) in stats.bot_stats" :key="stats_item.index">{{removeUnderscore(item_name)}}: {{stats_item}}</li>
+                        <li class="list__item" v-for="(item_name, stats_item) in stats.bot_stats" :key="stats_item.index">{{removeUnderscore(item_name)}}: {{numberWithComma(stats_item)}}</li>
                     </ul>
                 </div>
             </article>
