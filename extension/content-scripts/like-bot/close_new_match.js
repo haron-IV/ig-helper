@@ -1,4 +1,5 @@
 import DOM_listener from '../helpers/DOM_listener';
+import update_matches from '../statistics/update_matched';
 
 const close_new_match = () => {
 	DOM_listener('body', undefined, (mutation) => {
@@ -11,9 +12,8 @@ const close_new_match = () => {
 			mutation.addedNodes[0].innerText &&
 			mutation.addedNodes[0].innerText.substr(0, 23) === 'Oh, yeah! It’s a match!'
 		) {
-			// console.log(mutation);
 			document.querySelector('.ovl__close').children[0].click();
-			// console.log('Closed new match');
+			update_matches();
 		}
 	});
 };
