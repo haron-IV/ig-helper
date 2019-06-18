@@ -1,4 +1,4 @@
-import send_message_on_arrow from './send_message_on_arrow';
+import send_message_on_arrow from './send_message_on_shift_and_enter';
 
 const usables = () => {
 	window.addEventListener('keypress', (e) => {
