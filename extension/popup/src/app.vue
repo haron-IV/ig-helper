@@ -1,7 +1,7 @@
 <template>
   <div id="app" v-cloak>
     <template v-if="first_settings">
-      <!-- <Main_header></Main_header> -->
+      <Main-header></Main-header>
 
       <main class="main main--popup">
         <article class="set-name">
@@ -124,10 +124,13 @@
 </template>
 
 <script>
+import mainHeader from "./components/Main-header.vue";
+
 export default {
+  components: { "Main-header": mainHeader },
   data() {
     return {
-      first_settings: false,
+      first_settings: true,
       show_name_setter:
         localStorage.getItem("show_name_setter") !== null
           ? JSON.parse(localStorage.getItem("show_name_setter"))
