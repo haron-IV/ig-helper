@@ -1,0 +1,51 @@
+.main {
+	&--popup {
+		.header {
+			@include big-space-vertical;
+			text-decoration: underline;
+		}
+
+		.box {
+			display: flex;
+			justify-content: center;
+
+			&--info-about-messages {
+				font-size: .8rem;
+				.list {
+					padding: .5rem 0;
+					list-style-type: none;
+					&__item {
+						margin: .5rem 0;
+					}
+				}
+			}
+		}
+
+		.like-bot {
+			&__speed {
+				display: flex;
+				justify-content: space-between;
+
+				span {
+					cursor: pointer;
+				}
+			}
+
+			&__progress-bar {
+				width: 100%;
+			}
+		}
+
+		.message-bot {
+			.saved-message {
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+				@include small-space-bottom;
+
+				&__item {
+				}
+			}
+		}
+	}
+}

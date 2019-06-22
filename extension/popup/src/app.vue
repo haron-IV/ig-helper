@@ -4,46 +4,9 @@
       <Main-header></Main-header>
 
       <main class="main main--popup">
-        <article class="set-name">
-          <template v-if="show_name_setter" class="test">
-            <h4>Set your name*.</h4>
-            <p
-              class="small-info"
-            >* Name should be same as your profile name for proper bot operation</p>
-            <input type="text" class="input-text" v-model="user_name">
-            <button class="button" @click="show_name_setter_status(false)">save</button>
-          </template>
+        <Set-your-name></Set-your-name>
 
-          <template v-else>
-            <button class="button button--show-name-setter" @click="show_name_setter_status(true)">
-              change Name
-              <!-- <img src="../icons/down-arrow.png" class="img"> -->
-            </button>
-          </template>
-        </article>
-
-        <article class="like-bot">
-          <header class="header">
-            <h3>Like bot</h3>
-          </header>
-
-          <div>
-            <div class="like-bot__speed">
-              <span @click="set_like_speed(25)">Slow</span>
-              <span @click="set_like_speed(50)">Medium</span>
-              <span @click="set_like_speed(100)">Fast</span>
-            </div>
-            <progress class="like-bot__progress-bar" :value="like_bot.speed" max="100"></progress>
-          </div>
-
-          <div class="box bottom-line">
-            <button
-              class="button"
-              :class="{ button_active: like_bot.isStart }"
-              @click="toggle_liking"
-            >{{like_bot.isStart === true ? 'Stop' : 'Start'}}</button>
-          </div>
-        </article>
+        <Like-bot></Like-bot>
 
         <article class="message-bot">
           <header class="header">
@@ -125,9 +88,15 @@
 
 <script>
 import mainHeader from "./components/Main-header.vue";
+import setYourName from "./components/Set-your-name.vue";
+import likeBot from "./components/Like-bot.vue";
 
 export default {
-  components: { "Main-header": mainHeader },
+  components: {
+    "Main-header": mainHeader,
+    "Set-your-name": setYourName,
+    "Like-bot": likeBot
+  },
   data() {
     return {
       first_settings: true,
@@ -136,13 +105,7 @@ export default {
           ? JSON.parse(localStorage.getItem("show_name_setter"))
           : true,
       user_name: "",
-      like_bot: {
-        isStart: false,
-        speed:
-          localStorage.getItem("bot_like_speed") !== null
-            ? parseInt(localStorage.getItem("bot_like_speed"))
-            : 500
-      },
+
       message_bot: {
         isStart: false,
         message: localStorage.getItem("last_message"),
@@ -156,41 +119,6 @@ export default {
     };
   },
   methods: {
-    save_user_name() {
-      const vm = this;
-      chrome.storage.sync.set({ user_name: vm.user_name });
-    },
-
-    show_name_setter_status(status) {
-      if (status) {
-        this.show_name_setter = true;
-        localStorage.setItem("show_name_setter", true);
-      } else {
-        this.save_user_name();
-        this.show_name_setter = false;
-        localStorage.setItem("show_name_setter", false);
-      }
-    },
-
-    sendMessageToContentScript(message_name, message_value = null) {
-      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {
-          greeting: message_name,
-          value: message_value
-        });
-      });
-    },
-
-    toggle_liking() {
-      if (this.like_bot.isStart === false) {
-        this.sendMessageToContentScript("start_liking");
-        this.like_bot.isStart = true;
-      } else {
-        this.sendMessageToContentScript("stop_liking");
-        this.like_bot.isStart = false;
-      }
-    },
-
     toggle_messaging() {
       if (this.message_bot.isStart === false) {
         this.sendMessageToContentScript("start_messaging");
@@ -212,17 +140,6 @@ export default {
       } else {
         this.sendMessageToContentScript("stop_delete_all_old_messages");
         this.message_bot.dletingIsStart = false;
-      }
-    },
-
-    set_like_speed(speed) {
-      this.like_bot.speed = speed;
-      localStorage.setItem("bot_like_speed", speed);
-      this.sendMessageToContentScript("set_like_speed", speed);
-
-      if (this.like_bot.isStart) {
-        this.sendMessageToContentScript("stop_liking");
-        this.sendMessageToContentScript("start_liking");
       }
     },
 

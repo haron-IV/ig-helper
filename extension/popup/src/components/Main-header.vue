@@ -31,8 +31,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../scss/mixins.scss";
-@import "../../scss/variables.scss";
+@import "../assets/scss/mixins.scss";
+@import "../assets/scss/variables.scss";
 
 .main-header {
   @include medium-space-bottom;
