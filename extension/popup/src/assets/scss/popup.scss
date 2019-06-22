@@ -5,22 +5,6 @@
 			text-decoration: underline;
 		}
 
-		.box {
-			display: flex;
-			justify-content: center;
-
-			&--info-about-messages {
-				font-size: .8rem;
-				.list {
-					padding: .5rem 0;
-					list-style-type: none;
-					&__item {
-						margin: .5rem 0;
-					}
-				}
-			}
-		}
-
 		.message-bot {
 			.saved-message {
 				display: flex;
