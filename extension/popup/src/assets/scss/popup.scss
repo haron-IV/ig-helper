@@ -21,21 +21,6 @@
 			}
 		}
 
-		.like-bot {
-			&__speed {
-				display: flex;
-				justify-content: space-between;
-
-				span {
-					cursor: pointer;
-				}
-			}
-
-			&__progress-bar {
-				width: 100%;
-			}
-		}
-
 		.message-bot {
 			.saved-message {
 				display: flex;

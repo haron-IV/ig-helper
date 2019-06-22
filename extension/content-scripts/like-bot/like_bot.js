@@ -6,7 +6,8 @@ import close_new_match from './close_new_match';
 
 let data = null;
 const like_bot_data = {
-	interval: null
+	interval: null,
+	speed: null
 };
 
 const interval = setInterval(() => {
@@ -18,20 +19,6 @@ const interval = setInterval(() => {
 
 get_message_from_popup('start_liking', () => {
 	let timeout = parseInt(localStorage.getItem('bot_like_speed'));
-
-	switch (timeout) {
-		case 25:
-			timeout = 1000;
-			break;
-
-		case 50:
-			timeout = 500;
-			break;
-
-		case 100:
-			timeout = 200;
-			break;
-	}
 
 	like_bot_data.interval = setInterval(() => {
 		like(document.querySelector('.profile-action--yes'), data);
@@ -61,5 +48,6 @@ get_message_from_popup('stop_liking', () => {
 });
 
 get_message_from_popup('set_like_speed', (request) => {
-	localStorage.setItem('bot_like_speed', request.value);
+	like_bot_data.speed = Math.floor(5 / request.value * 3500); // here is a logic for set correct speed in ms from % of popup progress bar
+	localStorage.setItem('bot_like_speed', like_bot_data.speed);
 });
