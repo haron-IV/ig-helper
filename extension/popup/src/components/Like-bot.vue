@@ -17,20 +17,27 @@
       </div>
     </div>
 
-    <div class="box bottom-line">
+    <div class="box">
       <button
         class="button"
         :class="{ button_active: like_bot.isStart }"
         @click="toggle_liking"
       >{{like_bot.isStart === true ? 'Stop' : 'Start'}}</button>
     </div>
+
+    <Show-more>
+      <h1>CONTENT ...</h1>
+    </Show-more>
   </article>
 </template>
 
 <script>
 import { eventBus } from "../main.js";
+import showMore from "./Show-more.vue";
 
 export default {
+  components: { "Show-more": showMore },
+
   data() {
     return {
       like_bot: {

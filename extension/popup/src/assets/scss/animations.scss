@@ -1,6 +1,7 @@
 @keyframes jumpingArrow {
 	100% {
-		transform: translateY(3px);
+		// transform: translateY(3px);
+		opacity: 0;
 	}
 }
 .fade-enter-active,

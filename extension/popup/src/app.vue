@@ -5,7 +5,9 @@
 
       <main class="main main--popup">
         <Set-your-name></Set-your-name>
+
         <Like-bot></Like-bot>
+
         <Message-bot></Message-bot>
       </main>
     </template>
@@ -71,7 +73,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "../src/assets/scss/variables.scss";
 @import "../src/assets/scss/base.scss";
 @import "../src/assets/scss/helpers.scss";
 </style>

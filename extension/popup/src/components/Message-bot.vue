@@ -165,33 +165,14 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/variables.scss";
-@import "../assets/scss/helpers.scss";
+@import "../assets/scss/mixins.scss";
 
-.like-bot {
-  &__speed {
+.message-bot {
+  .saved-message {
     display: flex;
     justify-content: space-between;
-
-    span {
-      cursor: pointer;
-    }
-  }
-
-  &__progress-bar {
-    margin: 5px 0;
     width: 100%;
-    height: 5px;
-    border: 1px solid rgba($blue, 0.1);
-    border-radius: 15px;
-
-    .value {
-      width: 50%;
-      height: 5px;
-      border-radius: 15px;
-      background-color: $blue;
-      transition: width ease-in 200ms;
-    }
+    @include small-space-bottom;
   }
 }
 </style>

@@ -9,7 +9,7 @@
     </template>
 
     <template v-else>
-      <button class="button button--show-name-setter" @click="showNameSetter">
+      <button class="button button--transparent" @click="showNameSetter">
         change Name
         <img :src="downArrow" class="img">
       </button>
@@ -70,29 +70,29 @@ export default {
     font-size: 10px;
   }
 
-  .button {
-    &--show-name-setter {
-      background: transparent;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 0;
-      border: 0;
-      box-shadow: none;
-      color: $violet;
-      font-size: 12px;
+  // .button {
+  //   &--show-name-setter {
+  //     background: transparent;
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: center;
+  //     align-items: center;
+  //     padding: 0;
+  //     border: 0;
+  //     box-shadow: none;
+  //     color: $violet;
+  //     font-size: 12px;
 
-      &:hover .img {
-        animation-name: jumpingArrow;
-        animation-duration: 800ms;
-        animation-iteration-count: infinite;
-      }
+  //     &:hover .img {
+  //       animation-name: jumpingArrow;
+  //       animation-duration: 800ms;
+  //       animation-iteration-count: infinite;
+  //     }
 
-      .img {
-        max-width: 25px;
-      }
-    }
-  }
+  //     .img {
+  //       max-width: 25px;
+  //     }
+  //   }
+  // }
 }
 </style>

@@ -42,7 +42,7 @@ body {
 	background: #7100e3;
 	color: #ff681b;
 	border-radius: 3px;
-	padding: .5rem 2rem;
+	padding: .3rem 2rem;
 	outline: none;
 	cursor: pointer;
 
@@ -53,6 +53,33 @@ body {
 	&:hover {
 		background-color: lighten(#7100e3, 10%);
 		transform: translateY(-2px);
+	}
+
+	&--transparent {
+		background: transparent;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 0;
+		border: 0;
+		box-shadow: none;
+		color: $violet;
+		font-size: 12px;
+
+		&:hover {
+			background-color: transparent;
+		}
+
+		&:hover .img {
+			animation-name: jumpingArrow;
+			animation-duration: 1200ms;
+			animation-iteration-count: infinite;
+		}
+
+		.img {
+			max-width: 25px;
+		}
 	}
 }
 
