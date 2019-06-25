@@ -89,9 +89,21 @@ export default {
       if (this.like_bot.isStart === false) {
         eventBus.sendMessageToContentScript("start_liking");
         this.like_bot.isStart = true;
+
+        chrome.storage.sync.get(["like_bot"], data => {
+          data.like_bot.isStart = true;
+
+          chrome.storage.sync.set(data);
+        });
       } else {
         eventBus.sendMessageToContentScript("stop_liking");
         this.like_bot.isStart = false;
+
+        chrome.storage.sync.get(["like_bot"], data => {
+          data.like_bot.isStart = false;
+
+          chrome.storage.sync.set(data);
+        });
       }
     },
 
@@ -131,14 +143,16 @@ export default {
     const vm = this;
 
     chrome.storage.sync.get(["like_bot"], data => {
-      if (data.like_bot.searchBy === undefined) {
+      if (data.like_bot === undefined) {
         chrome.storage.sync.set({
           like_bot: {
+            isStart: false,
             searchBy: false,
             keywords: ""
           }
         });
       } else {
+        vm.like_bot.isStart = data.like_bot.isStart;
         vm.like_bot.searchBy = data.like_bot.searchBy;
         vm.like_bot.keywords = data.like_bot.keywords;
       }
