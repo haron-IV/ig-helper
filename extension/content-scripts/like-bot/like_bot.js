@@ -3,6 +3,7 @@ import get_message_from_popup from '../helpers/get_message_from_popup';
 import DOM_listener from '../helpers/DOM_listener';
 import like from './like';
 import close_new_match from './close_new_match';
+import like_by_keywords from './like_by_keywords';
 
 let data = null;
 const like_bot_data = {
@@ -21,23 +22,33 @@ get_message_from_popup('start_liking', () => {
 	let timeout = parseInt(localStorage.getItem('bot_like_speed'));
 
 	like_bot_data.interval = setInterval(() => {
-		like(document.querySelector('.profile-action--yes'), data);
+		chrome.storage.sync.get([ 'like_bot' ], (data) => {
+			if (data.like_bot.searchBy === true) {
+				document.querySelector('.profile-action--no').click();
 
-		close_new_match();
+				if (like_by_keywords() === true) {
+					like(document.querySelector('.profile-action--yes'), data);
+				}
+			} else {
+				like(document.querySelector('.profile-action--yes'), data);
 
-		DOM_listener('body', undefined, (mutation) => {
-			// should be in other funciton and file, and not working correctly
-			if (
-				//TODO: check this if states, i think here shouldn't be soo much states
-				mutation.target.classList &&
-				mutation.target.classList[0] === 'body' &&
-				mutation.addedNodes[0] &&
-				mutation.addedNodes[0].classList &&
-				mutation.addedNodes[0].classList[0] === 'ovl' &&
-				mutation.addedNodes[0].innerText.substr(0, 20) === "You're out of votes!"
-			) {
-				// TODO: Here should be function for changing state of like bot in popup
-				clearInterval(like_bot_data.interval);
+				close_new_match();
+
+				DOM_listener('body', undefined, (mutation) => {
+					// should be in other funciton and file, and not working correctly
+					if (
+						//TODO: check this if states, i think here shouldn't be soo much states
+						mutation.target.classList &&
+						mutation.target.classList[0] === 'body' &&
+						mutation.addedNodes[0] &&
+						mutation.addedNodes[0].classList &&
+						mutation.addedNodes[0].classList[0] === 'ovl' &&
+						mutation.addedNodes[0].innerText.substr(0, 20) === "You're out of votes!"
+					) {
+						// TODO: Here should be function for changing state of like bot in popup
+						clearInterval(like_bot_data.interval);
+					}
+				});
 			}
 		});
 	}, timeout);
