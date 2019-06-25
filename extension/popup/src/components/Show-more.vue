@@ -40,11 +40,11 @@ export default {
 @import "../assets/scss/helpers.scss";
 
 .show-more {
-  margin: 20px 0;
+  margin: 20px 0 0;
 }
 
 .button {
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
 .reverse {

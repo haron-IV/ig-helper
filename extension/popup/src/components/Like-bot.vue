@@ -1,5 +1,5 @@
 <template>
-  <article class="like-bot">
+  <article class="like-bot bottom-line">
     <header class="header">
       <h3>Like bot</h3>
     </header>
@@ -26,7 +26,23 @@
     </div>
 
     <Show-more>
-      <h1>CONTENT ...</h1>
+      <div>
+        <form>
+          <input type="checkbox" id="searchBy" v-model="like_bot.searchBy">
+          <label for="searchBy">Search by keywords</label>
+
+          <template v-if="like_bot.searchBy" class="option">
+            <textarea class="textarea textarea--keywords" v-model="like_bot.keywords"></textarea>
+
+            <ul class="list">
+              <li
+                class="list__item"
+              >Keywords should be separated by comma like: beauty, blonde, smile</li>
+              <li class="list__item">keywords are searching in users bio</li>
+            </ul>
+          </template>
+        </form>
+      </div>
     </Show-more>
   </article>
 </template>
@@ -45,14 +61,21 @@ export default {
         speed:
           localStorage.getItem("bot_like_speed") !== null
             ? parseInt(localStorage.getItem("bot_like_speed"))
-            : 500
+            : 100,
+        searchBy: false,
+        keywords: ""
       }
     };
   },
 
   methods: {
     set_like_speed(speed) {
-      this.like_bot.speed = speed;
+      if (speed < 100) {
+        this.like_bot.speed = speed;
+      } else {
+        this.like_bot.speed = 100;
+      }
+
       localStorage.setItem("bot_like_speed", speed);
       eventBus.sendMessageToContentScript("set_like_speed", speed);
 
@@ -74,13 +97,52 @@ export default {
 
     set_like_speed_from_progress(e) {
       const speed = Math.round(
-        (e.clientX / this.$refs.progress.offsetWidth) * 100 - 1,
+        (e.clientX / this.$refs.progress.offsetWidth) * 100 - 10,
         2
       );
 
       this.set_like_speed(speed);
       this.eventBus.sendMessageToContentScript("set_like_speed", speed);
     }
+  },
+
+  watch: {
+    "like_bot.searchBy": function() {
+      const vm = this;
+      chrome.storage.sync.get(["like_bot"], data => {
+        data.like_bot.searchBy = vm.like_bot.searchBy;
+
+        chrome.storage.sync.set(data);
+      });
+    },
+
+    "like_bot.keywords": function() {
+      const vm = this;
+
+      chrome.storage.sync.get(["like_bot"], data => {
+        data.like_bot.keywords = vm.like_bot.keywords;
+
+        chrome.storage.sync.set(data);
+      });
+    }
+  },
+
+  created() {
+    const vm = this;
+
+    chrome.storage.sync.get(["like_bot"], data => {
+      if (data.like_bot.searchBy === undefined) {
+        chrome.storage.sync.set({
+          like_bot: {
+            searchBy: false,
+            keywords: ""
+          }
+        });
+      } else {
+        vm.like_bot.searchBy = data.like_bot.searchBy;
+        vm.like_bot.keywords = data.like_bot.keywords;
+      }
+    });
   }
 };
 </script>
@@ -88,6 +150,7 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables.scss";
 @import "../assets/scss/helpers.scss";
+@import "../assets/scss/animations.scss";
 
 .like-bot {
   &__speed {
@@ -114,5 +177,28 @@ export default {
       transition: width ease-in 200ms;
     }
   }
+
+  .textarea {
+    &--keywords {
+      width: 100%;
+      height: 50px;
+      margin-top: 10px;
+    }
+  }
+
+  //   .option {
+  //     animation-name: fade;
+  //     animation-duration: 500ms;
+  //     animation-fill-mode: forwards;
+  //   }
+
+  //   @keyframes fade {
+  //     0% {
+  //       opacity: 0;
+  //     }
+  //     100% {
+  //       opacity: 1;
+  //     }
+  //   }
 }
 </style>
