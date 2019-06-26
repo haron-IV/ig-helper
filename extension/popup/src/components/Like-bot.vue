@@ -199,20 +199,5 @@ export default {
       margin-top: 10px;
     }
   }
-
-  //   .option {
-  //     animation-name: fade;
-  //     animation-duration: 500ms;
-  //     animation-fill-mode: forwards;
-  //   }
-
-  //   @keyframes fade {
-  //     0% {
-  //       opacity: 0;
-  //     }
-  //     100% {
-  //       opacity: 1;
-  //     }
-  //   }
 }
 </style>

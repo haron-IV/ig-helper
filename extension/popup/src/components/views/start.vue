@@ -34,6 +34,7 @@
 import setYourName from "../Set-your-name.vue";
 import likeBot from "../Like-bot.vue";
 import messageBot from "../Message-bot.vue";
+import { eventBus } from "../../main.js";
 
 export default {
   components: {
@@ -48,7 +49,7 @@ export default {
   },
   methods: {
     set_correct_settings() {
-      this.sendMessageToContentScript("set_correct_settings");
+      eventBus.sendMessageToContentScript("set_correct_settings");
     }
   },
 
@@ -62,9 +63,7 @@ export default {
     set_interface();
   },
 
-  mounted() {
-    // this.sendMessageToContentScript('update_statistics', {}); // should send obiect with stas
-  },
+  mounted() {},
   destroyed() {}
 };
 </script>

@@ -1,17 +1,17 @@
 <template>
   <article class="login">
-    <form class="form" @submit.prevent="btn">
+    <form class="form" @submit.prevent="stop">
       <div class="form__row">
         <label class="label">email</label>
-        <input type="text" class="input-text input--login">
+        <input type="text" class="input-text input--login" v-bind="email">
       </div>
 
       <div class="form__row">
         <label class="label">password</label>
-        <input type="password" class="input-text input--password">
+        <input type="password" class="input-text input--password" v-bind="password">
       </div>
 
-      <button class="button button--login" @click="isLoading = !isLoading;">
+      <button class="button button--login" @click="isLoading = !isLoading">
         <span v-if="isLoading === false">Login</span>
         <img v-else :src="loadingImg" class="img--loading">
       </button>
@@ -24,11 +24,13 @@ export default {
   data() {
     return {
       loadingImg: "../assets/img/loading.png",
-      isLoading: false
+      isLoading: false,
+      email: "",
+      password: ""
     };
   },
   methods: {
-    btn(e) {}
+    stop() {}
   },
 
   created() {}
