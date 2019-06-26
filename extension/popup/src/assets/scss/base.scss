@@ -83,6 +83,27 @@ body {
 	}
 }
 
+.img {
+	&--loading {
+		height: 15px;
+		filter: invert(100%);
+		animation-name: loadingImg;
+		animation-timing-function: linear;
+		animation-duration: 1200ms;
+		animation-iteration-count: infinite;
+	}
+
+	@keyframes loadingImg {
+		0% {
+			transform: rotateZ(0);
+		}
+
+		100% {
+			transform: rotateZ(360deg);
+		}
+	}
+}
+
 .button_active {
 	background-color: #ff681b;
 	border: 1px solid #7100e3;

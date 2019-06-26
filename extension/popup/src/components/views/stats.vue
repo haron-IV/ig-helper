@@ -11,6 +11,8 @@
             :key="stats_item.index"
           >{{removeUnderscore(item_name)}}: {{numberWithComma(stats_item)}}</li>
         </ul>
+
+        <!-- <button class="button" @click="refreshStats">refresh</button> -->
       </div>
     </article>
   </main>
@@ -22,15 +24,7 @@ export default {
     stats: null
   },
 
-  created() {
-    chrome.storage.sync.get(["bot_stats"], stats => {
-      localStorage.setItem("stats", JSON.stringify(stats));
-    });
-  },
-
-  beforeMount() {
-    this.stats = JSON.parse(localStorage.getItem("stats"));
-  },
+  computed: {},
 
   methods: {
     removeUnderscore(item_name) {
@@ -40,6 +34,16 @@ export default {
     numberWithComma(number) {
       return number.toLocaleString();
     }
+  },
+
+  created() {
+    chrome.storage.sync.get(["bot_stats"], stats => {
+      localStorage.setItem("stats", JSON.stringify(stats));
+    });
+  },
+
+  beforeMount() {
+    this.stats = JSON.parse(localStorage.getItem("stats"));
   }
 };
 </script>

@@ -2,9 +2,14 @@
   <section class="show-more">
     <slot v-if="showContent"></slot>
 
-    <button class="button button--transparent" @click="toggleContent">
+    <button class="button button--transparent" @click="showContent = !showContent">
       {{buttonInfo}}
-      <img :src="downArrow" class="img" ref="arrowImg">
+      <img
+        :src="downArrow"
+        class="img"
+        :class="{'reverse': showContent}"
+        ref="arrowImg"
+      >
     </button>
   </section>
 </template>
@@ -19,19 +24,7 @@ export default {
     };
   },
 
-  methods: {
-    toggleContent() {
-      this.showContent = !this.showContent;
-
-      if (this.showContent === true) {
-        this.buttonInfo = "Hide options";
-        this.$refs.arrowImg.classList.add("reverse");
-      } else {
-        this.buttonInfo = "Show More options";
-        this.$refs.arrowImg.classList.remove("reverse");
-      }
-    }
-  }
+  methods: {}
 };
 </script>
 

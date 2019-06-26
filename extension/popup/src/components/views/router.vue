@@ -9,13 +9,21 @@
 </template>
 
 <script>
+import mainHeader from "../Main-header.vue";
+
 import start from "../views/start.vue";
 import stats from "../views/stats.vue";
-import mainHeader from "../Main-header.vue";
+import login from "../views/login.vue";
+
 import { eventBus } from "../../main.js";
 
 export default {
-  components: { "Main-header": mainHeader, Start: start, Stats: stats },
+  components: {
+    "Main-header": mainHeader,
+    Start: start,
+    Stats: stats,
+    Login: login
+  },
   data() {
     return {
       activeView: "Start"
