@@ -2,7 +2,9 @@
   <div>
     <Main-header></Main-header>
 
-    <component v-bind:is="activeView"></component>
+    <transition name="fade">
+      <component v-bind:is="activeView"></component>
+    </transition>
   </div>
 </template>
 
@@ -31,4 +33,5 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../assets/scss/animations.scss";
 </style>

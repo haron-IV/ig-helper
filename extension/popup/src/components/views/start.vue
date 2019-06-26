@@ -1,8 +1,6 @@
 <template>
   <div>
     <template v-if="first_settings">
-      <!-- <Main-header></Main-header> -->
-
       <main class="main main--popup">
         <Set-your-name></Set-your-name>
 
@@ -33,14 +31,12 @@
 </template>
 
 <script>
-// import mainHeader from "../Main-header.vue";
 import setYourName from "../Set-your-name.vue";
 import likeBot from "../Like-bot.vue";
 import messageBot from "../Message-bot.vue";
 
 export default {
   components: {
-    // "Main-header": mainHeader,
     "Set-your-name": setYourName,
     "Like-bot": likeBot,
     "Message-bot": messageBot

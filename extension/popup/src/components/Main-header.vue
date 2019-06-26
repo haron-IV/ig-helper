@@ -9,10 +9,12 @@
     <nav class="navigation">
       <ul class="navigation__list">
         <li class="item">
-          <a @click="setView('Stats')">stats</a>
+          <a @click="setView('Start')" class="link">Start</a>
         </li>
 
-        <li class="item"></li>
+        <li class="item">
+          <a @click="setView('Stats')" class="link">stats</a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -66,6 +68,7 @@ export default {
           transform: rotateZ(-3deg) scale(1.1);
         }
         .link {
+          cursor: pointer;
         }
       }
     }

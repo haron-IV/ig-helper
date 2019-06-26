@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
 import store from './store/index';
-import router from './router/index';
 
 export const eventBus = new Vue({
 	methods: {
@@ -18,7 +17,6 @@ export const eventBus = new Vue({
 
 new Vue({
 	el: '#app',
-	router,
 	render: (h) => h(App),
 	store
 });
