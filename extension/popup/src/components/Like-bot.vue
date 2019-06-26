@@ -25,7 +25,7 @@
       >{{like_bot.isStart === true ? 'Stop' : 'Start'}}</button>
     </div>
 
-    <Show-more>
+    <Show-more buttonText="Show More Options">
       <div>
         <form>
           <input type="checkbox" id="searchBy" v-model="like_bot.searchBy">

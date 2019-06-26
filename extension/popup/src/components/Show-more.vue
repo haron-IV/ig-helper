@@ -3,24 +3,24 @@
     <slot v-if="showContent"></slot>
 
     <button class="button button--transparent" @click="showContent = !showContent">
-      {{buttonInfo}}
-      <img
-        :src="downArrow"
-        class="img"
-        :class="{'reverse': showContent}"
-        ref="arrowImg"
-      >
+      <span v-if="showContent === false">{{buttonText}}</span>
+      <span v-else>{{buttonCloseText}}</span>
+
+      <img :src="downArrow" class="img" :class="{'reverse': showContent}" ref="arrowImg">
     </button>
   </section>
 </template>
 
 <script>
 export default {
+  props: {
+    buttonText: String,
+    buttonCloseText: { type: String, default: "Hide" }
+  },
   data() {
     return {
       downArrow: "../assets/img/down-arrow.png",
-      showContent: false,
-      buttonInfo: "Show More options"
+      showContent: false
     };
   },
 

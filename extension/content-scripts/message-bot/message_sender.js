@@ -5,7 +5,7 @@ import past_message_txt from './past_message_txt';
 import send_message from './send_message';
 import get_conected_username from './get_conected_username';
 import update_send_messages from '../statistics/update_send_messages';
-import get_user_img from './get_user_img';
+import get_chatter_info from './get_chatter_info';
 
 const message_sender = (message_list) => {
 	let i = 0;
@@ -35,7 +35,7 @@ const message_sender = (message_list) => {
 		setTimeout(() => {
 			open_message(message_list, i);
 			chatter_name = get_conected_username(message_list, i);
-			get_user_img();
+			get_chatter_info();
 		}, 800);
 
 		if (message_list.length <= i) {
