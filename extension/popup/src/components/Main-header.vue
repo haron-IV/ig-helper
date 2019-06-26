@@ -9,22 +9,31 @@
     <nav class="navigation">
       <ul class="navigation__list">
         <li class="item">
-          <a class="link" href="./popup.html">Home</a>
+          <a @click="setView('Stats')">stats</a>
         </li>
 
-        <li class="item">
-          <a class="link" href="./statistics.html">Statistics</a>
-        </li>
+        <li class="item"></li>
       </ul>
     </nav>
   </header>
 </template>
 
 <script>
+import { eventBus } from "../main.js";
+
 export default {
+  data() {
+    return {
+      actualView: ""
+    };
+  },
   methods: {
     open_badoo() {
       chrome.tabs.create({ url: "https://badoo.com" });
+    },
+    setView(view) {
+      this.actualView = view;
+      eventBus.$emit("setView", view);
     }
   }
 };

@@ -28,9 +28,6 @@ const store = new Vuex.Store({
 	},
 
 	mutations: {
-		// setHeaderWidth(state, width) {
-		// 	state.interface.menu.header_width = width;
-		// }
 		setShowNameSetter(state, value) {
 			state.show_name_setter = value;
 		},
