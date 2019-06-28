@@ -14,6 +14,7 @@ import mainHeader from "../Main-header.vue";
 import start from "../views/start.vue";
 import stats from "../views/stats.vue";
 import login from "../views/login.vue";
+import register from "../views/register.vue";
 
 import { eventBus } from "../../main.js";
 
@@ -22,7 +23,8 @@ export default {
     "Main-header": mainHeader,
     Start: start,
     Stats: stats,
-    Login: login
+    Login: login,
+    Register: register
   },
   data() {
     return {

@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: here shouldbe stats for each accounts (logged), and global statistics of the bot. Button for reset stats -->
   <main class="main main--statistics">
     <article class="statistics-box">
       <header class="statistics-box__header">Bot Stats:</header>
@@ -13,6 +14,8 @@
         </ul>
       </div>
 
+      <button @click="resetStats" class="button">Reset Stats</button>
+
       <Chatters-gallery></Chatters-gallery>
     </article>
   </main>
@@ -24,8 +27,10 @@ import chattersGallery from "../Chatters-gallery.vue";
 export default {
   components: { "Chatters-gallery": chattersGallery },
 
-  data: {
-    stats: null
+  data() {
+    return {
+      stats: null
+    };
   },
 
   computed: {},
@@ -37,6 +42,26 @@ export default {
 
     numberWithComma(number) {
       return number.toLocaleString();
+    },
+
+    resetStats() {
+      const clearStats = {
+        delete_messages: 0,
+        likes: 0,
+        matches: 0,
+        messages: 0
+      };
+
+      chrome.storage.sync.get(["bot_stats"], stats => {
+        chrome.storage.sync.set({ bot_stats: clearStats });
+
+        localStorage.setItem(
+          "stats",
+          JSON.stringify({ bot_stats: clearStats })
+        );
+      });
+
+      this.stats.bot_stats = clearStats;
     }
   },
 
@@ -47,7 +72,9 @@ export default {
   },
 
   beforeMount() {
-    this.stats = JSON.parse(localStorage.getItem("stats"));
+    setTimeout(() => {
+      this.stats = JSON.parse(localStorage.getItem("stats"));
+    }, 100);
   }
 };
 </script>

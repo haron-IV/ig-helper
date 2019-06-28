@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 import store from './store/index';
+import { initializeApp } from 'firebase';
+import firebaseConfig from './api/config.js';
 
 export const eventBus = new Vue({
 	methods: {
@@ -14,6 +16,10 @@ export const eventBus = new Vue({
 		}
 	}
 });
+
+initializeApp(firebaseConfig);
+
+export const version = '1.0.5';
 
 new Vue({
 	el: '#app',

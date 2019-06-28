@@ -1,9 +1,11 @@
 const get_chatter_info = () => {
-	if (document.querySelector('.header-gallery__img')) {
+	const $userImg = document.querySelector('.header-gallery__img');
+
+	if ($userImg) {
 		chrome.storage.sync.get([ 'chatters' ], (data) => {
 			if (data.chatters) {
 				const userInfo = {
-					img: document.querySelector('.header-gallery__img').getAttribute('src'),
+					img: $userImg.getAttribute('src'),
 					profileLink: document.querySelector('.js-connection-profile').getAttribute('href'),
 					userName: document.querySelector('.connection-header__name').innerText,
 					userAge: document.querySelector('.connection-header__age').innerText

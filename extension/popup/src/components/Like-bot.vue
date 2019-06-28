@@ -182,6 +182,7 @@ export default {
     height: 5px;
     border: 1px solid rgba($blue, 0.1);
     border-radius: 15px;
+    cursor: pointer;
 
     .value {
       width: 50%;

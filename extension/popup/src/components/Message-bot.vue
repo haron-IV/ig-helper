@@ -5,6 +5,7 @@
     </header>
 
     <div class="saved-message">
+        <!-- TODO: this should be an other component -->
       <button
         class="saved-message__item button"
         @click="set_message(1)"
@@ -47,6 +48,8 @@
         </li>
       </ul>
     </div>
+
+    <!-- TODO: show more component with more buttons for saving messages and other -->
 
     <button
       class="button"

@@ -19,6 +19,10 @@
         <li class="item">
           <a @click="setView('Login')" class="link">login</a>
         </li>
+
+        <li class="item">
+          <a @click="setView('Register')" class="link">Register</a>
+        </li>
       </ul>
     </nav>
   </header>

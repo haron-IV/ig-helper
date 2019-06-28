@@ -3,12 +3,12 @@
     <form class="form" @submit.prevent="stop">
       <div class="form__row">
         <label class="label">email</label>
-        <input type="text" class="input-text input--login" v-bind="email">
+        <input type="email" class="input-text input--login" v-model="email">
       </div>
 
       <div class="form__row">
         <label class="label">password</label>
-        <input type="password" class="input-text input--password" v-bind="password">
+        <input type="password" class="input-text input--password" v-model="password">
       </div>
 
       <button class="button button--login" @click="isLoading = !isLoading">
