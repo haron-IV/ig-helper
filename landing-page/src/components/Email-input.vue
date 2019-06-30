@@ -1,5 +1,15 @@
 <template>
-  <input type="email" name="email" v-model="email" class="input input--email">
+  <!-- <input type="email" name="email" v-model="email" class="input input--email"> -->
+
+  <div>
+    <header>
+      <slot name="header"></slot>
+    </header>
+
+    <article>
+      <slot name="content"></slot>
+    </article>
+  </div>
 </template>
 
 <script>

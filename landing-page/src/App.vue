@@ -5,6 +5,7 @@
       <router-link to="/about">About</router-link>
     </div>
     <Email-input @revieveEmail="getMail(form.email = $event)"></Email-input>
+
     <!-- <router-view/> -->
   </div>
 </template>

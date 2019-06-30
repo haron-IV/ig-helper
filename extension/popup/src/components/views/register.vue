@@ -3,17 +3,17 @@
     <form class="form" @submit.prevent="stop">
       <div class="form__row">
         <label class="label">email</label>
-        <input type="email" class="input-text input--login" v-model="email">
+        <input type="email" class="input-text input--login" v-model="email" />
       </div>
 
       <div class="form__row">
         <label class="label">password</label>
-        <input type="password" class="input-text input--password" v-model="password">
+        <input type="password" class="input-text input--password" v-model="password" />
       </div>
 
       <button class="button button--login" @click="register">
         <span v-if="isLoading === false">Register</span>
-        <img v-else :src="loadingImg" class="img--loading">
+        <img v-else :src="loadingImg" class="img--loading" />
       </button>
     </form>
 
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { createUserWithEmailAndPassword, auth } from "firebase";
+// import { createUserWithEmailAndPassword, auth } from "firebase";
 
 export default {
   data() {
@@ -55,9 +55,7 @@ export default {
         .then(
           user => {
             vm.registerInfo = true;
-            vm.registerInfoTxt = `Account created. User email: ${
-              user.user.email
-            }`;
+            vm.registerInfoTxt = `Account created. User email: ${user.user.email}`;
 
             auth().sendSignInLinkToEmail(email, actionCodeSettings);
             window.localStorage.setItem("emailForSignIn", email);

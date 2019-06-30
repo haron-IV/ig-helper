@@ -2,6 +2,8 @@ import global_data from '../global_data';
 import check_message_window from './check_message_window';
 import open_message_window from './open_message_window';
 
+// TODO: here should be function for blocing user cuz if we block user we will get rid of pair second time with smae person
+
 const get_people_to_delete = () => {
 	const user_name = localStorage.getItem('user_name');
 

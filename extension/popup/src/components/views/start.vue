@@ -11,9 +11,10 @@
     </template>
 
     <template v-else>
+      <!-- TODO: should be a single component -->
       <h3 class="medium-space">Before use bot you must configurate your badoo profile.</h3>
 
-      <hr>
+      <hr />
 
       <p class="medium-space">
         Go to your profile and click this button.
@@ -23,7 +24,7 @@
         >Set correct setting</button>
       </p>
 
-      <hr>
+      <hr />
 
       <p class="medium-space">And set your language to English (United States) and save.</p>
     </template>

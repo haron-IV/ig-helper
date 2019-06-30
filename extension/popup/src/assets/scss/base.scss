@@ -13,6 +13,7 @@ body {
 	padding: 3rem;
 	font-family: Montserrat;
 	min-width: 350px;
+	max-width: 450px;
 }
 
 [v-cloak] {
@@ -32,6 +33,10 @@ body {
 				margin: .5rem 0;
 			}
 		}
+	}
+
+	&--message-bot-buttons {
+		justify-content: space-between;
 	}
 }
 
