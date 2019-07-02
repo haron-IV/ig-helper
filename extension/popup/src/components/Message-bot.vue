@@ -79,7 +79,7 @@
       <div class="option-row option-row--column">
         <label for="LoadMoreMessages">Load more messages</label>
 
-        <select type="checklist" id="LoadMoreMessages">
+        <select type="checklist" id="LoadMoreMessages" v-model="test">
           <option
             v-for="(message, index) in message_bot.more_messages.messages"
             :value="message"
@@ -87,7 +87,10 @@
           >{{message}}</option>
         </select>
 
-        <button class="button">Load</button>
+        <div class="button-row">
+          <button class="button" @click="loadMessage">Load</button>
+          <button class="button">Delete this message</button>
+        </div>
       </div>
     </Show-more>
   </article>
@@ -116,7 +119,8 @@ export default {
           message_holder: "",
           messages: []
         }
-      }
+      },
+      test: null
     };
   },
 
@@ -176,19 +180,29 @@ export default {
     },
 
     saveMoreMessage() {
-      const msg = this.message_bot.more_messages.message_holder;
+      const vm = this;
 
-      localStorage.setItem("last_more_message", msg);
+      localStorage.setItem(
+        "last_more_message",
+        this.message_bot.more_messages.message_holder
+      );
 
       chrome.storage.sync.get(["more_messages"], data => {
         if (data) {
           data.more_messages.push(localStorage.getItem("last_more_message"));
 
-          chrome.storage.sync.set(data);
+          chrome.storage.sync.set(data, () => {
+            vm.message_bot.more_messages.messages = data.more_messages;
+            vm.message_bot.more_messages.message_holder = "";
+          });
         } else {
           chrome.storage.sync.set({ more_messages: [] });
         }
       });
+    },
+
+    loadMessage() {
+      this.message_bot.message = this.test;
     }
   },
 
@@ -268,6 +282,11 @@ export default {
       display: flex;
       flex-direction: column;
     }
+  }
+
+  .button-row {
+    display: flex;
+    justify-content: center;
   }
 }
 </style>
