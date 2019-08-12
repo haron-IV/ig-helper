@@ -61,7 +61,7 @@
       <button
         class="button button--message-delete"
         :class="{ button_active: message_bot.blockingIsStart }"
-        @click="message_bot.blockingIsStart = !message_bot.blockingIsStart"
+        @click="toggle_block_messages"
       >{{message_bot.blockingIsStart === true ? 'Stop' : 'block messengers'}}</button>
     </div>
 
@@ -79,7 +79,11 @@
       <div class="option-row option-row--column">
         <label for="LoadMoreMessages">Load more messages</label>
 
-        <select type="checklist" id="LoadMoreMessages" v-model="test">
+        <select
+          type="checklist"
+          id="LoadMoreMessages"
+          v-model="message_bot.more_messages.selected_message"
+        >
           <option
             v-for="(message, index) in message_bot.more_messages.messages"
             :value="message"
@@ -117,10 +121,10 @@ export default {
         more_messages: {
           isOn: false,
           message_holder: "",
-          messages: []
+          messages: [],
+          selected_message: null
         }
-      },
-      test: null
+      }
     };
   },
 
@@ -179,6 +183,16 @@ export default {
       }
     },
 
+    toggle_block_messages() {
+      if (this.message_bot.blockingIsStart === false) {
+        eventBus.sendMessageToContentScript("start_blocking_all_old_messages");
+        this.message_bot.blockingIsStart = true;
+      } else {
+        eventBus.sendMessageToContentScript("stop_blocking_all_old_messages");
+        this.message_bot.blockingIsStart = false;
+      }
+    },
+
     saveMoreMessage() {
       const vm = this;
 
@@ -202,7 +216,14 @@ export default {
     },
 
     loadMessage() {
-      this.message_bot.message = this.test;
+      this.message_bot.message = this.message_bot.more_messages.selected_message;
+    },
+
+    deleteMessage() {
+      // get data from chrome storage
+      // get selected message
+      // check if selected message exsist in data and get it index
+      // remove message from array and push cleared data
     }
   },
 
