@@ -4,8 +4,9 @@
       <main class="main main--popup">
         <Set-your-name></Set-your-name>
 
-        <Like-bot></Like-bot>
-
+        <!-- Like bot is off cuz badoo blocked liking from scripts -->
+        <!-- <Like-bot></Like-bot> -->
+        <Like-limit-information></Like-limit-information>
         <Message-bot></Message-bot>
       </main>
     </template>
@@ -33,14 +34,16 @@
 
 <script>
 import setYourName from "../Set-your-name.vue";
-import likeBot from "../Like-bot.vue";
+// import likeBot from "../Like-bot.vue";
+import likeLimitInformation from "../Like-limit-information.vue";
 import messageBot from "../Message-bot.vue";
 import { eventBus } from "../../main.js";
 
 export default {
   components: {
     "Set-your-name": setYourName,
-    "Like-bot": likeBot,
+    // "Like-bot": likeBot,
+    "Like-limit-information": likeLimitInformation,
     "Message-bot": messageBot
   },
   data() {
