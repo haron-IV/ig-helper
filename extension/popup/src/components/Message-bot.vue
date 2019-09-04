@@ -184,6 +184,7 @@ export default {
     },
 
     toggle_block_messages() {
+      // TODO: save last state of this button
       if (this.message_bot.blockingIsStart === false) {
         eventBus.sendMessageToContentScript("start_blocking_all_old_messages");
         this.message_bot.blockingIsStart = true;
