@@ -1,21 +1,26 @@
 import storeSchema from "./storeSchema";
 import { setData } from "./chromeStore";
 
-const checkIsStoreInitialized = data => {
-    if ( Object.keys(data).length === 0) {
+const checkIsStoreInitialized = (store) => {
+    if ( Object.keys(store).length <= 1 ) {
       return false;
     };
     return true;
 };
 
-const setStoreSchemaIfItIsEmty = data => {
-    if (!checkIsStoreInitialized(data)) {
+const setStoreSchemaIfItIsEmty = store => {
+    if (!checkIsStoreInitialized(store)) {
         setData(storeSchema);
     }
 };
 
-const updateStore = data => {
-    setData(data);
+const updateStore = store => {
+    setData(store);
 };
 
-export { setStoreSchemaIfItIsEmty, updateStore };
+const clearStore = () => {
+    setData(storeSchema);
+    return storeSchema;
+};
+
+export { setStoreSchemaIfItIsEmty, updateStore, clearStore };

@@ -1,12 +1,13 @@
-import {setStoreSchemaIfItIsEmty, updateStore} from "./store/index";
+import {setStoreSchemaIfItIsEmty, updateStore, clearStore} from "./store/index";
+
+
 
 chrome.storage.sync.get("igHelperStore", store => { 
     // entire content-script shoud be inside store get cuz we need data in whole application    
     setStoreSchemaIfItIsEmty(store);
 
-    store.test = "Changed";
-    
-    updateStore(store);
-
-    console.log(store)
+    // how to update and clear store
+    // store.test = "changed"
+    // updateStore(store);
+    // store = clearStore();
 });
