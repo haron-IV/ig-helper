@@ -10,7 +10,7 @@
 	},
 	"browser_action": {
 		"default_icon": "./icons/icon16.png",
-		"default_popup": "./popup/src/dist/index.html"
+		"default_popup": "./popup/dist/index.html"
 	},
 	"permissions": [ "storage", "notifications", "contextMenus", "tabs", "activeTab" ],
 	"content_scripts": [
