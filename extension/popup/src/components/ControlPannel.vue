@@ -15,8 +15,8 @@ export default {
     name: 'Control-pannel',
     methods: {
         test() {
-            console.log(eventBus)
-            eventBus.sendMessageToContentScript('test')
+          console.log(eventBus)
+          eventBus.sendMessageToContentScript('test')
         }
     }
 }
