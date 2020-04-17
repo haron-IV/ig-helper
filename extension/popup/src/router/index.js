@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import App from "@/App";
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
   const routes = [
+  {
+    path: '/popup/dist/index.html', 
+    name: 'App',
+    component: App
+  },
   {
     path: '/',
     name: 'Home',
@@ -20,9 +26,10 @@ Vue.use(VueRouter)
   }
 ]
 
+// base: process.env.BASE_URL
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: '/popup/dist/index.html',
   routes
 })
 
