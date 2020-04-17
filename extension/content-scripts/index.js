@@ -1,21 +1,12 @@
-import getPopupMsg from "./utils/getMessageFromPopup";
-import { setData, getData } from "./utils/chromeStore";
+import {setStoreSchemaIfItIsEmty, updateStore} from "./store/index";
 
-const test = () => {
-    setData({
-        babol: ""
-    });
+chrome.storage.sync.get("igHelperStore", store => { 
+    // entire content-script shoud be inside store get cuz we need data in whole application    
+    setStoreSchemaIfItIsEmty(store);
 
-    getData("babol")
+    store.test = "Changed";
     
-    // console.log(getData("test"))
-    
-    // chrome.storage.sync.get(["cojest"]), data => {
-    //     console.log(data);
-        
-    // }
-};
+    updateStore(store);
 
-getPopupMsg('test', () => {test()});
-
-// export default test;
+    console.log(store)
+});
