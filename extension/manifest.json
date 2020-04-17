@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
-	"name": "Badoo spam bot",
-	"version": "1.0.2",
-	"description": "spam bot.",
+	"name": "Instagram follower tool",
+	"version": "0.0.0",
+	"description": "Get more followers by this tool.",
 	"icons": {
 		"128": "./icons/icon128.png",
 		"48": "./icons/icon48.png",
@@ -19,9 +19,5 @@
 			"js": [ "./content-scripts/dist/main.bundle.js" ],
 			"run_at": "document_end"
 		}
-	],
-
-	"_comments": {
-		"default_popup": "./popup/src/dist/index.html"
-	}
+	]
 }
