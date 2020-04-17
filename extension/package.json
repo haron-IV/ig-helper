@@ -1,7 +1,7 @@
 {
 	"name": "instagram-followers-helper",
 	"version": "1.0.0",
-	"description": "Get more followers with this extension!",
+	"description": "Get more followers with this extension!g",
 	"main": "index.js",
 	"scripts": {
 		"audit": "source-map-explorer public/dist/main.bundle.js",
