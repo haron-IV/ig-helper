@@ -1,4 +1,10 @@
-/node_modules
-extension/popup/node_modules/
-extension/popup/dist
 package-lock.json
+/node_modules
+
+extension/node_modules
+extension/npm-debug.log
+
+extension/content-scripts/dist
+
+extension/popup/node_modules
+extension/popup/dist

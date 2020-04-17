@@ -16,7 +16,7 @@ export default {
     methods: {
         test() {
           console.log(eventBus)
-          // eventBus.sendMessageToContentScript('test')
+          eventBus.sendMessageToContentScript('test')
         }
     }
 }
