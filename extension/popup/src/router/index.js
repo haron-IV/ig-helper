@@ -6,11 +6,11 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
   const routes = [
-  {
-    path: '/popup/dist/index.html', 
-    name: 'App',
-    component: App
-  },
+  // {
+    // path: '/popup/dist/index.html', 
+    // name: 'App',
+    // component: App
+  // },
   {
     path: '/',
     name: 'Home',

@@ -1,16 +1,14 @@
 <template>
-  <v-container class="my-2">
-    <v-layout row>
-      <v-flex xs>
-        <h1>elo</h1>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <Control-pannel />
 </template>
 
 <script>
+import ControlPannel from "@/components/ControlPannel";
+
 export default {
   name: 'Home',
-  components: {}
+  components: {
+    'Control-pannel': ControlPannel
+  }
 }
 </script>
