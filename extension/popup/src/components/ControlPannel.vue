@@ -1,8 +1,9 @@
 <template>
   <v-container class="my-2">
     <v-layout row>
-      <v-flex xs3>
-        <v-btn dark @click.native="colletFollowedUsers()">Get followers</v-btn>
+      <v-flex xs4>
+        <v-btn dark small @click.native="colletFollowedUsers()">Get followers</v-btn>
+        <div class="button-caption">Go to profile which have a lot of followers before use this</div>
       </v-flex>
     </v-layout>
   </v-container>
@@ -20,3 +21,10 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+.button-caption {
+  text-align: center;
+  margin: .5rem 0;
+}
+</style>

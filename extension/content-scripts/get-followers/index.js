@@ -1,17 +1,17 @@
 import getMessageFromPopup from "../utils/getMessageFromPopup";
 import {updateStore} from "../store/index";
 
-const storeFollowedProfiles = (store) => {
+const storeFollowedProfiles = store => {
     addListenerForFollowButtonAndStoreProfiles(store);
 };
 
-const addListenerForFollowButtonAndStoreProfiles = (store) => {
+const addListenerForFollowButtonAndStoreProfiles = store => {
     getMessageFromPopup("colletFollowedUsers", () => {
         openFollowList(store);
     });
 };
 
-const openFollowList =  (store) => {
+const openFollowList = store => {
     const btnShowList = document.querySelector("#react-root > section > main > div > header > section > div.nZSzR > div.Igw0E.IwRSH.eGOV_._4EzTm > span > span.mLCHD._1OSdk > button");
 
     if (btnShowList) {
@@ -28,7 +28,7 @@ const openFollowList =  (store) => {
     };
 };
 
-const addListenersToButtons = (store) => {
+const addListenersToButtons = store => {
     if (document.querySelector("body > div.RnEpo.Yx5HN > div")) {
         const profilesToFollow = document.querySelectorAll("body > div.RnEpo.Yx5HN > div > div.Igw0E.IwRSH.eGOV_.vwCYk.lDRO1 > div > div > div");
 

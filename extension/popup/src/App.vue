@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <v-container class="app">
+    <router-view />  
+  </v-container>
 </template>
 
 <script>
@@ -10,3 +12,9 @@ export default {
   created(){}
 };
 </script>
+
+<style lang="scss" scoped>
+  .app {
+    min-width: 450px;
+  }
+</style>
