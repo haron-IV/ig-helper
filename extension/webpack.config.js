@@ -1,12 +1,13 @@
 'use strict';
 
 const path = require('path');
+require("@babel/polyfill");
 
 module.exports = {
     mode: 'production',
 
     entry: {
-        main: path.resolve('./content-scripts/index.js')
+        main: ['@babel/polyfill', path.resolve('./content-scripts/index.js')]
     },
 
     output: {

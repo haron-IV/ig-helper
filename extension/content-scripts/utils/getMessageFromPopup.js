@@ -1,4 +1,4 @@
-const get_message_from_popup = ( message_name, callback ) => {
+const getMessageFromPopup = ( message_name, callback ) => {
     chrome.runtime.onMessage.addListener(
         function(request) {
             if (request.greeting == message_name) {
@@ -8,4 +8,4 @@ const get_message_from_popup = ( message_name, callback ) => {
     );
 };
 
-export default get_message_from_popup;
+export default getMessageFromPopup;
