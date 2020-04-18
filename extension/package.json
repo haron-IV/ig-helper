@@ -28,7 +28,7 @@
 		"@babel/polyfill": "^7.8.7",
 		"babel-plugin-transform-regenerator": "^6.26.0",
 		"babel-polyfill": "^6.26.0",
-		"lodash": "^4.17.11",
+		"lodash": "^4.17.15",
 		"lodash.debounce": "^4.0.8",
 		"node-sass": "^4.12.0",
 		"nodemon": "^1.19.1",

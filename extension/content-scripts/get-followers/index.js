@@ -1,3 +1,5 @@
+import debounce from "lodash.debounce";
+
 import getMessageFromPopup from "../utils/getMessageFromPopup";
 import {updateStore} from "../store/index";
 
@@ -29,15 +31,24 @@ const openFollowList = store => {
 };
 
 const addListenersToButtons = store => {
-    if (document.querySelector("body > div.RnEpo.Yx5HN > div")) {
-        const profilesToFollow = document.querySelectorAll("body > div.RnEpo.Yx5HN > div > div.Igw0E.IwRSH.eGOV_.vwCYk.lDRO1 > div > div > div");
+    if (document.querySelector("body > div.RnEpo.Yx5HN > div") && document.querySelector("body > div.RnEpo.Yx5HN > div > div.Igw0E.IwRSH.eGOV_.vwCYk.lDRO1 > div")) {
+        let profilesToFollow = document.querySelectorAll("body > div.RnEpo.Yx5HN > div > div.Igw0E.IwRSH.eGOV_.vwCYk.lDRO1 > div > div > div");
 
-        for (const profile of profilesToFollow) {
-            profile.children[2].children[0].addEventListener("click", () => {
-                store.igHelperStore.following.followedProfiles.push(profile.children[0].children[0].children[1].href);
-                updateStore(store);
-            });
-        }
+        document.querySelector("body > div.RnEpo.Yx5HN > div > div.Igw0E.IwRSH.eGOV_.vwCYk.lDRO1 > div").addEventListener("scroll", debounce(() => {
+            profilesToFollow = document.querySelectorAll("body > div.RnEpo.Yx5HN > div > div.Igw0E.IwRSH.eGOV_.vwCYk.lDRO1 > div > div > div");
+            loopThroughtButtons(profilesToFollow, store);    
+        }, 1350)); 
+
+        loopThroughtButtons(profilesToFollow, store);  
+    }
+};
+
+const loopThroughtButtons = (profilesToFollow, store) => {
+    for (const profile of profilesToFollow) {
+        profile.children[2].children[0].addEventListener("click", () => {
+            store.igHelperStore.following.followedProfiles.push(profile.children[0].children[0].children[1].href);
+            updateStore(store);
+        });
     }
 };
 
