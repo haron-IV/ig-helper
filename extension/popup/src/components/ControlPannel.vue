@@ -13,12 +13,12 @@
 import eventBus from "../eventBus.js";
 
 export default {
-    name: 'Control-pannel',
-    methods: {
-      colletFollowedUsers() {
-        eventBus.sendMessageToContentScript('colletFollowedUsers');
-      }
+  name: 'Control-pannel',
+  methods: {
+    colletFollowedUsers() {
+      eventBus.sendMessageToContentScript('colletFollowedUsers');
     }
+  }
 }
 </script>
 
