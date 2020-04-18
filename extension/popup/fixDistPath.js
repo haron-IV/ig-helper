@@ -3,6 +3,7 @@ var fs = require('fs');
 console.log("======================================");
 fs.readFile('./dist/index.html', 'utf8', function (err, data){
     console.log("rewriting dist/index.html");
+    console.log();
     if (err) {
         console.log("Check your path -> ", __dirname)
         return console.log(err);
@@ -18,5 +19,6 @@ fs.readFile('./dist/index.html', 'utf8', function (err, data){
     fs.writeFile('./dist/index.html', result, 'utf8', function(err) {
         if (err) console.log(err);
         console.log("File was overwrite withouts any problems");
+        console.log("======================================");
     })
-})
+});
