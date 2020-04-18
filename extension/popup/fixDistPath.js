@@ -12,7 +12,7 @@ fs.readFile('./dist/index.html', 'utf8', function (err, data){
     var result = data;
 
     result = result.replace(/src=\//g, 'src=./');
-    result = result.replace(/href=\//g, 'src=./');
+    result = result.replace(/href=\//g, 'href=./');
 
     console.log("File string was replacet without erros");
     
