@@ -8,7 +8,7 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/venglas/ig-helper/issues.svg)](https://github.com/venglas/ig-helper/issues)
+[![GitHub Issues](https://img.shields.io/github/issues/venglas/ig-helper.svg)](https://github.com/venglas/ig-helper/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https:github.com/venglas/ig-helper/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
