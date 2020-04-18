@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "dev": "watch 'npm run build-dev' ./src",
     "remove-old-build": "rimraf dist",
-    "build-dev": "npm run remove-old-build && vue-cli-service build"
+    "build-dev": "npm run remove-old-build && vue-cli-service build && node fixDistPath.js"
   },
   "dependencies": {
     "core-js": "^3.6.4",
