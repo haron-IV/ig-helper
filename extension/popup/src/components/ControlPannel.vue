@@ -1,12 +1,10 @@
 <template>
-  <v-container class="my-2">
-    <v-layout row>
-      <v-flex xs4>
-        <v-btn dark small @click.native="colletFollowedUsers()">Get followers</v-btn>
-        <div class="button-caption">Go to profile which have a lot of followers before use this</div>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-layout row>
+    <v-flex xs3>
+      <v-btn dark small @click.native="colletFollowedUsers()">Get followers</v-btn>
+      <div class="button-caption">Go to profile which have a lot of followers before use this</div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
