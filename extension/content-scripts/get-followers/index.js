@@ -44,11 +44,14 @@ const addListenersToButtons = store => {
 };
 
 const loopThroughtButtons = (profilesToFollow, store) => {
+    const addProfile = (profile) => {
+        store.igHelperStore.following.followedProfiles.push(profile.children[0].children[0].children[1].href);
+        updateStore(store);
+    };
+
     for (const profile of profilesToFollow) {
-        profile.children[2].children[0].addEventListener("click", () => {
-            store.igHelperStore.following.followedProfiles.push(profile.children[0].children[0].children[1].href);
-            updateStore(store);
-        });
+        profile.children[2].children[0].removeEventListener("click", addProfile);
+        profile.children[2].children[0].addEventListener("click", () => {addProfile(profile)});
     }
 };
 
