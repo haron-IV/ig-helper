@@ -50,7 +50,7 @@ const loopThroughtButtons = (profilesToFollow, store) => {
     };
 
     for (const profile of profilesToFollow) {
-        profile.children[2].children[0].removeEventListener("click", addProfile);
+        profile.children[2].children[0].removeEventListener("click", addProfile); // fix multiple profile adding after scrolling list
         profile.children[2].children[0].addEventListener("click", () => {addProfile(profile)});
     }
 };
