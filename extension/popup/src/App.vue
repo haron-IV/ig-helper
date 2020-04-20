@@ -39,7 +39,7 @@
     </v-navigation-drawer>
         
     <transition name="slide-x-transition">
-      <router-view style="position: absolute; width: calc(90% - 56px); margin: 0 4.5rem"/>
+      <router-view style="position: absolute; width: calc(81%); margin: 0 4.5rem"/>
     </transition>
   </v-container>
 </template>
@@ -49,7 +49,9 @@ export default {
   name: 'App',
   components: {},
   data: () => ({}),
-  created(){}
+  created(){
+    this.$store.commit('setData');
+  }
 };
 </script>
 
