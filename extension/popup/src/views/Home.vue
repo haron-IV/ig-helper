@@ -9,9 +9,12 @@
         <v-card class="card">
           <v-list-item>
             <v-list-item-content>
-              <div class="overline mb-4">Followed Profiles</div>
-              <v-list-item-title class="headline mb-1">Headline 5</v-list-item-title>
-              <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+              <v-list-item-title class="headline mb-1">Followed Profiles</v-list-item-title>
+              <div>
+                <p v-for="(profile, i) in $store.getters.getFollowedProfiles" :key="i" @click="openProfile(profile)" class="profile">
+                  {{i}}) <a>{{profile.split("/")[3]}}</a> 
+                </p>
+              </div>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -42,7 +45,6 @@ export default {
   },
   data(){
     return {
-      data: chrome.storage.sync.get('igHelperStore', (items) => { data = items })
     }
   },
   computed: {
@@ -50,8 +52,11 @@ export default {
       return this.$store.state.appWidth - menuLeftSpace;
     }
   },
-  created(){
-    console.log("store: ", this.$store.state.data)
+  created(){},
+  methods: {
+    openProfile(profile){
+      window.open(profile);
+    }
   }
 }
 </script>
@@ -73,6 +78,15 @@ export default {
     .card {
       min-height: 25%;  
       height: 75%;
+
+      .profile {
+        cursor: pointer;
+        transition: all ease-in-out 200ms;
+
+        &:hover {
+          text-shadow: 2px 3px 8px rgba(127,206,99,0.7);
+        }
+      }
     }
   }
 }

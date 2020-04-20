@@ -18,9 +18,8 @@ export default new Vuex.Store({
   actions: {
   },
   getters: {
-    getData(state){
-      return state.data.igHelperStore;
-    }
+    getData: state => state.data.igHelperStore,
+    getFollowedProfiles: state => state.data.igHelperStore.following.followedProfiles
   },
   modules: {
   }
