@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Control-pannel />  
+    <Control-pannel-home />  
     
     <hr class="divider">
 
@@ -36,12 +36,12 @@
 </template>
 
 <script>
-import ControlPannel from "@/components/ControlPannel";
+import ControlPannelHome from "@/components/ControlPannelHome";
 
 export default {
   name: 'Home',
   components: {
-    'Control-pannel': ControlPannel
+    'Control-pannel-home': ControlPannelHome
   },
   data(){
     return {
