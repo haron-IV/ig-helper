@@ -4,8 +4,9 @@ const unfollowProfiles = () => {
     getMessageFromPopup("unfollowProfiles", (data) => {
         openFollowedProfilesList(data.value);
         setTimeout(() => {
-            getProfilesToUnfollow();    
+            unfollow();
         }, 1000);
+        
     });
 };
 
@@ -13,22 +14,24 @@ const openFollowedProfilesList = () => {
     document.querySelector("#react-root > section > main > div > header > section > ul > li:nth-child(3) > a").click();
 };
 
-const getProfilesToUnfollow = (profiles) => {
-    profiles = document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP > ul > div").children;    
+const profilesToUnfollow = () => {
+    return document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP > ul > div").children;
+};
+
+const unfollow = () => {
+    const profiles = profilesToUnfollow();
     const countOfLoadedProfiles = profiles.length;
     let i = 0;
-    
-    const unfollow = () => {
-        if (i < countOfLoadedProfiles) {
-            profiles[i].children[0].children[1].children[0].click();
+
+    const interval = setInterval(() => {
+        if (i < 1) {
+            profiles[i].children[0].children[2].children[0].click()
             document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
-
-            setTimeout(unfollow(), 2000);
             i++;
+        } else {
+            clearInterval(interval);
         }
-    };
-
-    unfollow();
+    }, 2000);
 };
 
 export default unfollowProfiles;
