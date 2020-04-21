@@ -6,7 +6,7 @@
     </v-flex>
 
     <v-flex xs3 class="button-wrapper">
-      <v-btn dark small @click.native="unfollowProfiles()">Unfollow</v-btn>
+      <v-btn dark small @click.native="unfollow()">Unfollow</v-btn>
       <div class="button-caption">Go to your profile. Click button and set how many profiles you want to unfollow.</div>
     </v-flex>
   </v-layout>
@@ -21,8 +21,8 @@ export default {
     colletFollowedUsers() {
       eventBus.sendMessageToContentScript('colletFollowedUsers');
     },
-    unfollowProfiles() {
-      eventBus.sendMessageToContentScript('unfollowProfiles');
+    unfollow(){
+      this.$store.commit('showFollowersModal')
     }
   }
 }
