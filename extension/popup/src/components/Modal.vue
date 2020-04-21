@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import eventBus from "@/eventBus";
+
 export default {
   name: "Modal",
   data() {
@@ -30,7 +32,7 @@ export default {
   },
   methods: {
     unfollowProfiles(){
-      eventBus.sendMessageToContentScript('unfollowProfiles');
+      eventBus.sendMessageToContentScript('unfollowProfiles', this.unfollowCunt);
     }
   }
 };
