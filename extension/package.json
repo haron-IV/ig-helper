@@ -12,11 +12,7 @@
 		"watch": "webpack -w",
 		"start": "node public/dist/main.bundle.js",
 		"build-css": "node-sass --include-path scss scss/main.scss css/index.css",
-		"watch-sass": "nodemon -e scss -x \"npm run build-css\"",
-		"remove-old-build": "rimraf ./popup/dist",
-		"build-dev-popup": "cd ./popup && npm run remove-old-build && vue-cli-service build && node fixDistPath.js",
-		"watch-popup": "watch 'npm run build-dev-popup' ./popup/src",
-		"dev-all": "webpack -w && watch-popup"
+		"watch-sass": "nodemon -e scss -x \"npm run build-css\""
 	},
 	"devDependencies": {
 		"@babel/core": "^7.3.4",
