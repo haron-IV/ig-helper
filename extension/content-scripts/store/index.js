@@ -2,10 +2,14 @@ import storeSchema from "./storeSchema";
 import { setData } from "./chromeStore";
 
 const checkIsStoreInitialized = (store) => {
-    if ( Object.keys(store).length <= 1 ) {
-      return false;
-    };
-    return true;
+    if (Object.keys(store).length <= 1) return false;
+    return true
+
+    // TODO: Make it better ;)
+    // if ( Object.keys(store).length <= 1 ) {
+    //   return false;
+    // };
+    // return true;
 };
 
 const setStoreSchemaIfItIsEmty = store => {
