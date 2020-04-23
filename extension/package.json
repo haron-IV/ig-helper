@@ -18,9 +18,6 @@
 		"remove-old-build": "rimraf ./popup/dist",
 		"build-dev-popup": "npm run remove-old-build && cd ./popup & npm run build --prefix ./popup && cd ./popup && node fixDistPath.js",
 		"dev-all": "npm run watch & npm run dev-popup"
-
-
-
 	},
 	"devDependencies": {
 		"@babel/core": "^7.3.4",
