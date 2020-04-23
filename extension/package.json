@@ -12,7 +12,15 @@
 		"watch": "webpack -w",
 		"start": "node public/dist/main.bundle.js",
 		"build-css": "node-sass --include-path scss scss/main.scss css/index.css",
-		"watch-sass": "nodemon -e scss -x \"npm run build-css\""
+		"watch-sass": "nodemon -e scss -x \"npm run build-css\"",
+		
+		"dev-popup": "watch 'npm run build-dev-popup' ./popup/src",
+		"remove-old-build": "rimraf ./popup/dist",
+		"build-dev-popup": "npm run remove-old-build && cd ./popup & npm run build --prefix ./popup && cd ./popup && node fixDistPath.js",
+		"dev-all": "npm run watch & npm run dev-popup"
+
+
+
 	},
 	"devDependencies": {
 		"@babel/core": "^7.3.4",
