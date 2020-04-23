@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import {appearance} from './appearance.js';
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    appWidth: 600,
-    menuLeftSpace: 56,
     modals: {
       getFollowers: {
         isVisible: false
@@ -30,5 +30,6 @@ export default new Vuex.Store({
     getFollowersModalVisible: state => state.modals.getFollowers.isVisible
   },
   modules: {
+    appearance
   }
 })

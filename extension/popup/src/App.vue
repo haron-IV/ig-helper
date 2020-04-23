@@ -1,5 +1,5 @@
 <template>
-  <v-container class="app" :style="{minWidth: $store.state.appWidth + 'px'}">
+  <v-container class="app" :style="{minWidth: $store.getters['appearance/getAppWidth'] + 'px'}">
     <v-navigation-drawer
       :permanent="true"
       :expand-on-hover="true"
