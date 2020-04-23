@@ -1,5 +1,5 @@
 <template>
-  <v-overlay class="overlay" v-if="$store.getters.getFollowersModalVisible">
+  <v-overlay class="overlay" v-if="$store.getters['app/getUnfollowModalVisible']">
     <v-card class="modal">
       <v-card-title>Set the number of profiles to unfollow.</v-card-title>
 
@@ -12,7 +12,7 @@
 
       <v-divider></v-divider>
       <v-card-actions class="modal__button-section">
-        <v-btn color="blue darken-1" text @click="$store.commit('closeFollowersModal')">Close</v-btn>
+        <v-btn color="blue darken-1" text @click="$store.commit('app/toggleUnfollowModal', false)">Close</v-btn>
         <v-btn color="blue darken-1" text @click="unfollowProfiles()">Start</v-btn>
       </v-card-actions>
     </v-card>
@@ -26,7 +26,6 @@ export default {
   name: "Modal",
   data() {
     return {
-      isVisible: false,
       unfollowCunt: 0
     };
   },

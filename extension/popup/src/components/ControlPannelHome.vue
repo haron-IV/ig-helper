@@ -22,7 +22,7 @@ export default {
       eventBus.sendMessageToContentScript('colletFollowedUsers');
     },
     unfollow(){
-      this.$store.commit('showFollowersModal')
+      this.$store.commit('app/toggleUnfollowModal', true);
     }
   }
 }

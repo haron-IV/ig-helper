@@ -1,4 +1,4 @@
-const appearance = {
+export default {
     namespaced: true,
     state: {
         appWidth: 600,
@@ -9,5 +9,3 @@ const appearance = {
         getMenuLeftSpace: state => state.menuLeftSpace
     }
 };
-
-export {appearance};
