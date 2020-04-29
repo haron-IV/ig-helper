@@ -11,16 +11,20 @@ export default new Vuex.Store({
     data: null //chrome data store
   },
   mutations: {
-    setData(state){
-      chrome.storage.sync.get('igHelperStore', (items) => { localStorage.setItem('igHelper', JSON.stringify(items)) });
-      state.data = JSON.parse(localStorage.getItem('igHelper'));
+    setData(state, data){
+      state.data = data;
+      console.log("setData:", state);
     },
   },
   actions: {
+    setData({ commit }) {
+      chrome.storage.sync.get('igHelperStore', (chromeStorage) => { 
+        commit('setData', chromeStorage);
+      });
+    }
   },
   getters: {
-    getData: state => state.data.igHelperStore,
-    getFollowedProfiles: state => state.data.igHelperStore.following.followedProfiles,
+    getFollowedProfiles: state => state.data ? state.data.igHelperStore.following.followedProfiles : {}
   },
   modules: {
     appearance,

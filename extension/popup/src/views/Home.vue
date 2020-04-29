@@ -11,7 +11,7 @@
             <v-list-item-content>
               <v-list-item-title class="headline mb-1">Followed Profiles</v-list-item-title>
               <div>
-                <p v-for="(profile, i) in $store.getters.getFollowedProfiles" :key="i" @click="openProfile(profile)" class="profile">
+                <p v-for="(profile, i) in getFollowedProfiles" :key="i" @click="openProfile(profile)" class="profile">
                   {{i}}) <a>{{profile.split("/")[3]}}</a> 
                 </p>
               </div>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import ControlPannelHome from "@/components/ControlPannelHome";
 
 export default {
@@ -47,6 +48,7 @@ export default {
     return {}
   },
   computed: {
+    ...mapGetters(["getFollowedProfiles"]),
     width(){
       return this.$store.getters['appearance/getAppWidtg'] - this.$store.getters['appearance/getMenuLeftSpace'];
     }

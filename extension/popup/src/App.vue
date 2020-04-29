@@ -56,8 +56,7 @@ export default {
   },
   data: () => ({}),
   beforeCreate(){
-    this.$store.commit('setData');
-    // console.log(this.$store.getters.getData);
+    this.$store.dispatch('setData');
   },
   created(){
     // this.$store.commit('assignChromeDataToStore');
