@@ -19,5 +19,9 @@
 			"js": [ "./content-scripts/dist/main.bundle.js" ],
 			"run_at": "document_end"
 		}
-	]
+	],
+	"background": {
+		"scripts": ["./background-scripts/index.js"],
+		"persistent": false
+	}
 }

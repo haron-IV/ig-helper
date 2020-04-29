@@ -44,12 +44,11 @@ export default {
     'Control-pannel-home': ControlPannelHome
   },
   data(){
-    return {
-    }
+    return {}
   },
   computed: {
     width(){
-      return this.$store.state.appWidth - menuLeftSpace;
+      return this.$store.getters['appearance/getAppWidtg'] - this.$store.getters['appearance/getMenuLeftSpace'];
     }
   },
   created(){},
