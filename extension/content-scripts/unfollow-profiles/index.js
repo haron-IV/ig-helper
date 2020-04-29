@@ -1,11 +1,12 @@
 import getMessageFromPopup from '../utils/getMessageFromPopup';
+import config from "./config.js";
 
 const unfollowProfiles = () => {
     getMessageFromPopup("unfollowProfiles", (data) => {
         openFollowedProfilesList(data.value);
         setTimeout(() => {
             unfollow();
-        }, 1000);
+        }, 2000);
         
     });
 };
@@ -21,7 +22,8 @@ const profilesToUnfollow = () => {
 const randomTimeAfterUnfollow = (from, to) => {
     from = from * 1000;
     to = to * 1000;
-    return Math.floor(Math.random() * to) + from;
+    console.log(Math.floor(Math.random() * (to - from + 1) + from));
+    return Math.floor(Math.random() * (to - from + 1) + from);
 };
 
 const unfollow = () => {
@@ -29,15 +31,16 @@ const unfollow = () => {
     const countOfLoadedProfiles = profiles.length;
     let i = 0;
 
-    const interval = setInterval(() => {
-        if (i < countOfLoadedProfiles) {
-            profiles[i].children[0].children[2].children[0].click();
-            document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
-            i++;
-        } else {
-            clearInterval(interval);
-        }
-    }, randomTimeAfterUnfollow(5, 180));
+    (function loop() {
+        setTimeout(() => {
+            if (i < countOfLoadedProfiles) {
+                if (profiles[i].children[0].children[2].children[0]) profiles[i].children[0].children[2].children[0].click();
+                if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
+                i++;
+            }
+            loop();
+        }, randomTimeAfterUnfollow(config.sleepAfterUnfollow[0], config.sleepAfterUnfollow[1]));
+    })();
 };
 
 export default unfollowProfiles;
