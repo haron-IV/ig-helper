@@ -41,16 +41,26 @@
     <transition name="slide-x-transition">
       <router-view style="position: absolute; width: calc(81%); margin: 0 4.5rem"/>
     </transition>
+
+    <Modal />
   </v-container>
 </template>
 
 <script>
+import Modal from "@/components/Modal";
+
 export default {
   name: 'App',
-  components: {},
+  components: {
+    Modal
+  },
   data: () => ({}),
-  created(){
+  beforeCreate(){
     this.$store.commit('setData');
+    console.log(this.$store.getters.getData);
+  },
+  created(){
+    // this.$store.commit('assignChromeDataToStore');
   }
 };
 </script>
