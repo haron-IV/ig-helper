@@ -36,7 +36,7 @@ const unfollow = (profilesToUnfollowCount) => {
                 if (profiles[i].children[0].children[2].children[0]) profiles[i].children[0].children[2].children[0].click();
                 if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
                 i++;
-                if (i === profilesToUnfollowCount) alert("Unfollowing Done");
+                if (i === profilesToUnfollowCount) alert("Unfollowing Done"); // TODO: should show small modal or open popup
                 unfollowProfileLoop();
             }
         }, randomTimeAfterUnfollow(config.sleepAfterUnfollow[0], config.sleepAfterUnfollow[1]));
