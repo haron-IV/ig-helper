@@ -31,14 +31,14 @@ const unfollow = () => {
     const countOfLoadedProfiles = profiles.length;
     let i = 0;
 
-    (function loop() {
+    (function unfollowProfileLoop() {
         setTimeout(() => {
             if (i < countOfLoadedProfiles) {
                 if (profiles[i].children[0].children[2].children[0]) profiles[i].children[0].children[2].children[0].click();
                 if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
                 i++;
             }
-            loop();
+            unfollowProfileLoop();
         }, randomTimeAfterUnfollow(config.sleepAfterUnfollow[0], config.sleepAfterUnfollow[1]));
     })();
 };
