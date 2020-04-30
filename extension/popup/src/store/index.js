@@ -15,6 +15,7 @@ export default new Vuex.Store({
       state.data = data;
       console.log("setData:", state);
     },
+    clearFollowedProfilesList: state => state.data.igHelperStore.following.followedProfiles = []
   },
   actions: {
     setData({ commit }) {

@@ -9,7 +9,10 @@
         <v-card class="card">
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title class="headline mb-1">Followed Profiles</v-list-item-title>
+              <v-list-item-title class="headline mb-1">
+                <div>Followed Profiles</div> <div title="Clear followed profiles list" style="cursor: pointer;" @click="clearFollowedProfilesList"><v-icon small>mdi-trash-can-outline</v-icon></div>
+              </v-list-item-title>
+
               <div>
                 <p v-for="(profile, i) in $store.getters.getFollowedProfiles" :key="i" @click="openProfile(profile)" class="profile">
                   {{i+1}}) <a>{{profile.split("/")[3]}}</a> 
@@ -55,6 +58,10 @@ export default {
   methods: {
     openProfile(profile){
       window.open(profile);
+    },
+    clearFollowedProfilesList(){
+      this.$store.commit("clearFollowedProfilesList");
+      chrome.storage.sync.set(this.$store.state.data);
     }
   }
 }
@@ -77,6 +84,11 @@ export default {
     .card {
       min-height: 25%;  
       height: 75%;
+      
+      .headline{
+        display: flex;
+        justify-content: space-between;
+      }
 
       .profile {
         cursor: pointer;
