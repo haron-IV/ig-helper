@@ -12,7 +12,7 @@
               <v-list-item-title class="headline mb-1">Followed Profiles</v-list-item-title>
               <div>
                 <p v-for="(profile, i) in $store.getters.getFollowedProfiles" :key="i" @click="openProfile(profile)" class="profile">
-                  {{i}}) <a>{{profile.split("/")[3]}}</a> 
+                  {{i+1}}) <a>{{profile.split("/")[3]}}</a> 
                 </p>
               </div>
             </v-list-item-content>
