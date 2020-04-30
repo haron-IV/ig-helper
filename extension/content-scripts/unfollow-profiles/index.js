@@ -35,53 +35,14 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
         unfollowedProfilesCount: 0,
         unfollowedProfiles: []
     };
-    
-
-    // console.log("unfollow: ", profilesToUnfollowFromPopup)
 
     function unfollowProfileLoop() {
-        setTimeout(() => { //never stops
+        setTimeout(() => {
 
             if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
 
-                const tt = () => {
-
-                    for (let index = 0; i < profiles.length - 1; index++)  {
-
-                        if ( profilesToUnfollowFromPopup.includes(profiles[index].children[0].children[1].children[0].children[0].children[0].children[0].href) ) {
-                            // console.log(store.igHelperStore.following.followedProfiles);
-                            // console.log('removed: ', profile.children[0].children[1].children[0].children[0].children[0].children[0].href);
-                            // console.log('--------------------------------');
-                            
-                            
-
-                            if (profiles[index].children[0].children[2]) profiles[index].children[0].children[2].children[0].click();
-                            if (profiles[index].children[0].children[1]) profiles[index].children[0].children[1].children[0].click();
-                            if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
-                            updateUnfollowResults(unfollowResults, profiles[index].children[0].children[1].children[0].children[0].children[0].children[0].href);
-    
-                            const unfollowedProfile = profilesToUnfollowFromPopup.filter( profile => profile === profiles[i].children[0].children[1].children[0].children[0].children[0].children[0].href);
-                            const mappedStoreFollowedProfiles = store.igHelperStore.following.followedProfiles.map( profile => unfollowedProfile.includes(profile) ? null : profile);
-                            store.igHelperStore.following.followedProfiles = mappedStoreFollowedProfiles.filter( el => el !== null);
-                            updateStore(store);
-                            // console.log("updated profiles ", store.igHelperStore.following.followedProfiles);
-                            i++;
-                            // profile.remove();
-                            // TODO: not unfollowing excatly profiles
-                            return;
-                        } else {
-                            // TODO: scroll
-                            // this code is used below move it to function
-                            // document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTop += "420";
-                            // setTimeout(() => {
-                            //     profiles = profilesToUnfollow(); //update
-                            //     countOfLoadedProfiles = profiles.length - 1;
-                            // }, 2000);
-                        }
-                    }
-                };
-
-                tt();
+                unfollowLogic(profiles[i], unfollowResults);
+                i++;
                 
                 if ( i === countOfLoadedProfiles ) {
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTop += "420";
@@ -98,6 +59,43 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
     };
 
     unfollowProfileLoop();
+};
+
+const unfollowLogic = (profile, unfollowResults) => {
+
+    // for (const profile in profiles) {
+
+        // if ( profilesToUnfollowFromPopup.includes(profiles[index].children[0].children[1].children[0].children[0].children[0].children[0].href) ) {
+            // console.log(store.igHelperStore.following.followedProfiles);
+            // console.log('removed: ', profile.children[0].children[1].children[0].children[0].children[0].children[0].href);
+            // console.log('--------------------------------');
+            
+            
+
+            if (profile.children[0].children[2]) profile.children[0].children[2].children[0].click();
+            if (profile.children[0].children[1]) profile.children[0].children[1].children[0].click();
+            if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
+            updateUnfollowResults(unfollowResults, profile.children[0].children[1].children[0].children[0].children[0].children[0].href);
+
+            // const unfollowedProfile = profilesToUnfollowFromPopup.filter( profile => profile === profiles[i].children[0].children[1].children[0].children[0].children[0].children[0].href);
+            // const mappedStoreFollowedProfiles = store.igHelperStore.following.followedProfiles.map( profile => unfollowedProfile.includes(profile) ? null : profile);
+            // store.igHelperStore.following.followedProfiles = mappedStoreFollowedProfiles.filter( el => el !== null);
+            // updateStore(store);
+            // console.log("updated profiles ", store.igHelperStore.following.followedProfiles);
+            // i++;
+            // profile.remove();
+            // TODO: not unfollowing excatly profiles
+            // return;
+        // } else {
+            // TODO: scroll
+            // this code is used below move it to function
+            // document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTop += "420";
+            // setTimeout(() => {
+            //     profiles = profilesToUnfollow(); //update
+            //     countOfLoadedProfiles = profiles.length - 1;
+            // }, 2000);
+        // }
+    // }
 };
 
 export default unfollowProfiles;
