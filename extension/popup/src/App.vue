@@ -57,9 +57,6 @@ export default {
   data: () => ({}),
   beforeCreate(){
     this.$store.dispatch('setData');
-  },
-  created(){
-    // this.$store.commit('assignChromeDataToStore');
   }
 };
 </script>
