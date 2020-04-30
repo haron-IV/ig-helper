@@ -46,6 +46,7 @@ const addListenersToButtons = store => {
 const loopThroughtButtons = (profilesToFollow, store) => {
     const addProfile = (profile) => {
         store.igHelperStore.following.followedProfiles.push(profile.children[0].children[0].children[1].href);
+        store.igHelperStore.following.followedProfiles = [...new Set(store.igHelperStore.following.followedProfiles)]; // remove doubled entries
         updateStore(store);
     };
 

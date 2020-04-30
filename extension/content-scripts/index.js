@@ -14,5 +14,5 @@ chrome.storage.sync.get("igHelperStore", store => {
     // updateStore(store);
 
     storeFollowedProfiles(store);
-    unfollowProfiles();
+    unfollowProfiles(store);
 });
