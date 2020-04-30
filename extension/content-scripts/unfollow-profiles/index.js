@@ -29,6 +29,10 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup) => {
     let profiles = profilesToUnfollow();
     let countOfLoadedProfiles = profiles.length - 1;
     let i = 0;
+    const unfollowResults = {
+        unfollowedProfilesCount: 0,
+        unfollowedProfiles: []
+    };
 
     console.log("unfollow: ", profilesToUnfollowFromPopup)
 
@@ -45,7 +49,8 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup) => {
                         if (profiles[i].children[0].children[2]) profiles[i].children[0].children[2].children[0].click();
                         if (profiles[i].children[0].children[1]) profiles[i].children[0].children[1].children[0].click(); // after scrolling and refresh the list DOM in list looks different so need to use second case.
                         if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
-                        i++;        
+                        i++;
+                        updateUnfollowResults(unfollowResults, profile);
                     }
                 });
                 
@@ -57,13 +62,19 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup) => {
                     }, 2000);
                 }
 
-                if (i === profilesToUnfollowCount) alert("Unfollowing Done"); // TODO: should show small modal or open popup
+                if (i === profilesToUnfollowCount) alert(`Unfollowed profiles: ${unfollowResults.unfollowedProfilesCount}. Unfollowed profiles list: ${unfollowResults.unfollowedProfiles}`); // TODO: should show small modal or open popup
                 unfollowProfileLoop();
             }
         }, randomTimeAfterUnfollow(config.sleepAfterUnfollow[0], config.sleepAfterUnfollow[1]));
     };
 
     unfollowProfileLoop();
+};
+
+const updateUnfollowResults = (unfollowResults, profile) => {
+    unfollowResults.unfollowedProfilesCount++;
+    const profileName = profile.replace("https://www.instagram.com/", "");
+    unfollowResults.unfollowedProfiles.push( profileName.substring(0, profileName.length - 1) );
 };
 
 export default unfollowProfiles;
