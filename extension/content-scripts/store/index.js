@@ -8,16 +8,6 @@ const checkIsStoreInitialized = (store) => {
         return false;
     }
     return true;
-
-
-    // if (Object.keys(store).length <= 1) return false;
-    // return true
-
-    // TODO: Make it better ;)
-    // if ( Object.keys(store).length <= 1 ) {
-    //   return false;
-    // };
-    // return true;
 };
 
 const setStoreSchemaIfItIsEmty = store => {
