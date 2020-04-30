@@ -8,7 +8,7 @@
       <v-flex xs6 class="card-wrapper">
         <v-card class="card">
           <v-list-item>
-            <v-list-item-content>
+            <v-list-item-content class="followed-profiles-list">
               <v-list-item-title class="headline mb-1">
                 <div>Followed Profiles</div> <div title="Clear followed profiles list" style="cursor: pointer;" @click="clearFollowedProfilesList"><v-icon small>mdi-trash-can-outline</v-icon></div>
               </v-list-item-title>
@@ -76,15 +76,22 @@ export default {
 .info {
   display: flex;
   justify-content: space-between;
-  height: -webkit-fill-available;
+  // height: -webkit-fill-available;
+  height: 319px;
 
   .card-wrapper {
     margin: .65rem 0;
-    
+    height: 409px;    
+
     .card {
       min-height: 25%;  
       height: 75%;
-      
+
+      .followed-profiles-list {
+        height: -webkit-fill-available;
+        overflow: scroll;
+      }
+
       .headline{
         display: flex;
         justify-content: space-between;
