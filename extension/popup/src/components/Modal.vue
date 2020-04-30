@@ -31,7 +31,11 @@ export default {
   },
   methods: {
     unfollowProfiles(){
-      eventBus.sendMessageToContentScript('unfollowProfiles', this.unfollowCunt);
+      const data = {
+        unfollowCunt: this.unfollowCunt,
+        profilesToUnfollow: this.$store.getters.getFollowedProfiles
+      }
+      eventBus.sendMessageToContentScript('unfollowProfiles', data);
     }
   }
 };

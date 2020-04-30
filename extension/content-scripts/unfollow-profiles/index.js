@@ -3,9 +3,10 @@ import config from "./config.js";
 
 const unfollowProfiles = () => {
     getMessageFromPopup("unfollowProfiles", (message) => {
+        console.log("msg: ", message);
         openFollowedProfilesList();
         setTimeout(() => {
-            unfollow(JSON.parse(message.value));
+            unfollow(JSON.parse(message.value.unfollowCunt));
         }, config.sleepBeforeStartUnfollow);
         
     });
