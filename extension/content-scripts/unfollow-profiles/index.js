@@ -3,10 +3,9 @@ import config from "./config.js";
 
 const unfollowProfiles = () => {
     getMessageFromPopup("unfollowProfiles", (message) => {
-        console.log("msg: ", message);
         openFollowedProfilesList();
         setTimeout(() => {
-            unfollow(JSON.parse(message.value.unfollowCunt));
+            unfollow(JSON.parse(message.value.unfollowCunt), message.value.profilesToUnfollow);
         }, config.sleepBeforeStartUnfollow);
         
     });
@@ -26,19 +25,29 @@ const randomTimeAfterUnfollow = (from, to) => {
     return Math.floor(Math.random() * (to - from + 1) + from);
 };
 
-const unfollow = (profilesToUnfollowCount) => {
+const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup) => {
     let profiles = profilesToUnfollow();
     let countOfLoadedProfiles = profiles.length - 1;
     let i = 0;
 
+    console.log("unfollow: ", profilesToUnfollowFromPopup)
+
     function unfollowProfileLoop() {
         // TODO: show look for last followed profiles from list
         setTimeout(() => {
+            
+
+            console.log(profilesToUnfollowFromPopup);
+
             if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
-                if (profiles[i].children[0].children[2]) profiles[i].children[0].children[2].children[0].click();
-                if (profiles[i].children[0].children[1]) profiles[i].children[0].children[1].children[0].click(); // after scrolling and refresh the list DOM in list looks different so need to use second case.
-                if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
-                i++;
+                profilesToUnfollowFromPopup.filter( profile => {
+                    if (profile === profiles[i].children[0].children[1].children[0].children[0].children[0].children[0].href) {
+                        if (profiles[i].children[0].children[2]) profiles[i].children[0].children[2].children[0].click();
+                        if (profiles[i].children[0].children[1]) profiles[i].children[0].children[1].children[0].click(); // after scrolling and refresh the list DOM in list looks different so need to use second case.
+                        if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
+                        i++;        
+                    }
+                });
                 
                 if ( i === countOfLoadedProfiles ) {
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTop += "420";
