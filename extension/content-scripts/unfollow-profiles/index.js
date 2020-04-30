@@ -16,6 +16,7 @@ const openFollowedProfilesList = () => {
 };
 
 const profilesToUnfollow = () => {
+    // TODO: add scrolling avability
     return document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP > ul > div").children;
 };
 
@@ -26,16 +27,26 @@ const randomTimeAfterUnfollow = (from, to) => {
 };
 
 const unfollow = (profilesToUnfollowCount) => {
-    const profiles = profilesToUnfollow();
-    const countOfLoadedProfiles = profiles.length - 1;
+    let profiles = profilesToUnfollow();
+    let countOfLoadedProfiles = profiles.length - 1;
     let i = 0;
 
     function unfollowProfileLoop() {
         setTimeout(() => {
             if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
-                if (profiles[i].children[0].children[2].children[0]) profiles[i].children[0].children[2].children[0].click();
+                if (profiles[i].children[0].children[2]) profiles[i].children[0].children[2].children[0].click();
+                if (profiles[i].children[0].children[1]) profiles[i].children[0].children[1].children[0].click(); // after scrolling and refresh the list DOM in list looks different so need to use second case.
                 if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
                 i++;
+                
+                if ( i === countOfLoadedProfiles ) {
+                    document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTop += "420";
+                    setTimeout(() => {
+                        profiles = profilesToUnfollow(); //update
+                        countOfLoadedProfiles = profiles.length - 1;
+                    }, 2000);
+                }
+
                 if (i === profilesToUnfollowCount) alert("Unfollowing Done"); // TODO: should show small modal or open popup
                 unfollowProfileLoop();
             }
