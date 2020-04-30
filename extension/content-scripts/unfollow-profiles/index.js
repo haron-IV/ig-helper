@@ -16,7 +16,6 @@ const openFollowedProfilesList = () => {
 };
 
 const profilesToUnfollow = () => {
-    // TODO: add scrolling avability
     return document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP > ul > div").children;
 };
 
@@ -32,6 +31,7 @@ const unfollow = (profilesToUnfollowCount) => {
     let i = 0;
 
     function unfollowProfileLoop() {
+        // TODO: show look for last followed profiles from list
         setTimeout(() => {
             if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
                 if (profiles[i].children[0].children[2]) profiles[i].children[0].children[2].children[0].click();
