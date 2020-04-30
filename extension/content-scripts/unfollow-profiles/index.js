@@ -41,16 +41,13 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
 
             if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
 
-                unfollowLogic(profiles[i], unfollowResults, profilesToUnfollowFromPopup, store, i);
+                unfollowLogic(profiles[i], profiles, countOfLoadedProfiles, unfollowResults, profilesToUnfollowFromPopup, store, i);
                 i++;
-                console.log(profilesToUnfollowFromPopup)
                 
-                if ( i === countOfLoadedProfiles ) {
-                    document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTop += "420";
-                    setTimeout(() => {
-                        profiles = profilesToUnfollow(); //update
-                        countOfLoadedProfiles = profiles.length - 1;
-                    }, 2000);
+                if ( !JSON.stringify(i/7).includes(".") ) { 
+                    document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: 325, behavior: 'smooth'});
+                    profiles = profilesToUnfollow(); //update
+                    countOfLoadedProfiles = profiles.length - 1;
                 }
 
                 if (i === profilesToUnfollowCount) {
@@ -64,7 +61,7 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
     unfollowProfileLoop();
 };
 
-const unfollowLogic = (profile, unfollowResults, profilesToUnfollowFromPopup, store, i) => {
+const unfollowLogic = (profile, profiles, countOfLoadedProfiles, unfollowResults, profilesToUnfollowFromPopup, store, i) => {
 
     // for (const profile in profiles) {
 
@@ -83,8 +80,7 @@ const unfollowLogic = (profile, unfollowResults, profilesToUnfollowFromPopup, st
             if (profile.children[0].children[2]) profile.children[0].children[2].children[0].click();
             if (profile.children[0].children[1]) profile.children[0].children[1].children[0].click();
             if (document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_")) document.querySelector("body > div:nth-child(19) > div > div > div.mt3GC > button.aOOlW.-Cab_").click();
-            updateUnfollowResults(unfollowResults, profile.children[0].children[1].children[0].children[0].children[0].children[0].href);
-            
+            // updateUnfollowResults(unfollowResults, profile.children[0].children[1].children[0].children[0].children[0].children[0].href);
 
             // const unfollowedProfile = profilesToUnfollowFromPopup.filter( profile => profile === profiles[i].children[0].children[1].children[0].children[0].children[0].children[0].href);
             // const mappedStoreFollowedProfiles = store.igHelperStore.following.followedProfiles.map( profile => unfollowedProfile.includes(profile) ? null : profile);

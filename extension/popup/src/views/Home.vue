@@ -95,6 +95,7 @@ export default {
       .headline{
         display: flex;
         justify-content: space-between;
+        align-self: flex-start;
       }
 
       .profile {
