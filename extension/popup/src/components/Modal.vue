@@ -43,7 +43,7 @@ export default {
         profilesToUnfollow: this.$store.getters.getFollowedProfiles
       }
       eventBus.sendMessageToContentScript('unfollowProfiles', data);
-
+      eventBus.sendMessageToContentScript("addExtensionOverlay");
       setTimeout(() => {
         window.close();
       }, 1500);

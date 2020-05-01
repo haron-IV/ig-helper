@@ -2,6 +2,7 @@ import getMessageFromPopup from '../utils/getMessageFromPopup';
 import config from "./config.js";
 import { updateStore } from "../store/index.js";
 import { updateUnfollowResults } from "./unfollowDataHelper.js";
+import { removeOverlayFromPage } from "../utils/blockingOverlay.js";
 
 const unfollowProfiles = (store) => {
     getMessageFromPopup("unfollowProfiles", (message) => {
@@ -59,8 +60,9 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 }
 
                 if (i === profilesToUnfollowCount) {
-                    console.table(`Unfollowed profiles: ${unfollowResults.unfollowedProfilesCount}. Unfollowed profiles list: ${unfollowResults.unfollowedProfiles}`);
+                    console.log(`Unfollowed profiles: ${unfollowResults.unfollowedProfilesCount}. Unfollowed profiles list: ${unfollowResults.unfollowedProfiles}`);
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div:nth-child(1) > div > div:nth-child(3) > button").click(); // close followers modal
+                    removeOverlayFromPage();
                 } // TODO: should show small modal or open popup
                 unfollowProfileLoop();
             }

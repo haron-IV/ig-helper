@@ -1,6 +1,7 @@
 import {setStoreSchemaIfItIsEmty, updateStore, clearStore} from "./store/index";
 import storeFollowedProfiles from "./get-followers/index";
 import unfollowProfiles from './unfollow-profiles/index';
+import { overlay } from "./utils/blockingOverlay.js";
 
 chrome.storage.sync.get("igHelperStore", store => { 
     // entire content-script shoud be inside store get cuz we need data in whole application    
@@ -15,4 +16,5 @@ chrome.storage.sync.get("igHelperStore", store => {
 
     storeFollowedProfiles(store);
     unfollowProfiles(store);
+    overlay();
 });
