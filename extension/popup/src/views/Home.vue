@@ -86,10 +86,11 @@ export default {
     .card {
       min-height: 25%;  
       height: 75%;
+      overflow: scroll;
 
       .followed-profiles-list {
-        height: -webkit-fill-available;
-        overflow: scroll;
+        height: -webkit-fill-available;  
+        display: block
       }
 
       .headline{

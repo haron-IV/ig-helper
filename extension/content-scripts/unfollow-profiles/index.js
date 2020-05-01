@@ -31,6 +31,7 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
     let profiles = profilesToUnfollow();
     let countOfLoadedProfiles = profiles.length - 1;
     let i = 0;
+    let scrollHeight = 0;
     const unfollowResults = {
         unfollowedProfilesCount: 0,
         unfollowedProfiles: []
@@ -44,14 +45,21 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 unfollowLogic(profiles[i], profiles, countOfLoadedProfiles, unfollowResults, profilesToUnfollowFromPopup, store, i);
                 i++;
                 
-                if ( !JSON.stringify(i/7).includes(".") ) { 
-                    document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: 325, behavior: 'smooth'});
-                    profiles = profilesToUnfollow(); //update
-                    countOfLoadedProfiles = profiles.length - 1;
+                if ( !JSON.stringify(i/7).includes(".") ) {
+                    console.log(JSON.stringify(i/6));
+
+                    scrollHeight += 385;
+                    document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: scrollHeight, behavior: 'smooth'});
+                    setTimeout(() => {
+                        profiles = profilesToUnfollow(); //update
+                        countOfLoadedProfiles = profiles.length - 1;    
+                    }, 1000);
+                    
                 }
 
                 if (i === profilesToUnfollowCount) {
                     console.table(`Unfollowed profiles: ${unfollowResults.unfollowedProfilesCount}. Unfollowed profiles list: ${unfollowResults.unfollowedProfiles}`);
+                    document.querySelector("body > div.RnEpo.Yx5HN > div > div:nth-child(1) > div > div:nth-child(3) > button").click(); // close followers modal
                 } // TODO: should show small modal or open popup
                 unfollowProfileLoop();
             }
