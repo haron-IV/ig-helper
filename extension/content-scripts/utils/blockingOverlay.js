@@ -31,7 +31,11 @@ const overlayElement = () => {
     `;
     overlay.setAttribute("id", "extension-overlay");
     overlay.innerHTML = `
-        <h1> You can't do anything while extension working automatically. </h1>
+        <div style="background-color: rgba(0, 0, 0, .35); padding: 2rem; border-radius: 5px;">
+            <h1> You can't do anything while extension working automatically. </h1>
+            <p style="font-size: 2rem; margin: .5rem 0;"> When automations end work this window will disappear. </p>
+            <p style="font-size: 1.5rem;"> Extension blocking your actions on this page for working correctly.</p>
+        </div>
     `;
 
     return overlay;
