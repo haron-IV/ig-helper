@@ -45,6 +45,10 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
 
                 unfollowLogic(profiles[i], profiles, countOfLoadedProfiles, unfollowResults, profilesToUnfollowFromPopup, store, i);
                 i++;
+                profilesToUnfollowFromPopup.pop();
+                store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup;
+                updateStore(store);
+
                 console.log(`unfollowing... | removed ${i} profiles |`)
                 
                 if ( !JSON.stringify(i/7).includes(".") ) {
@@ -60,7 +64,8 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 }
 
                 if (i === profilesToUnfollowCount) {
-                    console.log(`Unfollowed profiles: ${unfollowResults.unfollowedProfilesCount}. Unfollowed profiles list: ${unfollowResults.unfollowedProfiles}`);
+                    updateStore(store);
+                    // console.log(`Unfollowed profiles: ${unfollowResults.unfollowedProfilesCount}. Unfollowed profiles list: ${unfollowResults.unfollowedProfiles}`);
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div:nth-child(1) > div > div:nth-child(3) > button").click(); // close followers modal
                     removeOverlayFromPage();
                 } // TODO: should show small modal or open popup

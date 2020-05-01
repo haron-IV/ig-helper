@@ -5,7 +5,7 @@
 
       <v-divider></v-divider>
 
-      <div>
+      <div style="text-align: center; padding-top: 1rem;">
         Unfollowing {{unfollowCunt}} profiles will takes from 
         <span style="text-decoration: underline">{{calcSleepTime($store.state.data.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[0])}}</span> 
         to <span style="text-decoration: underline">{{calcSleepTime($store.state.data.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[1])}}</span>
@@ -19,7 +19,7 @@
       <v-divider></v-divider>
       <v-card-actions class="modal__button-section">
         <v-btn color="blue darken-1" text @click="$store.commit('app/toggleUnfollowModal', false)">Close</v-btn>
-        <v-btn color="blue darken-1" text @click="unfollowProfiles()">Start</v-btn>
+        <v-btn color="blue darken-1" text @click="unfollowProfiles(unfollowCunt === 0 ? $store.getters.getFollowedProfiles.length : unfollowCunt)">Start</v-btn>
       </v-card-actions>
     </v-card>
   </v-overlay>
@@ -37,11 +37,12 @@ export default {
   },
   computed: {},
   methods: {
-    unfollowProfiles(){
+    unfollowProfiles(unfollowCunt){
       const data = {
-        unfollowCunt: this.unfollowCunt,
+        unfollowCunt: JSON.parse(unfollowCunt),
         profilesToUnfollow: this.$store.getters.getFollowedProfiles
       }
+      console.log(data)
       eventBus.sendMessageToContentScript('unfollowProfiles', data);
       eventBus.sendMessageToContentScript("addExtensionOverlay");
       setTimeout(() => {

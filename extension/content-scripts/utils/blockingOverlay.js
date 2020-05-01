@@ -1,9 +1,7 @@
 import getMessageFromPopup from "./getMessageFromPopup.js";
 
 const overlay = () => {
-    console.log("overlay ready");
     getMessageFromPopup("addExtensionOverlay", () => {
-        console.log("add overlay");
         addOverlayToPage();
     });
 
@@ -26,15 +24,18 @@ const overlayElement = () => {
     justify-content: center; 
     align-items: center;
     font-size: 2.5rem;
-    color: rgba(255, 255, 255, .45);
+    color: rgba(255, 255, 255, .65);
     text-shadow: 2px 2px 2px rgba(0, 0, 0, .55);
     `;
     overlay.setAttribute("id", "extension-overlay");
     overlay.innerHTML = `
-        <div style="background-color: rgba(0, 0, 0, .35); padding: 2rem; border-radius: 5px;">
+        <div style="background-color: rgba(0, 0, 0, .35); padding: 2rem; border-radius: 5px; text-align: center; font-family: Roboto,Helvetica,Arial,sans-serif;">
             <h1> You can't do anything while extension working automatically. </h1>
-            <p style="font-size: 2rem; margin: .5rem 0;"> When automations end work this window will disappear. </p>
+            <p style="font-size: 2rem; margin: .5rem 0;"> When automations end his work this window will disappear. </p>
             <p style="font-size: 1.5rem;"> Extension blocking your actions on this page for working correctly.</p>
+            <p style="font-size: 1.2rem;"> You can open new one instagram page and do your stuff there 
+                <a href="#" target="_blabk" style="color: #c7e4ff">instagram.com</a>
+            </p>
         </div>
     `;
 

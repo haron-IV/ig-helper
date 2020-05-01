@@ -20,6 +20,7 @@ export default {
   methods: {
     colletFollowedUsers() {
       eventBus.sendMessageToContentScript('colletFollowedUsers');
+      window.close();
     },
     unfollow(){
       this.$store.commit('app/toggleUnfollowModal', true);
