@@ -5,6 +5,12 @@
 
       <v-divider></v-divider>
 
+      <div>
+        Unfollowing {{unfollowCunt}} profiles will takes from 
+        <span style="text-decoration: underline">{{calcSleepTime($store.state.data.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[0])}}</span> 
+        to <span style="text-decoration: underline">{{calcSleepTime($store.state.data.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[1])}}</span>
+      </div>
+
       <v-card-text class="modal__input-wrapper">
         <v-icon class="info-arrow" small>mdi-arrow-right</v-icon>
         <input type="number" class="unfollow-count-input" autofocus v-model="unfollowCunt" /> / {{$store.getters.getFollowedProfiles.length}}
@@ -29,6 +35,7 @@ export default {
       unfollowCunt: 0
     };
   },
+  computed: {},
   methods: {
     unfollowProfiles(){
       const data = {
@@ -36,6 +43,31 @@ export default {
         profilesToUnfollow: this.$store.getters.getFollowedProfiles
       }
       eventBus.sendMessageToContentScript('unfollowProfiles', data);
+
+      setTimeout(() => {
+        window.close();
+      }, 1500);
+    },
+    calcSleepTime(sleepDuration){
+      // TODO: worse calculating ;)
+      let time = 0;
+      const timeInSeconds = this.unfollowCunt * sleepDuration;
+      if (timeInSeconds < 59) time = `${timeInSeconds}s`;
+      if (timeInSeconds >= 60) {
+        const minutes = `${ (timeInSeconds / 60).toString().slice(0, 1) }m`;
+        const seconds = `${ (timeInSeconds / 60).toString().slice(2, 3) }s`;
+
+        time = `${minutes} ${seconds}`;
+      };
+      if (timeInSeconds >= 3600) {
+        const hours = `${( (timeInSeconds / 60)/60 ).toString().slice(0, 1)}h`;
+        const minutes = `${ (timeInSeconds / 60).toString().slice(0, 1) }m`;
+        const seconds = `${ (timeInSeconds / 60).toString().slice(2, 3) }s`;
+        
+        time = `${hours} ${minutes} ${seconds}`;
+      };
+
+      return time;
     }
   }
 };

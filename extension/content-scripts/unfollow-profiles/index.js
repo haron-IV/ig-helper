@@ -44,6 +44,7 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
 
                 unfollowLogic(profiles[i], profiles, countOfLoadedProfiles, unfollowResults, profilesToUnfollowFromPopup, store, i);
                 i++;
+                console.log(`unfollowing... | removed ${i} profiles |`)
                 
                 if ( !JSON.stringify(i/7).includes(".") ) {
                     console.log(JSON.stringify(i/6));
@@ -63,7 +64,7 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 } // TODO: should show small modal or open popup
                 unfollowProfileLoop();
             }
-        }, randomTimeAfterUnfollow(config.sleepAfterUnfollow[0], config.sleepAfterUnfollow[1]));
+        }, randomTimeAfterUnfollow(store.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[0], store.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[1]) );
     };
 
     unfollowProfileLoop();
