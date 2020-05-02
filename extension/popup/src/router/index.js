@@ -15,7 +15,7 @@ Vue.use(VueRouter)
   },
   {
     path: '/SavedProfiles',
-    name: 'SavedProfiles',
+    name: 'Saved Profiles',
     menuIcon: 'mdi-folder-account',
     component: SavedProfiles
   },

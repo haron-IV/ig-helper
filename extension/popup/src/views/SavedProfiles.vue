@@ -5,10 +5,10 @@
         </v-flex>
         
         <div class="saved-profiles__list">
-            <div class="card-wrapper" v-for="tt of 50" :key="tt">
+            <div class="card-wrapper" v-for="profile of $store.getters.getFollowedProfiles" :key="profile">
                 <v-card class="card">
                     <v-card-content class="card__content">
-                        <a class="link" href="https://instagram.com">profile [{{tt}}]</a>
+                        <a class="link" :href="profile">{{ profile.replace("https://www.instagram.com/", "").slice(0, -1) }}</a>
                     </v-card-content>
 
                     <v-card-actions>
@@ -72,10 +72,12 @@ export default {
                 padding-top: 1rem;
 
                 &__content {
+                    padding: 0 .4rem;
                     display: flex;    
                     justify-content: center;
                     
                     .link {
+                        font-weight: 900;
                         color: rgba(0, 0, 0, .75);
                     }
                 }
