@@ -43,7 +43,6 @@ export default {
   created(){},
   methods: {
     removeProfile(profile){
-        console.log(1)
         if (this.$store.state.data.igHelperStore.savedProfiles.includes(profile)){
             this.$store.state.data.igHelperStore.savedProfiles = this.$store.state.data.igHelperStore.savedProfiles.filter(el => el != profile);
             chrome.storage.sync.set(this.$store.state.data);
