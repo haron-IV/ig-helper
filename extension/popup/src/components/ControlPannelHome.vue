@@ -6,6 +6,11 @@
     </v-flex>
 
     <v-flex xs3 class="button-wrapper">
+      <v-btn dark small @click.native="clearAllData()">Clear data</v-btn>
+      <div class="button-caption">Clears all extension date.</div>
+    </v-flex>
+
+    <v-flex xs3 class="button-wrapper">
       <v-btn dark small @click.native="unfollow()">Unfollow</v-btn>
       <div class="button-caption">Go to your profile. Click button and set how many profiles you want to unfollow.</div>
     </v-flex>
@@ -21,6 +26,9 @@ export default {
     colletFollowedUsers() {
       eventBus.sendMessageToContentScript('colletFollowedUsers');
       window.close();
+    },
+    clearAllData(){
+      eventBus.sendMessageToContentScript('clearAllData');
     },
     unfollow(){
       this.$store.commit('app/toggleUnfollowModal', true);
