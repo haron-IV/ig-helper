@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/Home.vue'
 import About from '../views/About.vue';
+import SavedProfiles from "../views/SavedProfiles.vue";
 
 Vue.use(VueRouter)
   const routes = [
@@ -13,8 +14,15 @@ Vue.use(VueRouter)
     component: Home
   },
   {
+    path: '/SavedProfiles',
+    name: 'SavedProfiles',
+    menuIcon: 'mdi-folder-account',
+    component: SavedProfiles
+  },
+  {
     path: '/about',
     name: 'About',
+    menuIcon: 'mdi-information',
     component : About
   }
 ]
