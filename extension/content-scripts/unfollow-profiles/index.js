@@ -22,16 +22,12 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
     let countOfLoadedProfiles = profiles.length - 1;
     let i = 0;
     let scrollHeight = 0;
-    const unfollowResults = {
-        unfollowedProfilesCount: 0,
-        unfollowedProfiles: []
-    };
 
     function unfollowProfileLoop() {
         setTimeout(() => {
             if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
 
-                unfollowLogic(profiles[i], profiles, countOfLoadedProfiles, unfollowResults, profilesToUnfollowFromPopup, store, i);
+                unfollowLogic(profiles[i]);
                 i++;
                 profilesToUnfollowFromPopup.pop();
                 store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup;
@@ -51,8 +47,8 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 }
 
                 if (i === profilesToUnfollowCount) {
+                    // export this to external function
                     updateStore(store);
-                    // console.log(`Unfollowed profiles: ${unfollowResults.unfollowedProfilesCount}. Unfollowed profiles list: ${unfollowResults.unfollowedProfiles}`);
                     closeFollowerModal();
                     removeOverlayFromPage();
 
@@ -63,7 +59,8 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                             message: `Unfollowing done. Unfollowed ${profilesToUnfollowCount} profiles.`
                         }
                     });
-                } // TODO: should show small modal or open popup
+                    // 
+                }
                 unfollowProfileLoop();
             }
         }, randomTimeAfterUnfollow(
