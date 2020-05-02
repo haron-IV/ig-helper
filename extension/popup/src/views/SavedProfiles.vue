@@ -8,13 +8,13 @@
             <div class="card-wrapper" v-for="profile of $store.getters.getSavedProfiles" :key="profile">
                 <v-card class="card">
                     <v-card-content class="card__content">
-                        <a class="link" :href="profile">{{ profile.replace("https://www.instagram.com/", "").slice(0, -1) }}</a>
+                        <a class="link" @click="openProfile(profile)">{{ profile.replace("https://www.instagram.com/", "").slice(0, -1) }}</a>
                     </v-card-content>
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
 
-                        <v-btn icon small>
+                        <v-btn icon small @click="removeProfile(profile)">
                             <v-icon small>mdi-delete</v-icon>
                         </v-btn>
 
@@ -42,10 +42,17 @@ export default {
   },
   created(){},
   methods: {
+    removeProfile(profile){
+        console.log(1)
+        if (this.$store.state.data.igHelperStore.savedProfiles.includes(profile)){
+            this.$store.state.data.igHelperStore.savedProfiles = this.$store.state.data.igHelperStore.savedProfiles.filter(el => el != profile);
+            chrome.storage.sync.set(this.$store.state.data);
+        }
+    },
     openProfile(profile){
       window.open(profile);
     },
-    clearFollowedProfilesList(){
+    clearsavedProfilesList(){
       this.$store.commit("clearFollowedProfilesList");
       chrome.storage.sync.set(this.$store.state.data);
     }
@@ -79,6 +86,7 @@ export default {
                     .link {
                         font-weight: 900;
                         color: rgba(0, 0, 0, .75);
+                        cursor: pointer;
                     }
                 }
             }
