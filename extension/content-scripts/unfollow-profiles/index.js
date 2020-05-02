@@ -68,6 +68,14 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                     // console.log(`Unfollowed profiles: ${unfollowResults.unfollowedProfilesCount}. Unfollowed profiles list: ${unfollowResults.unfollowedProfiles}`);
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div:nth-child(1) > div > div:nth-child(3) > button").click(); // close followers modal
                     removeOverlayFromPage();
+
+                    chrome.runtime.sendMessage('', {
+                        type: 'notification-unfollowing',
+                        options: {
+                            title: "Unfollowing done.",
+                            message: `Unfollowing done. Unfollowed ${profilesToUnfollowCount} profiles.`
+                        }
+                    });
                 } // TODO: should show small modal or open popup
                 unfollowProfileLoop();
             }
