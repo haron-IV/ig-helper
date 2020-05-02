@@ -5,6 +5,7 @@ import { updateUnfollowResults } from "./unfollowDataHelper.js";
 import { removeOverlayFromPage } from "../utils/blockingOverlay.js";
 import speedUnfollowSleepSetter from './speedUnfollowSleepSetter.js';
 import randomTimeAfterUnfollow from './randomTimeAfterUnfollow.js';
+import checkAndScrollList from "./checkAndScrollList.js";
 
 const unfollowProfiles = (store) => {
     getMessageFromPopup("unfollowProfiles", (message) => {
@@ -46,17 +47,10 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
 
                 console.log(`unfollowing... | removed ${i} profiles |`)
                 
-                if ( !JSON.stringify(i/3).includes(".") ) {
-                    console.log(JSON.stringify(i/3));
-
-                    scrollHeight += 150;
-                    document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: scrollHeight, behavior: 'smooth'});
-                    setTimeout(() => {
-                        profiles = profilesToUnfollow(); //update
-                        countOfLoadedProfiles = profiles.length - 1;    
-                    }, 1000);
-                    
-                }
+                checkAndScrollList(i, scrollHeight, ()=> {
+                    profiles = profilesToUnfollow(); //update
+                    countOfLoadedProfiles = profiles.length - 1;    
+                });
 
                 if (i === profilesToUnfollowCount) {
                     updateStore(store);
