@@ -51,10 +51,10 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
 
                 console.log(`unfollowing... | removed ${i} profiles |`)
                 
-                if ( !JSON.stringify(i/7).includes(".") ) {
-                    console.log(JSON.stringify(i/6));
+                if ( !JSON.stringify(i/4).includes(".") ) {
+                    console.log(JSON.stringify(i/4));
 
-                    scrollHeight += 385;
+                    scrollHeight += 120;
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: scrollHeight, behavior: 'smooth'});
                     setTimeout(() => {
                         profiles = profilesToUnfollow(); //update
