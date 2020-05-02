@@ -5,11 +5,12 @@
 
       <v-divider></v-divider>
 
-      <div style="text-align: center; padding-top: 1rem;">
+      <!-- <div style="text-align: center; padding-top: 1rem; display: none;">
+        TODO: not working
         Unfollowing {{unfollowCunt}} profiles will takes from 
         <span style="text-decoration: underline">{{calcSleepTime($store.state.data.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[0])}}</span> 
         to <span style="text-decoration: underline">{{calcSleepTime($store.state.data.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[1])}}</span>
-      </div>
+      </div> -->
 
       <v-card-text class="modal__input-wrapper">
         <v-icon class="info-arrow" small>mdi-arrow-right</v-icon>

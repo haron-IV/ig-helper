@@ -1,4 +1,4 @@
-import {setStoreSchemaIfItIsEmty, updateStore, clearStore} from "./store/index";
+import { setStoreSchemaIfItIsEmty } from "./store/index";
 import storeFollowedProfiles from "./get-followers/index";
 import unfollowProfiles from './unfollow-profiles/index';
 import { overlay } from "./utils/blockingOverlay.js";

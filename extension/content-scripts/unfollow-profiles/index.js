@@ -3,6 +3,8 @@ import config from "./config.js";
 import { updateStore } from "../store/index.js";
 import { updateUnfollowResults } from "./unfollowDataHelper.js";
 import { removeOverlayFromPage } from "../utils/blockingOverlay.js";
+import speedUnfollowSleepSetter from './speedUnfollowSleepSetter.js';
+import randomTimeAfterUnfollow from './randomTimeAfterUnfollow.js';
 
 const unfollowProfiles = (store) => {
     getMessageFromPopup("unfollowProfiles", (message) => {
@@ -22,12 +24,6 @@ const profilesToUnfollow = () => {
     return document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP > ul > div").children;
 };
 
-const randomTimeAfterUnfollow = (from, to) => {
-    from = from * 1000;
-    to = to * 1000;
-    return Math.floor(Math.random() * (to - from + 1) + from);
-};
-
 const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) => {
     let profiles = profilesToUnfollow();
     let countOfLoadedProfiles = profiles.length - 1;
@@ -40,7 +36,6 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
 
     function unfollowProfileLoop() {
         setTimeout(() => {
-
             if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
 
                 unfollowLogic(profiles[i], profiles, countOfLoadedProfiles, unfollowResults, profilesToUnfollowFromPopup, store, i);
@@ -54,7 +49,7 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 if ( !JSON.stringify(i/3).includes(".") ) {
                     console.log(JSON.stringify(i/3));
 
-                    scrollHeight += 120;
+                    scrollHeight += 150;
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: scrollHeight, behavior: 'smooth'});
                     setTimeout(() => {
                         profiles = profilesToUnfollow(); //update
@@ -79,7 +74,10 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 } // TODO: should show small modal or open popup
                 unfollowProfileLoop();
             }
-        }, randomTimeAfterUnfollow(store.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[0], store.igHelperStore.unfollowing.unfollowingConfig.sleepAfterUnfollow[1]) );
+        }, randomTimeAfterUnfollow(
+            speedUnfollowSleepSetter(profilesToUnfollowCount, store)[0], 
+            speedUnfollowSleepSetter(profilesToUnfollowCount, store)[1]
+        ));
     };
 
     unfollowProfileLoop();
