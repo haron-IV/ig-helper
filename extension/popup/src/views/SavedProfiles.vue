@@ -5,7 +5,7 @@
         </v-flex>
         
         <div class="saved-profiles__list">
-            <div class="card-wrapper" v-for="profile of $store.getters.getFollowedProfiles" :key="profile">
+            <div class="card-wrapper" v-for="profile of $store.getters.getSavedProfiles" :key="profile">
                 <v-card class="card">
                     <v-card-content class="card__content">
                         <a class="link" :href="profile">{{ profile.replace("https://www.instagram.com/", "").slice(0, -1) }}</a>

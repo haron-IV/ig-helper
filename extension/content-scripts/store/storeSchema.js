@@ -8,7 +8,8 @@ const storeSchema = {
         },
         unfollowing: {
             unfollowingConfig
-        }
+        },
+        savedProfiles: []
     }
 };
 
