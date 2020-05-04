@@ -46,12 +46,13 @@ export default {
   methods: {
     removeProfile(profile){
         if (this.$store.state.data.igHelperStore.savedProfiles.includes(profile)){
-            this.$store.commit("setData", this.$store.getters.getSavedProfiles.filter(el => el != profile));
+            this.$store.state.data.igHelperStore.savedProfiles = this.$store.state.data.igHelperStore.savedProfiles.filter(el => el != profile);
             chrome.storage.sync.set(this.$store.state.data);
         }
     },
     blockProfile(profile){
         eventBus.sendMessageToContentScript("blockUserFromSavedProfiles", profile);
+        this.removeProfile(profile);
     },
     openProfile(profile){
       window.open(profile);
