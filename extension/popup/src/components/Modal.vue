@@ -43,12 +43,12 @@ export default {
         unfollowCunt: JSON.parse(unfollowCunt),
         profilesToUnfollow: this.$store.getters.getFollowedProfiles
       }
-      console.log(data)
+      
       eventBus.sendMessageToContentScript('unfollowProfiles', data);
       eventBus.sendMessageToContentScript("addExtensionOverlay");
       setTimeout(() => {
         window.close();
-      }, 1500);
+      }, 1000);
     },
     calcSleepTime(sleepDuration){
       // TODO: worse calculating ;)
