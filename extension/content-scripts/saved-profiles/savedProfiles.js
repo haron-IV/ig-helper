@@ -12,11 +12,13 @@ const savedProfiles = (store) => {
 
 const profileToolbarSelector = "#react-root > section > main > div > header > section";
 
-const addListener = (store) => {
+const addListener = () => {
     document.querySelector(`#${saveProfileButton().id}`).addEventListener("click", () => {
         removeSaveProfileButtonFromPage();
-        store.igHelperStore.savedProfiles.push(window.location.href);
-        updateStore(store);
+        chrome.storage.sync.get("igHelperStore", store => {
+            store.igHelperStore.savedProfiles.push(window.location.href);
+            updateStore(store);
+        });
     });
 };
 
@@ -38,7 +40,7 @@ const saveProfileButton = () => {
 const addSaveProfileButtonToPage = (store) => {
     if (!store.igHelperStore.savedProfiles.includes(window.location.href)) {
         document.querySelector(profileToolbarSelector).before(saveProfileButton());
-        addListener(store);
+        addListener();
     }
 };
 
