@@ -36,8 +36,6 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 console.log(`unfollowing... | removed ${i} profiles |`)
                 
                 if ( !JSON.stringify(i/3).includes(".") ) {
-                    console.log(JSON.stringify(i/3));
-
                     scrollHeight += 150;
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: scrollHeight, behavior: 'smooth'});
                     setTimeout(() => {
