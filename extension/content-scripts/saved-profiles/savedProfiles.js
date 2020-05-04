@@ -1,6 +1,7 @@
 import { updateStore } from "../store/index.js";
 import unfollowSavedProfile from "./unfollowSavedProfile.js";
 import waitForElement from "../utils/waitForElement.js";
+import { profileObject } from "./getProfileInfo.js";
 
 const savedProfiles = (store) => {
     waitForElement(profileToolbarSelector, 250, () => { 
@@ -16,7 +17,7 @@ const addListener = () => {
     document.querySelector(`#${saveProfileButton().id}`).addEventListener("click", () => {
         removeSaveProfileButtonFromPage();
         chrome.storage.sync.get("igHelperStore", store => {
-            store.igHelperStore.savedProfiles.push(window.location.href);
+            store.igHelperStore.savedProfiles.push(profileObject());
             updateStore(store);
         });
     });
