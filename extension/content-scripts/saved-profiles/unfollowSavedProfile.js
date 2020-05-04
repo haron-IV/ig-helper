@@ -12,7 +12,8 @@ const unfollowSavedProfile = (store) => {
 };
 
 const autoBlockProfile = (store) => {
-    if (JSON.parse(localStorage.getItem("igHelperProfileToBlock")) === window.location.href) {
+    const condition = localStorage.getItem("igHelperProfileToBlock") && JSON.parse(localStorage.getItem("igHelperProfileToBlock")) != null && JSON.parse( localStorage.getItem("igHelperProfileToBlock") ) == window.location.href;
+    if (condition) {
         waitForElement("#react-root > section > main > div > header > section", 500, () => {
             openUnfollowModal();
             setTimeout(() => {
