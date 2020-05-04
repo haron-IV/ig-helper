@@ -46,21 +46,7 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                     }, 1000);   
                 }
 
-                if (i === profilesToUnfollowCount) {
-                    // export this to external function
-                    updateStore(store);
-                    closeFollowerModal();
-                    removeOverlayFromPage();
-
-                    chrome.runtime.sendMessage('', {
-                        type: 'notification-unfollowing',
-                        options: {
-                            title: "Unfollowing done.",
-                            message: `Unfollowing done. Unfollowed ${profilesToUnfollowCount} profiles.`
-                        }
-                    });
-                    // 
-                }
+                if (i === profilesToUnfollowCount) unfollowingDone(store, profilesToUnfollowCount);
                 unfollowProfileLoop();
             }
         }, randomTimeAfterUnfollow(
@@ -70,6 +56,20 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
     };
 
     unfollowProfileLoop();
+};
+
+const unfollowingDone = (store, profilesToUnfollowCount) => {
+    updateStore(store);
+    closeFollowerModal();
+    removeOverlayFromPage();
+
+    chrome.runtime.sendMessage('', {
+        type: 'notification-unfollowing',
+        options: {
+            title: "Unfollowing done.",
+            message: `Unfollowing done. Unfollowed ${profilesToUnfollowCount} profiles.`
+        }
+    });
 };
 
 const unfollowLogic = (profile) => {
