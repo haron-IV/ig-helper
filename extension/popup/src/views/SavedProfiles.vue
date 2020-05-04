@@ -14,12 +14,12 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
 
-                        <v-btn icon small @click="removeProfile(profile)">
+                        <v-btn icon small @click="removeProfile(profile)" title="remove profile">
                             <v-icon small>mdi-delete</v-icon>
                         </v-btn>
 
-                        <v-btn icon small>
-                            <v-icon small>mdi-bookmark</v-icon>
+                        <v-btn icon small @click="blockProfile(profile)" title="Block user">
+                            <v-icon small>mdi-block-helper</v-icon>
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import eventBus from "../eventBus.js";
+
 export default {
   name: 'SavedProfiles',
   components: {},
@@ -47,6 +49,9 @@ export default {
             this.$store.state.data.igHelperStore.savedProfiles = this.$store.state.data.igHelperStore.savedProfiles.filter(el => el != profile);
             chrome.storage.sync.set(this.$store.state.data);
         }
+    },
+    blockProfile(profile){
+        eventBus.sendMessageToContentScript("blockUserFromSavedProfiles", profile);
     },
     openProfile(profile){
       window.open(profile);

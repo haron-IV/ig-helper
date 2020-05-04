@@ -1,22 +1,14 @@
 import { updateStore } from "../store/index.js";
+import unfollowSavedProfile from "./unfollowSavedProfile.js";
+import waitForElement from "../utils/waitForElement.js";
 
 const savedProfiles = (store) => {
     waitForElement(profileToolbarSelector, 250, () => { 
         addSaveProfileButtonToPage(store);
     });
-};
 
-const waitForElement = (selector, time, callback) => {
-    if (document.querySelector(selector) != null) {
-        callback(); 
-        return
-    }else {
-        setTimeout(() => {
-            waitForElement(selector, time, callback);
-        }, time);
-    }
+    unfollowSavedProfile(store);
 };
-// #react-root > section > main > div > header > section > div.nZSzR > h2
 
 const profileToolbarSelector = "#react-root > section > main > div > header > section";
 
