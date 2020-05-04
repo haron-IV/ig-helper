@@ -1,17 +1,19 @@
 <template>
     <v-layout row class="saved-profiles">
         <v-flex xs12 class="my2">
-            <h1>Saved Profiles</h1>
+            <div>
+                <h1 style="display: inline">Saved Profiles</h1><sup style="top: -1.85em; left: 5px;">({{$store.getters.getSavedProfiles.length}})</sup>
+            </div>
         </v-flex>
         
         <div class="saved-profiles__list">
             <div class="card-wrapper">
                 <v-card class="card" v-for="profile of $store.getters.getSavedProfiles" :key="profile">
-                    <v-avatar class="card__avatar" @click="openProfile(profile)">
+                    <v-avatar class="card__avatar" @click="openProfile(profile.profileLink)">
                         <img :src="profile.avatar">
                     </v-avatar>
 
-                    <v-card-content class="card__content" @click="openProfile(profile)">
+                    <v-card-content class="card__content" @click="openProfile(profile.profileLink)">
                         <a class="link">{{ profile.profileLink.replace("https://www.instagram.com/", "").slice(0, -1) }}</a>
                         <div class="stats">
                             <span class="stats__info-label">Posts: </span>{{profile.posts}}
@@ -60,7 +62,7 @@ export default {
         }
     },
     blockProfile(profile){
-        eventBus.sendMessageToContentScript("blockUserFromSavedProfiles", profile);
+        eventBus.sendMessageToContentScript("blockUserFromSavedProfiles", profile.profileLink);
         this.removeProfile(profile);
     },
     openProfile(profile){
