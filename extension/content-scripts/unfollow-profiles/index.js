@@ -18,32 +18,26 @@ const unfollowProfiles = (store) => {
 };
 
 const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) => {
-    let profiles = profilesToUnfollow();
-    let countOfLoadedProfiles = profiles.length - 1;
     let i = 0;
     let scrollHeight = 0;
 
     function unfollowProfileLoop() {
         setTimeout(() => {
-            if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
-                console.log(`setted limit: ${profilesToUnfollowCount}, loader profiles: ${countOfLoadedProfiles}`);
+            const profiles = profilesToUnfollow();
+            const countOfLoadedProfiles = profiles.length - 1;
 
+            if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
                 unfollowLogic(profiles[i]);
                 i++;
                 profilesToUnfollowFromPopup.pop();
                 store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup;
                 updateStore(store);
 
-                console.log(`unfollowing... | removed ${i} profiles |`)
+                console.log(`unfollowing... | removed ${i} profiles | loaded profiles to unfollow: ${profiles.length}`);
                 
                 if ( !JSON.stringify(i/3).includes(".") ) {
                     scrollHeight += 150;
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: scrollHeight, behavior: 'smooth'});
-                    setTimeout(() => {
-                        profiles = document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP > ul > div").children; // same as profilesToUnfollow(), but this not wotking here.
-                        countOfLoadedProfiles = profiles.length - 1;
-                        console.log(profiles.length);
-                    }, 2000);
                 }
 
                 if (i === profilesToUnfollowCount) unfollowingDone(store, profilesToUnfollowCount);
@@ -56,6 +50,12 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
     };
 
     unfollowProfileLoop();
+};
+
+const unfollowLogic = (profile) => {
+    if (profile.children[0].children[2]) profile.children[0].children[2].children[0].click();
+    if (profile.children[0].children[1]) profile.children[0].children[1].children[0].click();
+    if (confirmUnfollowButton()) confirmUnfollowButton().click();
 };
 
 const unfollowingDone = (store, profilesToUnfollowCount) => {
@@ -72,12 +72,6 @@ const unfollowingDone = (store, profilesToUnfollowCount) => {
     });
 
     window.location.reload();
-};
-
-const unfollowLogic = (profile) => {
-    if (profile.children[0].children[2]) profile.children[0].children[2].children[0].click();
-    if (profile.children[0].children[1]) profile.children[0].children[1].children[0].click();
-    if (confirmUnfollowButton()) confirmUnfollowButton().click();
 };
 
 export default unfollowProfiles;
