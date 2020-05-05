@@ -26,6 +26,7 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
     function unfollowProfileLoop() {
         setTimeout(() => {
             if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
+                console.log(`setted limit: ${profilesToUnfollowCount}, loader profiles: ${countOfLoadedProfiles}`);
 
                 unfollowLogic(profiles[i]);
                 i++;
@@ -39,9 +40,10 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                     scrollHeight += 150;
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: scrollHeight, behavior: 'smooth'});
                     setTimeout(() => {
-                        profiles = profilesToUnfollow(); //update
-                        countOfLoadedProfiles = profiles.length - 1;    
-                    }, 1000);   
+                        profiles = document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP > ul > div").children; // same as profilesToUnfollow(), but this not wotking here.
+                        countOfLoadedProfiles = profiles.length - 1;
+                        console.log(profiles.length);
+                    }, 2000);
                 }
 
                 if (i === profilesToUnfollowCount) unfollowingDone(store, profilesToUnfollowCount);
