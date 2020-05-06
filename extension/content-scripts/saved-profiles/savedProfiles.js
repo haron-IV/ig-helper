@@ -1,6 +1,7 @@
 import { updateStore } from "../store/index.js";
 import unfollowSavedProfile from "./unfollowSavedProfile.js";
 import waitForElement from "../utils/waitForElement.js";
+import { profileObject } from "./getProfileInfo.js";
 
 const savedProfiles = (store) => {
     waitForElement(profileToolbarSelector, 250, () => { 
@@ -12,11 +13,13 @@ const savedProfiles = (store) => {
 
 const profileToolbarSelector = "#react-root > section > main > div > header > section";
 
-const addListener = (store) => {
+const addListener = () => {
     document.querySelector(`#${saveProfileButton().id}`).addEventListener("click", () => {
         removeSaveProfileButtonFromPage();
-        store.igHelperStore.savedProfiles.push(window.location.href);
-        updateStore(store);
+        chrome.storage.local.get("igHelperStore", store => {
+            store.igHelperStore.savedProfiles.push(profileObject());
+            updateStore(store);
+        });
     });
 };
 
@@ -38,7 +41,7 @@ const saveProfileButton = () => {
 const addSaveProfileButtonToPage = (store) => {
     if (!store.igHelperStore.savedProfiles.includes(window.location.href)) {
         document.querySelector(profileToolbarSelector).before(saveProfileButton());
-        addListener(store);
+        addListener();
     }
 };
 

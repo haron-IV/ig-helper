@@ -18,32 +18,26 @@ const unfollowProfiles = (store) => {
 };
 
 const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) => {
-    let profiles = profilesToUnfollow();
-    let countOfLoadedProfiles = profiles.length - 1;
     let i = 0;
     let scrollHeight = 0;
 
     function unfollowProfileLoop() {
         setTimeout(() => {
-            if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
+            const profiles = profilesToUnfollow();
+            const countOfLoadedProfiles = profiles.length - 1;
 
+            if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
                 unfollowLogic(profiles[i]);
                 i++;
                 profilesToUnfollowFromPopup.pop();
                 store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup;
                 updateStore(store);
 
-                console.log(`unfollowing... | removed ${i} profiles |`)
+                console.log(`unfollowing... | removed ${i} profiles | loaded profiles to unfollow: ${profiles.length}`);
                 
                 if ( !JSON.stringify(i/3).includes(".") ) {
-                    console.log(JSON.stringify(i/3));
-
                     scrollHeight += 150;
                     document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: scrollHeight, behavior: 'smooth'});
-                    setTimeout(() => {
-                        profiles = profilesToUnfollow(); //update
-                        countOfLoadedProfiles = profiles.length - 1;    
-                    }, 1000);   
                 }
 
                 if (i === profilesToUnfollowCount) unfollowingDone(store, profilesToUnfollowCount);
@@ -58,6 +52,12 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
     unfollowProfileLoop();
 };
 
+const unfollowLogic = (profile) => {
+    if (profile.children[0].children[2]) profile.children[0].children[2].children[0].click();
+    if (profile.children[0].children[1]) profile.children[0].children[1].children[0].click();
+    if (confirmUnfollowButton()) confirmUnfollowButton().click();
+};
+
 const unfollowingDone = (store, profilesToUnfollowCount) => {
     updateStore(store);
     closeFollowerModal();
@@ -70,12 +70,8 @@ const unfollowingDone = (store, profilesToUnfollowCount) => {
             message: `Unfollowing done. Unfollowed ${profilesToUnfollowCount} profiles.`
         }
     });
-};
 
-const unfollowLogic = (profile) => {
-    if (profile.children[0].children[2]) profile.children[0].children[2].children[0].click();
-    if (profile.children[0].children[1]) profile.children[0].children[1].children[0].click();
-    if (confirmUnfollowButton()) confirmUnfollowButton().click();
+    window.location.reload();
 };
 
 export default unfollowProfiles;

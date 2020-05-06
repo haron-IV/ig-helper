@@ -19,7 +19,7 @@ export default new Vuex.Store({
   },
   actions: {
     setData({ commit }) {
-      chrome.storage.sync.get('igHelperStore', (chromeStorage) => { 
+      chrome.storage.local.get('igHelperStore', (chromeStorage) => { 
         commit('setData', chromeStorage);
       });
     }

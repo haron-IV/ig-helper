@@ -12,7 +12,7 @@
 		"default_icon": "./icons/icon16.png",
 		"default_popup": "./popup/dist/index.html"
 	},
-	"permissions": [ "storage", "notifications", "contextMenus", "tabs", "activeTab" ],
+	"permissions": [ "storage", "notifications", "contextMenus", "tabs", "activeTab", "unlimitedStorage" ],
 	"content_scripts": [
 		{
 			"matches": [ "https://*.instagram.com/*" ],
