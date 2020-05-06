@@ -15,7 +15,11 @@ export default new Vuex.Store({
       state.data = data;
       console.log("setData:", state);
     },
-    clearFollowedProfilesList: state => state.data.igHelperStore.following.followedProfiles = []
+    clearFollowedProfilesList: state => state.data.igHelperStore.following.followedProfiles = [],
+    setLastMenuPosition(state, lastPosition) {
+      state.data.igHelperStore.menu.lastPosition = lastPosition;
+      chrome.storage.local.set(state.data);
+    }
   },
   actions: {
     setData({ commit }) {
@@ -26,7 +30,8 @@ export default new Vuex.Store({
   },
   getters: {
     getFollowedProfiles: state => state.data ? state.data.igHelperStore.following.followedProfiles : {},
-    getSavedProfiles: state => state.data ? state.data.igHelperStore.savedProfiles : []
+    getSavedProfiles: state => state.data ? state.data.igHelperStore.savedProfiles : [],
+    getLastMenuPosition: state => state.data ? state.data.igHelperStore.menu.lastPosition : ""
   },
   modules: {
     appearance,
