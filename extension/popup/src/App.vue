@@ -32,9 +32,12 @@
             <v-icon>{{ route.menuIcon }}</v-icon>
           </v-list-item-icon>
 
-          <v-list-item-content class="space-item">
-            <v-list-item-title>{{ route.name }}</v-list-item-title>
-          </v-list-item-content>
+          <v-badge :value="true" content="10" right>
+            <!-- TODO: add data to badge and stylize it:  https://vuetifyjs.com/en/components/badges/#badges-->
+            <v-list-item-content class="space-item">
+              <v-list-item-title>{{ route.name }}</v-list-item-title>
+            </v-list-item-content>
+          </v-badge>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
