@@ -26,7 +26,7 @@
           v-for="route in $router.options.routes"
           :key="route.name"
           link
-          @click="$router.push(route.path)"
+          @click="setRoute(route)"
         >
           <v-list-item-icon>
             <v-icon>{{ route.menuIcon }}</v-icon>
@@ -61,6 +61,11 @@ export default {
   beforeCreate(){
     this.$store.dispatch('setData');
   },
+  watch: {
+    '$store.getters.getLastMenuPosition'(){
+      this.$router.push(this.$store.getters.getLastMenuPosition);
+    }
+  },
   methods: {
     badgeContent(route) {
       switch(route.name) {
@@ -72,6 +77,10 @@ export default {
           return this.$store.getters.getSavedProfiles.length;
         }
       }
+    },
+    setRoute(route) {
+      this.$router.push(route.path);
+      this.$store.commit("setLastMenuPosition", route.path);
     }
   }
 };
