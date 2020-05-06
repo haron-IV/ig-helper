@@ -9,7 +9,10 @@ const storeSchema = {
         unfollowing: {
             unfollowingConfig
         },
-        savedProfiles: []
+        savedProfiles: [],
+        menu: {
+            lastPosition: ""
+        }
     }
 };
 

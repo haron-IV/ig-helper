@@ -6,14 +6,12 @@ import speedUnfollowSleepSetter from './speedUnfollowSleepSetter.js';
 import randomTimeAfterUnfollow from './randomTimeAfterUnfollow.js';
 import { openFollowedProfilesList, profilesToUnfollow, closeFollowerModal, confirmUnfollowButton } from "./elementsHelper.js";
 
-
 const unfollowProfiles = (store) => {
     getMessageFromPopup("unfollowProfiles", (message) => {
         openFollowedProfilesList();
         setTimeout(() => {
             unfollow(JSON.parse(message.value.unfollowCunt), message.value.profilesToUnfollow, store);
         }, config.sleepBeforeStartUnfollow);
-        
     });
 };
 
