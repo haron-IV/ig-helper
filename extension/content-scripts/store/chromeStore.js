@@ -1,10 +1,10 @@
 const setData = obj => {
-    chrome.storage.sync.set(obj);
+    chrome.storage.local.set(obj);
 };
 
 const getData = async name => {
     let data;
-    await chrome.storage.sync.get(name, (items) => { data = items });
+    await chrome.storage.local.get(name, (items) => { data = items });
     return data;
 };
 

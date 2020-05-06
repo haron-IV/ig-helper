@@ -16,7 +16,7 @@ const profileToolbarSelector = "#react-root > section > main > div > header > se
 const addListener = () => {
     document.querySelector(`#${saveProfileButton().id}`).addEventListener("click", () => {
         removeSaveProfileButtonFromPage();
-        chrome.storage.sync.get("igHelperStore", store => {
+        chrome.storage.local.get("igHelperStore", store => {
             store.igHelperStore.savedProfiles.push(profileObject());
             updateStore(store);
         });

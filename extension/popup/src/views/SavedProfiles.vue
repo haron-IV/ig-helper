@@ -58,7 +58,7 @@ export default {
     removeProfile(profile){
         if (this.$store.state.data.igHelperStore.savedProfiles.includes(profile)){
             this.$store.state.data.igHelperStore.savedProfiles = this.$store.state.data.igHelperStore.savedProfiles.filter(el => el != profile);
-            chrome.storage.sync.set(this.$store.state.data);
+            chrome.storage.local.set(this.$store.state.data);
         }
     },
     blockProfile(profile){
@@ -70,7 +70,7 @@ export default {
     },
     clearsavedProfilesList(){
       this.$store.commit("clearFollowedProfilesList");
-      chrome.storage.sync.set(this.$store.state.data);
+      chrome.storage.local.set(this.$store.state.data);
     }
   }
 }

@@ -61,7 +61,7 @@ export default {
     },
     clearFollowedProfilesList(){
       this.$store.commit("clearFollowedProfilesList");
-      chrome.storage.sync.set(this.$store.state.data);
+      chrome.storage.local.set(this.$store.state.data);
     }
   }
 }
