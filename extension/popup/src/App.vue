@@ -31,13 +31,12 @@
           <v-list-item-icon>
             <v-icon>{{ route.menuIcon }}</v-icon>
           </v-list-item-icon>
+          
+          <v-list-item-content class="space-item">
+            <v-list-item-title>{{ route.name }}</v-list-item-title>
+            <div class="space-item__badge">{{badgeContent(route)}}</div>
+          </v-list-item-content>
 
-          <v-badge :value="true" content="10" right>
-            <!-- TODO: add data to badge and stylize it:  https://vuetifyjs.com/en/components/badges/#badges-->
-            <v-list-item-content class="space-item">
-              <v-list-item-title>{{ route.name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-badge>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -61,15 +60,42 @@ export default {
   data: () => ({}),
   beforeCreate(){
     this.$store.dispatch('setData');
+  },
+  methods: {
+    badgeContent(route) {
+      switch(route.name) {
+        case "Get Followers": {
+          return this.$store.getters.getFollowedProfiles.length;
+        }
+
+        case "Saved Profiles": {
+          return this.$store.getters.getSavedProfiles.length;
+        }
+      }
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-  .app {
-    min-height: 450px;
-    .space-item {
-      margin: 0 .5rem;
+.app {
+  min-height: 450px;
+  .space-item {
+    margin: 0 .5rem;
+
+    &:hover {
+      .space-item__badge {
+        opacity: 1;
+      }
+    }
+
+    &__badge {
+      transition: opacity ease-in-out 200ms;
+      opacity: 0;
+      position: fixed;
+      right: 2rem;
+      font-size: 10px;
     }
   }
+}
 </style>
