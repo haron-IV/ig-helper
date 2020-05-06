@@ -39,7 +39,8 @@ const saveProfileButton = () => {
 };
 
 const addSaveProfileButtonToPage = (store) => {
-    if (!store.igHelperStore.savedProfiles.includes(window.location.href)) {
+    const isProfileSaved = store.igHelperStore.savedProfiles.filter ( profile => profile.profileLink.includes(window.location.href) );
+    if (isProfileSaved.length === 0) {
         document.querySelector(profileToolbarSelector).before(saveProfileButton());
         addListener();
     }
