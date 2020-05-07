@@ -14,12 +14,7 @@ const storeSchema = {
             lastPosition: ""
         },
         userProfile: {
-            profileLink: null,
-            profileImg: null,
-            followers: 0,
-            followed: 0,
-            lastUpdate: "",
-            archive: {} //archive there followers followed
+            archive: [] //archive there followers followed
         }
     }
 };
