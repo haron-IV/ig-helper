@@ -18,6 +18,7 @@ const storeSchema = {
             profileImg: null,
             followers: 0,
             followed: 0,
+            lastUpdate: "",
             archive: {} //archive there followers followed
         }
     }
