@@ -12,6 +12,11 @@ const storeSchema = {
         savedProfiles: [],
         menu: {
             lastPosition: ""
+        },
+        userProfile: {
+            profileLink: null,
+            followers: 0,
+            followed: 0
         }
     }
 };
