@@ -1,12 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import Profile from "../views/Profile.vue";
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import SavedProfiles from "../views/SavedProfiles.vue";
 
 Vue.use(VueRouter)
   const routes = [
+  {
+    path: '/profile',
+    name: 'Profile',
+    menuIcon: 'mdi-account',
+    component: Profile
+  },
   {
     path: '/',
     name: 'Get Followers',
@@ -23,7 +30,7 @@ Vue.use(VueRouter)
     path: '/about',
     name: 'About',
     menuIcon: 'mdi-information',
-    component : About
+    component: About
   }
 ]
 

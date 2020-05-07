@@ -16,7 +16,8 @@ const storeSchema = {
         userProfile: {
             profileLink: null,
             followers: 0,
-            followed: 0
+            followed: 0,
+            archive: {} //archive there followers followed
         }
     }
 };
