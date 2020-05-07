@@ -12,10 +12,10 @@
                     <p class="content__info"><span class="title">Followers:</span> {{$store.getters.getUserProfile.followers}}</p>
                     <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getUserProfile.followed}}</p>
                 </div>
+            </div>
 
-                <div class="update-info">
-                    <b>last update:</b> {{$store.getters.getUserProfile.lastUpdate}}
-                </div>
+            <div class="update-info">
+                <b>last update:</b> {{$store.getters.getUserProfile.lastUpdate}}
             </div>
         </section>
     </article>
@@ -49,7 +49,6 @@ export default {
 .profile {
     &__section-info {
         display: flex;
-        justify-content: space-between;
         padding-bottom: .5rem;
         border-bottom: 1px solid rgba(0, 0, 0, .2);
 
@@ -90,11 +89,16 @@ export default {
                     font-weight: 600;
                 }
             }
+        }
 
-            .update-info {
-                align-self: flex-end;
-                font-size: .6rem;
-            }
+        .update-info {
+            width: 100%;
+            position: absolute;
+            right: 0;
+            align-self: flex-end;
+            justify-self: flex-end;
+            text-align: right;
+            font-size: .6rem;
         }
     }
 }
