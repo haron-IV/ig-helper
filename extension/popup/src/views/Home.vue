@@ -14,8 +14,8 @@
               </v-list-item-title>
 
               <div>
-                <p v-for="(profile, i) in $store.getters.getFollowedProfiles" :key="i" @click="openProfile(profile)" class="profile">
-                  {{i+1}}) <a>{{profile.split("/")[3]}}</a> 
+                <p v-for="(profile, i) in $store.getters.getFollowedProfiles" :key="i" @click="openProfile(profile)" class="profile-list-item">
+                  {{i+1}}) <a>{{listItemProfile(profile)}}</a>
                 </p>
               </div>
             </v-list-item-content>
@@ -62,6 +62,9 @@ export default {
     clearFollowedProfilesList(){
       this.$store.commit("clearFollowedProfilesList");
       chrome.storage.local.set(this.$store.state.data);
+    },
+    listItemProfile(profile){
+      if (profile) return profile.split("/")[3]
     }
   }
 }
@@ -99,7 +102,7 @@ export default {
         align-self: flex-start;
       }
 
-      .profile {
+      .profile-list-item {
         cursor: pointer;
         transition: all ease-in-out 200ms;
 

@@ -64,6 +64,7 @@ export default {
   watch: {
     'archive.date'(){
         if (this.archive.date.length === 2) this.archive.datepicker = false;
+        console.log(this.archive.date);
     },
     'archive.datepicker'() {
         setTimeout(() => {
