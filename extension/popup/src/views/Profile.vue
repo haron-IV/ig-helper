@@ -22,10 +22,6 @@
         <section class="profile__section-archive">
             <header class="archive__header"><h2>Archive</h2></header>
 
-            <v-row class="date-picker-wrapper" v-if="archive.datepicker">
-                <v-date-picker dark landscape multiple scrollable v-model="archive.date"></v-date-picker>
-            </v-row>
-
             <v-row class="chart-wrapper">
                 <Profile-chart 
                 :archiveValues="$store.getters.getUserProfileArchive.map( el => el.followers)" 
@@ -36,7 +32,14 @@
                 :archiveValues="$store.getters.getUserProfileArchive.map( el => el.followed)"
                 name="Followed"
                 :collapse="true" />
+            </v-row>
+
+            <v-row class="date-picker-wrapper">
+                <div class="checkbox-wrapper">
+                    <v-checkbox v-model="archive.datepicker" id="chartByRange"></v-checkbox> <label style="padding: 0 1rem" for="chartByRange">Show charts from date range</label>
+                </div>
                 
+                <v-date-picker dark landscape multiple v-model="archive.date" v-if="archive.datepicker"></v-date-picker>
             </v-row>
         </section>
     </article>
@@ -148,6 +151,13 @@ export default {
         padding-top: 1rem;
 
         .date-picker-wrapper {
+            margin: 0;
+
+            .checkbox-wrapper {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
             .v-picker{
                 width: 100%;
 
