@@ -18,6 +18,14 @@
                 <b>last update:</b> {{$store.getters.getUserProfile[0].updated}}
             </div>
         </section>
+
+        <section class="profile__section-archive">
+            <header class="archive__header"><h2>Archive</h2></header>
+
+            <v-row class="date-picker-wrapper">
+                <v-date-picker dark landscape multiple scrollable v-model="archive.date"></v-date-picker>
+            </v-row>
+        </section>
     </article>
 </template>
 
@@ -26,7 +34,11 @@ export default {
   name: 'Profile',
   components: {},
   data(){
-    return {}
+    return {
+        archive: {
+            date: []// if length will be equals 2 close date picer and show archive stats
+        }
+    }
   },
   computed: {
     width(){
@@ -38,7 +50,7 @@ export default {
     openProfile() {
         window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
     }
-  }    
+  }
 }
 </script>
 
@@ -101,5 +113,19 @@ export default {
             font-size: .6rem;
         }
     }
+
+    &__section-archive {
+        .date-picker-wrapper {
+            .v-picker{
+                width: 100%;
+
+                &__body {
+                    width: 65%;
+                    margin-right: inherit;
+                }
+            }
+        }
+    }
+
 }
 </style>
