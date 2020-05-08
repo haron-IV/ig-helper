@@ -15,7 +15,7 @@
             </div>
 
             <div class="update-info">
-                <b>last update:</b> {{$store.getters.getUserProfile[0].updated}}
+                <b>last update:</b> {{$store.getters.getUserProfile[0].updated}} <!-- should be last element not first -->
             </div>
         </section>
 
