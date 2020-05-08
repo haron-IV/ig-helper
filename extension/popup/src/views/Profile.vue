@@ -34,7 +34,8 @@
                 <Profile-chart 
                 :archiveValues="$store.getters.getUserProfile.map( el => el.followed)"
                 name="Followed"
-                :collapse="true"></Profile-chart>
+                :collapse="true"
+                ></Profile-chart>
             </v-row>
         </section>
     </article>
@@ -64,15 +65,9 @@ export default {
   computed: {
     width(){
       return this.$store.getters['appearance/getAppWidtg'] - this.$store.getters['appearance/getMenuLeftSpace'];
-    },
-    archiveFollowers(){
-        
     }
   },
-  created(){
-      
-      
-  },
+  created(){},
   methods: {
     openProfile() {
         window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
@@ -90,7 +85,7 @@ export default {
     display: flex;
 }
 .profile {
-    height: 100%;
+    height: 95%;
     overflow: scroll;
 
     &__section-info {

@@ -1,5 +1,5 @@
 <template>
-    <v-card dark class="card-followers-chart" :class="{ collapsed: collapse }" @click="collapse = !collapse">
+    <v-card dark class="card-followers-chart" :class="{ collapsed: collapse }" @click="uncollapse">
         <h2 style="margin: .5rem 0 .5rem .7rem; position: sticky; top: 2rem;">{{name}}</h2>
         <v-card-text>
             <v-sheet>
@@ -35,7 +35,15 @@ export default {
     archiveValuesMapped(){return this.archiveValues.map( el => JSON.parse( el.replace(" ", "") ) );}
   },
   created(){},
-  methods: {}
+  methods: {
+    uncollapse() {
+        this.collapse = !this.collapse;
+
+        setTimeout(() => {
+            document.querySelector(".profile").scrollTop += 300;    
+        }, 5);
+    }
+  }
 }
 </script>
 
