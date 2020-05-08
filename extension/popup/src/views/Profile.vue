@@ -64,7 +64,11 @@ export default {
   watch: {
     'archive.date'(){
         if (this.archive.date.length === 2) this.archive.datepicker = false;
-        console.log(this.archive.date);
+        // console.log(this.archive.date);
+        // console.log(this.$store.getters.getUserProfileArchive);
+
+        this.selectDatesBetween(new Date().toLocaleDateString());
+
     },
     'archive.datepicker'() {
         setTimeout(() => {
@@ -72,15 +76,26 @@ export default {
         }, 5);
     }
   },
-  computed: {
-    width(){
-      return this.$store.getters['appearance/getAppWidtg'] - this.$store.getters['appearance/getMenuLeftSpace'];
-    }
-  },
+  computed: {},
   created(){},
   methods: {
     openProfile() {
         window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
+    },
+    selectDatesBetween(dateCheck) {
+        if (this.archive.date.length > 1) {
+            const dateFrom = this.archive.date[0].split(".");
+            const dateTo = this.archive.date[1].split(".");
+            const checkDate = dateCheck.slice(0, 10).split(".");
+
+            const from = new Date(dateFrom).toLocaleString();
+            const to = new Date(dateTo).toLocaleString();
+            const check = new Date(checkDate).toLocaleString();
+
+
+            // console.log(`Date: ${checkDate} is ${check > from && check < to}`)
+            console.log("picker date: ",  this.archive.date)
+        }
     }
   }
 }
