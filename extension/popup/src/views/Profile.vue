@@ -9,7 +9,9 @@
                 <a @click="openProfile()" class="link">{{$store.getters.getLastItemInProfileArchive.profileLink.replace("https://www.instagram.com/", "").slice(0, -1)}}</a>
 
                 <div class="d-flex">
-                    <p class="content__info"><span class="title">Followers:</span> {{$store.getters.getLastItemInProfileArchive.followers}}</p>
+                    <p class="content__info"><span class="title">Followers:
+                        </span> {{$store.getters.getLastItemInProfileArchive.followers}} <span class="difference"> {{differenceInNumbers($store.getters.getLastItemInProfileArchive.followers, $store.getters.getUserProfileArchive[1].followers)}} </span>
+                    </p>
                     <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getLastItemInProfileArchive.followed}}</p>
                 </div>
             </div>
@@ -63,11 +65,21 @@ export default {
   },
   watch: {
     'archive.date'(){
-        if (this.archive.date.length === 2) this.archive.datepicker = false;
+        if (this.archive.date.length === 2) { 
+            this.archive.datepicker = false;
+
+            this.mapArchiveByDateRange();
+        };
+
+        // console.log(`
+        // selected date range: ${this.archive.date}
+        // archive: 
+        // `, this.$store.getters.getUserProfileArchive);
+
         // console.log(this.archive.date);
         // console.log(this.$store.getters.getUserProfileArchive);
 
-        this.selectDatesBetween(new Date().toLocaleDateString());
+        // this.selectDatesBetween(new Date().toLocaleDateString());
 
     },
     'archive.datepicker'() {
@@ -82,20 +94,32 @@ export default {
     openProfile() {
         window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
     },
-    selectDatesBetween(dateCheck) {
-        if (this.archive.date.length > 1) {
-            const dateFrom = this.archive.date[0].split(".");
-            const dateTo = this.archive.date[1].split(".");
-            const checkDate = dateCheck.slice(0, 10).split(".");
-
-            const from = new Date(dateFrom).toLocaleString();
-            const to = new Date(dateTo).toLocaleString();
-            const check = new Date(checkDate).toLocaleString();
-
-
-            // console.log(`Date: ${checkDate} is ${check > from && check < to}`)
-            console.log("picker date: ",  this.archive.date)
+    differenceInNumbers(number1, number2) {
+        number1 = JSON.parse( number1.replace(" ", "") );
+        number2 = JSON.parse( number2.replace(" ", "") );
+        
+        if ( number1 > number2 ) {
+            return `+${number1 - number2}`;
+        } else {
+            return `${number1 - number2}`
         }
+    },
+    dateBetween(checkDate){
+        const dateFrom = this.archive.date[0].replace(/[-]/g, "/").split("/");
+        const dateTo = this.archive.date[1].replace(/[-]/g, "/").split("/");
+
+        const from = new Date( dateFrom[2], parseInt( dateFrom[1] ) -1, dateFrom[0] );
+        const to = new Date( dateTo[2], parseInt( dateTo[1] ) -1, dateTo[0] );
+        const check = new Date( checkDate[2], parseInt( checkDate[1] ) -1, checkDate[0] );
+        
+        return check > from && check < to;
+    },
+    mapArchiveByDateRange() {
+        const datesInRange = this.$store.getters.getUserProfileArchive.filter( el => 
+            this.dateBetween(el.updated.split(" ")[0].split("/").reverse())
+        );
+
+        console.log(datesInRange);
     }
   }
 }
