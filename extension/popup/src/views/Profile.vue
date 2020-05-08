@@ -64,6 +64,11 @@ export default {
   watch: {
     'archive.date'(){
         if (this.archive.date.length === 2) this.archive.datepicker = false;
+    },
+    'archive.datepicker'() {
+        setTimeout(() => {
+            document.querySelector(".profile").scrollTop += 300;    
+        }, 5);
     }
   },
   computed: {
