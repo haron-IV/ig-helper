@@ -26,9 +26,15 @@
                 <v-date-picker dark landscape multiple scrollable v-model="archive.date"></v-date-picker>
             </v-row>
 
-            <v-row class="chart-wrapper" v-else>
-                <Profile-chart :archiveValues="$store.getters.getUserProfile.map( el => el.followers)" name="Followers"></Profile-chart>
-                <Profile-chart :archiveValues="$store.getters.getUserProfile.map( el => el.followed)" name="Followed"></Profile-chart>
+            <v-row class="chart-wrapper">
+                <Profile-chart 
+                :archiveValues="$store.getters.getUserProfile.map( el => el.followers)" 
+                name="Followers"
+                :collapse="true"></Profile-chart>
+                <Profile-chart 
+                :archiveValues="$store.getters.getUserProfile.map( el => el.followed)"
+                name="Followed"
+                :collapse="true"></Profile-chart>
             </v-row>
         </section>
     </article>
@@ -45,7 +51,7 @@ export default {
   data(){
     return {
         archive: {
-            datepicker: true,
+            datepicker: false,
             date: []
         }
     }

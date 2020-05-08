@@ -1,5 +1,5 @@
 <template>
-    <v-card dark class="card-followers-chart">
+    <v-card dark class="card-followers-chart" :class="{ collapsed: collapse }" @click="collapse = !collapse">
         <h2 style="margin: .5rem 0 .5rem .7rem; position: sticky; top: 2rem;">{{name}}</h2>
         <v-card-text>
             <v-sheet>
@@ -24,7 +24,8 @@ export default {
   components: {},
   props: {
     archiveValues: Array,
-    name: String
+    name: String,
+    collapse: Boolean
   },
   data(){
     return {}
@@ -49,6 +50,15 @@ export default {
             margin: 0 auto;
             padding: 0;
         }
+    }
+}
+
+.collapsed {
+    height: 5rem;
+    overflow: hidden;
+
+    .v-card__text{
+        opacity: 0;
     }
 }
 </style>
