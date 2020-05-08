@@ -32,7 +32,8 @@ export default new Vuex.Store({
     getFollowedProfiles: state => state.data ? state.data.igHelperStore.following.followedProfiles : {},
     getSavedProfiles: state => state.data ? state.data.igHelperStore.savedProfiles : [],
     getLastMenuPosition: state => state.data ? state.data.igHelperStore.menu.lastPosition : "",
-    getUserProfile: state => state.data ? state.data.igHelperStore.userProfile.archive : []
+    getUserProfileArchive: state => state.data ? state.data.igHelperStore.userProfile.archive : [],
+    getLastItemInProfileArchive: state => state.data ? state.data.igHelperStore.userProfile.archive.slice(-1)[0] : {}
   },
   modules: {
     appearance,

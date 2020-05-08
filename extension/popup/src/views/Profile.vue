@@ -2,20 +2,20 @@
     <article class="profile">
         <section class="profile__section-info">
             <div class="avatar">
-                <v-img class="img avatar__img" :src="$store.getters.getUserProfile.slice(-1)[0].profileImg"></v-img>
+                <v-img class="img avatar__img" :src="$store.getters.getLastItemInProfileArchive.profileImg"></v-img>
             </div>
             
             <div class="content">
-                <a @click="openProfile()" class="link">{{$store.getters.getUserProfile.slice(-1)[0].profileLink.replace("https://www.instagram.com/", "").slice(0, -1)}}</a>
+                <a @click="openProfile()" class="link">{{$store.getters.getLastItemInProfileArchive.profileLink.replace("https://www.instagram.com/", "").slice(0, -1)}}</a>
 
                 <div class="d-flex">
-                    <p class="content__info"><span class="title">Followers:</span> {{$store.getters.getUserProfile.slice(-1)[0].followers}}</p>
-                    <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getUserProfile.slice(-1)[0].followed}}</p>
+                    <p class="content__info"><span class="title">Followers:</span> {{$store.getters.getLastItemInProfileArchive.followers}}</p>
+                    <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getLastItemInProfileArchive.followed}}</p>
                 </div>
             </div>
 
             <div class="update-info">
-                <b>last update:</b> {{$store.getters.getUserProfile.slice(-1)[0].updated}} <!-- should be last element not first -->
+                <b>last update:</b> {{$store.getters.getLastItemInProfileArchive.updated}} <!-- should be last element not first -->
             </div>
         </section>
 
@@ -28,14 +28,15 @@
 
             <v-row class="chart-wrapper">
                 <Profile-chart 
-                :archiveValues="$store.getters.getUserProfile.map( el => el.followers)" 
+                :archiveValues="$store.getters.getUserProfileArchive.map( el => el.followers)" 
                 name="Followers"
-                :collapse="true"></Profile-chart>
+                :collapse="true" />
+
                 <Profile-chart 
-                :archiveValues="$store.getters.getUserProfile.map( el => el.followed)"
+                :archiveValues="$store.getters.getUserProfileArchive.map( el => el.followed)"
                 name="Followed"
-                :collapse="true"
-                ></Profile-chart>
+                :collapse="true" />
+                
             </v-row>
         </section>
     </article>
