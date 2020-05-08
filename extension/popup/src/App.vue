@@ -89,6 +89,11 @@ export default {
 <style lang="scss" scoped>
 .app {
   min-height: 450px;
+  
+  .v-navigation-drawer {
+    z-index: 2;
+  }
+
   .space-item {
     margin: 0 .5rem;
 

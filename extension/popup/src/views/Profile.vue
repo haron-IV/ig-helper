@@ -22,33 +22,58 @@
         <section class="profile__section-archive">
             <header class="archive__header"><h2>Archive</h2></header>
 
-            <v-row class="date-picker-wrapper">
+            <v-row class="date-picker-wrapper" v-if="archive.datepicker">
                 <v-date-picker dark landscape multiple scrollable v-model="archive.date"></v-date-picker>
+            </v-row>
+
+            <v-row class="chart-wrapper" v-else>
+                <Profile-chart :archiveValues="$store.getters.getUserProfile.map( el => el.followers)" name="Followers"></Profile-chart>
+                <Profile-chart :archiveValues="$store.getters.getUserProfile.map( el => el.followed)" name="Followed"></Profile-chart>
             </v-row>
         </section>
     </article>
 </template>
 
 <script>
+import ProfileChart from "../components/ProfileChart";
+
 export default {
   name: 'Profile',
-  components: {},
+  components: {
+    'Profile-chart': ProfileChart
+  },
   data(){
     return {
         archive: {
-            date: []// if length will be equals 2 close date picer and show archive stats
+            datepicker: true,
+            date: []
         }
+    }
+  },
+  watch: {
+    'archive.date'(){
+        if (this.archive.date.length === 2) this.archive.datepicker = false;
     }
   },
   computed: {
     width(){
       return this.$store.getters['appearance/getAppWidtg'] - this.$store.getters['appearance/getMenuLeftSpace'];
+    },
+    archiveFollowers(){
+        
     }
   },
-  created(){},
+  created(){
+      
+      
+  },
   methods: {
     openProfile() {
         window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
+    },
+    textToNumber(txtNumber){
+        console.log(JSON.stringify(txtNumber))
+        return JSON.stringify(txtNumber);
     }
   }
 }
@@ -59,10 +84,17 @@ export default {
     display: flex;
 }
 .profile {
+    height: 100%;
+    overflow: scroll;
+
     &__section-info {
         display: flex;
         padding-bottom: .5rem;
         border-bottom: 1px solid rgba(0, 0, 0, .2);
+        position: sticky;
+        top: -19%;
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 1 );
 
         .avatar {
             width: 20%;
@@ -115,6 +147,8 @@ export default {
     }
 
     &__section-archive {
+        padding-top: 1rem;
+
         .date-picker-wrapper {
             .v-picker{
                 width: 100%;
@@ -125,7 +159,10 @@ export default {
                 }
             }
         }
-    }
 
+        .chart-wrapper {
+            margin: 0;
+        }
+    }
 }
 </style>
