@@ -2,20 +2,20 @@
     <article class="profile">
         <section class="profile__section-info">
             <div class="avatar">
-                <v-img class="img avatar__img" :src="$store.getters.getUserProfile[0].profileImg"></v-img>
+                <v-img class="img avatar__img" :src="$store.getters.getUserProfile.slice(-1)[0].profileImg"></v-img>
             </div>
             
             <div class="content">
-                <a @click="openProfile()" class="link">{{$store.getters.getUserProfile[0].profileLink.replace("https://www.instagram.com/", "").slice(0, -1)}}</a>
+                <a @click="openProfile()" class="link">{{$store.getters.getUserProfile.slice(-1)[0].profileLink.replace("https://www.instagram.com/", "").slice(0, -1)}}</a>
 
                 <div class="d-flex">
-                    <p class="content__info"><span class="title">Followers:</span> {{$store.getters.getUserProfile[0].followers}}</p>
-                    <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getUserProfile[0].followed}}</p>
+                    <p class="content__info"><span class="title">Followers:</span> {{$store.getters.getUserProfile.slice(-1)[0].followers}}</p>
+                    <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getUserProfile.slice(-1)[0].followed}}</p>
                 </div>
             </div>
 
             <div class="update-info">
-                <b>last update:</b> {{$store.getters.getUserProfile[0].updated}} <!-- should be last element not first -->
+                <b>last update:</b> {{$store.getters.getUserProfile.slice(-1)[0].updated}} <!-- should be last element not first -->
             </div>
         </section>
 
@@ -71,10 +71,6 @@ export default {
   methods: {
     openProfile() {
         window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
-    },
-    textToNumber(txtNumber){
-        console.log(JSON.stringify(txtNumber))
-        return JSON.stringify(txtNumber);
     }
   }
 }
