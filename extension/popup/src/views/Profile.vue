@@ -26,12 +26,12 @@
 
             <v-row class="chart-wrapper">
                 <Profile-chart 
-                :archiveValues="$store.getters.getUserProfileArchive.map( el => el.followers)" 
+                :archiveValues="archiveValues('followers')"
                 name="Followers"
                 :collapse="true" />
 
                 <Profile-chart 
-                :archiveValues="$store.getters.getUserProfileArchive.map( el => el.followed)"
+                :archiveValues="archiveValues('followed')"
                 name="Followed"
                 :collapse="true" />
             </v-row>
@@ -65,22 +65,9 @@ export default {
   },
   watch: {
     'archive.date'(){
-        if (this.archive.date.length === 2) { 
-            this.archive.datepicker = false;
-
-            this.mapArchiveByDateRange();
+        if (this.archive.date.length > 2) {
+            this.archive.date = [];
         };
-
-        // console.log(`
-        // selected date range: ${this.archive.date}
-        // archive: 
-        // `, this.$store.getters.getUserProfileArchive);
-
-        // console.log(this.archive.date);
-        // console.log(this.$store.getters.getUserProfileArchive);
-
-        // this.selectDatesBetween(new Date().toLocaleDateString());
-
     },
     'archive.datepicker'() {
         setTimeout(() => {
@@ -105,21 +92,41 @@ export default {
         }
     },
     dateBetween(checkDate){
-        const dateFrom = this.archive.date[0].replace(/[-]/g, "/").split("/");
-        const dateTo = this.archive.date[1].replace(/[-]/g, "/").split("/");
+        if (this.archive.date.length === 2){
+            const dateFrom = this.archive.date[0].replace(/[-]/g, "/").split("/");
+            const dateTo = this.archive.date[1].replace(/[-]/g, "/").split("/");
 
-        const from = new Date( dateFrom[2], parseInt( dateFrom[1] ) -1, dateFrom[0] );
-        const to = new Date( dateTo[2], parseInt( dateTo[1] ) -1, dateTo[0] );
-        const check = new Date( checkDate[2], parseInt( checkDate[1] ) -1, checkDate[0] );
-        
-        return check > from && check < to;
+            const from = new Date( dateFrom[2], parseInt( dateFrom[1] ) -1, dateFrom[0] );
+            const to = new Date( dateTo[2], parseInt( dateTo[1] ) -1, dateTo[0] );
+            const check = new Date( checkDate[2], parseInt( checkDate[1] ) -1, checkDate[0] );
+            
+            return check >= from && check <= to;
+        }
     },
-    mapArchiveByDateRange() {
-        const datesInRange = this.$store.getters.getUserProfileArchive.filter( el => 
-            this.dateBetween(el.updated.split(" ")[0].split("/").reverse())
-        );
+    datesInRange() {
+        if (this.archive.datepicker) {
+            const filtered = this.$store.getters.getUserProfileArchive.filter( el => 
+                this.dateBetween(el.updated.split(" ")[0].split("/").reverse())
+            );
+            console.log("filtered: ", filtered);
+            return filtered;
+        } else {
+            return this.$store.getters.getUserProfileArchive;
+        }
+    },
+    archiveValues(type){
+        switch(type){
+            case "followers": {
+                return this.datesInRange().map( el => el.followers);
+                break;
+            };
 
-        console.log(datesInRange);
+            case "followed": {
+                return this.datesInRange().map( el => el.followed);
+                break;
+            }
+        }
+        
     }
   }
 }
