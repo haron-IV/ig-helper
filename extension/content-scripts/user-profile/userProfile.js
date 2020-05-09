@@ -1,6 +1,8 @@
 import { updateStore } from "../store";
 
 const updateProfile = (store) => {
+    clearArchiveFromDoubledDays(store);
+
     store.igHelperStore.userProfile.archive.push({
         profileLink: window.location.href,
         profileImg: getProfileImg(),
@@ -10,6 +12,10 @@ const updateProfile = (store) => {
     });
     
     updateStore(store);
+};
+
+const clearArchiveFromDoubledDays = (store) => {
+    store.igHelperStore.userProfile.archive = store.igHelperStore.userProfile.archive.filter( el => !el.updated.includes(new Date().toLocaleDateString().replace(/[.]/g, "/")) );
 };
 
 const getProfileImg = () => {
