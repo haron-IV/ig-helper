@@ -11,9 +11,10 @@
                 <div class="d-flex">
                     <p class="content__info"><span class="title">Followers:
                         </span> {{$store.getters.getLastItemInProfileArchive.followers}} 
-                        <span class="difference" :class="{ 'difference--plus': differenceInNumbers($store.getters.getLastItemInProfileArchive.followers, $store.getters.getUserProfileArchive[0].followers) > 0 }"> 
-                            {{ differenceInNumbers($store.getters.getLastItemInProfileArchive.followers, $store.getters.getUserProfileArchive[0].followers) }} 
-                        </span>
+                        <Difference-in-numbers 
+                        :actualNumber="$store.getters.getLastItemInProfileArchive.followers"
+                        :comparingNumber="$store.getters.getUserProfileArchive[0].followers"
+                        />
                     </p>
                     <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getLastItemInProfileArchive.followed}}</p>
                 </div>
@@ -52,11 +53,13 @@
 
 <script>
 import ProfileChart from "../components/ProfileChart";
+import differenceInNumbers from '../components/profile/differenceInNumbers.vue';
 
 export default {
   name: 'Profile',
   components: {
-    'Profile-chart': ProfileChart
+    'Profile-chart': ProfileChart,
+    'Difference-in-numbers': differenceInNumbers
   },
   data(){
     return {
@@ -90,16 +93,6 @@ export default {
   methods: {
     openProfile() {
         window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
-    },
-    differenceInNumbers(number1, number2) {
-        number1 = JSON.parse( number1.replace(" ", "") );
-        number2 = JSON.parse( number2.replace(" ", "") );
-        
-        if ( number1 > number2 ) {
-            return `+${number1 - number2}`;
-        } else {
-            return `${number1 - number2}`
-        }
     },
     dateBetween(checkDate){
         if (this.archive.date.length === 2){
@@ -232,12 +225,6 @@ export default {
         .chart-wrapper {
             margin: 0;
         }
-    }
-}
-.difference {
-    color: red;
-    &--plus {
-        color: green;
     }
 }
 </style>
