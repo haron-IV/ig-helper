@@ -115,17 +115,9 @@ export default {
     },
     archiveValues(type){
         switch(type){
-            case "followers": {
-                return this.datesInRange().map( el => el.followers);
-                break;
-            };
-
-            case "followed": {
-                return this.datesInRange().map( el => el.followed);
-                break;
-            }
-        }
-        
+            case "followers": return this.datesInRange().map( el => el.followers);
+            case "followed": return this.datesInRange().map( el => el.followed);
+        };
     }
   }
 }
