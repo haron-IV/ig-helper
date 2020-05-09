@@ -109,14 +109,9 @@ export default {
         }
     },
     datesInRange() {
-        if (this.archive.datepicker) {
-            const filtered = this.$store.getters.getUserProfileArchive.filter( el => 
-                this.dateBetween(el.updated.split(" ")[0].split("/").reverse())
-            );
-            return filtered;
-        } else {
-            return this.$store.getters.getUserProfileArchive;
-        }
+        if (this.archive.datepicker) return this.$store.getters.getUserProfileArchive.filter( 
+            el => this.dateBetween(el.updated.split(" ")[0].split("/").reverse()) );
+        return this.$store.getters.getUserProfileArchive;
     },
     archiveValues(type){
         switch(type){
