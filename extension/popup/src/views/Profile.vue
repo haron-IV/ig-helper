@@ -60,13 +60,13 @@
 
 <script>
 import ProfileChart from "../components/profile/ProfileChart";
-import differenceInNumbers from '../components/profile/DifferenceInNumbers.vue';
+import DifferenceInNumbers from '../components/profile/DifferenceInNumbers.vue';
 
 export default {
   name: 'Profile',
   components: {
     'Profile-chart': ProfileChart,
-    'Difference-in-numbers': differenceInNumbers
+    'Difference-in-numbers': DifferenceInNumbers
   },
   data(){
     return {
