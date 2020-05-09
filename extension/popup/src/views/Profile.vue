@@ -12,15 +12,15 @@
                     <p class="content__info"><span class="title">Followers: </span>
                         {{$store.getters.getLastItemInProfileArchive.followers}} 
                         <Difference-in-numbers 
-                        :actualNumber="$store.getters.getLastItemInProfileArchive.followers"
-                        :comparingNumber="$store.getters.getUserProfileArchive[0].followers"
+                        :actualNumber="archiveValues('followers').slice(-1)[0]"
+                        :comparingNumber="archiveValues('followers')[0]"
                         />
                     </p>
                     <p class="content__info"><span class="title">Followed: </span>
                         {{$store.getters.getLastItemInProfileArchive.followed}}
                         <Difference-in-numbers 
-                        :actualNumber="$store.getters.getLastItemInProfileArchive.followed"
-                        :comparingNumber="$store.getters.getUserProfileArchive[0].followed"
+                        :actualNumber="archiveValues('followed').slice(-1)[0]"
+                        :comparingNumber="archiveValues('followed')[0]"
                         plusColor="red"
                         />
                     </p>
@@ -60,13 +60,13 @@
 
 <script>
 import ProfileChart from "../components/profile/ProfileChart";
-import differenceInNumbers from '../components/profile/DifferenceInNumbers.vue';
+import DifferenceInNumbers from '../components/profile/DifferenceInNumbers.vue';
 
 export default {
   name: 'Profile',
   components: {
     'Profile-chart': ProfileChart,
-    'Difference-in-numbers': differenceInNumbers
+    'Difference-in-numbers': DifferenceInNumbers
   },
   data(){
     return {
