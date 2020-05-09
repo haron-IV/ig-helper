@@ -80,13 +80,8 @@ export default {
   },
   watch: {
     'archive.date'(){
-        if (this.archive.date.length === 2) {
-            this.chartFollowersCollapse = false;
-            this.chartFollowedCollapse = false;
-        }
-        if (this.archive.date.length > 2) {
-            this.archive.date = [];
-        };
+        if (this.archive.date.length === 2) this.uncollapseCharts();
+        if (this.archive.date.length > 2) this.archive.date = [];
     },
     'archive.datepicker'() {
         // TODO: fix it
@@ -98,6 +93,11 @@ export default {
   computed: {},
   created(){},
   methods: {
+    uncollapseCharts() {
+        this.chartFollowersCollapse = false;
+        this.chartFollowedCollapse = false;
+        document.querySelector(".profile").scrollTo({top: 100, behavior: 'smooth'});
+    },
     openProfile() {
         window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
     },
