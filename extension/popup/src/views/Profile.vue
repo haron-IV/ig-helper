@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import ProfileChart from "../components/ProfileChart";
+import ProfileChart from "../components/profile/ProfileChart";
 import differenceInNumbers from '../components/profile/DifferenceInNumbers.vue';
 
 export default {
