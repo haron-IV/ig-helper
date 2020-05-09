@@ -6,7 +6,7 @@ import clearAllData from "./utils/clearAllData.js";
 import savedProfiles from "./saved-profiles/savedProfiles";
 import logObj from "./utils/logObject.js";
 
-logObj();
+logObj(); // initialize posibility to use console.json
 
 chrome.storage.local.get("igHelperStore", store => { 
     console.json(store);

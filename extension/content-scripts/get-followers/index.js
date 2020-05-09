@@ -1,7 +1,7 @@
 import debounce from "lodash.debounce";
 
 import getMessageFromPopup from "../utils/getMessageFromPopup";
-import {updateStore} from "../store/index";
+import { updateStore } from "../store/index";
 
 const storeFollowedProfiles = store => {
     addListenerForFollowButtonAndStoreProfiles(store);

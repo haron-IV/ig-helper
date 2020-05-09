@@ -1,4 +1,4 @@
-const setData = obj => {
+const setData = obj => { //obj means igHelperStore
     chrome.storage.local.set(obj);
 };
 

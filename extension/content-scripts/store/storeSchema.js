@@ -12,6 +12,9 @@ const storeSchema = {
         savedProfiles: [],
         menu: {
             lastPosition: ""
+        },
+        userProfile: {
+            archive: [] //archive there followers followed
         }
     }
 };
