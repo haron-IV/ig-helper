@@ -2,40 +2,46 @@
     <article class="profile">
         <section class="profile__section-info">
             <div class="avatar">
-                <v-img class="img avatar__img" :src="$store.getters.getUserProfile.slice(-1)[0].profileImg"></v-img>
+                <v-img class="img avatar__img" :src="$store.getters.getLastItemInProfileArchive.profileImg"></v-img>
             </div>
             
             <div class="content">
-                <a @click="openProfile()" class="link">{{$store.getters.getUserProfile.slice(-1)[0].profileLink.replace("https://www.instagram.com/", "").slice(0, -1)}}</a>
+                <a @click="openProfile()" class="link">{{$store.getters.getLastItemInProfileArchive.profileLink.replace("https://www.instagram.com/", "").slice(0, -1)}}</a>
 
                 <div class="d-flex">
-                    <p class="content__info"><span class="title">Followers:</span> {{$store.getters.getUserProfile.slice(-1)[0].followers}}</p>
-                    <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getUserProfile.slice(-1)[0].followed}}</p>
+                    <p class="content__info"><span class="title">Followers:
+                        </span> {{$store.getters.getLastItemInProfileArchive.followers}} <span class="difference"> {{differenceInNumbers($store.getters.getLastItemInProfileArchive.followers, $store.getters.getUserProfileArchive[1].followers)}} </span>
+                    </p>
+                    <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getLastItemInProfileArchive.followed}}</p>
                 </div>
             </div>
 
             <div class="update-info">
-                <b>last update:</b> {{$store.getters.getUserProfile.slice(-1)[0].updated}} <!-- should be last element not first -->
+                <b>last update:</b> {{$store.getters.getLastItemInProfileArchive.updated}} <!-- should be last element not first -->
             </div>
         </section>
 
         <section class="profile__section-archive">
             <header class="archive__header"><h2>Archive</h2></header>
 
-            <v-row class="date-picker-wrapper" v-if="archive.datepicker">
-                <v-date-picker dark landscape multiple scrollable v-model="archive.date"></v-date-picker>
-            </v-row>
-
             <v-row class="chart-wrapper">
                 <Profile-chart 
-                :archiveValues="$store.getters.getUserProfile.map( el => el.followers)" 
+                :archiveValues="archiveValues('followers')"
                 name="Followers"
-                :collapse="true"></Profile-chart>
+                :collapse="chartFollowersCollapse" />
+
                 <Profile-chart 
-                :archiveValues="$store.getters.getUserProfile.map( el => el.followed)"
+                :archiveValues="archiveValues('followed')"
                 name="Followed"
-                :collapse="true"
-                ></Profile-chart>
+                :collapse="chartFollowedCollapse" />
+            </v-row>
+
+            <v-row class="date-picker-wrapper">
+                <div class="checkbox-wrapper">
+                    <v-checkbox v-model="archive.datepicker" id="chartByRange"></v-checkbox> <label style="padding: 0 1rem" for="chartByRange">Show charts from date range</label>
+                </div>
+                
+                <v-date-picker dark landscape multiple v-model="archive.date" v-if="archive.datepicker"></v-date-picker>
             </v-row>
         </section>
     </article>
@@ -54,23 +60,79 @@ export default {
         archive: {
             datepicker: false,
             date: []
-        }
+        },
+        chartFollowersCollapse: true,
+        chartFollowedCollapse: true
     }
   },
   watch: {
     'archive.date'(){
-        if (this.archive.date.length === 2) this.archive.datepicker = false;
+        if (this.archive.date.length === 2) {
+            this.chartFollowersCollapse = false;
+            this.chartFollowedCollapse = false;
+        }
+        if (this.archive.date.length > 2) {
+            this.archive.date = [];
+        };
+    },
+    'archive.datepicker'() {
+        // TODO: fix it
+        setTimeout(() => {
+            document.querySelector(".profile").scrollTop += 300;    
+        }, 5);
     }
   },
-  computed: {
-    width(){
-      return this.$store.getters['appearance/getAppWidtg'] - this.$store.getters['appearance/getMenuLeftSpace'];
-    }
-  },
+  computed: {},
   created(){},
   methods: {
     openProfile() {
         window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
+    },
+    differenceInNumbers(number1, number2) {
+        number1 = JSON.parse( number1.replace(" ", "") );
+        number2 = JSON.parse( number2.replace(" ", "") );
+        
+        if ( number1 > number2 ) {
+            return `+${number1 - number2}`;
+        } else {
+            return `${number1 - number2}`
+        }
+    },
+    dateBetween(checkDate){
+        if (this.archive.date.length === 2){
+            const dateFrom = this.archive.date[0].replace(/[-]/g, "/").split("/");
+            const dateTo = this.archive.date[1].replace(/[-]/g, "/").split("/");
+
+            const from = new Date( dateFrom[2], parseInt( dateFrom[1] ) -1, dateFrom[0] );
+            const to = new Date( dateTo[2], parseInt( dateTo[1] ) -1, dateTo[0] );
+            const check = new Date( checkDate[2], parseInt( checkDate[1] ) -1, checkDate[0] );
+            
+            return check >= from && check <= to;
+        }
+    },
+    datesInRange() {
+        if (this.archive.datepicker) {
+            const filtered = this.$store.getters.getUserProfileArchive.filter( el => 
+                this.dateBetween(el.updated.split(" ")[0].split("/").reverse())
+            );
+            return filtered;
+        } else {
+            return this.$store.getters.getUserProfileArchive;
+        }
+    },
+    archiveValues(type){
+        switch(type){
+            case "followers": {
+                return this.datesInRange().map( el => el.followers);
+                break;
+            };
+
+            case "followed": {
+                return this.datesInRange().map( el => el.followed);
+                break;
+            }
+        }
+        
     }
   }
 }
@@ -147,6 +209,13 @@ export default {
         padding-top: 1rem;
 
         .date-picker-wrapper {
+            margin: 0;
+
+            .checkbox-wrapper {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
             .v-picker{
                 width: 100%;
 
