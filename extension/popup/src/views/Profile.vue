@@ -10,7 +10,10 @@
 
                 <div class="d-flex">
                     <p class="content__info"><span class="title">Followers:
-                        </span> {{$store.getters.getLastItemInProfileArchive.followers}} <span class="difference"> {{differenceInNumbers($store.getters.getLastItemInProfileArchive.followers, $store.getters.getUserProfileArchive[1].followers)}} </span>
+                        </span> {{$store.getters.getLastItemInProfileArchive.followers}} 
+                        <span class="difference" :class="{ 'difference--plus': differenceInNumbers($store.getters.getLastItemInProfileArchive.followers, $store.getters.getUserProfileArchive[0].followers) > 0 }"> 
+                            {{ differenceInNumbers($store.getters.getLastItemInProfileArchive.followers, $store.getters.getUserProfileArchive[0].followers) }} 
+                        </span>
                     </p>
                     <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getLastItemInProfileArchive.followed}}</p>
                 </div>
@@ -229,6 +232,12 @@ export default {
         .chart-wrapper {
             margin: 0;
         }
+    }
+}
+.difference {
+    color: red;
+    &--plus {
+        color: green;
     }
 }
 </style>
