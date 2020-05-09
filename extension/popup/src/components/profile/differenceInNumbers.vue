@@ -1,5 +1,7 @@
 <template>
-<span class="difference" :class="{ 'difference--plus': differenceInNumbers(actualNumber, comparingNumber) > 0 }"> 
+<span :class="{
+    'difference-green': ( differenceInNumbers(actualNumber, comparingNumber) > 0 ) && plusColor === 'green',
+    'difference-red': ( differenceInNumbers(actualNumber, comparingNumber) > 0 ) && plusColor === 'red'}">
     {{ differenceInNumbers(actualNumber, comparingNumber) }} 
 </span>
 </template>
@@ -12,7 +14,8 @@
     },
     props: {
         actualNumber: Number,
-        comparingNumber: Number
+        comparingNumber: Number,
+        plusColor: { type: String, default: 'green' }
     },
     computed: {},
     methods: {
@@ -28,10 +31,11 @@
 </script>
 
 <style lang='scss'>
-.difference {
+.difference-red {
     color: red;
-    &--plus {
-        color: green;
-    }
 }
+.difference-green {
+    color: green;
+}
+
 </style>

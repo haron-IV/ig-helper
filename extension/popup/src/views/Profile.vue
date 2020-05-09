@@ -9,14 +9,21 @@
                 <a @click="openProfile()" class="link">{{$store.getters.getLastItemInProfileArchive.profileLink.replace("https://www.instagram.com/", "").slice(0, -1)}}</a>
 
                 <div class="d-flex">
-                    <p class="content__info"><span class="title">Followers:
-                        </span> {{$store.getters.getLastItemInProfileArchive.followers}} 
+                    <p class="content__info"><span class="title">Followers: </span>
+                        {{$store.getters.getLastItemInProfileArchive.followers}} 
                         <Difference-in-numbers 
                         :actualNumber="$store.getters.getLastItemInProfileArchive.followers"
                         :comparingNumber="$store.getters.getUserProfileArchive[0].followers"
                         />
                     </p>
-                    <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getLastItemInProfileArchive.followed}}</p>
+                    <p class="content__info"><span class="title">Followed: </span>
+                        {{$store.getters.getLastItemInProfileArchive.followed}}
+                        <Difference-in-numbers 
+                        :actualNumber="$store.getters.getLastItemInProfileArchive.followed"
+                        :comparingNumber="$store.getters.getUserProfileArchive[0].followed"
+                        plusColor="red"
+                        />
+                    </p>
                 </div>
             </div>
 
@@ -53,7 +60,7 @@
 
 <script>
 import ProfileChart from "../components/ProfileChart";
-import differenceInNumbers from '../components/profile/differenceInNumbers.vue';
+import differenceInNumbers from '../components/profile/DifferenceInNumbers.vue';
 
 export default {
   name: 'Profile',
