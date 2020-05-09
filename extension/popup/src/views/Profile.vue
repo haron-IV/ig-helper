@@ -28,12 +28,12 @@
                 <Profile-chart 
                 :archiveValues="archiveValues('followers')"
                 name="Followers"
-                :collapse="true" />
+                :collapse="chartFollowersCollapse" />
 
                 <Profile-chart 
                 :archiveValues="archiveValues('followed')"
                 name="Followed"
-                :collapse="true" />
+                :collapse="chartFollowedCollapse" />
             </v-row>
 
             <v-row class="date-picker-wrapper">
@@ -60,16 +60,23 @@ export default {
         archive: {
             datepicker: false,
             date: []
-        }
+        },
+        chartFollowersCollapse: true,
+        chartFollowedCollapse: true
     }
   },
   watch: {
     'archive.date'(){
+        if (this.archive.date.length === 2) {
+            this.chartFollowersCollapse = false;
+            this.chartFollowedCollapse = false;
+        }
         if (this.archive.date.length > 2) {
             this.archive.date = [];
         };
     },
     'archive.datepicker'() {
+        // TODO: fix it
         setTimeout(() => {
             document.querySelector(".profile").scrollTop += 300;    
         }, 5);
@@ -108,7 +115,6 @@ export default {
             const filtered = this.$store.getters.getUserProfileArchive.filter( el => 
                 this.dateBetween(el.updated.split(" ")[0].split("/").reverse())
             );
-            console.log("filtered: ", filtered);
             return filtered;
         } else {
             return this.$store.getters.getUserProfileArchive;
