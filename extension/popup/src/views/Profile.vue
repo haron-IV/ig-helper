@@ -1,7 +1,7 @@
 <template>
     <article class="profile">
         <section class="profile__section-info">
-            <div class="avatar">
+            <div class="avatar" @click="openProfile()">
                 <v-img class="img avatar__img" :src="$store.getters.getLastItemInProfileArchive.profileImg"></v-img>
             </div>
             
@@ -9,10 +9,21 @@
                 <a @click="openProfile()" class="link">{{$store.getters.getLastItemInProfileArchive.profileLink.replace("https://www.instagram.com/", "").slice(0, -1)}}</a>
 
                 <div class="d-flex">
-                    <p class="content__info"><span class="title">Followers:
-                        </span> {{$store.getters.getLastItemInProfileArchive.followers}} <span class="difference"> {{differenceInNumbers($store.getters.getLastItemInProfileArchive.followers, $store.getters.getUserProfileArchive[1].followers)}} </span>
+                    <p class="content__info"><span class="title">Followers: </span>
+                        {{$store.getters.getLastItemInProfileArchive.followers}} 
+                        <Difference-in-numbers 
+                        :actualNumber="$store.getters.getLastItemInProfileArchive.followers"
+                        :comparingNumber="$store.getters.getUserProfileArchive[0].followers"
+                        />
                     </p>
-                    <p class="content__info"><span class="title">Followed:</span> {{$store.getters.getLastItemInProfileArchive.followed}}</p>
+                    <p class="content__info"><span class="title">Followed: </span>
+                        {{$store.getters.getLastItemInProfileArchive.followed}}
+                        <Difference-in-numbers 
+                        :actualNumber="$store.getters.getLastItemInProfileArchive.followed"
+                        :comparingNumber="$store.getters.getUserProfileArchive[0].followed"
+                        plusColor="red"
+                        />
+                    </p>
                 </div>
             </div>
 
@@ -48,12 +59,14 @@
 </template>
 
 <script>
-import ProfileChart from "../components/ProfileChart";
+import ProfileChart from "../components/profile/ProfileChart";
+import differenceInNumbers from '../components/profile/DifferenceInNumbers.vue';
 
 export default {
   name: 'Profile',
   components: {
-    'Profile-chart': ProfileChart
+    'Profile-chart': ProfileChart,
+    'Difference-in-numbers': differenceInNumbers
   },
   data(){
     return {
@@ -67,37 +80,22 @@ export default {
   },
   watch: {
     'archive.date'(){
-        if (this.archive.date.length === 2) {
-            this.chartFollowersCollapse = false;
-            this.chartFollowedCollapse = false;
-        }
-        if (this.archive.date.length > 2) {
-            this.archive.date = [];
-        };
+        if (this.archive.date.length === 2) this.uncollapseCharts();
+        if (this.archive.date.length > 2) this.archive.date = [];
     },
     'archive.datepicker'() {
-        // TODO: fix it
         setTimeout(() => {
-            document.querySelector(".profile").scrollTop += 300;    
+            document.querySelector(".profile").scrollTo({ top: document.querySelector(".profile").scrollHeight, behavior: 'smooth' });
         }, 5);
     }
   },
-  computed: {},
-  created(){},
   methods: {
-    openProfile() {
-        window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
+    uncollapseCharts() {
+        this.chartFollowersCollapse = false;
+        this.chartFollowedCollapse = false;
+        document.querySelector(".profile").scrollTo({top: 100, behavior: 'smooth'});
     },
-    differenceInNumbers(number1, number2) {
-        number1 = JSON.parse( number1.replace(" ", "") );
-        number2 = JSON.parse( number2.replace(" ", "") );
-        
-        if ( number1 > number2 ) {
-            return `+${number1 - number2}`;
-        } else {
-            return `${number1 - number2}`
-        }
-    },
+    openProfile() { window.open( this.$store.getters.getUserProfileArchive[0].profileLink, '_blank' ) },
     dateBetween(checkDate){
         if (this.archive.date.length === 2){
             const dateFrom = this.archive.date[0].replace(/[-]/g, "/").split("/");
@@ -111,28 +109,15 @@ export default {
         }
     },
     datesInRange() {
-        if (this.archive.datepicker) {
-            const filtered = this.$store.getters.getUserProfileArchive.filter( el => 
-                this.dateBetween(el.updated.split(" ")[0].split("/").reverse())
-            );
-            return filtered;
-        } else {
-            return this.$store.getters.getUserProfileArchive;
-        }
+        if (this.archive.datepicker) return this.$store.getters.getUserProfileArchive.filter( 
+            el => this.dateBetween(el.updated.split(" ")[0].split("/").reverse()) );
+        return this.$store.getters.getUserProfileArchive;
     },
     archiveValues(type){
         switch(type){
-            case "followers": {
-                return this.datesInRange().map( el => el.followers);
-                break;
-            };
-
-            case "followed": {
-                return this.datesInRange().map( el => el.followed);
-                break;
-            }
-        }
-        
+            case "followers": return this.datesInRange().map( el => el.followers);
+            case "followed": return this.datesInRange().map( el => el.followed);
+        };
     }
   }
 }
@@ -157,6 +142,12 @@ export default {
 
         .avatar {
             width: 20%;
+            transition: all ease-in-out 250ms;
+            cursor: pointer;
+
+            &:hover {
+                filter: blur(.7px);
+            }
 
             &__img {
                 border-radius: 50%;
