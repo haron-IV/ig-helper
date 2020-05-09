@@ -1,7 +1,7 @@
 <template>
     <article class="profile">
         <section class="profile__section-info">
-            <div class="avatar">
+            <div class="avatar" @click="openProfile()">
                 <v-img class="img avatar__img" :src="$store.getters.getLastItemInProfileArchive.profileImg"></v-img>
             </div>
             
@@ -89,17 +89,13 @@ export default {
         }, 5);
     }
   },
-  computed: {},
-  created(){},
   methods: {
     uncollapseCharts() {
         this.chartFollowersCollapse = false;
         this.chartFollowedCollapse = false;
         document.querySelector(".profile").scrollTo({top: 100, behavior: 'smooth'});
     },
-    openProfile() {
-        window.open( this.$store.getters.getUserProfile[0].profileLink, '_blank' );
-    },
+    openProfile() { window.open( this.$store.getters.getUserProfileArchive[0].profileLink, '_blank' ) },
     dateBetween(checkDate){
         if (this.archive.date.length === 2){
             const dateFrom = this.archive.date[0].replace(/[-]/g, "/").split("/");
@@ -159,6 +155,12 @@ export default {
 
         .avatar {
             width: 20%;
+            transition: all ease-in-out 250ms;
+            cursor: pointer;
+
+            &:hover {
+                filter: blur(.7px);
+            }
 
             &__img {
                 border-radius: 50%;
