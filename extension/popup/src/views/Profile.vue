@@ -84,9 +84,8 @@ export default {
         if (this.archive.date.length > 2) this.archive.date = [];
     },
     'archive.datepicker'() {
-        // TODO: fix it
         setTimeout(() => {
-            document.querySelector(".profile").scrollTop += 300;    
+            document.querySelector(".profile").scrollTo({ top: document.querySelector(".profile").scrollHeight, behavior: 'smooth' });
         }, 5);
     }
   },
