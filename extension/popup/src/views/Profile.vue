@@ -12,15 +12,15 @@
                     <p class="content__info"><span class="title">Followers: </span>
                         {{$store.getters.getLastItemInProfileArchive.followers}} 
                         <Difference-in-numbers 
-                        :actualNumber="$store.getters.getLastItemInProfileArchive.followers"
-                        :comparingNumber="$store.getters.getUserProfileArchive[0].followers"
+                        :actualNumber="archiveValues('followers').slice(-1)[0]"
+                        :comparingNumber="archiveValues('followers')[0]"
                         />
                     </p>
                     <p class="content__info"><span class="title">Followed: </span>
                         {{$store.getters.getLastItemInProfileArchive.followed}}
                         <Difference-in-numbers 
-                        :actualNumber="$store.getters.getLastItemInProfileArchive.followed"
-                        :comparingNumber="$store.getters.getUserProfileArchive[0].followed"
+                        :actualNumber="archiveValues('followed').slice(-1)[0]"
+                        :comparingNumber="archiveValues('followed')[0]"
                         plusColor="red"
                         />
                     </p>
