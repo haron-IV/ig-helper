@@ -14,7 +14,7 @@ const scroll = (scrollCount, i) => {
         const interval = setInterval(() => {
             document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTop += 1000;
             i++;
-            console.log(`Loaded profiles: ${document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP > ul > div").children.length} | i: ${i} | scrollCount: ${scrollCount}`);
+            // console.log(`Loaded profiles: ${document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP > ul > div").children.length} | i: ${i} | scrollCount: ${scrollCount}`);
             if (i >= scrollCount) {
                 clearInterval(interval);
                 resolve("loadedProfilesDone");

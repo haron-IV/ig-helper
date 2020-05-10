@@ -15,6 +15,8 @@ const unfollowProfiles = (store) => {
         openFollowedProfilesList();
         setTimeout(() => {
             loadProfiles(message.value.unfollowCunt, () => {
+                console.log(message.value.profilesToUnfollow.reverse().slice(0, message.value.unfollowCunt));
+                // const profilesToUnfollow = message.value.profilesToUnfollow.slice(0, message.value.unfollowCunt);
                 unfollow(JSON.parse(message.value.unfollowCunt), message.value.profilesToUnfollow, store);
             });
         }, config.sleepBeforeStartUnfollow);
