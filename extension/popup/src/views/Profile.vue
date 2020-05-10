@@ -33,7 +33,14 @@
         </section>
 
         <section class="profile__section-archive">
-            <header class="archive__header"><h2>Archive</h2></header>
+            <header class="header">
+                <h2>Archive</h2>
+                <div class="header__date">
+                    <span>from: </span>{{getFromToDate[0]}}
+                    <span>to: </span>{{getFromToDate[1]}}
+                </div>
+            </header>
+                
 
             <v-row class="chart-wrapper">
                 <Profile-chart 
@@ -78,9 +85,25 @@ export default {
         chartFollowedCollapse: true
     }
   },
+  computed: {
+    getFromToDate() {
+        if (this.archive.date.length === 2) {
+            const from = this.archive.date[0].replace(/[-]/g, "/");
+            const to = this.archive.date[1].replace(/[-]/g, "/");
+            return [from, to];
+        } else {
+            const from = this.$store.getters.getUserProfileArchive[0].updated.split(" ")[0];
+            const to = this.$store.getters.getUserProfileArchive.slice(-1)[0].updated.split(" ")[0];
+            return [from, to];
+        }
+    }
+  },
   watch: {
     'archive.date'(){
-        if (this.archive.date.length === 2) this.uncollapseCharts();
+        if (this.archive.date.length === 2) { 
+            this.uncollapseCharts();
+            this.getFromToDate
+        }
         if (this.archive.date.length > 2) this.archive.date = [];
     },
     'archive.datepicker'() {
@@ -113,12 +136,12 @@ export default {
             el => this.dateBetween(el.updated.split(" ")[0].split("/").reverse()) );
         return this.$store.getters.getUserProfileArchive;
     },
-    archiveValues(type){
+    archiveValues(type) {
         switch(type){
             case "followers": return this.datesInRange().map( el => el.followers);
             case "followed": return this.datesInRange().map( el => el.followed);
         };
-    }
+    },
   }
 }
 </script>
@@ -198,6 +221,17 @@ export default {
 
     &__section-archive {
         padding-top: 1rem;
+
+        .header {
+            &__date {
+                font-size: .65rem;
+
+                span {
+                    font-weight: 600;
+                    text-transform: capitalize;
+                }
+            }
+        }
 
         .date-picker-wrapper {
             margin: 0;
