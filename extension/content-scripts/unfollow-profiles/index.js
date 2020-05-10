@@ -14,10 +14,22 @@ const unfollowProfiles = (store) => {
         updateProfile(store);
         openFollowedProfilesList();
         setTimeout(() => {
-            loadProfiles(message.value.unfollowCunt, () => {
-                console.log(message.value.profilesToUnfollow.reverse().slice(0, message.value.unfollowCunt));
+            loadProfiles(message.value.profilesToUnfollow.length, () => {
+                console.log(message.value.profilesToUnfollow)
+                // console.log(message.value.profilesToUnfollow.reverse().slice(0, message.value.unfollowCunt));
                 // const profilesToUnfollow = message.value.profilesToUnfollow.slice(0, message.value.unfollowCunt);
-                unfollow(JSON.parse(message.value.unfollowCunt), message.value.profilesToUnfollow, store);
+                const profiles = profilesToUnfollow();
+                setTimeout(() => {
+                    
+                }, );
+                console.log(profiles)
+                // const startElemenet = profiles.filter(el => el === message.value.profilesToUnfollow.pop())
+
+
+
+
+
+                // unfollow(JSON.parse(message.value.unfollowCunt), message.value.profilesToUnfollow, store);
             });
         }, config.sleepBeforeStartUnfollow);
     });
