@@ -14,8 +14,8 @@ const unfollowProfiles = (store) => {
         updateProfile(store);
         openFollowedProfilesList();
         setTimeout(() => {
-            loadProfiles(JSON.parse( message.value.unfollowCunt ), () => {
-                // add default if message.value.unfollowCunt === 0 then push lenght of profiles array as this
+            const unfollowCount = JSON.parse(message.value.unfollowCunt) > message.value.profilesToUnfollow.length ? JSON.parse(message.value.unfollowCunt) : message.value.profilesToUnfollow.length;
+            loadProfiles(unfollowCount, () => {
                 // fix name this variable
                 unfollow(JSON.parse(message.value.unfollowCunt), message.value.profilesToUnfollow, store);
             });
@@ -26,21 +26,22 @@ const unfollowProfiles = (store) => {
 const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) => {
     const profiles = profilesToUnfollow();
     const countOfLoadedProfiles = profiles.length - 1;
-    let i = profilesToUnfollowCount - 1;
+    let i = profilesToUnfollowFromPopup.length - 1;
 
     function unfollowProfileLoop() {
         setTimeout(() => {
             if (i < countOfLoadedProfiles) {
                 unfollowLogic(profiles[i]);
-
                 profilesToUnfollowFromPopup.pop();
                 store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup.reverse();
                 updateStore(store);
-                // todo: check this. If unfollowing remove goog item from popup array
+                // todo: check this. If unfollowing remove goog item from popup arra
 
-                if (i === 0) unfollowingDone(store, profilesToUnfollowCount);
+                if (profilesToUnfollowCount === 0) unfollowingDone(store, profilesToUnfollowCount);
                 else unfollowProfileLoop();
-                console.log(`unfollowing... | still ${i} profiles to unfollow | loaded profiles to unfollow: ${profiles.length}`);
+                
+                console.log(`unfollowing... | still ${profilesToUnfollowCount} profiles to unfollow | loaded profiles to unfollow: ${profiles.length}`);
+                profilesToUnfollowCount--;
                 i--;
             }
         }, randomTimeAfterUnfollow(
