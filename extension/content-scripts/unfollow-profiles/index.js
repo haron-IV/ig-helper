@@ -14,11 +14,8 @@ const unfollowProfiles = (store) => {
         updateProfile(store);
         openFollowedProfilesList();
         setTimeout(() => {
-            const unfollowCount = JSON.parse(message.value.unfollowCunt) > message.value.profilesToUnfollow.length ? JSON.parse(message.value.unfollowCunt) : message.value.profilesToUnfollow.length;
-            loadProfiles(unfollowCount, () => {
-                // fix name this variable
-                unfollow(JSON.parse(message.value.unfollowCunt), message.value.profilesToUnfollow, store);
-            });
+            const unfollowCount = JSON.parse(message.value.unfollowCount) > message.value.profilesToUnfollow.length ? JSON.parse(message.value.unfollowCount) : message.value.profilesToUnfollow.length;
+            loadProfiles(unfollowCount, () => { unfollow(JSON.parse(message.value.unfollowCount), message.value.profilesToUnfollow, store) });
         }, config.sleepBeforeStartUnfollow);
     });
 };
@@ -35,11 +32,10 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 profilesToUnfollowFromPopup.pop();
                 store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup.reverse();
                 updateStore(store);
-                // todo: check this. If unfollowing remove goog item from popup arra
 
                 profilesToUnfollowCount--;
                 i--;
-                
+
                 if (profilesToUnfollowCount === 0) unfollowingDone(store, profilesToUnfollowCount);
                 else unfollowProfileLoop();
                 console.log(`unfollowing... | still ${profilesToUnfollowCount} profiles to unfollow | loaded profiles to unfollow: ${profiles.length}`);
