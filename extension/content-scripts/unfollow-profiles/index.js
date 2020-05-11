@@ -14,52 +14,33 @@ const unfollowProfiles = (store) => {
         updateProfile(store);
         openFollowedProfilesList();
         setTimeout(() => {
-            loadProfiles(message.value.profilesToUnfollow.length, () => {
-                console.log(message.value.profilesToUnfollow)
-                // console.log(message.value.profilesToUnfollow.reverse().slice(0, message.value.unfollowCunt));
-                // const profilesToUnfollow = message.value.profilesToUnfollow.slice(0, message.value.unfollowCunt);
-                const profiles = profilesToUnfollow();
-                setTimeout(() => {
-                    
-                }, );
-                console.log(profiles)
-                // const startElemenet = profiles.filter(el => el === message.value.profilesToUnfollow.pop())
-
-
-
-
-
-                // unfollow(JSON.parse(message.value.unfollowCunt), message.value.profilesToUnfollow, store);
+            loadProfiles(JSON.parse( message.value.unfollowCunt ), () => {
+                // add default if message.value.unfollowCunt === 0 then push lenght of profiles array as this
+                // fix name this variable
+                unfollow(JSON.parse(message.value.unfollowCunt), message.value.profilesToUnfollow, store);
             });
         }, config.sleepBeforeStartUnfollow);
     });
 };
 
 const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) => {
-    let i = 0;
-    let scrollHeight = 0;
+    const profiles = profilesToUnfollow();
+    const countOfLoadedProfiles = profiles.length - 1;
+    let i = profilesToUnfollowCount - 1;
 
     function unfollowProfileLoop() {
         setTimeout(() => {
-            const profiles = profilesToUnfollow();
-            const countOfLoadedProfiles = profiles.length - 1;
-
-            if (i < countOfLoadedProfiles && i < profilesToUnfollowCount) {
+            if (i < countOfLoadedProfiles) {
                 unfollowLogic(profiles[i]);
-                i++;
+
                 profilesToUnfollowFromPopup.pop();
-                store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup;
+                store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup.reverse();
                 updateStore(store);
 
-                console.log(`unfollowing... | removed ${i} profiles | loaded profiles to unfollow: ${profiles.length}`);
-                
-                if ( !JSON.stringify(i/3).includes(".") ) {
-                    scrollHeight += 150;
-                    document.querySelector("body > div.RnEpo.Yx5HN > div > div.isgrP").scrollTo({top: scrollHeight, behavior: 'smooth'});
-                }
-
-                if (i === profilesToUnfollowCount) unfollowingDone(store, profilesToUnfollowCount);
-                unfollowProfileLoop();
+                if (i === 0) unfollowingDone(store, profilesToUnfollowCount);
+                else unfollowProfileLoop();
+                console.log(`unfollowing... | still ${i} profiles to unfollow | loaded profiles to unfollow: ${profiles.length}`);
+                i--;
             }
         }, randomTimeAfterUnfollow(
             speedUnfollowSleepSetter(profilesToUnfollowCount, store)[0], 
@@ -77,19 +58,21 @@ const unfollowLogic = (profile) => {
 };
 
 const unfollowingDone = (store, profilesToUnfollowCount) => {
-    updateStore(store);
-    closeFollowerModal();
-    removeOverlayFromPage();
+    setTimeout(() => {
+        updateStore(store);
+        closeFollowerModal();
+        removeOverlayFromPage();
 
-    chrome.runtime.sendMessage('', {
-        type: 'notification-unfollowing',
-        options: {
-            title: "Unfollowing done.",
-            message: `Unfollowing done. Unfollowed ${profilesToUnfollowCount} profiles.`
-        }
-    });
+        chrome.runtime.sendMessage('', {
+            type: 'notification-unfollowing',
+            options: {
+                title: "Unfollowing done.",
+                message: `Unfollowing done. Unfollowed ${profilesToUnfollowCount} profiles.`
+            }
+        });
 
-    window.location.reload();
+        window.location.reload();
+    }, 1000);
 };
 
 export default unfollowProfiles;
