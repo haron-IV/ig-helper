@@ -10,15 +10,23 @@
 
                 <div class="d-flex">
                     <p class="content__info"><span class="title">Followers: </span>
-                        {{$store.getters.getLastItemInProfileArchive.followers}} 
-                        <Difference-in-numbers 
+                        <span>
+                            {{archiveValues("followers").slice(-1)[0]}}
+                        </span>
+
+                        <Difference-in-numbers
+                        v-if="archive.date.length == 2"
                         :actualNumber="archiveValues('followers').slice(-1)[0]"
                         :comparingNumber="archiveValues('followers')[0]"
                         />
                     </p>
                     <p class="content__info"><span class="title">Followed: </span>
-                        {{$store.getters.getLastItemInProfileArchive.followed}}
+                        <span >
+                            {{archiveValues("followed").slice(-1)[0]}}
+                        </span>
+                        
                         <Difference-in-numbers 
+                        v-if="archive.date.length == 2"
                         :actualNumber="archiveValues('followed').slice(-1)[0]"
                         :comparingNumber="archiveValues('followed')[0]"
                         plusColor="red"
