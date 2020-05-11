@@ -36,6 +36,7 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 profilesToUnfollowFromPopup.pop();
                 store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup.reverse();
                 updateStore(store);
+                // todo: check this. If unfollowing remove goog item from popup array
 
                 if (i === 0) unfollowingDone(store, profilesToUnfollowCount);
                 else unfollowProfileLoop();
