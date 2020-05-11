@@ -26,7 +26,7 @@ const unfollowProfiles = (store) => {
 const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) => {
     const profiles = profilesToUnfollow();
     const countOfLoadedProfiles = profiles.length - 1;
-    let i = profilesToUnfollowFromPopup.length - 1;
+    let i = (profilesToUnfollowFromPopup.length - 1) > 0 ? profilesToUnfollowFromPopup.length - 1 : profilesToUnfollowCount - 1;
 
     function unfollowProfileLoop() {
         setTimeout(() => {
@@ -37,15 +37,15 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 updateStore(store);
                 // todo: check this. If unfollowing remove goog item from popup arra
 
-                if (profilesToUnfollowCount === 0) unfollowingDone(store, profilesToUnfollowCount);
-                else unfollowProfileLoop();
-                
-                console.log(`unfollowing... | still ${profilesToUnfollowCount} profiles to unfollow | loaded profiles to unfollow: ${profiles.length}`);
                 profilesToUnfollowCount--;
                 i--;
+                
+                if (profilesToUnfollowCount === 0) unfollowingDone(store, profilesToUnfollowCount);
+                else unfollowProfileLoop();
+                console.log(`unfollowing... | still ${profilesToUnfollowCount} profiles to unfollow | loaded profiles to unfollow: ${profiles.length}`);
             }
         }, randomTimeAfterUnfollow(
-            speedUnfollowSleepSetter(profilesToUnfollowCount, store)[0], 
+            speedUnfollowSleepSetter(profilesToUnfollowCount, store)[0],
             speedUnfollowSleepSetter(profilesToUnfollowCount, store)[1]
         ));
     };
