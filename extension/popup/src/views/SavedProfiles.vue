@@ -32,6 +32,10 @@
                         <v-btn icon medium @click="blockProfile(profile)" title="Block Profile - Remove profile from this list and block profile. If this user following you after this operation his following disapear.">
                             <v-icon small>mdi-block-helper</v-icon>
                         </v-btn>
+
+                        <v-btn icon medium @click="unfollowProfile(profile)" title="Unfollow Profile - Remove profile from this list and unfollow profile.">
+                            <v-icon small>mdi-account-off</v-icon>
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </div>
@@ -63,6 +67,10 @@ export default {
     },
     blockProfile(profile){
         eventBus.sendMessageToContentScript("blockUserFromSavedProfiles", profile.profileLink);
+        this.removeProfile(profile);
+    },
+    unfollowProfile(profile) {
+        eventBus.sendMessageToContentScript("unfollowUserFromSavedProfiles", profile.profileLink);
         this.removeProfile(profile);
     },
     openProfile(profile){
