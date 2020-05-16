@@ -30,12 +30,13 @@ const autoBlockProfile = (store) => {
     if (condition) {
         waitForElement("#react-root > section > main > div > header > section", 500, () => {
             openBlockModal();
-            setTimeout(() => {
+             setTimeout(() => {
                 clickBlockButton();
                 confirmBlock();
                 removeProfileFromStorage(store);
                 removeProfile("igHelperProfileToBlock");
-            }, 700);
+             }, 700);
+            closeWindow();
         });
     }
 };
@@ -50,6 +51,7 @@ const autoUnfollowProfile = (store) => {
                 removeProfileFromStorage(store);
                 removeProfile("igHelperProfileToUnfollow");
             }, 700);
+            closeWindow();
         });
     }
 };
@@ -61,5 +63,6 @@ const removeProfileFromStorage = (store) => {
 };
 
 const removeProfile = (localStorageItemName) => localStorage.setItem(localStorageItemName, "");
+const closeWindow = () => setTimeout(window.close, 1000);
 
 export { profileAction };
