@@ -1,0 +1,12 @@
+.extension-overlay:hover .unfollow-counter {
+    opacity: 1;
+}
+
+.unfollow-counter {
+    font-size: 1.2rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    opacity: 0;
+    transition: opacity ease-in 400ms;
+}

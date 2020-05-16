@@ -8,6 +8,7 @@ import { openFollowedProfilesList, profilesToUnfollow, closeFollowerModal, confi
 
 import { updateProfile } from "../user-profile/userProfile.js";
 import loadProfiles from './loadProfiles';
+import {updateUnfollowCounter} from "../utils/blockingOverlay.js";
 
 const unfollowProfiles = (store) => {
     getMessageFromPopup("unfollowProfiles", (message) => {
@@ -32,7 +33,7 @@ const unfollow = (profilesToUnfollowCount, profilesToUnfollowFromPopup, store) =
                 profilesToUnfollowFromPopup.pop();
                 store.igHelperStore.following.followedProfiles = profilesToUnfollowFromPopup.reverse();
                 updateStore(store);
-
+                updateUnfollowCounter(profilesToUnfollowCount);
                 profilesToUnfollowCount--;
                 i--;
 

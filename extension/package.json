@@ -11,7 +11,7 @@
 		"build": "webpack",
 		"watch": "webpack -w",
 		"start": "node public/dist/main.bundle.js",
-		"build-css": "node-sass --include-path scss scss/main.scss css/index.css",
+		"build-css": "node-sass --include-path scss scss/main.scss css/externals.css",
 		"watch-sass": "nodemon -e scss -x \"npm run build-css\"",
 		"dev-popup": "watch 'npm run build-dev-popup' ./popup/src",
 		"remove-old-build": "rimraf ./popup/dist",

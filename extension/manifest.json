@@ -16,6 +16,7 @@
 	"content_scripts": [
 		{
 			"matches": [ "https://*.instagram.com/*" ],
+			"css": ["./css/externals.css"],
 			"js": [ "./content-scripts/dist/main.bundle.js" ],
 			"run_at": "document_end"
 		}
