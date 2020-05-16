@@ -7,7 +7,7 @@
         </v-flex>
         
         <div class="saved-profiles__list">
-            <div class="card-wrapper">
+            <div class="card-wrapper" v-if="$store.getters.getFollowedProfiles">
                 <v-card class="card" v-for="profile of $store.getters.getSavedProfiles" :key="profile">
                     <v-avatar class="card__avatar" @click="openProfile(profile.profileLink)">
                         <img :src="profile.avatar">
@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     width(){
-      return this.$store.getters['appearance/getAppWidtg'] - this.$store.getters['appearance/getMenuLeftSpace'];
+      return this.$store.getters['appearance/getAppWidth'] - this.$store.getters['appearance/getMenuLeftSpace'];
     }
   },
   created(){},

@@ -68,6 +68,9 @@
                 </div>
                 
                 <v-date-picker dark landscape multiple v-model="archive.date" v-if="archive.datepicker"></v-date-picker>
+                <v-btn fab dark small class="date-picker-clear-button" v-if="archive.date.length === 2" @click="clearDatePicker()">
+                    <v-icon>mdi-trash-can-outline</v-icon>
+                </v-btn>
             </v-row>
         </section>
     </article>
@@ -110,7 +113,7 @@ export default {
     'archive.date'(){
         if (this.archive.date.length === 2) { 
             this.uncollapseCharts();
-            this.getFromToDate
+            // this.getFromToDate
         }
         if (this.archive.date.length > 2) this.archive.date = [];
     },
@@ -150,6 +153,9 @@ export default {
             case "followed": return this.datesInRange().map( el => el.followed);
         };
     },
+    clearDatePicker() {
+        this.archive.date.push("-");
+    }
   }
 }
 </script>
@@ -242,6 +248,7 @@ export default {
         }
 
         .date-picker-wrapper {
+            position: relative;
             margin: 0;
 
             .checkbox-wrapper {
@@ -256,6 +263,11 @@ export default {
                     width: 65%;
                     margin-right: inherit;
                 }
+            }
+            .date-picker-clear-button {
+                position: absolute;
+                right: 0;
+                bottom: 0;
             }
         }
 

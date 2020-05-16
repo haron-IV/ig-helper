@@ -13,7 +13,6 @@
 		"start": "node public/dist/main.bundle.js",
 		"build-css": "node-sass --include-path scss scss/main.scss css/index.css",
 		"watch-sass": "nodemon -e scss -x \"npm run build-css\"",
-		
 		"dev-popup": "watch 'npm run build-dev-popup' ./popup/src",
 		"remove-old-build": "rimraf ./popup/dist",
 		"build-dev-popup": "npm run remove-old-build && cd ./popup & npm run build --prefix ./popup && cd ./popup && node fixDistPath.js",
@@ -37,6 +36,7 @@
 		"lodash.debounce": "^4.0.8",
 		"node-sass": "^4.12.0",
 		"nodemon": "^1.19.1",
-		"vue": "^1.0.28-csp"
+		"vue": "^1.0.28-csp",
+		"watch": "^1.0.2"
 	}
 }
