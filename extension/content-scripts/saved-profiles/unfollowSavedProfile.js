@@ -3,20 +3,26 @@ import { updateStore } from "../store";
 import waitForElement from "../utils/waitForElement.js";
 import { openProfile, openBlockModal, clickBlockButton, clickUnfollowButton, confirmBlock, confirmUnfollow } from "./elementsHelper.js";
 
-const blockSavedProfile = (store) => {
-    getMessageFromPopup("blockUserFromSavedProfiles", msg => {
-        localStorage.setItem("igHelperProfileToBlock", JSON.stringify(msg.value));
-        openProfile(msg.value);
-    });
-    autoBlockProfile(store);
-};
+const profileAction = (store, type, popupMessageName, localStorageitemName) => {
+    switch (type) {
+        case "block": {
+            getMessageFromPopup(popupMessageName, msg => {
+                localStorage.setItem(localStorageitemName, JSON.stringify(msg.value));
+                openProfile(msg.value);
+            });
+            autoBlockProfile(store);
+            break;
+        };
 
-const unfollowSavedProfile = (store) => {
-    getMessageFromPopup("unfollowUserFromSavedProfiles", msg => {
-        localStorage.setItem("igHelperProfileToUnfollow", JSON.stringify(msg.value));
-        openProfile(msg.value);
-    });
-    autoUnfollowProfile(store);
+        case "unfollow": {
+            getMessageFromPopup(popupMessageName, msg => {
+                localStorage.setItem(localStorageitemName, JSON.stringify(msg.value));
+                openProfile(msg.value);
+            });
+            autoUnfollowProfile(store);
+            break;
+        };
+    }
 };
 
 const autoBlockProfile = (store) => {
@@ -28,7 +34,7 @@ const autoBlockProfile = (store) => {
                 clickBlockButton();
                 confirmBlock();
                 removeProfileFromStorage(store);
-                removeProfileToBlock();
+                removeProfile("igHelperProfileToBlock");
             }, 700);
         });
     }
@@ -42,11 +48,11 @@ const autoUnfollowProfile = (store) => {
             setTimeout(() => {
                 confirmUnfollow();
                 removeProfileFromStorage(store);
-                removeProfileToUnfollow();
+                removeProfile("igHelperProfileToUnfollow");
             }, 700);
         });
     }
-}
+};
 
 const removeProfileFromStorage = (store) => {
     const profile = window.location.href;
@@ -54,7 +60,6 @@ const removeProfileFromStorage = (store) => {
     updateStore(store);
 };
 
-const removeProfileToBlock = () => localStorage.setItem("igHelperProfileToBlock", "");
-const removeProfileToUnfollow = () => localStorage.setItem("igHelperProfileToUnfollow", "");
+const removeProfile = (localStorageItemName) => localStorage.setItem(localStorageItemName, "");
 
-export { blockSavedProfile, unfollowSavedProfile };
+export { profileAction };
