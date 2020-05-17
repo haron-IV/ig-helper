@@ -55,7 +55,7 @@ export default {
   computed: {
     width(){
       return this.$store.getters['appearance/getAppWidth'] - this.$store.getters['appearance/getMenuLeftSpace'];
-    }
+    },
   },
   created(){},
   methods: {

@@ -148,10 +148,14 @@ export default {
         return this.$store.getters.getUserProfileArchive;
     },
     archiveValues(type) {
+        const archives = this.datesInRange().filter( el => el.profileLink === this.$store.getters.getLastItemInProfileArchive.profileLink);
         switch(type){
-            case "followers": return this.datesInRange().map( el => el.followers);
-            case "followed": return this.datesInRange().map( el => el.followed);
+            case "followers": return archives.map( el => el.followers);
+            case "followed": return archives.map( el => el.followed);
         };
+    },
+    archiveValuesByProfile(type) {
+
     },
     clearDatePicker() {
         this.archive.date.push("-");
