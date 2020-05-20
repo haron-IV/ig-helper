@@ -96,6 +96,9 @@ export default {
         chartFollowedCollapse: true
     }
   },
+  beforeCreate() {
+      ga('send', 'pageview', '/profile');
+  },
   computed: {
     getFromToDate() {
         if (this.archive.date.length === 2) {

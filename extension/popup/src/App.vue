@@ -83,8 +83,8 @@ export default {
         this.remoteVersion = res.data.version;
       } else { this.needUpdate = true; }
     });
-    //
 
+    //INIT GA
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -92,11 +92,9 @@ export default {
 
     ga('create', 'UA-167301033-1', 'auto');
 
-// Modifications:
-    ga('set', 'checkProtocolTask', null); // Disables file protocol checking.
-    ga('send', 'pageview', '/popup'); // Set page, avoiding rejection due to chrome-extension protocol
-
-},
+    ga('set', 'checkProtocolTask', null);
+    ga('send', 'pageview', '/app');
+  },
   watch: {
     '$store.getters.getLastMenuPosition'(){
       this.$router.push(this.$store.getters.getLastMenuPosition);
@@ -117,7 +115,7 @@ export default {
     setRoute(route) {
       this.$router.push(route.path);
       this.$store.commit("setLastMenuPosition", route.path);
-    }
+    },
   }
 };
 </script>

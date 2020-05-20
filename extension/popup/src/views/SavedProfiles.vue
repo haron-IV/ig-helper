@@ -57,7 +57,9 @@ export default {
       return this.$store.getters['appearance/getAppWidth'] - this.$store.getters['appearance/getMenuLeftSpace'];
     },
   },
-  created(){},
+  created(){
+      ga('send', 'pageview', '/savedProfile');
+  },
   methods: {
     removeProfile(profile){
         if (this.$store.state.data.igHelperStore.savedProfiles.includes(profile)){

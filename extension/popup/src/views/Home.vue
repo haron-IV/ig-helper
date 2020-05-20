@@ -54,7 +54,9 @@ export default {
       return this.$store.getters['appearance/getAppWidtg'] - this.$store.getters['appearance/getMenuLeftSpace'];
     }
   },
-  created(){},
+  created(){
+    ga('send', 'pageview', '/home');
+  },
   methods: {
     openProfile(profile){
       window.open(profile);
