@@ -1,5 +1,5 @@
 import { updateStore } from "../store/index.js";
-import unfollowSavedProfile from "./unfollowSavedProfile.js";
+import { blockSavedProfile, unfollowSavedProfile, profileAction } from "./unfollowSavedProfile.js";
 import waitForElement from "../utils/waitForElement.js";
 import { profileObject } from "./getProfileInfo.js";
 
@@ -8,7 +8,10 @@ const savedProfiles = (store) => {
         addSaveProfileButtonToPage(store);
     });
 
-    unfollowSavedProfile(store);
+    // blockSavedProfile(store);
+    // unfollowSavedProfile(store);
+    profileAction(store, "block", "blockUserFromSavedProfiles", "igHelperProfileToBlock");
+    profileAction(store, "unfollow", "unfollowUserFromSavedProfiles", "igHelperProfileToUnfollow");
 };
 
 const profileToolbarSelector = "#react-root > section > main > div > header > section";

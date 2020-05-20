@@ -14,13 +14,13 @@
 
       <v-card-text class="modal__input-wrapper">
         <v-icon class="info-arrow" small>mdi-arrow-right</v-icon>
-        <input type="number" class="unfollow-count-input" autofocus v-model="unfollowCunt" /> / {{$store.getters.getFollowedProfiles.length}}
+        <input type="number" class="unfollow-count-input" autofocus v-model="unfollowCount" /> / {{$store.getters.getFollowedProfiles.length}}
       </v-card-text>
 
       <v-divider></v-divider>
       <v-card-actions class="modal__button-section">
         <v-btn color="blue darken-1" text @click="$store.commit('app/toggleUnfollowModal', false)">Close</v-btn>
-        <v-btn color="blue darken-1" text @click="unfollowProfiles(unfollowCunt === 0 ? $store.getters.getFollowedProfiles.length : unfollowCunt)">Start</v-btn>
+        <v-btn color="blue darken-1" text @click="unfollowProfiles(unfollowCount === 0 ? $store.getters.getFollowedProfiles.length : unfollowCount)">Start</v-btn>
       </v-card-actions>
     </v-card>
   </v-overlay>
@@ -33,14 +33,14 @@ export default {
   name: "Modal",
   data() {
     return {
-      unfollowCunt: 0
+      unfollowCount: 0
     };
   },
   computed: {},
   methods: {
-    unfollowProfiles(unfollowCunt){
+    unfollowProfiles(unfollowCount){
       const data = {
-        unfollowCunt: JSON.parse(unfollowCunt),
+        unfollowCount: JSON.parse(unfollowCount),
         profilesToUnfollow: this.$store.getters.getFollowedProfiles
       }
       
@@ -53,7 +53,7 @@ export default {
     calcSleepTime(sleepDuration){
       // TODO: worse calculating ;)
       let time = 0;
-      const timeInSeconds = this.unfollowCunt * sleepDuration;
+      const timeInSeconds = this.unfollowCount * sleepDuration;
       if (timeInSeconds < 59) time = `${timeInSeconds}s`;
       if (timeInSeconds >= 60) {
         const minutes = `${ (timeInSeconds / 60).toString().slice(0, 1) }m`;

@@ -10,15 +10,23 @@
 
                 <div class="d-flex">
                     <p class="content__info"><span class="title">Followers: </span>
-                        {{$store.getters.getLastItemInProfileArchive.followers}} 
-                        <Difference-in-numbers 
+                        <span>
+                            {{archiveValues("followers").slice(-1)[0]}}
+                        </span>
+
+                        <Difference-in-numbers
+                        v-if="archive.date.length == 2"
                         :actualNumber="archiveValues('followers').slice(-1)[0]"
                         :comparingNumber="archiveValues('followers')[0]"
                         />
                     </p>
                     <p class="content__info"><span class="title">Followed: </span>
-                        {{$store.getters.getLastItemInProfileArchive.followed}}
+                        <span >
+                            {{archiveValues("followed").slice(-1)[0]}}
+                        </span>
+                        
                         <Difference-in-numbers 
+                        v-if="archive.date.length == 2"
                         :actualNumber="archiveValues('followed').slice(-1)[0]"
                         :comparingNumber="archiveValues('followed')[0]"
                         plusColor="red"
@@ -33,7 +41,14 @@
         </section>
 
         <section class="profile__section-archive">
-            <header class="archive__header"><h2>Archive</h2></header>
+            <header class="header">
+                <h2>Archive</h2>
+                <div class="header__date">
+                    <span>from: </span>{{getFromToDate[0]}}
+                    <span>to: </span>{{getFromToDate[1]}}
+                </div>
+            </header>
+                
 
             <v-row class="chart-wrapper">
                 <Profile-chart 
@@ -53,6 +68,9 @@
                 </div>
                 
                 <v-date-picker dark landscape multiple v-model="archive.date" v-if="archive.datepicker"></v-date-picker>
+                <v-btn fab dark small class="date-picker-clear-button" v-if="archive.date.length === 2" @click="clearDatePicker()">
+                    <v-icon>mdi-trash-can-outline</v-icon>
+                </v-btn>
             </v-row>
         </section>
     </article>
@@ -78,9 +96,25 @@ export default {
         chartFollowedCollapse: true
     }
   },
+  computed: {
+    getFromToDate() {
+        if (this.archive.date.length === 2) {
+            const from = this.archive.date[0].replace(/[-]/g, "/");
+            const to = this.archive.date[1].replace(/[-]/g, "/");
+            return [from, to];
+        } else {
+            const from = this.$store.getters.getUserProfileArchive[0].updated.split(" ")[0];
+            const to = this.$store.getters.getUserProfileArchive.slice(-1)[0].updated.split(" ")[0];
+            return [from, to];
+        }
+    }
+  },
   watch: {
     'archive.date'(){
-        if (this.archive.date.length === 2) this.uncollapseCharts();
+        if (this.archive.date.length === 2) { 
+            this.uncollapseCharts();
+            // this.getFromToDate
+        }
         if (this.archive.date.length > 2) this.archive.date = [];
     },
     'archive.datepicker'() {
@@ -113,11 +147,18 @@ export default {
             el => this.dateBetween(el.updated.split(" ")[0].split("/").reverse()) );
         return this.$store.getters.getUserProfileArchive;
     },
-    archiveValues(type){
+    archiveValues(type) {
+        const archives = this.datesInRange().filter( el => el.profileLink === this.$store.getters.getLastItemInProfileArchive.profileLink);
         switch(type){
-            case "followers": return this.datesInRange().map( el => el.followers);
-            case "followed": return this.datesInRange().map( el => el.followed);
+            case "followers": return archives.map( el => el.followers);
+            case "followed": return archives.map( el => el.followed);
         };
+    },
+    archiveValuesByProfile(type) {
+
+    },
+    clearDatePicker() {
+        this.archive.date.push("-");
     }
   }
 }
@@ -199,7 +240,19 @@ export default {
     &__section-archive {
         padding-top: 1rem;
 
+        .header {
+            &__date {
+                font-size: .65rem;
+
+                span {
+                    font-weight: 600;
+                    text-transform: capitalize;
+                }
+            }
+        }
+
         .date-picker-wrapper {
+            position: relative;
             margin: 0;
 
             .checkbox-wrapper {
@@ -214,6 +267,11 @@ export default {
                     width: 65%;
                     margin-right: inherit;
                 }
+            }
+            .date-picker-clear-button {
+                position: absolute;
+                right: 0;
+                bottom: 0;
             }
         }
 
