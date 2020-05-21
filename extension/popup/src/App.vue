@@ -75,6 +75,8 @@ export default {
   }),
   beforeCreate(){
     this.$store.dispatch('setData');
+
+    //checking version and show update or app  
     Axios.get("http://demo1488314.mockable.io/isActive").then( res => {
       this.loader = false;
 
