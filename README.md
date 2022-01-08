@@ -85,9 +85,6 @@ Add additional notes about how to deploy this on a live system.
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 
 ## ✍️ Authors <a name = "authors"></a>
-
-- [@venglas](https://github.com/venglas) - Idea & Initial work
-
 See also the list of [contributors](https://github.com/venglas/ig-helper/contributors) who participated in this project.
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
